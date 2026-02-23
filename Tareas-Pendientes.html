@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas Pendientes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .stat {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+        }
+        .stat-number {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 20px;
+        }
+        .task-item {
+            display: flex;
+            gap: 12px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+            align-items: flex-start;
+        }
+        .task-item.completed {
+            background: #f0f9ff;
+            border-color: #667eea;
+            opacity: 0.7;
+        }
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+            color: #999;
+        }
+        .task-checkbox {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+        .task-content {
+            flex: 1;
+        }
+        .task-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-weight: bold;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+        .task-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .task-description {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .task-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .priority-badge {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .priority-alta {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .priority-media {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        .priority-baja {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-input {
+            font-size: 11px;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            font-size: 12px;
+            color: #666;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .btn-save {
+            background: #667eea;
+            color: white;
+        }
+        .btn-save:active {
+            opacity: 0.8;
+        }
+        .btn-clear {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .btn-clear:active {
+            opacity: 0.8;
+        }
+        .section-title {
+            background: #f0f4ff;
+            padding: 12px 15px;
+            border-left: 4px solid #667eea;
+            font-size: 16px;
+            font-weight: 600;
+            color: #667eea;
+            margin: 20px 0 15px 0;
+            border-radius: 4px;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✓ Tareas Pendientes</h1>
+            <p>Lista de actividades SEO y Marketing</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number" id="total">10</div>
+                    <div>Total</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="completed">0</div>
+                    <div>Completadas</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="pending">10</div>
+                    <div>Pendientes</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div id="tasksContainer"></div>
+
+            <div class="btn-group">
+                <button class="btn btn-clear" onclick="resetAllTasks()">Reiniciar</button>
+                <button class="btn btn-save" onclick="guardarTareas()">💾 Guardar</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>✓ Tu progreso se guarda automáticamente en tu dispositivo</p>
+        </div>
+    </div>
+
+    <script>
+        const tareas = [
+            { id: 1, numero: 1, titulo: "Crear/optimizar Google Business Profile", descripcion: "Configurar o mejorar el perfil de Google My Business", prioridad: "ALTA", seccion: "TAREAS CRÍTICAS" },
+            { id: 2, numero: 2, titulo: "Enviar cuestionario al dueño", descripcion: "Compartir el cuestionario y recopilar información", prioridad: "ALTA", seccion: "TAREAS CRÍTICAS" },
+            { id: 3, numero: 3, titulo: "Investigar 3 competidores locales", descripcion: "Analizar sitios web y estrategias de la competencia", prioridad: "MEDIA", seccion: "INVESTIGACIÓN" },
+            { id: 4, numero: 4, titulo: "Crear lista de 10 keywords objetivo", descripcion: "Identificar palabras clave principales para SEO", prioridad: "MEDIA", seccion: "INVESTIGACIÓN" },
+            { id: 5, numero: 5, titulo: "Análisis SEO inicial", descripcion: "Revisar estado actual del SEO del sitio", prioridad: "MEDIA", seccion: "OPTIMIZACIÓN" },
+            { id: 6, numero: 6, titulo: "Optimizar estructura del sitio", descripcion: "Mejorar arquitectura y navegación", prioridad: "MEDIA", seccion: "OPTIMIZACIÓN" },
+            { id: 7, numero: 7, titulo: "Crear contenido de landing pages", descripcion: "Desarrollar páginas de conversión", prioridad: "MEDIA", seccion: "CONTENIDO" },
+            { id: 8, numero: 8, titulo: "Implementar schema markup", descripcion: "Agregar datos estructurados para buscadores", prioridad: "BAJA", seccion: "TÉCNICO" },
+            { id: 9, numero: 9, titulo: "Configurar Google Analytics", descripcion: "Instalar y configurar seguimiento", prioridad: "MEDIA", seccion: "ANALÍTICA" },
+            { id: 10, numero: 10, titulo: "Revisar velocidad del sitio", descripcion: "Optimizar performance y carga", prioridad: "BAJA", seccion: "TÉCNICO" }
+        ];
+
+        let tareasCompletadas = {};
+        const secciones = {};
+
+        // Agrupar tareas por sección
+        tareas.forEach(tarea => {
+            if (!secciones[tarea.seccion]) {
+                secciones[tarea.seccion] = [];
+            }
+            secciones[tarea.seccion].push(tarea);
+        });
+
+        function renderTareas() {
+            const container = document.getElementById('tasksContainer');
+            container.innerHTML = '';
+
+            Object.keys(secciones).forEach(seccion => {
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'section-title';
+                sectionDiv.textContent = seccion;
+                container.appendChild(sectionDiv);
+
+                secciones[seccion].forEach(tarea => {
+                    const isCompleted = tareasCompletadas[tarea.id];
+                    const taskDiv = document.createElement('div');
+                    taskDiv.className = `task-item ${isCompleted ? 'completed' : ''}`;
+                    taskDiv.id = `task-${tarea.id}`;
+
+                    const prioridad = tarea.prioridad.toLowerCase();
+                    taskDiv.innerHTML = `
+                        <input type="checkbox" class="task-checkbox" ${isCompleted ? 'checked' : ''} 
+                               onchange="toggleTask(${tarea.id})">
+                        <div class="task-content">
+                            <div class="task-text">
+                                <span class="task-number">${tarea.numero}</span>${tarea.titulo}
+                            </div>
+                            <div class="task-description">${tarea.descripcion}</div>
+                            <div class="task-meta">
+                                <span class="priority-badge priority-${prioridad}">🔴 ${tarea.prioridad}</span>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(taskDiv);
+                });
+            });
+
+            updateStats();
+        }
+
+        function toggleTask(id) {
+            tareasCompletadas[id] = !tareasCompletadas[id];
+            renderTareas();
+            guardarTareas();
+        }
+
+        function updateStats() {
+            const completed = Object.values(tareasCompletadas).filter(v => v).length;
+            const pending = tareas.length - completed;
+            
+            document.getElementById('completed').textContent = completed;
+            document.getElementById('pending').textContent = pending;
+        }
+
+        function guardarTareas() {
+            localStorage.setItem('tareasCompletadas', JSON.stringify(tareasCompletadas));
+            alert('✓ Tareas guardadas');
+        }
+
+        function resetAllTasks() {
+            if (confirm('¿Deseas reiniciar todas las tareas?')) {
+                tareasCompletadas = {};
+                localStorage.removeItem('tareasCompletadas');
+                renderTareas();
+            }
+        }
+
+        // Cargar tareas guardadas
+        window.addEventListener('load', function() {
+            const datos = localStorage.getItem('tareasCompletadas');
+            if (datos) {
+                tareasCompletadas = JSON.parse(datos);
+            }
+            renderTareas();
+        });
+    </script>
+</body>
+</html>

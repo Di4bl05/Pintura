@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario - Dueño del Negocio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            background: #f0f4ff;
+            padding: 12px 15px;
+            border-left: 4px solid #667eea;
+            font-size: 16px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .question:last-child {
+            border-bottom: none;
+        }
+        .question-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        .question-text {
+            font-size: 15px;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .question-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        .question-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        textarea.question-input {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            font-size: 12px;
+            color: #666;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .btn-save {
+            background: #667eea;
+            color: white;
+        }
+        .btn-save:active {
+            opacity: 0.8;
+        }
+        .btn-clear {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .btn-clear:active {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Cuestionario</h1>
+            <p>Información del Negocio</p>
+        </div>
+        
+        <div class="content">
+            <form id="cuestionarioForm">
+                <!-- INFORMACIÓN GENERAL -->
+                <div class="section">
+                    <div class="section-title">ℹ️ INFORMACIÓN GENERAL</div>
+                    
+                    <div class="question">
+                        <span class="question-number">1</span>
+                        <div class="question-text">¿Cuál es el nombre completo del negocio?</div>
+                        <input type="text" class="question-input" name="q1" placeholder="Nombre del negocio">
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">2</span>
+                        <div class="question-text">¿Cuál es la dirección principal?</div>
+                        <input type="text" class="question-input" name="q2" placeholder="Dirección completa">
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">3</span>
+                        <div class="question-text">¿Hace cuántos años opera el negocio?</div>
+                        <input type="number" class="question-input" name="q3" placeholder="Años">
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">4</span>
+                        <div class="question-text">¿Cuál es el horario de atención?</div>
+                        <input type="text" class="question-input" name="q4" placeholder="Ej: Lunes-Viernes 9AM-6PM">
+                    </div>
+                </div>
+
+                <!-- CONTACTO -->
+                <div class="section">
+                    <div class="section-title">📞 CONTACTO</div>
+                    
+                    <div class="question">
+                        <span class="question-number">5</span>
+                        <div class="question-text">¿Teléfono principal?</div>
+                        <input type="tel" class="question-input" name="q5" placeholder="Teléfono">
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">6</span>
+                        <div class="question-text">¿Correo electrónico principal?</div>
+                        <input type="email" class="question-input" name="q6" placeholder="Email">
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">7</span>
+                        <div class="question-text">¿Página web actual?</div>
+                        <input type="url" class="question-input" name="q7" placeholder="https://...">
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">8</span>
+                        <div class="question-text">¿Redes sociales actuales?</div>
+                        <input type="text" class="question-input" name="q8" placeholder="Facebook, Instagram, etc">
+                    </div>
+                </div>
+
+                <!-- SERVICIOS/PRODUCTOS -->
+                <div class="section">
+                    <div class="section-title">🛍️ SERVICIOS/PRODUCTOS</div>
+                    
+                    <div class="question">
+                        <span class="question-number">9</span>
+                        <div class="question-text">¿Cuáles son los 3 servicios/productos principales?</div>
+                        <textarea class="question-input" name="q9" placeholder="Servicio 1&#10;Servicio 2&#10;Servicio 3"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">10</span>
+                        <div class="question-text">¿Cuál es el precio promedio?</div>
+                        <input type="text" class="question-input" name="q10" placeholder="Rango de precios">
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">11</span>
+                        <div class="question-text">¿Quién es su cliente ideal/perfil?</div>
+                        <textarea class="question-input" name="q11" placeholder="Descripción del cliente ideal"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">12</span>
+                        <div class="question-text">¿Cuál es la diferencia con competidores?</div>
+                        <textarea class="question-input" name="q12" placeholder="Ventajas competitivas"></textarea>
+                    </div>
+                </div>
+
+                <!-- MARKETING -->
+                <div class="section">
+                    <div class="section-title">📊 MARKETING</div>
+                    
+                    <div class="question">
+                        <span class="question-number">13</span>
+                        <div class="question-text">¿Cómo llegan actualmente sus clientes?</div>
+                        <textarea class="question-input" name="q13" placeholder="Referidos, Google, Redes Sociales, etc"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">14</span>
+                        <div class="question-text">¿Tiene Google Business Profile?</div>
+                        <select class="question-input" name="q14">
+                            <option value="">-- Seleccionar --</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                            <option value="No estoy seguro">No estoy seguro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">15</span>
+                        <div class="question-text">¿Aparece en buscadores cuando buscan sus servicios?</div>
+                        <select class="question-input" name="q15">
+                            <option value="">-- Seleccionar --</option>
+                            <option value="Siempre">Siempre</option>
+                            <option value="A veces">A veces</option>
+                            <option value="Nunca">Nunca</option>
+                            <option value="No lo sé">No lo sé</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- OBJETIVOS -->
+                <div class="section">
+                    <div class="section-title">🎯 OBJETIVOS</div>
+                    
+                    <div class="question">
+                        <span class="question-number">16</span>
+                        <div class="question-text">¿Cuál es el objetivo principal para este año?</div>
+                        <textarea class="question-input" name="q16" placeholder="Objetivo principal"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">17</span>
+                        <div class="question-text">¿Cuántos clientes nuevos desea obtener?</div>
+                        <input type="number" class="question-input" name="q17" placeholder="Número de clientes">
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">18</span>
+                        <div class="question-text">¿Cuál es su presupuesto para marketing?</div>
+                        <input type="text" class="question-input" name="q18" placeholder="Presupuesto mensual/anual">
+                    </div>
+                </div>
+
+                <!-- COMPETENCIA -->
+                <div class="section">
+                    <div class="section-title">⚔️ COMPETENCIA</div>
+                    
+                    <div class="question">
+                        <span class="question-number">19</span>
+                        <div class="question-text">¿Quiénes son sus 3 competidores principales?</div>
+                        <textarea class="question-input" name="q19" placeholder="Competidor 1&#10;Competidor 2&#10;Competidor 3"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">20</span>
+                        <div class="question-text">¿Qué hacen mejor que ellos?</div>
+                        <textarea class="question-input" name="q20" placeholder="Sus fortalezas"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">21</span>
+                        <div class="question-text">¿Qué hace usted mejor que ellos?</div>
+                        <textarea class="question-input" name="q21" placeholder="Sus ventajas"></textarea>
+                    </div>
+                </div>
+
+                <!-- ANALÍTICA -->
+                <div class="section">
+                    <div class="section-title">📈 ANALÍTICA</div>
+                    
+                    <div class="question">
+                        <span class="question-number">22</span>
+                        <div class="question-text">¿Cuántos clientes recibe por mes actualmente?</div>
+                        <input type="number" class="question-input" name="q22" placeholder="Número de clientes">
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">23</span>
+                        <div class="question-text">¿Cuál es el ticket promedio por venta?</div>
+                        <input type="text" class="question-input" name="q23" placeholder="Precio promedio">
+                    </div>
+                    
+                    <div class="question">
+                        <span class="question-number">24</span>
+                        <div class="question-text">¿Cuál es su área de cobertura/zona de servicio?</div>
+                        <input type="text" class="question-input" name="q24" placeholder="Zona de cobertura">
+                    </div>
+                </div>
+
+                <!-- BOTONES -->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-clear" onclick="limpiarForm()">Limpiar</button>
+                    <button type="button" class="btn btn-save" onclick="guardarRespuestas()">💾 Guardar</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="footer">
+            <p>✓ Tus respuestas se guardan localmente en tu dispositivo</p>
+        </div>
+    </div>
+
+    <script>
+        // Cargar respuestas guardadas
+        window.addEventListener('load', function() {
+            const datos = localStorage.getItem('cuestionarioRespuestas');
+            if (datos) {
+                const respuestas = JSON.parse(datos);
+                for (let key in respuestas) {
+                    const input = document.querySelector(`[name="${key}"]`);
+                    if (input) {
+                        input.value = respuestas[key];
+                    }
+                }
+            }
+        });
+
+        function guardarRespuestas() {
+            const form = document.getElementById('cuestionarioForm');
+            const respuestas = {};
+            
+            form.querySelectorAll('input, textarea, select').forEach(input => {
+                if (input.name) {
+                    respuestas[input.name] = input.value;
+                }
+            });
+
+            localStorage.setItem('cuestionarioRespuestas', JSON.stringify(respuestas));
+            alert('✓ Respuestas guardadas exitosamente');
+        }
+
+        function limpiarForm() {
+            if (confirm('¿Deseas limpiar todas las respuestas?')) {
+                document.getElementById('cuestionarioForm').reset();
+                localStorage.removeItem('cuestionarioRespuestas');
+                alert('✓ Formulario limpiado');
+            }
+        }
+    </script>
+</body>
+</html>
