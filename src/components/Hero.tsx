@@ -1,50 +1,76 @@
 import Link from "next/link";
-import { Phone, ArrowRight } from "lucide-react";
+import { Phone, ArrowRight, Award, Star } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative bg-gradient-to-br from-primary-600 to-primary-800 text-white py-20 md:py-32">
-      <div className="absolute inset-0 bg-black opacity-10"></div>
+    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-gray-900 via-primary-900 to-orange-900">
+      {/* Overlay pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+      </div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Professional Painting Services in <span className="text-primary-200">[Your City]</span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-primary-50">
-            Transform your home or business with expert painting services. 
-            Licensed, insured, and trusted by hundreds of satisfied customers.
-          </p>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm mb-8">
+          <Award className="w-4 h-4" />
+          <span>Licensed & Insured • 15+ Years Excellence</span>
+        </div>
+        
+        <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-tight">
+          Paint Your
+          <br />
+          <span className="bg-gradient-to-r from-green-400 to-orange-400 bg-clip-text text-transparent">
+            Vision
+          </span>
+        </h1>
+        
+        <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+          Premium painting services that bring your space to life.
+          <br className="hidden md:block" />
+          Quality you can see. Results you'll love.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+          <Link 
+            href="#contact" 
+            className="group inline-flex items-center justify-center px-10 py-5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-lg font-bold rounded-full transition-all shadow-2xl hover:shadow-green-500/50 hover:scale-105"
+          >
+            Start Your Project
+            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </Link>
           
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-white text-primary-600 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-bold text-lg shadow-lg"
-            >
-              Get Free Estimate
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-            <a
-              href="tel:+15555555555"
-              className="inline-flex items-center justify-center gap-2 bg-primary-700 text-white px-8 py-4 rounded-lg hover:bg-primary-800 transition-colors font-bold text-lg border-2 border-white/20"
-            >
-              <Phone className="w-5 h-5" />
-              Call Now
-            </a>
+          <Link 
+            href="tel:+1-555-555-5555" 
+            className="inline-flex items-center justify-center px-10 py-5 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white text-lg font-bold rounded-full border-2 border-white/30 transition-all"
+          >
+            <Phone className="mr-2 w-5 h-5" />
+            (555) 555-5555
+          </Link>
+        </div>
+        
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+          <div className="text-center">
+            <div className="text-5xl font-black text-white mb-2">500+</div>
+            <div className="text-sm text-gray-400 uppercase tracking-wider">Projects</div>
           </div>
-
-          {/* Trust Badges */}
-          <div className="mt-12 flex flex-wrap gap-6 text-sm">
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-              <span>4.9/5 Stars</span>
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <span className="text-5xl font-black text-white">4.9</span>
+              <Star className="w-8 h-8 text-yellow-400 fill-current" />
             </div>
-            <div>✓ Licensed & Insured</div>
-            <div>✓ 15+ Years Experience</div>
-            <div>✓ Same Day Quotes</div>
+            <div className="text-sm text-gray-400 uppercase tracking-wider">Rating</div>
           </div>
+          <div className="text-center">
+            <div className="text-5xl font-black text-white mb-2">100%</div>
+            <div className="text-sm text-gray-400 uppercase tracking-wider">Guaranteed</div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-white/30 rounded-full p-1">
+          <div className="w-1 h-3 bg-white rounded-full mx-auto"></div>
         </div>
       </div>
     </section>
