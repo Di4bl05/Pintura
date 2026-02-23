@@ -69,14 +69,12 @@ export default function Home() {
                 Learn More About Us →
               </Link>
             </div>
-            <div className="relative h-[400px] md:h-[500px]">
-              <Image
-                src="/images/team-working.jpg"
-                alt="Professional painters at work"
-                fill
-                className="object-cover rounded-lg shadow-lg"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
+            <div className="relative h-[400px] md:h-[500px] bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg shadow-lg flex items-center justify-center">
+              <div className="text-center text-white p-8">
+                <p className="text-6xl mb-4">🎨</p>
+                <p className="text-xl font-semibold">Professional Painters</p>
+                <p className="text-sm opacity-90 mt-2">Add your project photos here</p>
+              </div>
             </div>
           </div>
         </div>
