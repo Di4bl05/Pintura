@@ -1,83 +1,83 @@
-import Link from "next/link";
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
-
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
-          {/* Company Info */}
+    <footer id="contact" className="relative bg-gradient-to-br from-gray-900 via-purple-900/50 to-gray-900 text-white py-32">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="h-full w-full" style={{
+          backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-8 lg:px-16">
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Left - Big CTA */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-4">Your Painting Co.</h3>
-            <p className="mb-4 text-sm">
-              Professional painting services for residential and commercial properties. 
-              Licensed, insured, and trusted in [Your City].
+            <h2 className="text-7xl md:text-9xl font-black leading-none mb-8">
+              LET'S
+              <br/>
+              <span className="bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text text-transparent">
+                TALK
+              </span>
+            </h2>
+            <p className="text-2xl text-white/60 mb-12">
+              Ready to transform your space?
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="hover:text-primary-400 transition-colors">
-                <Facebook className="w-5 h-5" />
+            <a 
+              href="tel:+15555555555"
+              className="inline-block bg-white text-gray-900 px-12 py-6 text-2xl font-bold hover:scale-105 transition-transform"
+            >
+              (555) 555-5555
+            </a>
+          </div>
+
+          {/* Right - Info Grid */}
+          <div className="space-y-12">
+            <div>
+              <div className="text-xs uppercase tracking-[0.3em] text-white/40 mb-2">Email</div>
+              <a href="mailto:hello@paint.com" className="text-2xl font-light hover:text-orange-400 transition-colors">
+                hello@paint.com
               </a>
-              <a href="#" className="hover:text-primary-400 transition-colors">
-                <Instagram className="w-5 h-5" />
+            </div>
+            
+            <div>
+              <div className="text-xs uppercase tracking-[0.3em] text-white/40 mb-2">Location</div>
+              <p className="text-2xl font-light">
+                123 Design Street<br/>
+                Your City, ST 12345
+              </p>
+            </div>
+
+            <div>
+              <div className="text-xs uppercase tracking-[0.3em] text-white/40 mb-2">Hours</div>
+              <p className="text-2xl font-light">
+                Mon - Fri: 8AM - 6PM<br/>
+                Sat: 9AM - 4PM
+              </p>
+            </div>
+
+            {/* Social */}
+            <div className="flex gap-6 pt-8">
+              <a href="#" className="w-12 h-12 border border-white/20 flex items-center justify-center hover:border-orange-400 hover:text-orange-400 transition-colors">
+                IG
               </a>
-              <a href="#" className="hover:text-primary-400 transition-colors">
-                <Linkedin className="w-5 h-5" />
+              <a href="#" className="w-12 h-12 border border-white/20 flex items-center justify-center hover:border-orange-400 hover:text-orange-400 transition-colors">
+                FB
+              </a>
+              <a href="#" className="w-12 h-12 border border-white/20 flex items-center justify-center hover:border-orange-400 hover:text-orange-400 transition-colors">
+                LI
               </a>
             </div>
           </div>
-
-          {/* Services */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-4">Services</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/services/interior" className="hover:text-primary-400 transition-colors">Interior Painting</Link></li>
-              <li><Link href="/services/exterior" className="hover:text-primary-400 transition-colors">Exterior Painting</Link></li>
-              <li><Link href="/services/commercial" className="hover:text-primary-400 transition-colors">Commercial Painting</Link></li>
-              <li><Link href="/services/residential" className="hover:text-primary-400 transition-colors">Residential Painting</Link></li>
-            </ul>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="hover:text-primary-400 transition-colors">About Us</Link></li>
-              <li><Link href="/gallery" className="hover:text-primary-400 transition-colors">Gallery</Link></li>
-              <li><Link href="/blog" className="hover:text-primary-400 transition-colors">Blog</Link></li>
-              <li><Link href="/contact" className="hover:text-primary-400 transition-colors">Contact</Link></li>
-              <li><Link href="/free-estimate" className="hover:text-primary-400 transition-colors">Free Estimate</Link></li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-4">Contact Us</h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-2">
-                <Phone className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <a href="tel:+15555555555" className="hover:text-primary-400 transition-colors">
-                  (555) 555-5555
-                </a>
-              </li>
-              <li className="flex items-start gap-2">
-                <Mail className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <a href="mailto:info@yourpainting.com" className="hover:text-primary-400 transition-colors">
-                  info@yourpainting.com
-                </a>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span>123 Main St<br />Your City, State 12345</span>
-              </li>
-            </ul>
-          </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
-          <p>&copy; {new Date().getFullYear()} Your Painting Company. All rights reserved.</p>
-          <div className="mt-2 space-x-4">
-            <Link href="/privacy" className="hover:text-primary-400 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-primary-400 transition-colors">Terms of Service</Link>
+        {/* Bottom */}
+        <div className="mt-32 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/40">
+          <p>© 2026 Paint Studio. All rights reserved.</p>
+          <div className="flex gap-8">
+            <a href="#" className="hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <a href="#" className="hover:text-white transition-colors">Careers</a>
           </div>
         </div>
       </div>

@@ -1,161 +1,121 @@
-import { Home, Building2, Palette, Sparkles } from "lucide-react";
+"use client";
+
+import { useRef } from "react";
+
+const works = [
+  {
+    title: "Residential",
+    subtitle: "Modern Living",
+    number: "01",
+    color: "from-orange-500 to-rose-500",
+    description: "Transforming houses into homes with carefully curated color palettes"
+  },
+  {
+    title: "Commercial",
+    subtitle: "Workspace Design",
+    number: "02", 
+    color: "from-purple-500 to-blue-500",
+    description: "Creating productive environments that inspire creativity and focus"
+  },
+  {
+    title: "Exterior",
+    subtitle: "Curb Appeal",
+    number: "03",
+    color: "from-green-500 to-teal-500",
+    description: "Weather-resistant finishes that protect and beautify for years"
+  },
+  {
+    title: "Specialty",
+    subtitle: "Custom Finish",
+    number: "04",
+    color: "from-pink-500 to-red-500",
+    description: "Unique textures and techniques for one-of-a-kind spaces"
+  },
+];
 
 export default function Services() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   return (
-    <section className="py-32 bg-white">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        {/* Header - Columna estrecha */}
-        <div className="grid lg:grid-cols-12 gap-12 mb-24">
-          <div className="lg:col-span-3">
-            <div className="sticky top-24">
-              <div className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-6">Services</div>
-              <h2 className="text-5xl font-light text-gray-900 mb-4">
-                What We
-                <br/>
-                <span className="italic font-serif">Offer</span>
-              </h2>
-              <div className="w-12 h-[2px] bg-gray-900"></div>
+    <section id="work" className="relative bg-black py-32 overflow-hidden">
+      {/* Section Title - Fixed */}
+      <div className="max-w-7xl mx-auto px-8 lg:px-16 mb-16">
+        <h2 className="text-7xl md:text-9xl font-black text-white/10 uppercase">
+          Our Work
+        </h2>
+        <p className="text-white/60 text-xl mt-4 tracking-wide">
+          Scroll to explore →
+        </p>
+      </div>
+
+      {/* Horizontal Scroll */}
+      <div 
+        ref={scrollRef}
+        className="flex gap-8 px-8 lg:px-16 overflow-x-auto scrollbar-hide pb-8"
+        style={{ scrollSnapType: 'x mandatory' }}
+      >
+        {works.map((work, index) => (
+          <div 
+            key={index}
+            className="min-w-[85vw] md:min-w-[60vw] lg:min-w-[45vw] group cursor-pointer"
+            style={{ scrollSnapAlign: 'start' }}
+          >
+            <div className="relative h-[70vh] bg-gradient-to-br {work.color} overflow-hidden">
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500"></div>
+              
+              {/* Content */}
+              <div className="absolute inset-0 p-12 flex flex-col justify-between">
+                <div>
+                  <div className="text-white/50 text-9xl font-black mb-4">
+                    {work.number}
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-6xl font-black text-white mb-2 group-hover:translate-x-4 transition-transform">
+                    {work.title}
+                  </h3>
+                  <p className="text-2xl text-white/80 mb-6 font-light">
+                    {work.subtitle}
+                  </p>
+                  <p className="text-white/60 text-lg max-w-md mb-8">
+                    {work.description}
+                  </p>
+                  <button className="border-2 border-white text-white px-8 py-4 font-bold hover:bg-white hover:text-black transition-all">
+                    LEARN MORE
+                  </button>
+                </div>
+              </div>
+
+              {/* Hover Effect */}
+              <div className="absolute inset-0 border-4 border-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
             </div>
           </div>
-          
-          <div className="lg:col-span-9">
-            {/* Stacked Cards con Overlapping */}
-            <div className="space-y-16">
-              {/* Card 1 - Residential */}
-              <div className="group relative">
-                <div className="grid md:grid-cols-5 gap-8 items-center">
-                  <div className="md:col-span-2 order-2 md:order-1">
-                    <div className="space-y-4">
-                      <div className="text-6xl">01</div>
-                      <h3 className="text-4xl font-light text-gray-900">
-                        Residential
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        Transform your home into a personal sanctuary. We specialize in creating warm, inviting spaces that reflect your unique style and personality.
-                      </p>
-                      <button className="inline-flex items-center gap-2 text-sm uppercase tracking-widest border-b-2 border-transparent hover:border-gray-900 transition-colors pb-1">
-                        Explore →
-                      </button>
-                    </div>
-                  </div>
-                  <div className="md:col-span-3 order-1 md:order-2">
-                    <div className="relative">
-                      <div className="aspect-[4/3] bg-gradient-to-br from-blue-50 to-cyan-50 shadow-lg group-hover:shadow-2xl transition-shadow duration-500">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <Home className="w-20 h-20 text-gray-300" />
-                        </div>
-                      </div>
-                      {/* Overlapping element */}
-                      <div className="absolute -bottom-4 -right-4 bg-white border-2 border-gray-900 p-4 shadow-lg">
-                        <div className="text-2xl font-bold">500+</div>
-                        <div className="text-xs uppercase tracking-wider text-gray-500">Homes</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Card 2 - Commercial */}
-              <div className="group relative lg:ml-24">
-                <div className="grid md:grid-cols-5 gap-8 items-center">
-                  <div className="md:col-span-3">
-                    <div className="relative">
-                      <div className="aspect-[4/3] bg-gradient-to-br from-purple-50 to-pink-50 shadow-lg group-hover:shadow-2xl transition-shadow duration-500">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <Building2 className="w-20 h-20 text-gray-300" />
-                        </div>
-                      </div>
-                      <div className="absolute -top-4 -left-4 bg-white border-2 border-gray-900 p-4 shadow-lg">
-                        <div className="text-xs uppercase tracking-wider text-gray-500">Premium</div>
-                        <div className="text-2xl font-bold">Quality</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="md:col-span-2">
-                    <div className="space-y-4">
-                      <div className="text-6xl">02</div>
-                      <h3 className="text-4xl font-light text-gray-900">
-                        Commercial
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        Elevate your business environment. Professional spaces that inspire productivity, creativity, and success for your team and clients.
-                      </p>
-                      <button className="inline-flex items-center gap-2 text-sm uppercase tracking-widest border-b-2 border-transparent hover:border-gray-900 transition-colors pb-1">
-                        Learn More →
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Card 3 - Consultation */}
-              <div className="group relative">
-                <div className="grid md:grid-cols-5 gap-8 items-center">
-                  <div className="md:col-span-2 order-2 md:order-1">
-                    <div className="space-y-4">
-                      <div className="text-6xl">03</div>
-                      <h3 className="text-4xl font-light text-gray-900">
-                        Color Design
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        Expert color consultation to match your vision. We help you choose the perfect palette that enhances your space and mood.
-                      </p>
-                      <button className="inline-flex items-center gap-2 text-sm uppercase tracking-widest border-b-2 border-transparent hover:border-gray-900 transition-colors pb-1">
-                        Discover →
-                      </button>
-                    </div>
-                  </div>
-                  <div className="md:col-span-3 order-1 md:order-2">
-                    <div className="relative">
-                      <div className="aspect-[4/3] bg-gradient-to-br from-orange-50 to-red-50 shadow-lg group-hover:shadow-2xl transition-shadow duration-500">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <Palette className="w-20 h-20 text-gray-300" />
-                        </div>
-                      </div>
-                      <div className="absolute -bottom-4 -right-4 bg-gray-900 text-white p-4 shadow-lg">
-                        <div className="text-xs uppercase tracking-wider opacity-70">Free</div>
-                        <div className="text-2xl font-bold">Consult</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Card 4 - Premium */}
-              <div className="group relative lg:ml-24">
-                <div className="grid md:grid-cols-5 gap-8 items-center">
-                  <div className="md:col-span-3">
-                    <div className="relative">
-                      <div className="aspect-[4/3] bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg group-hover:shadow-2xl transition-shadow duration-500">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <Sparkles className="w-20 h-20 text-gray-300" />
-                        </div>
-                      </div>
-                      <div className="absolute -top-4 -left-4 bg-white border-2 border-gray-900 p-4 shadow-lg rotate-3 group-hover:rotate-0 transition-transform">
-                        <div className="text-2xl font-bold">★★★★★</div>
-                        <div className="text-xs uppercase tracking-wider text-gray-500">Rated</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="md:col-span-2">
-                    <div className="space-y-4">
-                      <div className="text-6xl">04</div>
-                      <h3 className="text-4xl font-light text-gray-900">
-                        Premium Finish
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        Flawless execution with premium materials. Every detail perfected, every surface smooth, every corner immaculate.
-                      </p>
-                      <button className="inline-flex items-center gap-2 text-sm uppercase tracking-widest border-b-2 border-transparent hover:border-gray-900 transition-colors pb-1">
-                        View Process →
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        ))}
+
+        {/* CTA Card */}
+        <div className="min-w-[85vw] md:min-w-[60vw] lg:min-w-[45vw]">
+          <div className="h-[70vh] bg-white flex items-center justify-center p-12 text-center">
+            <div>
+              <h3 className="text-7xl font-black mb-8">Ready to<br/>Start?</h3>
+              <p className="text-2xl text-gray-600 mb-12 max-w-md mx-auto">
+                Let's bring your vision to life
+              </p>
+              <a 
+                href="tel:+15555555555"
+                className="inline-block bg-black text-white px-12 py-6 text-xl font-bold hover:bg-gray-800 transition-colors"
+              >
+                CALL (555) 555-5555
+              </a>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Scroll Progress Bar */}
+      <div className="w-full h-1 bg-white/10 mt-8">
+        <div className="h-full bg-white w-1/4"></div>
       </div>
     </section>
   );

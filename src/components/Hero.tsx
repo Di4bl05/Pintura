@@ -1,96 +1,103 @@
-import Link from "next/link";
-import { Phone, ArrowRight, ArrowDown } from "lucide-react";
+"use client";
+
+import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 export default function Hero() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) * 100,
+        y: (e.clientY / window.innerHeight) * 100,
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-rose-50 via-white to-sky-50">
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-transparent via-white to-transparent opacity-60"></div>
-      
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 pt-20 pb-16">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Sidebar - Stats */}
-          <div className="lg:col-span-2 space-y-8 lg:mt-32">
-            <div className="text-center lg:text-left">
-              <div className="text-5xl font-bold text-gray-900 mb-1">15+</div>
-              <div className="text-xs uppercase tracking-widest text-gray-500">Years</div>
-            </div>
-            <div className="text-center lg:text-left">
-              <div className="text-5xl font-bold text-gray-900 mb-1">500+</div>
-              <div className="text-xs uppercase tracking-widest text-gray-500">Projects</div>
-            </div>
-            <div className="text-center lg:text-left">
-              <div className="text-5xl font-bold text-gray-900 mb-1">★</div>
-              <div className="text-xs uppercase tracking-widest text-gray-500">Premium</div>
-            </div>
-          </div>
-          
-          {/* Main Content - Center */}
-          <div className="lg:col-span-6 space-y-10">
-            <div className="space-y-6">
-              <div className="inline-block px-3 py-1 border border-gray-900 text-gray-900 text-xs uppercase tracking-[0.3em] font-semibold">
-                Est. 2010
-              </div>
-              
-              <h1 className="text-[5rem] md:text-[7rem] lg:text-[9rem] font-light leading-[0.85] tracking-tight text-gray-900">
-                Paint<br/>
-                <span className="italic font-serif">Studio</span>
-              </h1>
-              
-              <div className="w-20 h-[2px] bg-gray-900"></div>
-            </div>
+    <section id="home" className="relative h-screen w-full overflow-hidden bg-gray-900">
+      {/* Animated Background */}
+      <div 
+        className="absolute inset-0 transition-transform duration-1000 ease-out"
+        style={{
+          transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 via-rose-500/20 to-purple-500/20"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/30 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/30 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-rose-500/30 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
+
+      {/* Grid Overlay */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="h-full w-full" style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundSize: '100px 100px'
+        }}></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative h-full flex items-center justify-center">
+        <div className="text-center px-8">
+          {/* Main Heading - Huge */}
+          <h1 className="text-[10vw] md:text-[12vw] lg:text-[15vw] font-black leading-none text-white mb-8 tracking-tighter">
+            <span className="block opacity-90">WE</span>
+            <span className="block bg-gradient-to-r from-orange-400 via-rose-400 to-purple-400 bg-clip-text text-transparent animate-pulse">PAINT</span>
+            <span className="block opacity-90">DREAMS</span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-white/60 text-lg md:text-xl tracking-[0.5em] uppercase mb-12">
+            Transform • Inspire • Create
+          </p>
+
+          {/* CTA - Different */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <button className="group relative px-12 py-6 bg-white text-gray-900 font-bold text-lg overflow-hidden">
+              <span className="relative z-10">START PROJECT</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-rose-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20 text-white font-bold">
+                LET'S GO →
+              </span>
+            </button>
             
-            <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-md font-light">
-              Where craftsmanship meets artistry. We create living spaces that inspire, comfort, and elevate everyday moments.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link 
-                href="#contact" 
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white text-sm uppercase tracking-widest hover:bg-gray-800 transition-colors"
-              >
-                Book Consultation
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              
-              <a 
-                href="tel:+15555555555" 
-                className="inline-flex items-center gap-3 px-8 py-4 border border-gray-300 text-gray-900 text-sm uppercase tracking-widest hover:border-gray-900 transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                Call Us
-              </a>
-            </div>
+            <a href="#work" className="text-white border-2 border-white/30 px-12 py-6 font-bold text-lg hover:bg-white hover:text-gray-900 transition-all">
+              VIEW WORK
+            </a>
           </div>
-          
-          {/* Right Side - Large Image Card */}
-          <div className="lg:col-span-4 lg:mt-20">
-            <div className="relative">
-              {/* Main card */}
-              <div className="relative bg-gradient-to-br from-gray-100 to-gray-50 aspect-[3/4] shadow-2xl">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="text-[8rem] mb-4">🎨</div>
-                    <div className="text-2xl font-light text-gray-900">Crafted</div>
-                    <div className="text-2xl italic font-serif text-gray-900">with Precision</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Overlapping badge */}
-              <div className="absolute -bottom-6 -left-6 bg-white border-2 border-gray-900 px-6 py-4 shadow-xl">
-                <div className="text-xs uppercase tracking-widest text-gray-500 mb-1">Certified</div>
-                <div className="text-lg font-bold text-gray-900">Licensed & Insured</div>
-              </div>
+
+          {/* Stats - Minimal */}
+          <div className="flex gap-12 justify-center mt-20 text-white">
+            <div>
+              <div className="text-4xl font-black">500+</div>
+              <div className="text-xs uppercase tracking-widest text-white/50">Projects</div>
+            </div>
+            <div className="w-px bg-white/20"></div>
+            <div>
+              <div className="text-4xl font-black">15Y</div>
+              <div className="text-xs uppercase tracking-widest text-white/50">Experience</div>
+            </div>
+            <div className="w-px bg-white/20"></div>
+            <div>
+              <div className="text-4xl font-black">★★★★★</div>
+              <div className="text-xs uppercase tracking-widest text-white/50">Rated</div>
             </div>
           </div>
         </div>
       </div>
-      
-      {/* Scroll indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-gray-400">
-        <span className="text-xs uppercase tracking-widest">Scroll</span>
-        <ArrowDown className="w-4 h-4 animate-bounce" />
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
+        <ChevronDown className="w-8 h-8 text-white/50" />
+      </div>
+
+      {/* Version Number - Design Detail */}
+      <div className="absolute bottom-8 right-8 text-white/30 text-xs font-mono">
+        V5.0
       </div>
     </section>
   );

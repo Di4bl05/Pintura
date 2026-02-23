@@ -1,17 +1,18 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Phone, Mail, MapPin, Star, CheckCircle2 } from "lucide-react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
-import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-black">
       <Header />
       <Hero />
+      <Services />
+      <Footer />
+    </main>
+  );
+}
       
       {/* Trust Indicators */}
       <section className="py-8 bg-gray-50">

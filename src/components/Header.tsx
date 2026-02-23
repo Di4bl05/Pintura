@@ -1,96 +1,71 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const navigation = [
-    { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "About", href: "/about" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/contact" },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <nav className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">P</span>
-            </div>
-            <span className="font-bold text-xl text-gray-900">
-              Your Painting Co.
-            </span>
+    <>
+      {/* Fixed Side Navigation */}
+      <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
+        <div className="flex flex-col gap-8">
+          <Link href="#home" className="group flex items-center gap-4">
+            <div className={`w-2 h-2 rounded-full transition-all ${scrolled ? 'bg-gray-900' : 'bg-white'} group-hover:w-12`}></div>
+            <span className={`text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity ${scrolled ? 'text-gray-900' : 'text-white'}`}>Home</span>
           </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* CTA Button */}
-          <a
-            href="tel:+15555555555"
-            className="hidden md:flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors font-semibold"
-          >
-            <Phone className="w-5 h-5" />
-            (555) 555-5555
-          </a>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
+          <Link href="#work" className="group flex items-center gap-4">
+            <div className={`w-2 h-2 rounded-full transition-all ${scrolled ? 'bg-gray-900' : 'bg-white'} group-hover:w-12`}></div>
+            <span className={`text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity ${scrolled ? 'text-gray-900' : 'text-white'}`}>Work</span>
+          </Link>
+          <Link href="#about" className="group flex items-center gap-4">
+            <div className={`w-2 h-2 rounded-full transition-all ${scrolled ? 'bg-gray-900' : 'bg-white'} group-hover:w-12`}></div>
+            <span className={`text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity ${scrolled ? 'text-gray-900' : 'text-white'}`}>About</span>
+          </Link>
+          <Link href="#contact" className="group flex items-center gap-4">
+            <div className={`w-2 h-2 rounded-full transition-all ${scrolled ? 'bg-gray-900' : 'bg-white'} group-hover:w-12`}></div>
+            <span className={`text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity ${scrolled ? 'text-gray-900' : 'text-white'}`}>Contact</span>
+          </Link>
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <div className="flex flex-col space-y-4">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-gray-700 hover:text-primary-600 font-medium py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <a
-                href="tel:+15555555555"
-                className="flex items-center justify-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors font-semibold"
-              >
-                <Phone className="w-5 h-5" />
-                (555) 555-5555
-              </a>
-            </div>
-          </div>
-        )}
       </nav>
-    </header>
+
+      {/* Minimal Top Bar */}
+      <header className="fixed top-0 left-0 right-0 z-40">
+        <div className="flex justify-between items-center px-8 lg:px-16 py-6">
+          <Link href="/" className={`text-2xl font-bold tracking-tighter transition-colors ${scrolled ? 'text-gray-900' : 'text-white'}`}>
+            PAINT<span className="font-light">.</span>
+          </Link>
+          
+          <a 
+            href="tel:+15555555555" 
+            className={`px-6 py-3 text-sm font-medium tracking-wide transition-all ${
+              scrolled 
+                ? 'bg-gray-900 text-white hover:bg-gray-800' 
+                : 'bg-white text-gray-900 hover:bg-gray-100'
+            }`}
+          >
+            CALL NOW
+          </a>
+        </div>
+      </header>
+
+      {/* Mobile Menu Button */}
+      <button className="fixed bottom-8 right-8 z-50 lg:hidden w-14 h-14 bg-gray-900 text-white rounded-full shadow-2xl flex items-center justify-center">
+        <svg width="20" height="12" viewBox="0 0 20 12" fill="none">
+          <line x1="0" y1="1" x2="20" y2="1" stroke="white" strokeWidth="2"/>
+          <line x1="0" y1="6" x2="20" y2="6" stroke="white" strokeWidth="2"/>
+          <line x1="0" y1="11" x2="20" y2="11" stroke="white" strokeWidth="2"/>
+        </svg>
+      </button>
+    </>
   );
 }
