@@ -37,13 +37,13 @@ export default function Services() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="work" className="relative bg-black py-32 overflow-hidden">
+    <section id="work" className="relative py-32 overflow-hidden bg-black">
       {/* Section Title - Fixed */}
-      <div className="max-w-7xl mx-auto px-8 lg:px-16 mb-16">
-        <h2 className="text-7xl md:text-9xl font-black text-white/10 uppercase">
+      <div className="px-8 mx-auto mb-16 max-w-7xl lg:px-16">
+        <h2 className="font-black uppercase text-7xl md:text-9xl text-white/10">
           Our Work
         </h2>
-        <p className="text-white/60 text-xl mt-4 tracking-wide">
+        <p className="mt-4 text-xl tracking-wide text-white/60">
           Scroll to explore →
         </p>
       </div>
@@ -51,7 +51,7 @@ export default function Services() {
       {/* Horizontal Scroll */}
       <div 
         ref={scrollRef}
-        className="flex gap-8 px-8 lg:px-16 overflow-x-auto scrollbar-hide pb-8"
+        className="flex gap-8 px-8 pb-8 overflow-x-auto lg:px-16 scrollbar-hide"
         style={{ scrollSnapType: 'x mandatory' }}
       >
         {works.map((work, index) => (
@@ -62,34 +62,34 @@ export default function Services() {
           >
             <div className="relative h-[70vh] bg-gradient-to-br {work.color} overflow-hidden">
               {/* Overlay */}
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500"></div>
+              <div className="absolute inset-0 transition-all duration-500 bg-black/40 group-hover:bg-black/20"></div>
               
               {/* Content */}
-              <div className="absolute inset-0 p-12 flex flex-col justify-between">
+              <div className="absolute inset-0 flex flex-col justify-between p-12">
                 <div>
-                  <div className="text-white/50 text-9xl font-black mb-4">
+                  <div className="mb-4 font-black text-white/50 text-9xl">
                     {work.number}
                   </div>
                 </div>
                 
                 <div>
-                  <h3 className="text-6xl font-black text-white mb-2 group-hover:translate-x-4 transition-transform">
+                  <h3 className="mb-2 text-6xl font-black text-white transition-transform group-hover:translate-x-4">
                     {work.title}
                   </h3>
-                  <p className="text-2xl text-white/80 mb-6 font-light">
+                  <p className="mb-6 text-2xl font-light text-white/80">
                     {work.subtitle}
                   </p>
-                  <p className="text-white/60 text-lg max-w-md mb-8">
+                  <p className="max-w-md mb-8 text-lg text-white/60">
                     {work.description}
                   </p>
-                  <button className="border-2 border-white text-white px-8 py-4 font-bold hover:bg-white hover:text-black transition-all">
+                  <button className="px-8 py-4 font-bold text-white transition-all border-2 border-white hover:bg-white hover:text-black">
                     LEARN MORE
                   </button>
                 </div>
               </div>
 
               {/* Hover Effect */}
-              <div className="absolute inset-0 border-4 border-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+              <div className="absolute inset-0 transition-opacity border-4 border-white opacity-0 pointer-events-none group-hover:opacity-100"></div>
             </div>
           </div>
         ))}
@@ -98,13 +98,13 @@ export default function Services() {
         <div className="min-w-[85vw] md:min-w-[60vw] lg:min-w-[45vw]">
           <div className="h-[70vh] bg-white flex items-center justify-center p-12 text-center">
             <div>
-              <h3 className="text-7xl font-black mb-8">Ready to<br/>Start?</h3>
-              <p className="text-2xl text-gray-600 mb-12 max-w-md mx-auto">
+              <h3 className="mb-8 font-black text-7xl">Ready to<br/>Start?</h3>
+              <p className="max-w-md mx-auto mb-12 text-2xl text-gray-600">
                 Let's bring your vision to life
               </p>
               <a 
                 href="tel:+15555555555"
-                className="inline-block bg-black text-white px-12 py-6 text-xl font-bold hover:bg-gray-800 transition-colors"
+                className="inline-block px-12 py-6 text-xl font-bold text-white transition-colors bg-black hover:bg-gray-800"
               >
                 CALL (555) 555-5555
               </a>
@@ -114,8 +114,8 @@ export default function Services() {
       </div>
 
       {/* Scroll Progress Bar */}
-      <div className="w-full h-1 bg-white/10 mt-8">
-        <div className="h-full bg-white w-1/4"></div>
+      <div className="w-full h-1 mt-8 bg-white/10">
+        <div className="w-1/4 h-full bg-white"></div>
       </div>
     </section>
   );
