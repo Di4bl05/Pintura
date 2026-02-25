@@ -169,16 +169,4 @@ main ──→ PRODUCCIÓN (solo recibe merges de dev)
 
 ---
 
-## 📞 Preguntas Frecuentes
-
-**P: ¿Qué hago si mi compañero y yo editamos el mismo archivo?**  
-R: Git te avisará del conflicto. Abre el archivo, verás marcas como `<<<<<<`, resuélvelo manualmente y luego commitea.
-
-**P: ¿Puedo crear más ramas?**  
-R: Sí, para features grandes usa: `git checkout -b feature/nombre`
-
-**P: ¿Cómo vuelvo a ver los diseños antiguos?**  
-R: `git checkout design-v5-revolutionary` (o la que quieras ver)
-
-**P: ¿Con qué frecuencia mergeamos dev a main?**  
-R: Cuando tengas un conjunto de features completo y probado, listo para que los usuarios lo vean.
+Necesito q la pagina tenga una seccion principal, un formulario de contacto detallado un sistema de resenas conectado por una api a google maps o algo x el estilo, una agaleria de imagenes de antes y despues del trabajo yuna seccion de serviciones detallados y con los rangos de precios, los datos q no conoces dejalo como placeholder o con daots improvisados ya los cambiare luego tambien ecesito q me digas si debeira agregar algo mas a la pagina y hazlo con el diseno de 
