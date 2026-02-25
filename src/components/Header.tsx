@@ -8,12 +8,11 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigation = [
-    { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "About", href: "/about" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/contact" },
+    { name: "Inicio", href: "#" },
+    { name: "Servicios", href: "#services" },
+    { name: "Galería", href: "#gallery" },
+    { name: "Reseñas", href: "#reviews" },
+    { name: "Contacto", href: "#contact" },
   ];
 
   return (
@@ -22,7 +21,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-accent-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">P</span>
             </div>
             <span className="font-bold text-xl text-gray-900">
@@ -33,20 +32,27 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
-              <Link
+              <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+                className="text-gray-700 hover:text-accent-600 font-medium transition-colors"
+                onClick={(e) => {
+                  if (item.href.startsWith("#")) {
+                    e.preventDefault();
+                    const element = document.querySelector(item.href);
+                    element?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
               >
                 {item.name}
-              </Link>
+              </a>
             ))}
           </div>
 
           {/* CTA Button */}
           <a
             href="tel:+15555555555"
-            className="hidden md:flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors font-semibold"
+            className="hidden md:flex items-center gap-2 bg-accent-600 text-white px-6 py-3 rounded-lg hover:bg-accent-700 transition-colors font-semibold"
           >
             <Phone className="w-5 h-5" />
             (555) 555-5555
@@ -71,18 +77,25 @@ export default function Header() {
           <div className="md:hidden py-4 border-t">
             <div className="flex flex-col space-y-4">
               {navigation.map((item) => (
-                <Link
+                <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-primary-600 font-medium py-2"
-                  onClick={() => setIsMenuOpen(false)}
+                  className="text-gray-700 hover:text-accent-600 font-medium py-2"
+                  onClick={(e) => {
+                    setIsMenuOpen(false);
+                    if (item.href.startsWith("#")) {
+                      e.preventDefault();
+                      const element = document.querySelector(item.href);
+                      element?.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
                 >
                   {item.name}
-                </Link>
+                </a>
               ))}
               <a
                 href="tel:+15555555555"
-                className="flex items-center justify-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors font-semibold"
+                className="flex items-center justify-center gap-2 bg-accent-600 text-white px-6 py-3 rounded-lg hover:bg-accent-700 transition-colors font-semibold"
               >
                 <Phone className="w-5 h-5" />
                 (555) 555-5555
