@@ -1,36 +1,50 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://yoursite.com'),
+  metadataBase: new URL('https://luisbety.com'),
   title: {
-    default: "Professional Painting Services | Your Painting Company",
-    template: "%s | Your Painting Company"
+    default: "LUISBETY INC - Best House Painters Florida | Top-Rated Painting Company",
+    template: "%s | LUISBETY INC - Florida's Premier Painting Company"
   },
-  description: "Expert residential and commercial painting services. Licensed, insured painters with 15+ years of experience. Free estimates. Serving [Your City] and surrounding areas.",
-  keywords: ["painting services", "house painters", "interior painting", "exterior painting", "commercial painters", "residential painting"],
-  authors: [{ name: "Your Painting Company" }],
+  description: "LUISBETY INC - Best house painters Florida - Professional interior & exterior painting, commercial painting, deck staining, pressure washing. Licensed & insured. Serving Longwood, Orlando and all Florida. Free quotes! Competitive prices.",
+  keywords: [
+    "best house painters Florida",
+    "interior painting Florida",
+    "exterior painting Florida",
+    "commercial painting Florida",
+    "deck staining Florida",
+    "pressure washing Florida",
+    "Longwood painters",
+    "Orlando painting companies",
+    "professional painters near me",
+    "licensed and insured painters",
+    "LUISBETY INC",
+    "competitive painting prices Florida"
+  ],
+  authors: [{ name: "LUISBETY INC" }],
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yoursite.com",
-    siteName: "Your Painting Company",
-    title: "Professional Painting Services",
-    description: "Expert residential and commercial painting services",
+    url: "https://luisbety.com",
+    siteName: "LUISBETY INC",
+    title: "Professional Painting Services Florida",
+    description: "Expert residential and commercial painting services in Florida",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/logo/logo.png",
         width: 1200,
         height: 630,
-        alt: "Your Painting Company"
+        alt: "LUISBETY INC Logo"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional Painting Services",
-    description: "Expert residential and commercial painting services",
-    images: ["/og-image.jpg"]
+    title: "Professional Painting Services Florida",
+    description: "Expert residential and commercial painting services in Florida",
+    images: ["/images/logo/logo.png"]
   },
   robots: {
     index: true,
@@ -63,43 +77,56 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "PaintingContractor",
-              "name": "Your Painting Company",
-              "image": "https://yoursite.com/logo.jpg",
-              "telephone": "+1-555-555-5555",
+              "name": "LUISBETY INC",
+              "image": "https://luisbety.com/images/logo/logo.png",
+              "telephone": "+1-786-350-6367",
               "priceRange": "$$",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "123 Main St",
-                "addressLocality": "Your City",
-                "addressRegion": "Your State",
-                "postalCode": "12345",
+                "streetAddress": "2381 Westwood Dr",
+                "addressLocality": "Longwood",
+                "addressRegion": "FL",
+                "postalCode": "32779",
                 "addressCountry": "US"
               },
               "geo": {
                 "@type": "GeoCoordinates",
-                "latitude": 0.0,
-                "longitude": 0.0
+                "latitude": 28.7004,
+                "longitude": -81.3384
               },
-              "url": "https://yoursite.com",
-              "areaServed": ["Your City", "Nearby City 1", "Nearby City 2"],
+              "url": "https://luisbety.com",
+              "areaServed": [
+                "Longwood",
+                "Orlando",
+                "Winter Park",
+                "Altamonte Springs",
+                "Lake Mary",
+                "Sanford",
+                "Central Florida",
+                "Florida"
+              ],
               "openingHoursSpecification": [
                 {
                   "@type": "OpeningHoursSpecification",
                   "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                  "opens": "08:00",
-                  "closes": "18:00"
+                  "opens": "09:00",
+                  "closes": "17:00"
                 }
               ],
               "aggregateRating": {
                 "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "reviewCount": "127"
+                "ratingValue": "5.0",
+                "reviewCount": "6"
               }
             })
           }}
         />
       </head>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   );
 }

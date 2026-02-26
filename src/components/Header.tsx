@@ -1,18 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, Globe } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   const navigation = [
-    { name: "Inicio", href: "#" },
-    { name: "Servicios", href: "#services" },
-    { name: "Galería", href: "#gallery" },
-    { name: "Reseñas", href: "#reviews" },
-    { name: "Contacto", href: "#contact" },
+    { name: t("nav.home"), href: "#" },
+    { name: t("nav.services"), href: "#services" },
+    { name: t("nav.gallery"), href: "#gallery" },
+    { name: t("nav.reviews"), href: "#reviews" },
+    { name: t("nav.contact"), href: "#contact" },
   ];
 
   return (
@@ -20,12 +22,14 @@ export default function Header() {
       <nav className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-accent-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">P</span>
-            </div>
+          <Link href="/" className="flex items-center space-x-3">
+            <img 
+              src="/images/logo/logo.png" 
+              alt="LUISBETY INC Logo" 
+              className="h-12 w-auto"
+            />
             <span className="font-bold text-xl text-gray-900">
-              Your Painting Co.
+              LUISBETY INC.
             </span>
           </Link>
 
@@ -51,12 +55,24 @@ export default function Header() {
 
           {/* CTA Button */}
           <a
-            href="tel:+15555555555"
+            href="tel:+17863506367"
             className="hidden md:flex items-center gap-2 bg-accent-600 text-white px-6 py-3 rounded-lg hover:bg-accent-700 transition-colors font-semibold"
           >
             <Phone className="w-5 h-5" />
-            (555) 555-5555
+            (786) 350-6367
           </a>
+
+          {/* Language Selector - Desktop */}
+          <div className="hidden md:flex items-center gap-2">
+            <button
+              onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label="Change language"
+            >
+              <Globe className="w-5 h-5 text-gray-600" />
+              <span className="text-sm font-semibold text-gray-700 uppercase">{language}</span>
+            </button>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -93,12 +109,22 @@ export default function Header() {
                   {item.name}
                 </a>
               ))}
+              
+              {/* Language Selector - Mobile */}
+              <button
+                onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
+                className="flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors font-semibold"
+              >
+                <Globe className="w-5 h-5" />
+                {language === 'es' ? 'English' : 'Español'}
+              </button>
+              
               <a
-                href="tel:+15555555555"
+                href="tel:+17863506367"
                 className="flex items-center justify-center gap-2 bg-accent-600 text-white px-6 py-3 rounded-lg hover:bg-accent-700 transition-colors font-semibold"
               >
                 <Phone className="w-5 h-5" />
-                (555) 555-5555
+                (786) 350-6367
               </a>
             </div>
           </div>

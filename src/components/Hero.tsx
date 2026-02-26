@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import { Phone, ArrowRight, Award, Sparkles, ArrowDown } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Hero() {
+  const { t } = useLanguage();
   return (
     <section className="relative min-h-screen overflow-hidden bg-white">
       {/* Diagonal Background Split con gradientes dinámicos */}
@@ -25,16 +29,16 @@ export default function Hero() {
             <div className="inline-block animate-fade-in">
               <div className="flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-primary-700 to-accent-600 text-white rounded-full shadow-lg">
                 <Sparkles className="w-5 h-5" />
-                <span className="font-bold text-sm tracking-wide">CALIDAD PREMIUM GARANTIZADA</span>
+                <span className="font-bold text-sm tracking-wide">{t("hero.badge")}</span>
               </div>
             </div>
 
             {/* Título híbrido: tipografía de v4, colores de v3 */}
             <div className="space-y-6">
               <h1 className="text-[4rem] md:text-[6rem] lg:text-[7rem] font-black leading-[0.9] tracking-tight">
-                <span className="block text-gray-900">COLOR</span>
+                <span className="block text-gray-900">{t("hero.title1")}</span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-accent-600 via-accent-500 to-primary-700 italic font-serif">
-                  tu Mundo
+                  {t("hero.title2")}
                 </span>
               </h1>
 
@@ -42,8 +46,8 @@ export default function Hero() {
             </div>
 
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-lg font-light">
-              No solo pintamos paredes — transformamos espacios en obras maestras.
-              <span className="font-semibold text-gray-900"> Tu visión, nuestra experiencia.</span>
+              {t("hero.description")}
+              <span className="font-semibold text-gray-900"> {t("hero.descriptionBold")}</span>
             </p>
 
             {/* Botones mejorados */}
@@ -53,18 +57,18 @@ export default function Hero() {
                 className="group relative px-8 py-5 bg-gradient-to-r from-primary-800 to-accent-600 text-white font-bold rounded-2xl overflow-hidden transition-all hover:scale-105 hover:shadow-2xl"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  CONSULTA GRATUITA
+                  {t("hero.ctaFree")}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-accent-700 to-accent-800 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               </Link>
 
               <a
-                href="tel:+15555555555"
+                href="tel:+17863506367"
                 className="px-8 py-5 bg-white border-2 border-gray-900 text-gray-900 font-bold rounded-2xl hover:bg-gray-900 hover:text-white transition-all hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2"
               >
                 <Phone className="w-5 h-5" />
-                (555) 555-5555
+                (786) 350-6367
               </a>
             </div>
           </div>

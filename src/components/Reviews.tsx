@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Star, Quote, MapPin, ThumbsUp, ExternalLink } from "lucide-react";
+import MobileAccordion from "./MobileAccordion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Estas reseñas pueden venir de una API de Google Maps
 // Para conectar con Google Places API, necesitarás configurar NEXT_PUBLIC_GOOGLE_PLACES_API_KEY
@@ -69,6 +71,7 @@ const reviewsData = [
 ];
 
 export default function Reviews() {
+  const { t } = useLanguage();
   const [visibleReviews, setVisibleReviews] = useState(3);
   
   const averageRating = reviewsData.reduce((acc, review) => acc + review.rating, 0) / reviewsData.length;
@@ -92,13 +95,13 @@ export default function Reviews() {
         {/* Header */}
         <div className="mb-16 text-center">
           <div className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-yellow-700 bg-yellow-100 rounded-full">
-            ⭐ RESEÑAS DE CLIENTES
+            {t("reviews.badge")}
           </div>
           <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">
-            Lo que dicen nuestros <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-700">clientes</span>
+            {t("reviews.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-700">{t("reviews.titleHighlight")}</span>
           </h2>
           <p className="max-w-2xl mx-auto text-xl text-gray-600">
-            La satisfacción de nuestros clientes es nuestra mejor carta de presentación
+            {t("reviews.subtitle")}
           </p>
         </div>
 
@@ -119,7 +122,7 @@ export default function Reviews() {
                     />
                   ))}
                 </div>
-                <p className="font-semibold text-gray-600">Basado en {totalReviews} reseñas</p>
+                <p className="font-semibold text-gray-600">{t("reviews.basedOn")} {totalReviews} {t("reviews.reviews")}</p>
                 <a
                   href="https://www.google.com/maps"
                   target="_blank"
@@ -127,7 +130,7 @@ export default function Reviews() {
                   className="inline-flex items-center gap-2 mt-4 text-accent-600 hover:text-accent-700 font-semibold"
                 >
                   <MapPin className="w-5 h-5" />
-                  Ver en Google Maps
+                  {t("reviews.viewGoogle")}
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
@@ -152,61 +155,112 @@ export default function Reviews() {
         </div>
 
         {/* Reviews Grid */}
-        <div className="grid gap-8 mb-12 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 mb-12 md:grid-cols-2 lg:grid-cols-3 md:gap-8">
           {reviewsData.slice(0, visibleReviews).map((review) => (
             <div
               key={review.id}
-              className="relative p-8 transition-shadow bg-white border border-gray-100 shadow-lg rounded-2xl hover:shadow-xl"
+              className="relative bg-white border border-gray-100 shadow-lg rounded-2xl hover:shadow-xl transition-shadow overflow-hidden"
             >
-              {/* Quote Icon */}
-              <div className="absolute top-6 right-6 text-primary-100">
-                <Quote className="w-12 h-12" />
-              </div>
-
-              {/* Header */}
-              <div className="flex items-start gap-4 mb-4">
-                <div className="flex items-center justify-center flex-shrink-0 text-lg font-bold text-white rounded-full w-14 h-14 bg-gradient-to-br from-primary-600 to-orange-600">
-                  {review.avatar}
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-bold text-gray-900">{review.author}</h3>
-                    {review.verified && (
-                      <span className="text-accent-600" title="Reseña Verificada">
-                        ✓
-                      </span>
-                    )}
+              <MobileAccordion
+                title={review.author}
+                headerContent={
+                  <div className="flex items-center gap-3 w-full">
+                    <div className="flex items-center justify-center flex-shrink-0 text-sm font-bold text-white rounded-full w-10 h-10 bg-gradient-to-br from-primary-600 to-orange-600">
+                      {review.avatar}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-bold text-gray-900 text-sm truncate">{review.author}</h3>
+                        {review.verified && (
+                          <span className="text-accent-600" title={t("reviews.verified")}>✓</span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star
+                            key={star}
+                            className={`w-3 h-3 ${
+                              star <= review.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                }
+              >
+                {/* Desktop Version */}
+                <div className="hidden md:block p-8">
+                  {/* Quote Icon */}
+                  <div className="absolute top-6 right-6 text-primary-100">
+                    <Quote className="w-12 h-12" />
+                  </div>
+
+                  {/* Header */}
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="flex items-center justify-center flex-shrink-0 text-lg font-bold text-white rounded-full w-14 h-14 bg-gradient-to-br from-primary-600 to-orange-600">
+                      {review.avatar}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-bold text-gray-900">{review.author}</h3>
+                        {review.verified && (
+                          <span className="text-accent-600" title={t("reviews.verified")}>
+                            ✓
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <MapPin className="w-3 h-3" />
+                        <span>{review.location}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Rating */}
+                  <div className="flex items-center gap-1 mb-4">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className={`w-5 h-5 ${
+                          star <= review.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+                        }`}
+                      />
+                    ))}
+                    <span className="ml-2 text-sm text-gray-500">{review.date}</span>
+                  </div>
+
+                  {/* Review Text */}
+                  <p className="leading-relaxed text-gray-700">{review.text}</p>
+
+                  {/* Helpful Button */}
+                  <div className="pt-6 mt-6 border-t border-gray-100">
+                    <button className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-primary-600">
+                      <ThumbsUp className="w-4 h-4" />
+                      <span>{t("reviews.helpful")}</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Mobile Version */}
+                <div className="md:hidden p-4 space-y-3">
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
                     <MapPin className="w-3 h-3" />
                     <span>{review.location}</span>
+                    <span>•</span>
+                    <span>{review.date}</span>
                   </div>
+
+                  {/* Review Text */}
+                  <p className="text-sm leading-relaxed text-gray-700">{review.text}</p>
+
+                  {/* Helpful Button */}
+                  <button className="flex items-center gap-2 text-xs text-gray-600 pt-2 border-t border-gray-100">
+                    <ThumbsUp className="w-3 h-3" />
+                    <span>{t("reviews.helpful")}</span>
+                  </button>
                 </div>
-              </div>
-
-              {/* Rating */}
-              <div className="flex items-center gap-1 mb-4">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star
-                    key={star}
-                    className={`w-5 h-5 ${
-                      star <= review.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-                    }`}
-                  />
-                ))}
-                <span className="ml-2 text-sm text-gray-500">{review.date}</span>
-              </div>
-
-              {/* Review Text */}
-              <p className="leading-relaxed text-gray-700">{review.text}</p>
-
-              {/* Helpful Button */}
-              <div className="pt-6 mt-6 border-t border-gray-100">
-                <button className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-primary-600">
-                  <ThumbsUp className="w-4 h-4" />
-                  <span>Útil</span>
-                </button>
-              </div>
+              </MobileAccordion>
             </div>
           ))}
         </div>
@@ -218,22 +272,22 @@ export default function Reviews() {
               onClick={loadMore}
               className="px-8 py-4 font-bold transition-all border-2 rounded-lg border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white"
             >
-              Ver Más Reseñas
+              {t("reviews.loadMore")}
             </button>
           </div>
         )}
 
         {/* CTA Box */}
         <div className="p-8 mt-16 text-center text-white shadow-xl bg-gradient-to-r from-primary-600 to-orange-600 rounded-2xl md:p-12">
-          <h3 className="mb-4 text-3xl font-bold">¿Listo para transformar tu espacio?</h3>
+          <h3 className="mb-4 text-3xl font-bold">{t("reviews.ctaTitle")}</h3>
           <p className="mb-8 text-xl opacity-90">
-            Únete a nuestros cientos de clientes satisfechos
+            {t("reviews.ctaSubtitle")}
           </p>
           <a
             href="#contact"
             className="inline-block px-8 py-4 text-lg font-bold transition-colors bg-white rounded-lg text-primary-600 hover:bg-gray-100"
           >
-            Solicita tu Presupuesto Gratuito
+            {t("reviews.ctaButton")}
           </a>
         </div>
 
