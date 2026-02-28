@@ -76,6 +76,7 @@ export default function BeforeAfterGallery() {
   const [comparePosition, setComparePosition] = useState(50);
   const [isHovering, setIsHovering] = useState(false);
   const [filter, setFilter] = useState<string>("all");
+  const [showAllPhotos, setShowAllPhotos] = useState(false);
 
   const filters = [
     { id: "all", label: "Todos" },
@@ -154,73 +155,87 @@ export default function BeforeAfterGallery() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid gap-8 mb-12 md:grid-cols-2 lg:grid-cols-3">
-          {filteredGallery.map((item) => (
-            <div
-              key={item.id}
-              className="relative overflow-hidden transition-all bg-white shadow-lg cursor-pointer group rounded-2xl hover:shadow-2xl"
-              onClick={() => openModal(item)}
-            >
-              {/* Image Container */}
-              <div className="relative aspect-[4/3] overflow-hidden">
-                {/* Before Image */}
-                <div className="absolute inset-0">
-                  <img
-                    src={item.beforeImage}
-                    alt={`${item.title} - Antes`}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-                
-                {/* After Image with clip */}
-                <div 
-                  className="absolute inset-0 transition-opacity group-hover:opacity-0"
-                  style={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)' }}
+        <div className="relative">
+          {/* Botón flotante "Ver todas" - visible solo en móvil */}
+          <button
+            onClick={() => setShowAllPhotos(true)}
+            className="absolute z-10 flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white transition-all rounded-full shadow-lg md:hidden top-4 right-4 bg-gradient-to-r from-primary-800 to-accent-600 hover:shadow-xl"
+          >
+            <Maximize2 className="w-4 h-4" />
+            Ver Todas
+          </button>
+
+          {/* Carrusel en móvil, Grid en desktop */}
+          <div className="mb-12 overflow-x-auto md:overflow-visible hide-scrollbar md:grid md:gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="flex gap-6 pb-4 pl-4 pr-4 md:pl-0 md:pr-0 md:contents">
+              {filteredGallery.map((item) => (
+                <div
+                  key={item.id}
+                  className="relative flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto overflow-hidden transition-all bg-white shadow-lg cursor-pointer group rounded-2xl hover:shadow-2xl"
+                  onClick={() => openModal(item)}
                 >
-                  <img
-                    src={item.afterImage}
-                    alt={`${item.title} - Después`}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
+                  {/* Image Container */}
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    {/* Before Image */}
+                    <div className="absolute inset-0">
+                      <img
+                        src={item.beforeImage}
+                        alt={`${item.title} - Antes`}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                    
+                    {/* After Image with clip */}
+                    <div 
+                      className="absolute inset-0 transition-opacity group-hover:opacity-0"
+                      style={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)' }}
+                    >
+                      <img
+                        src={item.afterImage}
+                        alt={`${item.title} - Después`}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
 
-                {/* Labels */}
-                <div className="absolute px-3 py-1 text-sm font-semibold text-gray-700 rounded-full top-4 left-4 bg-white/90 backdrop-blur-sm">
-                  ANTES
-                </div>
-                <div className="absolute px-3 py-1 text-sm font-semibold text-gray-700 rounded-full top-4 right-4 bg-white/90 backdrop-blur-sm">
-                  DESPUÉS
-                </div>
+                    {/* Labels */}
+                    <div className="absolute px-3 py-1 text-sm font-semibold text-gray-700 rounded-full top-4 left-4 bg-white/90 backdrop-blur-sm">
+                      ANTES
+                    </div>
+                    <div className="absolute px-3 py-1 text-sm font-semibold text-gray-700 rounded-full top-4 right-4 bg-white/90 backdrop-blur-sm">
+                      DESPUÉS
+                    </div>
 
-                {/* Divider Line */}
-                <div className="absolute inset-y-0 w-1 transform -translate-x-1/2 bg-white shadow-lg left-1/2">
-                  <div className="absolute flex items-center justify-center w-10 h-10 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full shadow-lg top-1/2 left-1/2">
-                    <ChevronLeft className="w-4 h-4 -ml-1 text-gray-700" />
-                    <ChevronRight className="w-4 h-4 -mr-1 text-gray-700" />
+                    {/* Divider Line */}
+                    <div className="absolute inset-y-0 w-1 transform -translate-x-1/2 bg-white shadow-lg left-1/2">
+                      <div className="absolute flex items-center justify-center w-10 h-10 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full shadow-lg top-1/2 left-1/2">
+                        <ChevronLeft className="w-4 h-4 -ml-1 text-gray-700" />
+                        <ChevronRight className="w-4 h-4 -mr-1 text-gray-700" />
+                      </div>
+                    </div>
+
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 transition-opacity opacity-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:opacity-100">
+                      <div className="absolute text-white bottom-4 left-4 right-4">
+                        <Maximize2 className="w-6 h-6 mb-2" />
+                        <p className="text-sm font-semibold">Click para ver detalles</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Info */}
+                  <div className="p-6">
+                    <h3 className="mb-2 text-xl font-bold text-gray-900">{item.title}</h3>
+                    <div className="flex items-center justify-between text-sm text-gray-600">
+                      <span>📍 {item.location}</span>
+                      <span className="px-3 py-1 font-semibold rounded-full bg-primary-100 text-primary-700">
+                        {item.service}
+                      </span>
+                    </div>
                   </div>
                 </div>
-
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 transition-opacity opacity-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:opacity-100">
-                  <div className="absolute text-white bottom-4 left-4 right-4">
-                    <Maximize2 className="w-6 h-6 mb-2" />
-                    <p className="text-sm font-semibold">Click para ver detalles</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Info */}
-              <div className="p-6">
-                <h3 className="mb-2 text-xl font-bold text-gray-900">{item.title}</h3>
-                <div className="flex items-center justify-between text-sm text-gray-600">
-                  <span>📍 {item.location}</span>
-                  <span className="px-3 py-1 font-semibold rounded-full bg-primary-100 text-primary-700">
-                    {item.service}
-                  </span>
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
         {/* Modal */}
@@ -349,6 +364,88 @@ export default function BeforeAfterGallery() {
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Modal "Ver Todas las Fotos" */}
+        {showAllPhotos && (
+          <div className="fixed inset-0 z-50 overflow-y-auto bg-black/95 backdrop-blur-sm">
+            <div className="min-h-screen px-4 py-8">
+              {/* Header del modal */}
+              <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-4 mb-6 bg-black/50 backdrop-blur-md rounded-xl">
+                <div>
+                  <h2 className="text-2xl font-bold text-white">Galería Completa</h2>
+                  <p className="text-sm text-gray-300">{galleryData.length} proyectos completados</p>
+                </div>
+                <button
+                  onClick={() => setShowAllPhotos(false)}
+                  className="flex items-center justify-center w-12 h-12 transition-colors bg-white rounded-full hover:bg-gray-100"
+                >
+                  <X className="w-6 h-6 text-gray-700" />
+                </button>
+              </div>
+
+              {/* Grid de todas las fotos */}
+              <div className="grid max-w-6xl gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-3">
+                {galleryData.map((item) => (
+                  <div
+                    key={item.id}
+                    className="relative overflow-hidden transition-all bg-white cursor-pointer group rounded-xl hover:scale-105"
+                    onClick={() => {
+                      setShowAllPhotos(false);
+                      openModal(item);
+                    }}
+                  >
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      {/* Before Image */}
+                      <div className="absolute inset-0">
+                        <img
+                          src={item.beforeImage}
+                          alt={`${item.title} - Antes`}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                      
+                      {/* After Image with clip */}
+                      <div 
+                        className="absolute inset-0"
+                        style={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)' }}
+                      >
+                        <img
+                          src={item.afterImage}
+                          alt={`${item.title} - Después`}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+
+                      {/* Labels */}
+                      <div className="absolute px-2 py-1 text-xs font-semibold text-gray-700 rounded-full top-2 left-2 bg-white/90 backdrop-blur-sm">
+                        ANTES
+                      </div>
+                      <div className="absolute px-2 py-1 text-xs font-semibold text-gray-700 rounded-full top-2 right-2 bg-white/90 backdrop-blur-sm">
+                        DESPUÉS
+                      </div>
+
+                      {/* Center divider */}
+                      <div className="absolute inset-y-0 w-0.5 bg-white shadow-lg left-1/2 transform -translate-x-1/2"></div>
+
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 transition-opacity opacity-0 bg-black/50 group-hover:opacity-100">
+                        <div className="flex items-center justify-center w-full h-full text-white">
+                          <Maximize2 className="w-8 h-8" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Info */}
+                    <div className="p-3">
+                      <h3 className="mb-1 text-sm font-bold text-gray-900">{item.title}</h3>
+                      <p className="text-xs text-gray-600">📍 {item.location}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
