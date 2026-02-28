@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface GalleryItem {
   id: number;
@@ -17,61 +18,80 @@ interface GalleryItem {
 const galleryData: GalleryItem[] = [
   {
     id: 1,
-    title: "Sala de Estar Moderna",
-    location: "Miami, FL",
-    service: "Pintura Interior",
-    beforeImage: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80",
-    afterImage: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800&q=80",
-    description: "Transformación completa de sala con colores modernos y acabados premium"
+    title: "Proyecto de Pintura Exterior",
+    location: "Florida",
+    service: "Pintura Exterior",
+    beforeImage: "/images/gallery/IMG-20260225-WA0001.jpg",
+    afterImage: "/images/gallery/IMG-20260225-WA0002.jpg",
+    description: "Transformación completa de exterior con colores modernos y acabados resistentes al clima de Florida"
   },
   {
     id: 2,
-    title: "Exterior de Casa",
-    location: "Coral Gables, FL",
-    service: "Pintura Exterior",
-    beforeImage: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
-    afterImage: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
-    description: "Renovación completa del exterior con pintura resistente al clima"
+    title: "Pintura Interior Residencial",
+    location: "Florida",
+    service: "Pintura Interior",
+    beforeImage: "/images/gallery/IMG-20260225-WA0003.jpg",
+    afterImage: "/images/gallery/IMG-20260225-WA0004.jpg",
+    description: "Renovación completa de interiores con pintura premium de alta calidad"
   },
   {
     id: 3,
-    title: "Cocina Contemporánea",
-    location: "Kendall, FL",
-    service: "Gabinetes & Paredes",
-    beforeImage: "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80",
-    afterImage: "https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?w=800&q=80",
-    description: "Refinishing de gabinetes y pintura de paredes para look moderno"
+    title: "Deck Staining Profesional",
+    location: "Florida",
+    service: "Deck Staining",
+    beforeImage: "/images/gallery/IMG-20260225-WA0005.jpg",
+    afterImage: "/images/gallery/IMG-20260225-WA0006.jpg",
+    description: "Staining y sellado completo de deck exterior con protección duradera"
   },
   {
     id: 4,
-    title: "Dormitorio Principal",
-    location: "Doral, FL",
-    service: "Pintura Interior",
-    beforeImage: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&q=80",
-    afterImage: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80",
-    description: "Ambiente relajante con colores suaves y técnicas especiales"
+    title: "Proyecto Comercial",
+    location: "Florida",
+    service: "Pintura Comercial",
+    beforeImage: "/images/gallery/IMG-20260225-WA0007.jpg",
+    afterImage: "/images/gallery/IMG-20260225-WA0008.jpg",
+    description: "Pintura comercial profesional con acabados de alta calidad"
   },
   {
     id: 5,
-    title: "Oficina Comercial",
-    location: "Brickell, FL",
-    service: "Pintura Comercial",
-    beforeImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
-    afterImage: "https://images.unsplash.com/photo-1497366858526-0766cadbe8fa?w=800&q=80",
-    description: "Espacio de oficina corporativa con branding colors"
+    title: "Pintura de Paredes",
+    location: "Florida",
+    service: "Pintura Interior",
+    beforeImage: "/images/gallery/IMG-20260225-WA0009.jpg",
+    afterImage: "/images/gallery/IMG-20260225-WA0010.jpg",
+    description: "Transformación de interiores con preparación completa de superficies"
   },
   {
     id: 6,
-    title: "Baño Elegante",
-    location: "Homestead, FL",
+    title: "Exterior Painting",
+    location: "Florida",
+    service: "Pintura Exterior",
+    beforeImage: "/images/gallery/IMG-20260225-WA0011.jpg",
+    afterImage: "/images/gallery/IMG-20260225-WA0012.jpg",
+    description: "Pintura exterior con materiales resistentes al clima de Florida"
+  },
+  {
+    id: 7,
+    title: "Proyecto Residencial",
+    location: "Florida",
     service: "Pintura Interior",
-    beforeImage: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80",
-    afterImage: "https://images.unsplash.com/photo-1620626011761-996317b8d101?w=800&q=80",
-    description: "Renovación de baño con pintura especial resistente a humedad"
+    beforeImage: "/images/gallery/IMG-20260225-WA0013.jpg",
+    afterImage: "/images/gallery/IMG-20260225-WA0014.jpg",
+    description: "Renovación completa con acabados profesionales y limpieza incluida"
+  },
+  {
+    id: 8,
+    title: "Pressure Washing",
+    location: "Florida",
+    service: "Pressure Washing",
+    beforeImage: "/images/gallery/IMG-20260225-WA0015.jpg",
+    afterImage: "/images/gallery/IMG-20260225-WA0016.jpg",
+    description: "Limpieza profunda con pressure washing profesional"
   }
 ];
 
 export default function BeforeAfterGallery() {
+  const { t } = useLanguage();
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [comparePosition, setComparePosition] = useState(50);
   const [isHovering, setIsHovering] = useState(false);
@@ -79,10 +99,12 @@ export default function BeforeAfterGallery() {
   const [showAllPhotos, setShowAllPhotos] = useState(false);
 
   const filters = [
-    { id: "all", label: "Todos" },
-    { id: "interior", label: "Interior" },
-    { id: "exterior", label: "Exterior" },
-    { id: "commercial", label: "Comercial" }
+    { id: "all", label: t("gallery.filters.all") },
+    { id: "interior", label: t("gallery.filters.interior") },
+    { id: "exterior", label: t("gallery.filters.exterior") },
+    { id: "comercial", label: t("gallery.filters.commercial") },
+    { id: "deck", label: t("gallery.filters.deck") },
+    { id: "pressure", label: t("gallery.filters.pressure") }
   ];
 
   const filteredGallery = filter === "all" 
@@ -127,13 +149,13 @@ export default function BeforeAfterGallery() {
         {/* Header */}
         <div className="mb-16 text-center">
           <div className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-orange-700 bg-orange-100 rounded-full">
-            🎨 PORTAFOLIO
+            {t("gallery.badge")}
           </div>
           <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">
-            Antes & <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-orange-500">Después</span>
+            {t("gallery.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-orange-500">{t("gallery.titleHighlight")}</span>
           </h2>
           <p className="max-w-2xl mx-auto text-xl text-gray-600">
-            Mira la transformación increíble de nuestros proyectos completados
+            {t("gallery.subtitle")}
           </p>
         </div>
 
@@ -199,10 +221,10 @@ export default function BeforeAfterGallery() {
 
                     {/* Labels */}
                     <div className="absolute px-3 py-1 text-sm font-semibold text-gray-700 rounded-full top-4 left-4 bg-white/90 backdrop-blur-sm">
-                      ANTES
+                      {t("gallery.before")}
                     </div>
                     <div className="absolute px-3 py-1 text-sm font-semibold text-gray-700 rounded-full top-4 right-4 bg-white/90 backdrop-blur-sm">
-                      DESPUÉS
+                      {t("gallery.after")}
                     </div>
 
                     {/* Divider Line */}
@@ -217,7 +239,7 @@ export default function BeforeAfterGallery() {
                     <div className="absolute inset-0 transition-opacity opacity-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:opacity-100">
                       <div className="absolute text-white bottom-4 left-4 right-4">
                         <Maximize2 className="w-6 h-6 mb-2" />
-                        <p className="text-sm font-semibold">Click para ver detalles</p>
+                        <p className="text-sm font-semibold">{t("gallery.clickDetails")}</p>
                       </div>
                     </div>
                   </div>
@@ -457,7 +479,7 @@ export default function BeforeAfterGallery() {
             href="#contact"
             className="inline-block px-8 py-4 text-lg font-bold text-white transition-all rounded-lg shadow-lg bg-gradient-to-r from-primary-800 to-accent-600 hover:from-primary-900 hover:to-accent-700 hover:shadow-xl"
           >
-            ¡Transforma Tu Espacio Hoy!
+            {t("gallery.cta")}
           </a>
         </div>
       </div>

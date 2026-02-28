@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Phone, Mail, MapPin, Send, Clock, User } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ContactForm() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -57,13 +59,13 @@ export default function ContactForm() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-2 bg-accent-100 text-accent-700 rounded-full text-sm font-semibold mb-4">
-            CONTÁCTANOS
+            {t("contact.badge")}
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Solicita tu Presupuesto <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-700">Gratuito</span>
+            {t("contact.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-700">{t("contact.titleHighlight")}</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas
+            {t("contact.subtitle")}
           </p>
         </div>
 
@@ -71,7 +73,7 @@ export default function ContactForm() {
           {/* Contact Info */}
           <div className="lg:col-span-1 space-y-8">
             <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-              <h3 className="text-2xl font-bold mb-6">Información de Contacto</h3>
+              <h3 className="text-2xl font-bold mb-6">{t("contact.info.title")}</h3>
               
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
@@ -79,9 +81,9 @@ export default function ContactForm() {
                     <Phone className="w-6 h-6 text-accent-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Teléfono</p>
-                    <a href="tel:+15555555555" className="text-accent-600 hover:text-accent-700">
-                      (555) 555-5555
+                    <p className="font-semibold text-gray-900">{t("contact.info.phone")}</p>
+                    <a href="tel:+17863506367" className="text-accent-600 hover:text-accent-700">
+                      (786) 350-6367
                     </a>
                   </div>
                 </div>
@@ -92,8 +94,8 @@ export default function ContactForm() {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">Email</p>
-                    <a href="mailto:info@paintingstudio.com" className="text-accent-600 hover:text-accent-700">
-                      info@paintingstudio.com
+                    <a href="mailto:contact@luisbety.com" className="text-accent-600 hover:text-accent-700">
+                      contact@luisbety.com
                     </a>
                   </div>
                 </div>
@@ -103,11 +105,10 @@ export default function ContactForm() {
                     <MapPin className="w-6 h-6 text-accent-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Dirección</p>
+                    <p className="font-semibold text-gray-900">{t("contact.info.address")}</p>
                     <p className="text-gray-600">
-                      123 Main Street<br />
-                      Suite 400<br />
-                      Your City, ST 12345
+                      2381 Westwood Dr<br />
+                      Longwood, FL 32779
                     </p>
                   </div>
                 </div>
@@ -117,11 +118,9 @@ export default function ContactForm() {
                     <Clock className="w-6 h-6 text-accent-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Horario</p>
+                    <p className="font-semibold text-gray-900">{t("contact.info.hours")}</p>
                     <p className="text-gray-600">
-                      Lunes - Viernes: 8:00 AM - 6:00 PM<br />
-                      Sábado: 9:00 AM - 4:00 PM<br />
-                      Domingo: Cerrado
+                      {t("contact.info.hoursText")}
                     </p>
                   </div>
                 </div>
@@ -130,23 +129,23 @@ export default function ContactForm() {
 
             {/* Quick Benefits */}
             <div className="bg-gradient-to-br from-primary-800 to-accent-600 rounded-2xl shadow-lg p-8 text-white">
-              <h3 className="text-xl font-bold mb-4">¿Por qué elegirnos?</h3>
+              <h3 className="text-xl font-bold mb-4">{t("contact.benefits.title")}</h3>
               <ul className="space-y-3">
                 <li className="flex items-center gap-2">
                   <span className="text-2xl">✓</span>
-                  <span>Presupuesto gratuito sin compromiso</span>
+                  <span>{t("contact.benefits.items.0")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-2xl">✓</span>
-                  <span>Respuesta en 24 horas</span>
+                  <span>{t("contact.benefits.items.1")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-2xl">✓</span>
-                  <span>Garantía de satisfacción</span>
+                  <span>{t("contact.benefits.items.2")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-2xl">✓</span>
-                  <span>Materiales premium</span>
+                  <span>{t("contact.benefits.items.3")}</span>
                 </li>
               </ul>
             </div>
@@ -159,7 +158,7 @@ export default function ContactForm() {
                 {/* Name */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Nombre Completo *
+                    {t("contact.form.name")} *
                   </label>
                   <input
                     type="text"
@@ -169,14 +168,14 @@ export default function ContactForm() {
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all"
-                    placeholder="Juan Pérez"
+                    placeholder={t("contact.form.namePlaceholder")}
                   />
                 </div>
 
                 {/* Email */}
                 <div>
                   <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email *
+                    {t("contact.form.email")} *
                   </label>
                   <input
                     type="email"
@@ -186,14 +185,14 @@ export default function ContactForm() {
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                    placeholder="juan@email.com"
+                    placeholder={t("contact.form.emailPlaceholder")}
                   />
                 </div>
 
                 {/* Phone */}
                 <div>
                   <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Teléfono *
+                    {t("contact.form.phone")} *
                   </label>
                   <input
                     type="tel"
@@ -203,14 +202,14 @@ export default function ContactForm() {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                    placeholder="(555) 555-5555"
+                    placeholder={t("contact.form.phonePlaceholder")}
                   />
                 </div>
 
                 {/* Service Type */}
                 <div>
                   <label htmlFor="serviceType" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Tipo de Servicio *
+                    {t("contact.form.serviceType")} *
                   </label>
                   <select
                     id="serviceType"
@@ -220,20 +219,20 @@ export default function ContactForm() {
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                   >
-                    <option value="">Selecciona un servicio</option>
-                    <option value="interior">Pintura Interior</option>
-                    <option value="exterior">Pintura Exterior</option>
-                    <option value="commercial">Pintura Comercial</option>
-                    <option value="cabinet">Refinishing de Gabinetes</option>
-                    <option value="deck">Pintura de Deck/Patio</option>
-                    <option value="other">Otro</option>
+                    <option value="">{t("contact.form.selectService")}</option>
+                    <option value="interior">{t("contact.form.services.interior")}</option>
+                    <option value="exterior">{t("contact.form.services.exterior")}</option>
+                    <option value="commercial">{t("contact.form.services.commercial")}</option>
+                    <option value="cabinet">{t("contact.form.services.cabinet")}</option>
+                    <option value="deck">{t("contact.form.services.deck")}</option>
+                    <option value="other">{t("contact.form.services.other")}</option>
                   </select>
                 </div>
 
                 {/* Address */}
                 <div className="md:col-span-2">
                   <label htmlFor="address" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Dirección del Proyecto *
+                    {t("contact.form.address")} *
                   </label>
                   <input
                     type="text"
@@ -243,14 +242,14 @@ export default function ContactForm() {
                     value={formData.address}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                    placeholder="123 Main St, City, ST 12345"
+                    placeholder={t("contact.form.addressPlaceholder")}
                   />
                 </div>
 
                 {/* Project Size */}
                 <div>
                   <label htmlFor="projectSize" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Tamaño del Proyecto
+                    {t("contact.form.projectSize")}
                   </label>
                   <select
                     id="projectSize"
@@ -259,18 +258,18 @@ export default function ContactForm() {
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                   >
-                    <option value="">Selecciona</option>
-                    <option value="small">Pequeño (1-2 habitaciones)</option>
-                    <option value="medium">Mediano (3-5 habitaciones)</option>
-                    <option value="large">Grande (Casa completa)</option>
-                    <option value="commercial">Comercial</option>
+                    <option value="">{t("contact.form.select")}</option>
+                    <option value="small">{t("contact.form.size.small")}</option>
+                    <option value="medium">{t("contact.form.size.medium")}</option>
+                    <option value="large">{t("contact.form.size.large")}</option>
+                    <option value="commercial">{t("contact.form.size.commercial")}</option>
                   </select>
                 </div>
 
                 {/* Budget */}
                 <div>
                   <label htmlFor="budget" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Presupuesto Estimado
+                    {t("contact.form.budget")}
                   </label>
                   <select
                     id="budget"
@@ -279,19 +278,19 @@ export default function ContactForm() {
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                   >
-                    <option value="">Selecciona</option>
-                    <option value="under-1k">Menos de $1,000</option>
-                    <option value="1k-3k">$1,000 - $3,000</option>
-                    <option value="3k-5k">$3,000 - $5,000</option>
-                    <option value="5k-10k">$5,000 - $10,000</option>
-                    <option value="over-10k">Más de $10,000</option>
+                    <option value="">{t("contact.form.select")}</option>
+                    <option value="under-1k">{t("contact.form.budgetRange.under1k")}</option>
+                    <option value="1k-3k">{t("contact.form.budgetRange.1k3k")}</option>
+                    <option value="3k-5k">{t("contact.form.budgetRange.3k5k")}</option>
+                    <option value="5k-10k">{t("contact.form.budgetRange.5k10k")}</option>
+                    <option value="over-10k">{t("contact.form.budgetRange.over10k")}</option>
                   </select>
                 </div>
 
                 {/* Preferred Date */}
                 <div>
                   <label htmlFor="preferredDate" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Fecha Preferida para Empezar
+                    {t("contact.form.preferredDate")}
                   </label>
                   <input
                     type="date"
@@ -306,7 +305,7 @@ export default function ContactForm() {
                 {/* Timeframe */}
                 <div>
                   <label htmlFor="timeframe" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Urgencia del Proyecto
+                    {t("contact.form.timeframe")}
                   </label>
                   <select
                     id="timeframe"
@@ -315,18 +314,18 @@ export default function ContactForm() {
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                   >
-                    <option value="">Selecciona</option>
-                    <option value="urgent">Urgente (1-2 semanas)</option>
-                    <option value="soon">Pronto (3-4 semanas)</option>
-                    <option value="flexible">Flexible (1-3 meses)</option>
-                    <option value="planning">Solo investigando</option>
+                    <option value="">{t("contact.form.select")}</option>
+                    <option value="urgent">{t("contact.form.urgency.urgent")}</option>
+                    <option value="soon">{t("contact.form.urgency.soon")}</option>
+                    <option value="flexible">{t("contact.form.urgency.flexible")}</option>
+                    <option value="planning">{t("contact.form.urgency.planning")}</option>
                   </select>
                 </div>
 
                 {/* Message */}
                 <div className="md:col-span-2">
                   <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Detalles del Proyecto
+                    {t("contact.form.message")}
                   </label>
                   <textarea
                     id="message"
@@ -335,7 +334,7 @@ export default function ContactForm() {
                     value={formData.message}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
-                    placeholder="Cuéntanos más sobre tu proyecto, colores preferidos, condiciones especiales..."
+                    placeholder={t("contact.form.messagePlaceholder")}
                   />
                 </div>
               </div>
@@ -350,11 +349,11 @@ export default function ContactForm() {
                   {isSubmitting ? (
                     <>
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
-                      Enviando...
+                      {t("contact.form.submitting")}
                     </>
                   ) : (
                     <>
-                      Solicitar Presupuesto Gratuito
+                      {t("contact.form.submit")}
                       <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
@@ -362,19 +361,19 @@ export default function ContactForm() {
 
                 {submitStatus === "success" && (
                   <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800 text-center">
-                    ¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto contigo pronto.
+                    {t("contact.form.success")}
                   </div>
                 )}
 
                 {submitStatus === "error" && (
                   <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 text-center">
-                    Hubo un error al enviar el formulario. Por favor, intenta de nuevo.
+                    {t("contact.form.error")}
                   </div>
                 )}
               </div>
 
               <p className="text-sm text-gray-500 mt-4 text-center">
-                Al enviar este formulario, aceptas que nos pongamos en contacto contigo sobre tu proyecto.
+                {t("contact.form.disclaimer")}
               </p>
             </form>
           </div>
