@@ -8,7 +8,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigation = [
-    { name: "Inicio", href: "#" },
+    { name: "Inicio ", href: "#" },
     { name: "Servicios", href: "#services" },
     { name: "Galería", href: "#gallery" },
     { name: "Reseñas", href: "#reviews" },
@@ -16,26 +16,26 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <nav className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
+    <header className="sticky top-0 z-50 bg-white shadow-sm">
+      <nav className="container px-4 mx-auto">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-accent-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">P</span>
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-accent-600">
+              <span className="text-xl font-bold text-white">P</span>
             </div>
-            <span className="font-bold text-xl text-gray-900">
+            <span className="text-xl font-bold text-gray-900">
               Your Painting Co.
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="items-center hidden space-x-8 md:flex">
             {navigation.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-accent-600 font-medium transition-colors"
+                className="font-medium text-gray-700 transition-colors hover:text-accent-600"
                 onClick={(e) => {
                   if (item.href.startsWith("#")) {
                     e.preventDefault();
@@ -52,7 +52,7 @@ export default function Header() {
           {/* CTA Button */}
           <a
             href="tel:+15555555555"
-            className="hidden md:flex items-center gap-2 bg-accent-600 text-white px-6 py-3 rounded-lg hover:bg-accent-700 transition-colors font-semibold"
+            className="items-center hidden gap-2 px-6 py-3 font-semibold text-white transition-colors rounded-lg md:flex bg-accent-600 hover:bg-accent-700"
           >
             <Phone className="w-5 h-5" />
             (555) 555-5555
@@ -61,7 +61,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2"
+            className="p-2 md:hidden"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
@@ -74,13 +74,13 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t">
+          <div className="py-4 border-t md:hidden">
             <div className="flex flex-col space-y-4">
               {navigation.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-accent-600 font-medium py-2"
+                  className="py-2 font-medium text-gray-700 hover:text-accent-600"
                   onClick={(e) => {
                     setIsMenuOpen(false);
                     if (item.href.startsWith("#")) {
@@ -95,7 +95,7 @@ export default function Header() {
               ))}
               <a
                 href="tel:+15555555555"
-                className="flex items-center justify-center gap-2 bg-accent-600 text-white px-6 py-3 rounded-lg hover:bg-accent-700 transition-colors font-semibold"
+                className="flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white transition-colors rounded-lg bg-accent-600 hover:bg-accent-700"
               >
                 <Phone className="w-5 h-5" />
                 (555) 555-5555
