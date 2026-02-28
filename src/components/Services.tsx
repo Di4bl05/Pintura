@@ -68,7 +68,7 @@ export default function Services() {
               {/* Popular Badge (for first service) */}
               {index === 0 && (
                 <div className="absolute top-4 right-4 bg-gradient-to-r from-accent-600 to-accent-700 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10">
-                  POPULAR
+                  {t("services.popular")}
                 </div>
               )}
 

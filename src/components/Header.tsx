@@ -20,15 +20,15 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <nav className="container px-4 mx-auto">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between py-2 md:py-3">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
             <img 
-              src="/images/logo/logo.png" 
+              src="/images/logo/logo-cropped.png" 
               alt="LUISBETY INC Logo" 
-              className="w-auto h-12"
+              className="w-auto h-16 md:h-20"
             />
-            <span className="text-xl font-bold text-gray-900">
+            <span className="text-xl font-bold text-gray-900 md:text-2xl">
               LUISBETY INC.
             </span>
           </Link>
@@ -41,8 +41,12 @@ export default function Header() {
                 href={item.href}
                 className="font-medium text-gray-700 transition-colors hover:text-accent-600"
                 onClick={(e) => {
-                  if (item.href.startsWith("#")) {
-                    e.preventDefault();
+                  e.preventDefault();
+                  if (item.href === "#") {
+                    // Scroll al inicio de la página
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  } else if (item.href.startsWith("#")) {
+                    // Scroll a la sección específica
                     const element = document.querySelector(item.href);
                     element?.scrollIntoView({ behavior: "smooth" });
                   }
@@ -99,8 +103,12 @@ export default function Header() {
                   className="py-2 font-medium text-gray-700 hover:text-accent-600"
                   onClick={(e) => {
                     setIsMenuOpen(false);
-                    if (item.href.startsWith("#")) {
-                      e.preventDefault();
+                    e.preventDefault();
+                    if (item.href === "#") {
+                      // Scroll al inicio de la página
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    } else if (item.href.startsWith("#")) {
+                      // Scroll a la sección específica
                       const element = document.querySelector(item.href);
                       element?.scrollIntoView({ behavior: "smooth" });
                     }

@@ -1,45 +1,47 @@
 "use client";
 
+import { useMemo } from "react";
 import { MapPin, Check } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const serviceAreas = [
-  {
-    name: "Longwood FL Painters",
-    description: "Professional painting services in Longwood"
-  },
-  {
-    name: "Orlando Painting Companies",
-    description: "Top-rated painters serving Orlando"
-  },
-  {
-    name: "Winter Park Painters",
-    description: "Expert painters in Winter Park"
-  },
-  {
-    name: "Altamonte Springs Painting",
-    description: "Reliable painters in Altamonte Springs"
-  },
-  {
-    name: "Lake Mary Painters",
-    description: "Quality painting in Lake Mary"
-  },
-  {
-    name: "Sanford FL Painting Services",
-    description: "Licensed painters in Sanford"
-  },
-  {
-    name: "Central Florida Painters",
-    description: "Professional painters in Central Florida"
-  },
-  {
-    name: "Serving All Florida",
-    description: "We travel anywhere in Florida"
-  }
-];
-
 export default function ServiceAreas() {
   const { t } = useLanguage();
+  
+  // Datos de áreas de servicio traducidos dinámicamente
+  const serviceAreas = useMemo(() => [
+    {
+      name: t("serviceAreas.areas.0.name"),
+      description: t("serviceAreas.areas.0.description")
+    },
+    {
+      name: t("serviceAreas.areas.1.name"),
+      description: t("serviceAreas.areas.1.description")
+    },
+    {
+      name: t("serviceAreas.areas.2.name"),
+      description: t("serviceAreas.areas.2.description")
+    },
+    {
+      name: t("serviceAreas.areas.3.name"),
+      description: t("serviceAreas.areas.3.description")
+    },
+    {
+      name: t("serviceAreas.areas.4.name"),
+      description: t("serviceAreas.areas.4.description")
+    },
+    {
+      name: t("serviceAreas.areas.5.name"),
+      description: t("serviceAreas.areas.5.description")
+    },
+    {
+      name: t("serviceAreas.areas.6.name"),
+      description: t("serviceAreas.areas.6.description")
+    },
+    {
+      name: t("serviceAreas.areas.7.name"),
+      description: t("serviceAreas.areas.7.description")
+    }
+  ], [t]);
   
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">

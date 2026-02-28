@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -14,89 +14,129 @@ interface GalleryItem {
   description: string;
 }
 
-// Datos de ejemplo - reemplazar con imágenes reales
-const galleryData: GalleryItem[] = [
-  {
-    id: 1,
-    title: "Proyecto de Pintura Exterior",
-    location: "Florida",
-    service: "Pintura Exterior",
-    beforeImage: "/images/gallery/IMG-20260225-WA0001.jpg",
-    afterImage: "/images/gallery/IMG-20260225-WA0002.jpg",
-    description: "Transformación completa de exterior con colores modernos y acabados resistentes al clima de Florida"
-  },
-  {
-    id: 2,
-    title: "Pintura Interior Residencial",
-    location: "Florida",
-    service: "Pintura Interior",
-    beforeImage: "/images/gallery/IMG-20260225-WA0003.jpg",
-    afterImage: "/images/gallery/IMG-20260225-WA0004.jpg",
-    description: "Renovación completa de interiores con pintura premium de alta calidad"
-  },
-  {
-    id: 3,
-    title: "Deck Staining Profesional",
-    location: "Florida",
-    service: "Deck Staining",
-    beforeImage: "/images/gallery/IMG-20260225-WA0005.jpg",
-    afterImage: "/images/gallery/IMG-20260225-WA0006.jpg",
-    description: "Staining y sellado completo de deck exterior con protección duradera"
-  },
-  {
-    id: 4,
-    title: "Proyecto Comercial",
-    location: "Florida",
-    service: "Pintura Comercial",
-    beforeImage: "/images/gallery/IMG-20260225-WA0007.jpg",
-    afterImage: "/images/gallery/IMG-20260225-WA0008.jpg",
-    description: "Pintura comercial profesional con acabados de alta calidad"
-  },
-  {
-    id: 5,
-    title: "Pintura de Paredes",
-    location: "Florida",
-    service: "Pintura Interior",
-    beforeImage: "/images/gallery/IMG-20260225-WA0009.jpg",
-    afterImage: "/images/gallery/IMG-20260225-WA0010.jpg",
-    description: "Transformación de interiores con preparación completa de superficies"
-  },
-  {
-    id: 6,
-    title: "Exterior Painting",
-    location: "Florida",
-    service: "Pintura Exterior",
-    beforeImage: "/images/gallery/IMG-20260225-WA0011.jpg",
-    afterImage: "/images/gallery/IMG-20260225-WA0012.jpg",
-    description: "Pintura exterior con materiales resistentes al clima de Florida"
-  },
-  {
-    id: 7,
-    title: "Proyecto Residencial",
-    location: "Florida",
-    service: "Pintura Interior",
-    beforeImage: "/images/gallery/IMG-20260225-WA0013.jpg",
-    afterImage: "/images/gallery/IMG-20260225-WA0014.jpg",
-    description: "Renovación completa con acabados profesionales y limpieza incluida"
-  },
-  {
-    id: 8,
-    title: "Pressure Washing",
-    location: "Florida",
-    service: "Pressure Washing",
-    beforeImage: "/images/gallery/IMG-20260225-WA0015.jpg",
-    afterImage: "/images/gallery/IMG-20260225-WA0016.jpg",
-    description: "Limpieza profunda con pressure washing profesional"
-  }
-];
-
 export default function BeforeAfterGallery() {
   const { t } = useLanguage();
+  
+  // Datos de galería traducidos dinámicamente
+  const galleryData: GalleryItem[] = useMemo(() => [
+    {
+      id: 1,
+      title: t("gallery.projects.1.title"),
+      location: t("gallery.projects.1.location"),
+      service: t("gallery.projects.1.service"),
+      beforeImage: "/images/gallery/IMG-20260225-WA0001.jpg",
+      afterImage: "/images/gallery/IMG-20260225-WA0002.jpg",
+      description: t("gallery.projects.1.description")
+    },
+    {
+      id: 2,
+      title: t("gallery.projects.2.title"),
+      location: t("gallery.projects.2.location"),
+      service: t("gallery.projects.2.service"),
+      beforeImage: "/images/gallery/IMG-20260225-WA0003.jpg",
+      afterImage: "/images/gallery/IMG-20260225-WA0004.jpg",
+      description: t("gallery.projects.2.description")
+    },
+    {
+      id: 3,
+      title: t("gallery.projects.3.title"),
+      location: t("gallery.projects.3.location"),
+      service: t("gallery.projects.3.service"),
+      beforeImage: "/images/gallery/IMG-20260225-WA0005.jpg",
+      afterImage: "/images/gallery/IMG-20260225-WA0006.jpg",
+      description: t("gallery.projects.3.description")
+    },
+    {
+      id: 4,
+      title: t("gallery.projects.4.title"),
+      location: t("gallery.projects.4.location"),
+      service: t("gallery.projects.4.service"),
+      beforeImage: "/images/gallery/IMG-20260225-WA0007.jpg",
+      afterImage: "/images/gallery/IMG-20260225-WA0008.jpg",
+      description: t("gallery.projects.4.description")
+    },
+    {
+      id: 5,
+      title: t("gallery.projects.5.title"),
+      location: t("gallery.projects.5.location"),
+      service: t("gallery.projects.5.service"),
+      beforeImage: "/images/gallery/IMG-20260225-WA0009.jpg",
+      afterImage: "/images/gallery/IMG-20260225-WA0010.jpg",
+      description: t("gallery.projects.5.description")
+    },
+    {
+      id: 6,
+      title: t("gallery.projects.6.title"),
+      location: t("gallery.projects.6.location"),
+      service: t("gallery.projects.6.service"),
+      beforeImage: "/images/gallery/IMG-20260225-WA0011.jpg",
+      afterImage: "/images/gallery/IMG-20260225-WA0012.jpg",
+      description: t("gallery.projects.6.description")
+    },
+    {
+      id: 7,
+      title: t("gallery.projects.7.title"),
+      location: t("gallery.projects.7.location"),
+      service: t("gallery.projects.7.service"),
+      beforeImage: "/images/gallery/IMG-20260225-WA0013.jpg",
+      afterImage: "/images/gallery/IMG-20260225-WA0014.jpg",
+      description: t("gallery.projects.7.description")
+    },
+    {
+      id: 8,
+      title: t("gallery.projects.8.title"),
+      location: t("gallery.projects.8.location"),
+      service: t("gallery.projects.8.service"),
+      beforeImage: "/images/gallery/IMG-20260225-WA0015.jpg",
+      afterImage: "/images/gallery/IMG-20260225-WA0016.jpg",
+      description: t("gallery.projects.8.description")
+    }
+  ], [t]);
+  
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [comparePosition, setComparePosition] = useState(50);
   const [isHovering, setIsHovering] = useState(false);
   const [filter, setFilter] = useState<string>("all");
   const [showAllPhotos, setShowAllPhotos] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll animation with pauses
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel || isPaused) return;
+
+    const pauseDuration = 800; // Pausa de 0.8 segundos
+    const scrollDuration = 500; // Duración del deslizamiento
+    let intervalId: NodeJS.Timeout;
+
+    const slideToNext = () => {
+      const cardWidth = carousel.offsetWidth * 0.95 + 24; // 95vw + gap
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      const nextPosition = carousel.scrollLeft + cardWidth;
+      
+      // Si llegamos al final, volver al inicio
+      if (nextPosition >= maxScroll) {
+        carousel.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        // Scroll normal a la siguiente posición
+        carousel.scrollTo({
+          left: nextPosition,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    // Configurar el intervalo para las slides
+    intervalId = setInterval(slideToNext, pauseDuration + scrollDuration);
+
+    return () => clearInterval(intervalId);
+  }, [isPaused, filter]);
+
 
   const filters = [
     { id: "all", label: t("gallery.filters.all") },
@@ -160,7 +200,7 @@ export default function BeforeAfterGallery() {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
           {filters.map((filterItem) => (
             <button
               key={filterItem.id}
@@ -176,24 +216,33 @@ export default function BeforeAfterGallery() {
           ))}
         </div>
 
-        {/* Gallery Grid */}
-        <div className="relative">
-          {/* Botón flotante "Ver todas" - visible solo en móvil */}
+        {/* Botón "Ver todas" - visible solo en móvil */}
+        <div className="flex justify-end mb-4 md:hidden">
           <button
             onClick={() => setShowAllPhotos(true)}
-            className="absolute z-10 flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white transition-all rounded-full shadow-lg md:hidden top-4 right-4 bg-gradient-to-r from-primary-800 to-accent-600 hover:shadow-xl"
+            className="flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all rounded-full shadow-lg bg-gradient-to-r from-primary-800 to-accent-600 hover:shadow-xl"
           >
             <Maximize2 className="w-4 h-4" />
-            Ver Todas
+            {t('gallery.viewAll')}
           </button>
+        </div>
 
+        {/* Gallery Grid */}
+        <div className="relative">
           {/* Carrusel en móvil, Grid en desktop */}
-          <div className="mb-12 overflow-x-auto md:overflow-visible hide-scrollbar md:grid md:gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <div className="flex gap-6 pb-4 pl-4 pr-4 md:pl-0 md:pr-0 md:contents">
-              {filteredGallery.map((item) => (
+          <div 
+            ref={carouselRef}
+            className="mb-6 overflow-x-auto md:mb-12 md:overflow-visible hide-scrollbar md:grid md:gap-8 md:grid-cols-2 lg:grid-cols-3"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+          >
+            <div className="flex gap-6 md:pl-0 md:pr-0 md:contents">
+              {filteredGallery.map((item, index) => (
                 <div
-                  key={item.id}
-                  className="relative flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto overflow-hidden transition-all bg-white shadow-lg cursor-pointer group rounded-2xl hover:shadow-2xl"
+                  key={`${item.id}-${index}`}
+                  className="relative flex-shrink-0 w-[95vw] sm:w-[85vw] md:w-auto overflow-hidden transition-all bg-white shadow-lg cursor-pointer group rounded-2xl hover:shadow-2xl"
                   onClick={() => openModal(item)}
                 >
                   {/* Image Container */}
@@ -202,7 +251,7 @@ export default function BeforeAfterGallery() {
                     <div className="absolute inset-0">
                       <img
                         src={item.beforeImage}
-                        alt={`${item.title} - Antes`}
+                        alt={`${item.title} - ${t("gallery.beforeAlt")}`}
                         className="object-cover w-full h-full"
                       />
                     </div>
@@ -214,7 +263,7 @@ export default function BeforeAfterGallery() {
                     >
                       <img
                         src={item.afterImage}
-                        alt={`${item.title} - Después`}
+                        alt={`${item.title} - ${t("gallery.afterAlt")}`}
                         className="object-cover w-full h-full"
                       />
                     </div>
@@ -244,8 +293,8 @@ export default function BeforeAfterGallery() {
                     </div>
                   </div>
 
-                  {/* Info */}
-                  <div className="p-6">
+                  {/* Info - Solo visible en desktop */}
+                  <div className="hidden p-6 md:block">
                     <h3 className="mb-2 text-xl font-bold text-gray-900">{item.title}</h3>
                     <div className="flex items-center justify-between text-sm text-gray-600">
                       <span>📍 {item.location}</span>
@@ -305,11 +354,11 @@ export default function BeforeAfterGallery() {
                   <div className="absolute inset-0">
                     <img
                       src={selectedItem.beforeImage}
-                      alt="Antes"
+                      alt={t("gallery.beforeAlt")}
                       className="object-cover w-full h-full"
                     />
                     <div className="absolute px-4 py-2 font-bold text-white rounded-lg top-4 left-4 bg-black/70">
-                      ANTES
+                      {t("gallery.before")}
                     </div>
                   </div>
 
@@ -320,11 +369,11 @@ export default function BeforeAfterGallery() {
                   >
                     <img
                       src={selectedItem.afterImage}
-                      alt="Después"
+                      alt={t("gallery.afterAlt")}
                       className="object-cover w-full h-full"
                     />
                     <div className="absolute px-4 py-2 font-bold text-white rounded-lg top-4 left-4 bg-black/70">
-                      DESPUÉS
+                      {t("gallery.after")}
                     </div>
                   </div>
 
@@ -362,15 +411,15 @@ export default function BeforeAfterGallery() {
                     <div className="grid grid-cols-3 gap-4">
                       <div className="p-4 text-center rounded-lg bg-gray-50">
                         <div className="mb-1 text-2xl font-bold text-primary-600">✓</div>
-                        <div className="text-sm text-gray-600">Preparación</div>
+                        <div className="text-sm text-gray-600">{t("gallery.preparation")}</div>
                       </div>
                       <div className="p-4 text-center rounded-lg bg-gray-50">
                         <div className="mb-1 text-2xl font-bold text-primary-600">🎨</div>
-                        <div className="text-sm text-gray-600">Pintura Premium</div>
+                        <div className="text-sm text-gray-600">{t("gallery.premiumPaint")}</div>
                       </div>
                       <div className="p-4 text-center rounded-lg bg-gray-50">
                         <div className="mb-1 text-2xl font-bold text-primary-600">⭐</div>
-                        <div className="text-sm text-gray-600">Garantizado</div>
+                        <div className="text-sm text-gray-600">{t("gallery.guaranteed")}</div>
                       </div>
                     </div>
 
@@ -378,11 +427,11 @@ export default function BeforeAfterGallery() {
                       href="#contact"
                       className="inline-block w-full px-8 py-4 font-bold text-center text-white transition-all rounded-lg bg-gradient-to-r from-primary-800 to-accent-600 hover:from-primary-900 hover:to-accent-700"
                     >
-                      Obtén un Proyecto Como Este
+                      {t("gallery.projectLike")}
                     </a>
 
                     <p className="text-sm text-center text-gray-500">
-                      💡 Arrasta el control deslizante para comparar
+                      {t("gallery.dragSlider")}
                     </p>
                   </div>
                 </div>
@@ -398,8 +447,8 @@ export default function BeforeAfterGallery() {
               {/* Header del modal */}
               <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-4 mb-6 bg-black/50 backdrop-blur-md rounded-xl">
                 <div>
-                  <h2 className="text-2xl font-bold text-white">Galería Completa</h2>
-                  <p className="text-sm text-gray-300">{galleryData.length} proyectos completados</p>
+                  <h2 className="text-2xl font-bold text-white">{t('gallery.fullGallery')}</h2>
+                  <p className="text-sm text-gray-300">{galleryData.length} {t('gallery.completedProjects')}</p>
                 </div>
                 <button
                   onClick={() => setShowAllPhotos(false)}
@@ -425,7 +474,7 @@ export default function BeforeAfterGallery() {
                       <div className="absolute inset-0">
                         <img
                           src={item.beforeImage}
-                          alt={`${item.title} - Antes`}
+                          alt={`${item.title} - ${t("gallery.beforeAlt")}`}
                           className="object-cover w-full h-full"
                         />
                       </div>
@@ -437,17 +486,17 @@ export default function BeforeAfterGallery() {
                       >
                         <img
                           src={item.afterImage}
-                          alt={`${item.title} - Después`}
+                          alt={`${item.title} - ${t("gallery.afterAlt")}`}
                           className="object-cover w-full h-full"
                         />
                       </div>
 
                       {/* Labels */}
                       <div className="absolute px-2 py-1 text-xs font-semibold text-gray-700 rounded-full top-2 left-2 bg-white/90 backdrop-blur-sm">
-                        ANTES
+                        {t("gallery.before")}
                       </div>
                       <div className="absolute px-2 py-1 text-xs font-semibold text-gray-700 rounded-full top-2 right-2 bg-white/90 backdrop-blur-sm">
-                        DESPUÉS
+                        {t("gallery.after")}
                       </div>
 
                       {/* Center divider */}

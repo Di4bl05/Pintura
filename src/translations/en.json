@@ -13,13 +13,24 @@
     "description": "Best house painters Orlando FL — We don't just paint walls, we transform spaces into masterpieces.",
     "descriptionBold": "Competitive prices, superior quality, fast results.",
     "ctaFree": "FREE CONSULTATION",
-    "ctaCall": "Call Now"
+    "ctaCall": "Call Now",
+    "card": {
+      "transform": "Transform",
+      "yourSpace": "your Space",
+      "professionalResults": "Professional Results"
+    },
+    "badge2": {
+      "licensed": "Licensed &",
+      "insured": "Insured"
+    },
+    "scroll": "Scroll"
   },
   "services": {
     "badge": "OUR SERVICES",
     "title": "Professional Painters Near Me",
     "titleHighlight": "Orlando FL",
     "subtitle": "Full service painting and repair - Complete solutions for residential and commercial properties in Orlando and nearby areas",
+    "popular": "POPULAR",
     "interior": {
       "title": "Interior Painting",
       "description": "Professional interior painting services Orlando - We transform your interior spaces with premium quality paint. Includes complete surface preparation, minor repairs and professional finishes.",
@@ -103,10 +114,68 @@
     },
     "before": "BEFORE",
     "after": "AFTER",
+    "beforeAlt": "Before",
+    "afterAlt": "After",
     "clickDetails": "Click to see details",
+    "viewAll": "View All",
+    "fullGallery": "Full Gallery",
+    "completedProjects": "completed projects",
+    "preparation": "Preparation",
+    "premiumPaint": "Premium Paint",
+    "guaranteed": "Guaranteed",
     "cta": "Transform Your Space Today!",
     "projectLike": "Get a Project Like This",
-    "dragSlider": "💡 Drag the slider to compare"
+    "dragSlider": "💡 Drag the slider to compare",
+    "projects": {
+      "1": {
+        "title": "Exterior Painting Project",
+        "location": "Florida",
+        "service": "Exterior Painting",
+        "description": "Complete exterior transformation with modern colors and weather-resistant finishes for Florida climate"
+      },
+      "2": {
+        "title": "Residential Interior Painting",
+        "location": "Florida",
+        "service": "Interior Painting",
+        "description": "Complete interior renovation with premium high-quality paint"
+      },
+      "3": {
+        "title": "Professional Deck Staining",
+        "location": "Florida",
+        "service": "Deck Staining",
+        "description": "Complete deck staining and sealing with durable protection"
+      },
+      "4": {
+        "title": "Commercial Project",
+        "location": "Florida",
+        "service": "Commercial Painting",
+        "description": "Professional commercial painting with high-quality finishes"
+      },
+      "5": {
+        "title": "Wall Painting",
+        "location": "Florida",
+        "service": "Interior Painting",
+        "description": "Interior transformation with complete surface preparation"
+      },
+      "6": {
+        "title": "Residential Exterior Painting",
+        "location": "Florida",
+        "service": "Exterior Painting",
+        "description": "Exterior painting with weather-resistant materials for Florida climate"
+      },
+      "7": {
+        "title": "Residential Project",
+        "location": "Florida",
+        "service": "Interior Painting",
+        "description": "Complete renovation with professional finishes and cleanup included"
+      },
+      "8": {
+        "title": "Pressure Washing",
+        "location": "Florida",
+        "service": "Pressure Washing",
+        "description": "Deep cleaning with professional pressure washing"
+      }
+    }
   },
   "whyChoose": {
     "badge": "WHY CHOOSE US?",
@@ -146,6 +215,40 @@
     "title": "Local House Painting",
     "titleHighlight": "Quotes Florida",
     "subtitle": "Reliable painters Florida FL serving Longwood, Orlando and surrounding communities throughout Florida",
+    "areas": [
+      {
+        "name": "Longwood FL Painters",
+        "description": "Professional painting services in Longwood"
+      },
+      {
+        "name": "Orlando Painting Companies",
+        "description": "Top-rated painters serving Orlando"
+      },
+      {
+        "name": "Winter Park Painters",
+        "description": "Expert painters in Winter Park"
+      },
+      {
+        "name": "Altamonte Springs Painting",
+        "description": "Reliable painters in Altamonte Springs"
+      },
+      {
+        "name": "Lake Mary Painters",
+        "description": "Quality painting in Lake Mary"
+      },
+      {
+        "name": "Sanford FL Painting Services",
+        "description": "Licensed painters in Sanford"
+      },
+      {
+        "name": "Central Florida Painters",
+        "description": "Professional painters in Central Florida"
+      },
+      {
+        "name": "Serving All Florida",
+        "description": "We travel anywhere in Florida"
+      }
+    ],
     "whyChoose": {
       "title": "Why Choose Our Orlando Painters?",
       "items": [

@@ -84,11 +84,11 @@ export default function Hero() {
                 <div className="aspect-[3/4] bg-gradient-to-br from-gray-50 via-accent-50 to-white rounded-2xl flex items-center justify-center">
                   <div className="text-center">
                     <div className="text-8xl mb-4">🎨</div>
-                    <p className="text-2xl font-bold text-gray-800 mb-2">Transforma</p>
+                    <p className="text-2xl font-bold text-gray-800 mb-2">{t("hero.card.transform")}</p>
                     <p className="text-2xl italic font-serif text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-700">
-                      tu Espacio
+                      {t("hero.card.yourSpace")}
                     </p>
-                    <p className="text-gray-600 mt-4 text-sm">Resultados Profesionales</p>
+                    <p className="text-gray-600 mt-4 text-sm">{t("hero.card.professionalResults")}</p>
                   </div>
                 </div>
               </div>
@@ -97,8 +97,8 @@ export default function Hero() {
               <div className="absolute -bottom-8 -left-8 bg-gradient-to-br from-accent-600 to-accent-700 text-white px-8 py-6 rounded-2xl shadow-xl transform rotate-3 hover:rotate-0 transition-transform">
                 <div className="text-center">
                   <Award className="w-10 h-10 mx-auto mb-2" />
-                  <div className="font-black text-lg">Licenciado &</div>
-                  <div className="font-black text-lg">Asegurado</div>
+                  <div className="font-black text-lg">{t("hero.badge2.licensed")}</div>
+                  <div className="font-black text-lg">{t("hero.badge2.insured")}</div>
                 </div>
               </div>
             </div>
@@ -108,7 +108,7 @@ export default function Hero() {
 
       {/* Scroll indicator de v4 */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-gray-400 animate-bounce">
-        <span className="text-xs uppercase tracking-widest">Scroll</span>
+        <span className="text-xs uppercase tracking-widest">{t("hero.scroll")}</span>
         <ArrowDown className="w-4 h-4" />
       </div>
 

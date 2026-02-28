@@ -7,76 +7,87 @@
     "contact": "Contacto"
   },
   "hero": {
-    "badge": "TOP-RATED PAINTING COMPANY FLORIDA",
+    "badge": "EMPRESA DE PINTURA MEJOR CALIFICADA EN FLORIDA",
     "title1": "COLOR",
     "title2": "tu Mundo",
-    "description": "Best house painters Orlando FL — No solo pintamos paredes, transformamos espacios en obras maestras.",
+    "description": "Los mejores pintores de casas en Orlando FL — No solo pintamos paredes, transformamos espacios en obras maestras.",
     "descriptionBold": "Precios competitivos, calidad superior, resultados rápidos.",
     "ctaFree": "CONSULTA GRATUITA",
-    "ctaCall": "Llamar"
+    "ctaCall": "Llamar",
+    "card": {
+      "transform": "Transforma",
+      "yourSpace": "tu Espacio",
+      "professionalResults": "Resultados Profesionales"
+    },
+    "badge2": {
+      "licensed": "Licenciado &",
+      "insured": "Asegurado"
+    },
+    "scroll": "Scroll"
   },
   "services": {
     "badge": "NUESTROS SERVICIOS",
-    "title": "Professional Painters Near Me",
+    "title": "Pintores Profesionales Cerca de Mí",
     "titleHighlight": "Orlando FL",
-    "subtitle": "Full service painting and repair - Soluciones completas para propiedades residenciales y comerciales en Orlando y áreas cercanas",
+    "subtitle": "Servicio completo de pintura y reparación - Soluciones completas para propiedades residenciales y comerciales en Orlando y áreas cercanas",
+    "popular": "POPULAR",
     "interior": {
-      "title": "Interior Painting",
-      "description": "Professional interior painting services Orlando - Transformamos tus espacios interiores con pintura de calidad premium. Incluye preparación completa de superficies, reparaciones menores y acabados profesionales.",
+      "title": "Pintura Interior",
+      "description": "Servicios profesionales de pintura interior en Orlando - Transformamos tus espacios interiores con pintura de calidad premium. Incluye preparación completa de superficies, reparaciones menores y acabados profesionales.",
       "price": "$2,000 - $10,000",
       "priceUnit": "por proyecto",
       "features": [
         "Preparación de paredes profesional",
         "2 capas de pintura premium",
         "Protección de muebles incluida",
-        "Post-painting cleanup Orlando"
+        "Limpieza posterior a la pintura en Orlando"
       ]
     },
     "exterior": {
-      "title": "Exterior Painting",
-      "description": "Exterior house washing and paint - Protege y embellece tu propiedad con pinturas resistentes al clima de Florida. Trabajo de alta calidad que dura años.",
+      "title": "Pintura Exterior",
+      "description": "Lavado y pintura exterior de casas - Protege y embellece tu propiedad con pinturas resistentes al clima de Florida. Trabajo de alta calidad que dura años.",
       "price": "$2,000 - $10,000",
       "priceUnit": "por proyecto",
       "features": [
-        "Pressure washing Orlando FL",
-        "Wall patching and repair Orlando",
-        "Best paint for Florida humidity",
+        "Lavado a presión en Orlando FL",
+        "Reparación y parcheo de paredes en Orlando",
+        "Mejor pintura para la humedad de Florida",
         "Garantía de durabilidad"
       ]
     },
     "commercial": {
-      "title": "Commercial Painting",
-      "description": "Licensed and insured painters - Servicios comerciales eficientes con mínima interrupción. Trabajamos según tu horario y necesidades del negocio.",
+      "title": "Pintura Comercial",
+      "description": "Pintores licenciados y asegurados - Servicios comerciales eficientes con mínima interrupción. Trabajamos según tu horario y necesidades del negocio.",
       "price": "$2,000 - $10,000+",
       "priceUnit": "según metraje",
       "features": [
-        "HOA approved painting Orlando",
-        "Detailed painting and prep work",
-        "Move-in painting services",
+        "Pintura aprobada por HOA en Orlando",
+        "Pintura detallada y trabajo de preparación",
+        "Servicios de pintura para mudanza",
         "Proyectos grandes y pequeños"
       ]
     },
     "deck": {
-      "title": "Deck Staining",
-      "description": "Deck staining and sealing - Protege y embellece tu deck con tratamientos especializados. Restauramos y protegemos tus espacios exteriores de madera.",
+      "title": "Tinción de Deck",
+      "description": "Tinción y sellado de deck - Protege y embellece tu deck con tratamientos especializados. Restauramos y protegemos tus espacios exteriores de madera.",
       "price": "$2,000 - $8,000",
       "priceUnit": "según tamaño",
       "features": [
         "Preparación y limpieza completa",
-        "Stain de alta calidad",
+        "Tinte de alta calidad",
         "Acabado resistente al clima",
         "Protección anti-moho"
       ]
     },
     "pressure": {
-      "title": "Pressure Washing",
-      "description": "Roof cleaning Orlando & soft wash house cleaning - Limpieza profesional para exteriores. Driveway and sidewalk cleaning incluido.",
+      "title": "Lavado a Presión",
+      "description": "Limpieza de techos en Orlando y lavado suave de casas - Limpieza profesional para exteriores. Limpieza de entradas y aceras incluida.",
       "price": "$600 - $2,500",
       "priceUnit": "según área",
       "features": [
-        "Soft wash house cleaning Orlando",
-        "Roof cleaning Orlando",
-        "Driveway and sidewalk cleaning",
+        "Limpieza suave de casas en Orlando",
+        "Limpieza de techos en Orlando",
+        "Limpieza de entradas y aceras",
         "Limpieza profunda y efectiva"
       ]
     },
@@ -98,15 +109,73 @@
       "interior": "Interior",
       "exterior": "Exterior",
       "commercial": "Comercial",
-      "deck": "Deck Staining",
-      "pressure": "Pressure Washing"
+      "deck": "Tinción de Deck",
+      "pressure": "Lavado a Presión"
     },
     "before": "ANTES",
     "after": "DESPUÉS",
+    "beforeAlt": "Antes",
+    "afterAlt": "Después",
     "clickDetails": "Click para ver detalles",
+    "viewAll": "Ver Todas",
+    "fullGallery": "Galería Completa",
+    "completedProjects": "proyectos completados",
+    "preparation": "Preparación",
+    "premiumPaint": "Pintura Premium",
+    "guaranteed": "Garantizado",
     "cta": "¡Transforma Tu Espacio Hoy!",
     "projectLike": "Obtén un Proyecto Como Este",
-    "dragSlider": "💡 Arrasta el control deslizante para comparar"
+    "dragSlider": "💡 Arrasta el control deslizante para comparar",
+    "projects": {
+      "1": {
+        "title": "Proyecto de Pintura Exterior",
+        "location": "Florida",
+        "service": "Pintura Exterior",
+        "description": "Transformación completa de exterior con colores modernos y acabados resistentes al clima de Florida"
+      },
+      "2": {
+        "title": "Pintura Interior Residencial",
+        "location": "Florida",
+        "service": "Pintura Interior",
+        "description": "Renovación completa de interiores con pintura premium de alta calidad"
+      },
+      "3": {
+        "title": "Tinción de Deck Profesional",
+        "location": "Florida",
+        "service": "Tinción de Deck",
+        "description": "Tinción y sellado completo de deck exterior con protección duradera"
+      },
+      "4": {
+        "title": "Proyecto Comercial",
+        "location": "Florida",
+        "service": "Pintura Comercial",
+        "description": "Pintura comercial profesional con acabados de alta calidad"
+      },
+      "5": {
+        "title": "Pintura de Paredes",
+        "location": "Florida",
+        "service": "Pintura Interior",
+        "description": "Transformación de interiores con preparación completa de superficies"
+      },
+      "6": {
+        "title": "Pintura Exterior Residencial",
+        "location": "Florida",
+        "service": "Pintura Exterior",
+        "description": "Pintura exterior con materiales resistentes al clima de Florida"
+      },
+      "7": {
+        "title": "Proyecto Residencial",
+        "location": "Florida",
+        "service": "Pintura Interior",
+        "description": "Renovación completa con acabados profesionales y limpieza incluida"
+      },
+      "8": {
+        "title": "Limpieza a Presión",
+        "location": "Florida",
+        "service": "Lavado a Presión",
+        "description": "Limpieza profunda con lavado a presión profesional"
+      }
+    }
   },
   "whyChoose": {
     "badge": "¿POR QUÉ ELEGIRNOS?",
@@ -143,30 +212,64 @@
   },
   "serviceAreas": {
     "badge": "ÁREAS DE SERVICIO",
-    "title": "Local House Painting",
-    "titleHighlight": "Quotes Florida",
-    "subtitle": "Reliable painters Florida FL serving Longwood, Orlando and surrounding communities throughout Florida",
+    "title": "Cotizaciones Locales de",
+    "titleHighlight": "Pintura en Florida",
+    "subtitle": "Pintores confiables en Florida sirviendo Longwood, Orlando y comunidades circundantes en todo el estado",
+    "areas": [
+      {
+        "name": "Pintores en Longwood FL",
+        "description": "Servicios profesionales de pintura en Longwood"
+      },
+      {
+        "name": "Empresas de Pintura en Orlando",
+        "description": "Pintores mejor calificados sirviendo Orlando"
+      },
+      {
+        "name": "Pintores en Winter Park",
+        "description": "Pintores expertos en Winter Park"
+      },
+      {
+        "name": "Pintura en Altamonte Springs",
+        "description": "Pintores confiables en Altamonte Springs"
+      },
+      {
+        "name": "Pintores en Lake Mary",
+        "description": "Pintura de calidad en Lake Mary"
+      },
+      {
+        "name": "Servicios de Pintura en Sanford FL",
+        "description": "Pintores licenciados en Sanford"
+      },
+      {
+        "name": "Pintores en Florida Central",
+        "description": "Pintores profesionales en Florida Central"
+      },
+      {
+        "name": "Servimos Todo Florida",
+        "description": "Viajamos a cualquier parte de Florida"
+      }
+    ],
     "whyChoose": {
-      "title": "Why Choose Our Orlando Painters?",
+      "title": "¿Por Qué Elegir Nuestros Pintores de Orlando?",
       "items": [
-        "Licensed and insured painters Orlando",
-        "Average cost to paint a house FL - transparent pricing",
-        "Stucco painting contractors specialized",
-        "Apartment painting Orlando move-in ready"
+        "Pintores licenciados y asegurados en Orlando",
+        "Costo promedio para pintar una casa en FL - precios transparentes",
+        "Contratistas especializados en pintura de estuco",
+        "Pintura de apartamentos en Orlando lista para mudarse"
       ]
     },
     "specialized": {
-      "title": "Specialized Services",
+      "title": "Servicios Especializados",
       "items": [
-        "Garage floor epoxy Orlando installation",
-        "Professional painter cleanup included",
-        "Why is my exterior paint peeling? Free diagnosis",
-        "Cost to paint kitchen cabinets - affordable rates"
+        "Instalación de epoxy para piso de garaje en Orlando",
+        "Limpieza profesional de pintor incluida",
+        "¿Por qué se está pelando mi pintura exterior? Diagnóstico gratuito",
+        "Costo para pintar gabinetes de cocina - tarifas asequibles"
       ]
     },
     "cta": {
-      "text": "Get Your Local House Painting Quotes Today - Free Estimates!",
-      "button": "Request Free Quote"
+      "text": "¡Obtén tus Cotizaciones Locales de Pintura Hoy - Estimados Gratuitos!",
+      "button": "Solicitar Cotización Gratuita"
     }
   },
   "contact": {
@@ -255,28 +358,28 @@
     }
   },
   "footer": {
-    "description": "Best house painters Florida - Licensed and insured painting contractors. Serving Florida with 3 years of professional experience.",
+    "description": "Los mejores pintores de casas en Florida - Contratistas de pintura licenciados y asegurados. Sirviendo Florida con 3 años de experiencia profesional.",
     "services": {
-      "title": "Services",
-      "interior": "Interior Painting",
-      "exterior": "Exterior Painting",
-      "commercial": "Commercial Painting",
-      "deck": "Deck Staining",
-      "pressure": "Pressure Washing"
+      "title": "Servicios",
+      "interior": "Pintura Interior",
+      "exterior": "Pintura Exterior",
+      "commercial": "Pintura Comercial",
+      "deck": "Tinción de Deck",
+      "pressure": "Lavado a Presión"
     },
     "areas": {
-      "title": "Service Areas",
-      "longwood": "Longwood Painters",
-      "orlando": "Orlando Painting",
-      "central": "Central Florida",
-      "all": "Serving all of Florida"
+      "title": "Áreas de Servicio",
+      "longwood": "Pintores en Longwood",
+      "orlando": "Pintura en Orlando",
+      "central": "Florida Central",
+      "all": "Sirviendo todo Florida"
     },
     "contact": {
-      "title": "Contact Us",
+      "title": "Contáctanos",
       "hours": "Lun-Vie: 9AM - 5PM"
     },
-    "copyright": "All rights reserved.",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+    "copyright": "Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio"
   }
 }
