@@ -55,14 +55,14 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 via-white to-accent-50">
+    <section id="contact" className="py-20 bg-gradient-to-br from-blue-50 via-white to-red-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="inline-block px-4 py-2 bg-accent-100 text-accent-700 rounded-full text-sm font-semibold mb-4">
+          <div className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">
             {t("contact.badge")}
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            {t("contact.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-700">{t("contact.titleHighlight")}</span>
+            {t("contact.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-600">{t("contact.titleHighlight")}</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             {t("contact.subtitle")}
@@ -72,17 +72,17 @@ export default function ContactForm() {
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Info */}
           <div className="lg:col-span-1 space-y-8">
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+            <div className="bg-white rounded-2xl shadow-xl p-8 border-2 border-gray-200">
               <h3 className="text-2xl font-bold mb-6">{t("contact.info.title")}</h3>
               
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-accent-600" />
+                  <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-primary-600" />
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">{t("contact.info.phone")}</p>
-                    <a href="tel:+17863506367" className="text-accent-600 hover:text-accent-700">
+                    <a href="tel:+17863506367" className="text-primary-600 hover:text-primary-700">
                       (786) 350-6367
                     </a>
                   </div>
@@ -101,8 +101,8 @@ export default function ContactForm() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-accent-600" />
+                  <div className="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-secondary-600" />
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">{t("contact.info.address")}</p>
@@ -114,8 +114,8 @@ export default function ContactForm() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-6 h-6 text-accent-600" />
+                  <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-primary-600" />
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">{t("contact.info.hours")}</p>
@@ -128,7 +128,7 @@ export default function ContactForm() {
             </div>
 
             {/* Quick Benefits */}
-            <div className="bg-gradient-to-br from-primary-800 to-accent-600 rounded-2xl shadow-lg p-8 text-white">
+            <div className="bg-gradient-to-br from-primary-600 to-accent-600 rounded-2xl shadow-lg p-8 text-white">
               <h3 className="text-xl font-bold mb-4">{t("contact.benefits.title")}</h3>
               <ul className="space-y-3">
                 <li className="flex items-center gap-2">
@@ -153,7 +153,7 @@ export default function ContactForm() {
 
           {/* Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+            <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border-2 border-gray-200">
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Name */}
                 <div>
@@ -344,7 +344,7 @@ export default function ContactForm() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-primary-800 to-accent-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:from-primary-900 hover:to-accent-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 group"
+                  className="w-full bg-gradient-to-r from-primary-600 to-accent-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:from-primary-700 hover:to-accent-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 group"
                 >
                   {isSubmitting ? (
                     <>

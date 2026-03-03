@@ -10,7 +10,6 @@ import BeforeAfterGallery from "@/components/BeforeAfterGallery";
 import Reviews from "@/components/Reviews";
 import ServiceAreas from "@/components/ServiceAreas";
 import ContactForm from "@/components/ContactForm";
-import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import MobileAccordion from "@/components/MobileAccordion";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -46,12 +45,18 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div className="order-2 md:order-1">
               <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                {/* Placeholder - Replace with actual image */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-700 to-accent-600 flex items-center justify-center">
-                  <div className="text-center text-white p-8">
-                    <p className="text-6xl mb-4">🎨</p>
-                    <p className="text-xl font-semibold">Profesionales Certificados</p>
-                    <p className="text-sm opacity-90 mt-2">Agrega fotos de tu equipo aquí</p>
+                <Image
+                  src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1200&auto=format&fit=crop"
+                  alt="Equipo profesional de pintores trabajando"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                {/* Overlay con texto temporal */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
+                  <div className="p-6 text-white">
+                    <p className="text-sm font-semibold opacity-90">📸 Imagen de placeholder</p>
+                    <p className="text-xs opacity-75">Reemplazar con foto del equipo real</p>
                   </div>
                 </div>
               </div>
@@ -110,9 +115,6 @@ export default function Home() {
 
       {/* Contact Form */}
       <ContactForm />
-
-      {/* Final CTA */}
-      <CTASection />
       
       <Footer />
     </main>
