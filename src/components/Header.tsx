@@ -12,7 +12,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -29,8 +29,8 @@ export default function Header() {
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${
       scrolled 
-        ? 'bg-white/98 backdrop-blur-lg shadow-2xl border-b-2 border-primary-100' 
-        : 'bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-100'
+        ? 'bg-slate-800 backdrop-blur-lg shadow-2xl border-b-2 border-primary-100' 
+        : 'bg-slate-800 backdrop-blur-md shadow-[0_10px_30px_-5px_rgba(0,0,0,0.15)] border-b border-gray-100'
     }`}>
       <nav className="container px-4 mx-auto">
         <div className={`flex items-center justify-between transition-all duration-300 ${
@@ -39,13 +39,13 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <img 
-              src="/images/logo/logo-cropped.png" 
+              src="/images/logo/luisbety-inc.png" 
               alt="LUISBETY INC Logo" 
               className={`w-auto transition-all duration-300 ${
                 scrolled ? 'h-12 md:h-16' : 'h-16 md:h-20'
               } group-hover:scale-105`}
             />
-            <span className="text-xl font-bold text-gray-900 transition-colors md:text-2xl group-hover:text-primary-600">
+            <span className="sr-only text-xl font-bold text-gray-900 transition-colors md:text-2xl group-hover:text-primary-600">
               LUISBETY INC.
             </span>
           </Link>
@@ -56,7 +56,7 @@ export default function Header() {
               <a
                 key={item.name}
                 href={item.href}
-                className="relative font-medium text-gray-700 transition-colors group hover:text-primary-600"
+                className="relative font-medium text-white transition-colors group hover:text-primary-600"
                 onClick={(e) => {
                   e.preventDefault();
                   if (item.href === "#") {
@@ -78,7 +78,7 @@ export default function Header() {
           {/* CTA Button */}
           <a
             href="tel:+17863506367"
-            className="items-center hidden gap-2 px-6 py-3 font-semibold text-white transition-all duration-300 rounded-lg shadow-lg md:flex bg-gradient-to-r from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800 hover:shadow-xl hover:scale-105 hover:-translate-y-0.5"
+            className="items-center hidden gap-2 px-6 py-3 font-semibold text-white transition-all duration-300 rounded-lg shadow-lg md:flex bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl hover:scale-105 hover:-translate-y-0.5"
           >
             <Phone className="w-5 h-5 animate-pulse" />
             (786) 350-6367
@@ -91,8 +91,8 @@ export default function Header() {
               className="flex items-center gap-2 px-4 py-2 transition-all duration-300 rounded-lg hover:bg-gradient-to-r hover:from-primary-50 hover:to-accent-50 hover:scale-105"
               aria-label="Change language"
             >
-              <Globe className="w-5 h-5 text-gray-600 group-hover:text-primary-600" />
-              <span className="text-sm font-semibold text-gray-700 uppercase">{language}</span>
+              <Globe className="w-5 h-5 text-white group-hover:text-primary-600" />
+              <span className="text-sm font-semibold text-white uppercase">{language}</span>
             </button>
           </div>
 
@@ -105,7 +105,7 @@ export default function Header() {
             {isMenuOpen ? (
               <X className="w-6 h-6 text-accent-600" />
             ) : (
-              <Menu className="w-6 h-6 text-gray-700" />
+              <Menu className="w-6 h-6 text-white" />
             )}
           </button>
         </div>
@@ -118,7 +118,7 @@ export default function Header() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="py-2 font-medium text-gray-700 transition-all hover:text-primary-600 hover:translate-x-2"
+                  className="py-2 font-medium text-white transition-all hover:text-primary-600 hover:translate-x-2"
                   style={{ animationDelay: `${index * 50}ms` }}
                   onClick={(e) => {
                     setIsMenuOpen(false);
@@ -140,7 +140,7 @@ export default function Header() {
               {/* Language Selector - Mobile */}
               <button
                 onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
-                className="flex items-center justify-center gap-2 px-6 py-3 font-semibold text-gray-700 transition-all duration-300 rounded-lg bg-gradient-to-r from-gray-100 to-gray-50 hover:from-primary-50 hover:to-accent-50 hover:scale-105"
+                className="flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-to-r from-gray-100 to-gray-50 hover:from-primary-50 hover:to-accent-50 hover:scale-105"
               >
                 <Globe className="w-5 h-5" />
                 {language === 'es' ? 'English' : 'Español'}
