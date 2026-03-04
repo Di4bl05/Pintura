@@ -123,6 +123,70 @@ git commit -m "style: actualizado el hero con nuevo diseño"
 
 ---
 
+## 👥 Permisos de Colaboradores
+
+### Problema: El colaborador no puede hacer push
+
+Si tu colaborador no puede subir cambios a las ramas, sigue estos pasos:
+
+#### Paso 1: Verificar el nivel de acceso
+
+1. Ve al repositorio en GitHub: `https://github.com/Di4bl05/Pintura`
+2. Haz clic en **Settings** (Configuración)
+3. En el menú lateral, haz clic en **Collaborators and teams** (Colaboradores y equipos)
+4. Busca al colaborador en la lista
+
+#### Paso 2: Cambiar el rol del colaborador a Write
+
+Si el colaborador aparece con rol **Read**, cámbialo a **Write**:
+
+1. Haz clic en el ícono de configuración ⚙️ junto al nombre del colaborador
+2. Selecciona **Write** en el menú de roles
+3. Confirma el cambio
+
+> **Roles disponibles:**
+> - `Read` → Solo puede ver el código (❌ no puede hacer push)
+> - `Triage` → Puede gestionar issues (❌ no puede hacer push)
+> - `Write` → Puede hacer push a ramas (✅ recomendado para colaboradores)
+> - `Maintain` → Puede gestionar el repositorio sin acceso a settings
+> - `Admin` → Acceso completo al repositorio
+
+#### Paso 3: El colaborador debe aceptar la invitación
+
+Si el colaborador nunca aceptó la invitación:
+
+1. Ve a **Settings → Collaborators and teams**
+2. Si aparece como "Pending invite", el colaborador debe aceptar el correo de invitación
+3. O comparte este enlace directo: `https://github.com/Di4bl05/Pintura/invitations`
+
+#### Verificación rápida para el colaborador
+
+El colaborador puede verificar su acceso ejecutando:
+
+```bash
+# Clonar el repositorio (solo primera vez)
+git clone https://github.com/Di4bl05/Pintura.git
+cd Pintura
+
+# Verificar acceso a una rama
+git checkout dev
+git pull origin dev
+
+# Hacer un commit de prueba
+echo "test" > test.txt
+git add test.txt
+git commit -m "test: verificar acceso"
+git push origin dev
+
+# Si el push funciona, los permisos están correctos
+# Después borrar el archivo de prueba
+git rm test.txt
+git commit -m "chore: eliminar archivo de prueba"
+git push origin dev
+```
+
+---
+
 ## 🆘 Comandos Útiles
 
 ```bash
