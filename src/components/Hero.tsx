@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Phone, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
+import { effectTsResolver } from "@hookform/resolvers/effect-ts/src/effect-ts.js";
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -31,7 +32,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-[calc(100vh-80px)] flex items-center overflow-hidden bg-gray-950 will-change-transform">
       
-      {/* --- FONDO --- */}
+      {/* --- FONDO -- */}
       <div className="absolute inset-0 z-0">
         {heroContent.map((item, index) => (
           <div
@@ -51,7 +52,6 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/20 to-transparent"></div>
       </div>
-
       {/* --- CONTENIDO --- */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 w-full py-8">
         <div className="max-w-4xl space-y-6"> 
