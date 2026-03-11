@@ -88,10 +88,10 @@ export default function Header() {
           <div className="items-center hidden gap-2 md:flex">
             <button
               onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
-              className="flex items-center gap-2 px-4 py-2 transition-all duration-300 rounded-lg hover:bg-gradient-to-r hover:from-primary-50 hover:to-accent-50 hover:scale-105"
+              className="flex items-center gap-2 px-4 py-2 transition-all duration-300 rounded-lg hover:bg-blue-600/30 hover:scale-105 border border-transparent hover:border-blue-400/50"
               aria-label="Change language"
             >
-              <Globe className="w-5 h-5 text-white group-hover:text-primary-600" />
+              <Globe className="w-5 h-5 text-white" />
               <span className="text-sm font-semibold text-white uppercase">{language}</span>
             </button>
           </div>
@@ -140,7 +140,7 @@ export default function Header() {
               {/* Language Selector - Mobile */}
               <button
                 onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
-                className="flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-to-r from-gray-100 to-gray-50 hover:from-primary-50 hover:to-accent-50 hover:scale-105"
+                className="flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white transition-all duration-300 rounded-lg bg-blue-600/50 hover:bg-blue-600 hover:scale-105 border border-blue-400/50"
               >
                 <Globe className="w-5 h-5" />
                 {language === 'es' ? 'English' : 'Español'}
