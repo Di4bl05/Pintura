@@ -1,6 +1,8 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import esTranslations from '@/translations/es.json';
+import enTranslations from '@/translations/en.json';
 
 type Language = 'es' | 'en';
 
@@ -12,11 +14,17 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const allTranslations = {
+  es: esTranslations,
+  en: enTranslations
+};
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('es');
-  const [translations, setTranslations] = useState<any>({});
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Detect browser language on mount
     const savedLang = localStorage.getItem('language') as Language;
     if (savedLang) {
@@ -28,21 +36,16 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  useEffect(() => {
-    // Load translations
-    import(`@/translations/${language}.json`)
-      .then((module) => setTranslations(module.default))
-      .catch((error) => console.error('Error loading translations:', error));
-  }, [language]);
-
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('language', lang);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('language', lang);
+    }
   };
 
   const t = (key: string): string => {
     const keys = key.split('.');
-    let value: any = translations;
+    let value: any = allTranslations[language];
     
     for (const k of keys) {
       value = value?.[k];
