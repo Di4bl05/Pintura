@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Phone, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
-import { effectTsResolver } from "@hookform/resolvers/effect-ts/src/effect-ts.js";
 
 export default function Hero() {
   const { t } = useLanguage();
