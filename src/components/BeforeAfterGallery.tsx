@@ -101,7 +101,17 @@ export default function BeforeAfterGallery() {
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [animationKey, setAnimationKey] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Reset animation when filter changes
+  useEffect(() => {
+    setAnimationKey(prev => prev + 1);
+    // Scroll carousel to start
+    if (carouselRef.current) {
+      carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+  }, [filter]);
 
   // Auto-scroll animation with pauses
   useEffect(() => {
@@ -198,13 +208,10 @@ export default function BeforeAfterGallery() {
   };
 
   return (
-    <section id="gallery" className="py-20 bg-gradient-to-b from-red-50 via-white to-blue-50">
+    <section id="gallery" className="py-20 bg-white/60">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8 md:mb-16 text-center">
-          <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 mb-3 md:mb-4 text-xs md:text-sm font-semibold text-primary-700 bg-primary-100 rounded-full">
-            {t("gallery.badge")}
-          </div>
           <h2 className="mb-3 md:mb-4 text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
             {t("gallery.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-secondary-600">{t("gallery.titleHighlight")}</span>
           </h2>
@@ -219,10 +226,10 @@ export default function BeforeAfterGallery() {
             <button
               key={filterItem.id}
               onClick={() => setFilter(filterItem.id)}
-              className={`px-3 py-1.5 md:px-6 md:py-3 rounded-full text-xs md:text-base font-semibold transition-all ${
+              className={`px-3 py-1.5 md:px-6 md:py-3 rounded-full text-xs md:text-base font-semibold transition-all duration-300 transform ${
                 filter === filterItem.id
-                  ? "bg-gradient-to-r from-primary-600 to-accent-600 text-white shadow-lg"
-                  : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
+                  ? "bg-gradient-to-r from-primary-600 to-accent-600 text-white shadow-lg scale-105 animate-pulse-subtle"
+                  : "bg-white text-gray-700 hover:bg-gradient-to-r hover:from-primary-50 hover:to-accent-50 hover:scale-110 hover:shadow-md hover:-translate-y-1 border border-gray-200"
               }`}
             >
               {filterItem.label}
@@ -234,9 +241,9 @@ export default function BeforeAfterGallery() {
         <div className="flex justify-end mb-4">
           <button
             onClick={() => setShowAllPhotos(true)}
-            className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 text-xs md:text-sm font-semibold text-white transition-all rounded-full shadow-lg bg-gradient-to-r from-secondary-600 to-secondary-700 hover:shadow-xl"
+            className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 text-xs md:text-sm font-semibold text-white transition-all duration-300 transform rounded-full shadow-lg bg-gradient-to-r from-secondary-600 to-secondary-700 hover:shadow-xl hover:scale-105 hover:-translate-y-1"
           >
-            <Maximize2 className="w-3 h-3 md:w-4 md:h-4" />
+            <Maximize2 className="w-3 h-3 md:w-4 md:h-4 transition-transform group-hover:rotate-90" />
             {t('gallery.viewAll')}
           </button>
         </div>
@@ -256,9 +263,9 @@ export default function BeforeAfterGallery() {
                   }
                 }
               }}
-              className="absolute z-10 flex items-center justify-center w-12 h-12 transition-all transform -translate-y-1/2 bg-white rounded-full shadow-lg left-2 top-1/2 hover:bg-gray-100 hover:scale-110"
+              className="absolute z-10 flex items-center justify-center w-12 h-12 transition-all duration-300 transform -translate-y-1/2 bg-white rounded-full shadow-lg left-2 top-1/2 hover:bg-primary-600 hover:scale-110 hover:shadow-xl group"
             >
-              <ChevronLeft className="w-6 h-6 text-gray-700" />
+              <ChevronLeft className="w-6 h-6 text-gray-700 transition-all group-hover:text-white group-hover:-translate-x-1" />
             </button>
             <button
               onClick={() => {
@@ -270,9 +277,9 @@ export default function BeforeAfterGallery() {
                   }
                 }
               }}
-              className="absolute z-10 flex items-center justify-center w-12 h-12 transition-all transform -translate-y-1/2 bg-white rounded-full shadow-lg right-2 top-1/2 hover:bg-gray-100 hover:scale-110"
+              className="absolute z-10 flex items-center justify-center w-12 h-12 transition-all duration-300 transform -translate-y-1/2 bg-white rounded-full shadow-lg right-2 top-1/2 hover:bg-primary-600 hover:scale-110 hover:shadow-xl group"
             >
-              <ChevronRight className="w-6 h-6 text-gray-700" />
+              <ChevronRight className="w-6 h-6 text-gray-700 transition-all group-hover:text-white group-hover:translate-x-1" />
             </button>
 
             <div 
@@ -285,8 +292,9 @@ export default function BeforeAfterGallery() {
             >
               {filteredGallery.map((item, index) => (
                 <div
-                  key={`${item.id}-${index}`}
-                  className="relative flex-shrink-0 w-[95vw] sm:w-[85vw] md:w-[70vw] lg:w-[45vw] xl:w-[35vw] overflow-hidden transition-all bg-white shadow-xl cursor-pointer group rounded-2xl hover:shadow-2xl border-2 border-gray-200 hover:border-primary-300"
+                  key={`${item.id}-${index}-${animationKey}`}
+                  className="relative flex-shrink-0 w-[95vw] sm:w-[85vw] md:w-[70vw] lg:w-[45vw] xl:w-[35vw] overflow-hidden transition-all duration-500 bg-white shadow-xl cursor-pointer group rounded-2xl hover:shadow-2xl border-2 border-gray-200 hover:border-primary-300 hover:scale-[1.02] animate-fade-slide-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
                   onClick={() => openModal(item)}
                 >
                   {/* Image Container */}
@@ -296,42 +304,42 @@ export default function BeforeAfterGallery() {
                       <img
                         src={item.beforeImage}
                         alt={`${item.title} - ${t("gallery.beforeAlt")}`}
-                        className="object-cover w-full h-full"
+                        className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
                       />
                     </div>
                     
                     {/* After Image with clip */}
                     <div 
-                      className="absolute inset-0 transition-opacity group-hover:opacity-0"
+                      className="absolute inset-0 transition-all duration-500 group-hover:opacity-0"
                       style={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)' }}
                     >
                       <img
                         src={item.afterImage}
                         alt={`${item.title} - ${t("gallery.afterAlt")}`}
-                        className="object-cover w-full h-full"
+                        className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
                       />
                     </div>
 
                     {/* Labels */}
-                    <div className="absolute px-3 py-1 text-sm font-semibold text-gray-700 rounded-full top-4 left-4 bg-white/90 backdrop-blur-sm">
+                    <div className="absolute px-3 py-1 text-sm font-semibold text-gray-700 transition-all duration-300 rounded-full top-4 left-4 bg-white/90 backdrop-blur-sm group-hover:bg-primary-100 group-hover:scale-110">
                       {t("gallery.before")}
                     </div>
-                    <div className="absolute px-3 py-1 text-sm font-semibold text-gray-700 rounded-full top-4 right-4 bg-white/90 backdrop-blur-sm">
+                    <div className="absolute px-3 py-1 text-sm font-semibold text-gray-700 transition-all duration-300 rounded-full top-4 right-4 bg-white/90 backdrop-blur-sm group-hover:bg-accent-100 group-hover:scale-110">
                       {t("gallery.after")}
                     </div>
 
                     {/* Divider Line */}
-                    <div className="absolute inset-y-0 w-1 transform -translate-x-1/2 bg-white shadow-lg left-1/2">
-                      <div className="absolute flex items-center justify-center w-10 h-10 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full shadow-lg top-1/2 left-1/2">
-                        <ChevronLeft className="w-4 h-4 -ml-1 text-gray-700" />
-                        <ChevronRight className="w-4 h-4 -mr-1 text-gray-700" />
+                    <div className="absolute inset-y-0 w-1 transition-all duration-300 transform -translate-x-1/2 bg-white shadow-lg left-1/2 group-hover:w-2 group-hover:bg-primary-400">
+                      <div className="absolute flex items-center justify-center w-10 h-10 transition-all duration-300 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full shadow-lg top-1/2 left-1/2 group-hover:scale-125 group-hover:bg-primary-600">
+                        <ChevronLeft className="w-4 h-4 -ml-1 text-gray-700 transition-colors group-hover:text-white" />
+                        <ChevronRight className="w-4 h-4 -mr-1 text-gray-700 transition-colors group-hover:text-white" />
                       </div>
                     </div>
 
                     {/* Hover Overlay */}
-                    <div className="absolute inset-0 transition-opacity opacity-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:opacity-100">
-                      <div className="absolute text-white bottom-4 left-4 right-4">
-                        <Maximize2 className="w-6 h-6 mb-2" />
+                    <div className="absolute inset-0 transition-all duration-500 opacity-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:opacity-100">
+                      <div className="absolute transition-all duration-500 transform translate-y-4 text-white bottom-4 left-4 right-4 group-hover:translate-y-0">
+                        <Maximize2 className="w-6 h-6 mb-2 transition-transform duration-500 group-hover:rotate-90" />
                         <p className="text-sm font-semibold">{t("gallery.clickDetails")}</p>
                       </div>
                     </div>
@@ -410,9 +418,6 @@ export default function BeforeAfterGallery() {
                   alt={t("gallery.beforeAlt")}
                   className="max-w-full max-h-full object-contain"
                 />
-                <div className="absolute px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-bold text-white rounded-lg top-20 md:top-24 left-4 bg-black/70 backdrop-blur-sm">
-                  {t("gallery.before")}
-                </div>
               </div>
 
               {/* After Image */}
@@ -425,9 +430,11 @@ export default function BeforeAfterGallery() {
                   alt={t("gallery.afterAlt")}
                   className="max-w-full max-h-full object-contain"
                 />
-                <div className="absolute px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-bold text-white rounded-lg top-20 md:top-24 left-4 bg-black/70 backdrop-blur-sm">
-                  {t("gallery.after")}
-                </div>
+              </div>
+
+              {/* Label centrado arriba que cambia según posición */}
+              <div className="absolute top-4 md:top-6 left-1/2 transform -translate-x-1/2 px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-bold text-white rounded-full bg-black/80 backdrop-blur-sm shadow-lg transition-all duration-300 z-10">
+                {comparePosition < 50 ? t("gallery.after") : t("gallery.before")}
               </div>
 
               {/* Slider */}
@@ -455,19 +462,19 @@ export default function BeforeAfterGallery() {
 
         {/* Modal "Ver Todas las Fotos" */}
         {showAllPhotos && (
-          <div className="fixed inset-0 z-50 overflow-y-auto bg-black/95 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 overflow-y-auto bg-white/30 backdrop-blur-md">
             <div className="min-h-screen px-4 py-8">
               {/* Header del modal */}
-              <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-4 mb-6 bg-black/50 backdrop-blur-md rounded-xl">
+              <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-4 mb-6 bg-white/80 backdrop-blur-md rounded-xl shadow-lg">
                 <div>
-                  <h2 className="text-xl md:text-2xl font-bold text-white">{t('gallery.fullGallery')}</h2>
-                  <p className="text-xs md:text-sm text-gray-300">{galleryData.length} {t('gallery.completedProjects')}</p>
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900">{t('gallery.fullGallery')}</h2>
+                  <p className="text-xs md:text-sm text-gray-600">{galleryData.length} {t('gallery.completedProjects')}</p>
                 </div>
                 <button
                   onClick={() => setShowAllPhotos(false)}
-                  className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 transition-colors bg-white/10 backdrop-blur-md rounded-full hover:bg-white/20"
+                  className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 transition-colors bg-gray-200/50 backdrop-blur-md rounded-full hover:bg-gray-300/70"
                 >
-                  <X className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  <X className="w-5 h-5 md:w-6 md:h-6 text-gray-900" />
                 </button>
               </div>
 
@@ -476,7 +483,7 @@ export default function BeforeAfterGallery() {
                 {galleryData.map((item) => (
                   <div
                     key={item.id}
-                    className="relative overflow-hidden transition-all bg-black cursor-pointer group rounded-lg hover:scale-105"
+                    className="relative overflow-hidden transition-all bg-white shadow-lg cursor-pointer group rounded-lg hover:scale-105 hover:shadow-xl"
                     onClick={() => {
                       setShowAllPhotos(false);
                       openModal(item);
@@ -505,11 +512,11 @@ export default function BeforeAfterGallery() {
                       </div>
 
                       {/* Labels - solo en hover */}
-                      <div className="absolute inset-0 transition-opacity opacity-0 group-hover:opacity-100 bg-black/30">
-                        <div className="absolute px-2 py-1 text-xs font-semibold text-white rounded top-2 left-2 bg-black/50 backdrop-blur-sm">
+                      <div className="absolute inset-0 transition-opacity opacity-0 group-hover:opacity-100 bg-black/40">
+                        <div className="absolute px-2 py-1 text-xs font-semibold text-white rounded top-2 left-2 bg-gray-900/70 backdrop-blur-sm">
                           {t("gallery.before")}
                         </div>
-                        <div className="absolute px-2 py-1 text-xs font-semibold text-white rounded top-2 right-2 bg-black/50 backdrop-blur-sm">
+                        <div className="absolute px-2 py-1 text-xs font-semibold text-white rounded top-2 right-2 bg-gray-900/70 backdrop-blur-sm">
                           {t("gallery.after")}
                         </div>
                         <div className="absolute inset-y-0 w-0.5 bg-white/50 left-1/2 transform -translate-x-1/2"></div>

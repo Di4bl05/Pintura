@@ -44,12 +44,9 @@ export default function ServiceAreas() {
   ], [t]);
   
   return (
-    <section className="py-20 bg-gradient-to-b from-green-50 to-blue-50">
+    <section className="py-20 bg-white/60">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <div className="inline-block px-4 py-2 bg-secondary-100 text-secondary-700 rounded-full text-sm font-semibold mb-4">
-            {t("serviceAreas.badge")}
-          </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             {t("serviceAreas.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-accent-600">{t("serviceAreas.titleHighlight")}</span>
           </h2>

@@ -10,9 +10,9 @@ export default function Hero() {
   const { t } = useLanguage();
   
   const heroContent = [
-    { title: "Transforma tu hogar", img: "/images/gallery/acabado-perfecto.png" },
-    { title: "Pasión en cada detalle", img: "/images/gallery/acabado-perfecto1.png" },
-    { title: "Acabados de excelencia", img: "/images/gallery/acabado-perfecto2.png" }
+    { title: t("hero.carousel.0"), img: "/images/gallery/acabado-perfecto.png" },
+    { title: t("hero.carousel.1"), img: "/images/gallery/acabado-perfecto1.png" },
+    { title: t("hero.carousel.2"), img: "/images/gallery/acabado-perfecto2.png" }
   ];
 
   const [current, setCurrent] = useState(0);

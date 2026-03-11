@@ -127,13 +127,10 @@ export default function Reviews() {
   ];
 
   return (
-    <section id="reviews" className="py-20 bg-gradient-to-b from-blue-50 via-white to-red-50">
+    <section id="reviews" className="py-20 bg-white/60">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-16 text-center">
-          <div className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-yellow-700 bg-yellow-100 rounded-full">
-            {t("reviews.badge")}
-          </div>
           <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">
             {t("reviews.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-700">{t("reviews.titleHighlight")}</span>
           </h2>

@@ -55,12 +55,9 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-blue-50 via-white to-red-50">
+    <section id="contact" className="py-20 bg-white/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">
-            {t("contact.badge")}
-          </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             {t("contact.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-600">{t("contact.titleHighlight")}</span>
           </h2>

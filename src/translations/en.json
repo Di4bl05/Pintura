@@ -14,6 +14,11 @@
     "descriptionBold": "Superior quality, fair prices.",
     "ctaFree": "FREE QUOTE",
     "ctaCall": "Call Now",
+    "carousel": [
+      "Transform your home",
+      "Passion in every detail",
+      "Excellence in finishes"
+    ],
     "card": {
       "transform": "Transform",
       "yourSpace": "your Space",
@@ -190,7 +195,10 @@
       "Competitive prices",
       "Licensed & insured",
       "Premium materials",
-      "100% guarantee"
+      "100% guarantee",
+      "Experienced team",
+      "Personalized attention",
+      "Complete cleanup included"
     ]
   },
   "reviews": {

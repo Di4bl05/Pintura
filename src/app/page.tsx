@@ -40,7 +40,7 @@ export default function Home() {
       <BeforeAfterGallery />
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white/60">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div className="order-2 md:order-1">
@@ -62,9 +62,6 @@ export default function Home() {
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <div className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">
-                {t("whyChoose.badge")}
-              </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {t("whyChoose.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-700">{t("whyChoose.titleHighlight")}</span>
               </h2>

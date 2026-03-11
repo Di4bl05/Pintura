@@ -29,8 +29,8 @@ export default function Header() {
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${
       scrolled 
-        ? 'bg-slate-800 backdrop-blur-lg shadow-2xl border-b-2 border-primary-100' 
-        : 'bg-slate-800 backdrop-blur-md shadow-[0_10px_30px_-5px_rgba(0,0,0,0.15)] border-b border-gray-100'
+        ? 'bg-slate-800 backdrop-blur-lg shadow-2xl' 
+        : 'bg-slate-800 backdrop-blur-md shadow-[0_10px_30px_-5px_rgba(0,0,0,0.15)]'
     }`}>
       <nav className="container px-4 mx-auto">
         <div className={`flex items-center justify-between transition-all duration-300 ${

@@ -14,6 +14,11 @@
     "descriptionBold": "Calidad superior, precios justos.",
     "ctaFree": "CONSULTA GRATIS",
     "ctaCall": "Llamar",
+    "carousel": [
+      "Transforma tu hogar",
+      "Pasión en cada detalle",
+      "Acabados de excelencia"
+    ],
     "card": {
       "transform": "Transforma",
       "yourSpace": "tu Espacio",
@@ -190,7 +195,10 @@
       "Precios competitivos",
       "Licenciados y asegurados",
       "Materiales premium",
-      "Garantía 100%"
+      "Garantía 100%",
+      "Equipo experimentado",
+      "Atención personalizada",
+      "Limpieza total incluida"
     ]
   },
   "reviews": {

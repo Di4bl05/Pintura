@@ -35,7 +35,7 @@ export default function Services() {
     // }
   ];
   return (
-    <section id="services" className="py-20 bg-gradient-to-b from-blue-50 to-green-50">
+    <section id="services" className="py-20 bg-white/60">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">
