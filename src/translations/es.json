@@ -7,103 +7,104 @@
     "contact": "Contacto"
   },
   "hero": {
-    "badge": "MEJOR CALIFICADA EN FLORIDA",
-    "title1": "ESTILO",
-    "title2": "tu Mundo",
-    "description": "Transformamos espacios en obras maestras.",
-    "descriptionBold": "Calidad superior, precios justos.",
-    "ctaFree": "CONSULTA GRATIS",
-    "ctaCall": "Llamar",
+    "badge": "PINTORES #1 EN ORLANDO",
+    "title1": "PINTURA DE",
+    "title2": "INTERIOR & EXTERIOR",
+    "description": "Pintura residencial profesional en Orlando, FL. Especialistas en reparación de drywall, enlacado de gabinetes y lavado a presión.",
+    "descriptionBold": "Licenciados, Asegurados y Limpieza Detallada Incluida.",
+    "ctaFree": "PRESUPUESTO GRATIS",
+    "ctaCall": "Llamar Ahora",
     "carousel": [
-      "Transforma tu hogar",
-      "Pasión en cada detalle",
-      "Acabados de excelencia"
+      "Pintura de Gabinetes de Cocina",
+      "Reparación Profesional de Paredes",
+      "Limpieza de Techos y Lavado a Presión",
+      "Limpieza Detallada Post-Trabajo"
     ],
     "card": {
       "transform": "Transforma",
-      "yourSpace": "tu Espacio",
+      "yourSpace": "tu Hogar",
       "professionalResults": "Resultados Pro"
     },
     "badge2": {
-      "licensed": "Licenciado &",
-      "insured": "Asegurado"
+      "licensed": "Licencia &",
+      "insured": "Seguro"
     },
-    "scroll": "Scroll"
+    "scroll": "Ver Servicios"
   },
   "services": {
-    "badge": "SERVICIOS",
+    "badge": "SERVICIOS PROFESIONALES",
     "title": "Pintores Profesionales",
-    "titleHighlight": "Orlando FL",
-    "subtitle": "Soluciones completas para tu propiedad",
-    "popular": "POPULAR",
+    "titleHighlight": "en Orlando FL",
+    "subtitle": "Expertos en acabados de alta calidad para residencias y comercios en Florida Central.",
+    "popular": "EL MÁS SOLICITADO",
     "interior": {
-      "title": "Pintura Interior",
-      "description": "Transformamos espacios interiores con pintura premium.",
-      "price": "$2,000 - $10,000",
-      "priceUnit": "por proyecto",
+      "title": "Pintura de Interiores",
+      "description": "Renovación estética con acabados premium y protección de superficies.",
+      "price": "Desde $1,800",
+      "priceUnit": "est. por habitación/área",
       "features": [
-        "Preparación profesional",
-        "2 capas premium",
-        "Protección de muebles",
-        "Limpieza incluida"
+        "Preparación de paredes y drywall",
+        "Pintura Premium (Low VOC)",
+        "Protección total de pisos y muebles",
+        "Limpieza profunda post-servicio"
       ]
     },
     "exterior": {
-      "title": "Pintura Exterior",
-      "description": "Protege y embellece tu propiedad con pintura resistente.",
-      "price": "$2,000 - $10,000",
-      "priceUnit": "por proyecto",
+      "title": "Pintura de Exteriores",
+      "description": "Protección climática avanzada contra el sol de Florida y la humedad.",
+      "price": "Desde $2,500",
+      "priceUnit": "según pies cuadrados",
       "features": [
-        "Lavado a presión",
-        "Reparación de paredes",
-        "Pintura clima Florida",
-        "Garantía incluida"
+        "Sellado de grietas y calafateo",
+        "Impermeabilización de paredes",
+        "Pintura resistente a rayos UV",
+        "Tratamiento anti-moho y hongo"
       ]
     },
     "commercial": {
       "title": "Pintura Comercial",
-      "description": "Servicios eficientes con mínima interrupción.",
-      "price": "$2,000+",
-      "priceUnit": "según metraje",
+      "description": "Servicios de pintura para negocios con horarios flexibles para no detener tu operación.",
+      "price": "Cotización Personalizada",
+      "priceUnit": "basado en planos/visita",
       "features": [
-        "Aprobado por HOA",
-        "Trabajo detallado",
-        "Horario flexible",
-        "Proyectos grandes/pequeños"
+        "Cumplimiento de normativas HOA",
+        "Revestimientos industriales",
+        "Trabajos nocturnos y fines de semana",
+        "Garantía de durabilidad extendida"
       ]
     },
     "deck": {
-      "title": "Tinción de Deck",
-      "description": "Protege tu deck con tratamientos especializados.",
-      "price": "$2,000 - $8,000",
-      "priceUnit": "según tamaño",
+      "title": "Staining de Decks y Cercas",
+      "description": "Restauración y tinción de madera para resistir el clima tropical.",
+      "price": "Desde $800",
+      "priceUnit": "según dimensiones",
       "features": [
-        "Limpieza completa",
-        "Tinte de calidad",
-        "Resistente al clima",
-        "Protección anti-moho"
+        "Lijado y remoción de manchas",
+        "Selladores de alta penetración",
+        "Variedad de tonos y acabados",
+        "Protección contra termitas y agua"
       ]
     },
     "pressure": {
-      "title": "Lavado a Presión",
-      "description": "Limpieza profesional para exteriores.",
-      "price": "$600 - $2,500",
-      "priceUnit": "según área",
+      "title": "Pressure Washing Profesional",
+      "description": "Lavado a presión para techos, calzadas y fachadas.",
+      "price": "Desde $350",
+      "priceUnit": "dependiendo del área",
       "features": [
-        "Limpieza suave",
-        "Limpieza de techos",
-        "Entradas y aceras",
-        "Limpieza profunda"
+        "Soft Wash para superficies delicadas",
+        "Eliminación de manchas de aceite",
+        "Limpieza de techos y canaletas",
+        "Restauración de Driveways"
       ]
     },
-    "moreInfo": "Más Info →",
-    "ctaTitle": "¿No sabes qué necesitas?",
-    "ctaSubtitle": "Te ayudamos a elegir la mejor opción",
-    "ctaFree": "Consulta Gratis",
-    "ctaCall": "Llámanos",
-    "priceNote": "* Precios estimados, varían según proyecto.",
-    "priceNote2": "Presupuestos gratuitos sin compromiso."
-  },
+    "moreInfo": "Ver Detalles del Servicio",
+    "ctaTitle": "¿Necesitas un presupuesto exacto?",
+    "ctaSubtitle": "Realizamos visitas técnicas sin costo en todo el área de Orlando.",
+    "ctaFree": "Cotización Gratuita",
+    "ctaCall": "Hablar con un Experto",
+    "priceNote": "* Los precios son estimados. El valor final depende de la condición de la superficie.",
+    "priceNote2": "Garantía por escrito en cada contrato de pintura."
+},
   "gallery": {
     "badge": "🎨 PORTAFOLIO",
     "title": "Antes &",

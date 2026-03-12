@@ -7,103 +7,104 @@
     "contact": "Contact"
   },
   "hero": {
-    "badge": "TOP-RATED IN FLORIDA",
-    "title1": "STYLE",
-    "title2": "your World",
-    "description": "We transform spaces into masterpieces.",
-    "descriptionBold": "Superior quality, fair prices.",
-    "ctaFree": "FREE QUOTE",
+    "badge": "TOP-RATED ORLANDO PAINTERS",
+    "title1": "INTERIOR &",
+    "title2": "EXTERIOR PAINTING",
+    "description": "Professional residential painting in Orlando, FL. We specialize in expert wall repair, cabinet refinishing, and pressure washing.",
+    "descriptionBold": "Licensed, Insured & Detailed Cleanup Included.",
+    "ctaFree": "FREE PAINTING QUOTE",
     "ctaCall": "Call Now",
     "carousel": [
-      "Transform your home",
-      "Passion in every detail",
-      "Excellence in finishes"
+      "Expert Kitchen Cabinet Painting",
+      "Professional Drywall & Wall Repair",
+      "Roof Cleaning & Pressure Washing",
+      "Detailed Post-Painting Cleanup"
     ],
     "card": {
       "transform": "Transform",
-      "yourSpace": "your Space",
-      "professionalResults": "Pro Results"
+      "yourSpace": "Your Home",
+      "professionalResults": "Top-Tier Results"
     },
     "badge2": {
       "licensed": "Licensed &",
       "insured": "Insured"
     },
-    "scroll": "Scroll"
+    "scroll": "Scroll to Explore"
   },
   "services": {
-    "badge": "SERVICES",
+    "badge": "PROFESSIONAL SERVICES",
     "title": "Professional Painters",
-    "titleHighlight": "Orlando FL",
-    "subtitle": "Complete solutions for your property",
-    "popular": "POPULAR",
+    "titleHighlight": "in Orlando FL",
+    "subtitle": "High-quality painting and restoration solutions for Central Florida homes and businesses.",
+    "popular": "MOST POPULAR",
     "interior": {
       "title": "Interior Painting",
-      "description": "Transform interior spaces with premium paint.",
-      "price": "$2,000 - $10,000",
-      "priceUnit": "per project",
+      "description": "Premium finishes and meticulous surface preparation to transform your living spaces.",
+      "price": "Starting at $1,800",
+      "priceUnit": "est. per project/area",
       "features": [
-        "Professional prep",
-        "2 premium coats",
-        "Furniture protection",
-        "Cleanup included"
+        "Drywall repair & texture matching",
+        "Two coats of premium low-VOC paint",
+        "Full furniture & flooring protection",
+        "Thorough post-project cleanup"
       ]
     },
     "exterior": {
       "title": "Exterior Painting",
-      "description": "Protect and beautify with weather-resistant paint.",
-      "price": "$2,000 - $10,000",
-      "priceUnit": "per project",
+      "description": "Advanced weatherproofing to protect your home from the Florida sun and humidity.",
+      "price": "Starting at $2,500",
+      "priceUnit": "based on square footage",
       "features": [
-        "Pressure washing",
-        "Wall repair",
-        "Florida climate paint",
-        "Warranty included"
+        "Full pressure wash & prep",
+        "Crack sealing & professional caulking",
+        "UV-resistant & mildew-proof finishes",
+        "Boosted curb appeal & protection"
       ]
     },
     "commercial": {
       "title": "Commercial Painting",
-      "description": "Efficient service with minimal disruption.",
-      "price": "$2,000+",
-      "priceUnit": "by sq ft",
+      "description": "Efficient painting solutions for businesses with flexible scheduling to minimize downtime.",
+      "price": "Custom Quote",
+      "priceUnit": "based on site walkthrough",
       "features": [
-        "HOA approved",
-        "Detailed work",
-        "Flexible schedule",
-        "Large/small projects"
+        "HOA & property manager compliant",
+        "Industrial-grade durable coatings",
+        "After-hours & weekend availability",
+        "Large-scale project management"
       ]
     },
     "deck": {
-      "title": "Deck Staining",
-      "description": "Protect your deck with specialized treatments.",
-      "price": "$2,000 - $8,000",
-      "priceUnit": "by size",
+      "title": "Deck & Fence Staining",
+      "description": "Wood restoration and sealing to prevent rot and sun damage in tropical climates.",
+      "price": "Starting at $800",
+      "priceUnit": "depending on dimensions",
       "features": [
-        "Complete cleaning",
-        "Quality stain",
-        "Weather-resistant",
-        "Anti-mold protection"
+        "Sanding & old stain removal",
+        "Deep-penetrating waterproof sealers",
+        "Solid, semi-transparent, or clear tints",
+        "Protection against water & termites"
       ]
     },
     "pressure": {
-      "title": "Pressure Washing",
-      "description": "Professional exterior cleaning.",
-      "price": "$600 - $2,500",
-      "priceUnit": "by area",
+      "title": "Professional Pressure Washing",
+      "description": "Deep cleaning for roofs, driveways, and building facades.",
+      "price": "Starting at $350",
+      "priceUnit": "based on surface area",
       "features": [
-        "Soft wash cleaning",
-        "Roof cleaning",
-        "Driveways & sidewalks",
-        "Deep cleaning"
+        "Safe Soft Wash for delicate roofs",
+        "Oil stain & rust removal",
+        "Driveway & walkway restoration",
+        "Gutter & fascia cleaning"
       ]
     },
-    "moreInfo": "More Info →",
-    "ctaTitle": "Not sure what you need?",
-    "ctaSubtitle": "We'll help you choose the best option",
-    "ctaFree": "Free Quote",
-    "ctaCall": "Call Now",
-    "priceNote": "* Estimated prices, vary by project.",
-    "priceNote2": "Free quotes, no obligation."
-  },
+    "moreInfo": "View Service Details",
+    "ctaTitle": "Ready for a transformation?",
+    "ctaSubtitle": "We offer free on-site estimates throughout the Orlando area.",
+    "ctaFree": "Get a Free Quote",
+    "ctaCall": "Call an Expert",
+    "priceNote": "* Estimated prices. Final cost depends on surface condition and materials.",
+    "priceNote2": "Written warranty included with every contract."
+},
   "gallery": {
     "badge": "🎨 PORTFOLIO",
     "title": "Before &",
