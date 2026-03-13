@@ -43,7 +43,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           
           {/* Logo con efecto de escala */}
-          <Link href="/" className="flex-shrink-0 transition-transform hover:scale-105 active:scale-95">
+          <Link href="/" className="flex-shrink-0 transition-transform hover:scale-105 active:scale-95 ml-12">
             <img 
               src="/images/logo/logo-mejorado-removebg-preview.png" 
               alt="LUISBETY INC" 
@@ -88,14 +88,14 @@ export default function Header() {
 
             <a
               href="tel:+17863506367"
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-black text-xs tracking-widest transition-all shadow-md active:scale-95 ${
+              className={`flex items-center gap-2 px-6 py-3 rounded-full font-black text-sm tracking-widest transition-all shadow-md active:scale-95 ${
                 scrolled 
                   ? "bg-slate-900 text-white hover:bg-blue-600" 
                   : "bg-white text-slate-900 hover:bg-blue-500 hover:text-white"
               }`}
             >
               <Phone className="w-4 h-4 fill-current" />
-              <span>(786) 350-6367</span>
+              <span className="font-mono text-sm font-bold">(786) 350-6367</span>
             </a>
           </div>
 

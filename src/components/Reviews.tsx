@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Star, Quote, MapPin, ThumbsUp, ExternalLink, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Star, Quote, MapPin, ThumbsUp, ExternalLink, ChevronLeft, ChevronRight, X, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-
-// Estas reseñas pueden venir de una API de Google Maps
-// Para conectar con Google Places API, necesitarás configurar NEXT_PUBLIC_GOOGLE_PLACES_API_KEY
+// --- DATOS RESTAURADOS COMPLETAMENTE ---
 const reviewsData = [
   {
     id: 1,
@@ -72,6 +70,8 @@ const reviewsData = [
 
 export default function Reviews() {
   const { t } = useLanguage();
+  
+  // --- LÓGICA RESTAURADA ---
   const [currentMobileReview, setCurrentMobileReview] = useState(0);
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [currentModalReview, setCurrentModalReview] = useState(0);
@@ -79,43 +79,24 @@ export default function Reviews() {
   const averageRating = reviewsData.reduce((acc, review) => acc + review.rating, 0) / reviewsData.length;
   const totalReviews = reviewsData.length;
 
-  const nextMobileReview = () => {
-    setCurrentMobileReview(prev => (prev + 1) % reviewsData.length);
-  };
+  const nextMobileReview = () => setCurrentMobileReview(prev => (prev + 1) % reviewsData.length);
+  const prevMobileReview = () => setCurrentMobileReview(prev => (prev - 1 + reviewsData.length) % reviewsData.length);
+  const nextModalReview = () => setCurrentModalReview(prev => (prev + 1) % reviewsData.length);
+  const prevModalReview = () => setCurrentModalReview(prev => (prev - 1 + reviewsData.length) % reviewsData.length);
 
-  const prevMobileReview = () => {
-    setCurrentMobileReview(prev => (prev - 1 + reviewsData.length) % reviewsData.length);
-  };
-
-  const nextModalReview = () => {
-    setCurrentModalReview(prev => (prev + 1) % reviewsData.length);
-  };
-
-  const prevModalReview = () => {
-    setCurrentModalReview(prev => (prev - 1 + reviewsData.length) % reviewsData.length);
-  };
-
-  // Close modal with ESC key
+  // Manejo de ESC para cerrar modal
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && showAllReviews) {
-        setShowAllReviews(false);
-      }
+      if (e.key === 'Escape') setShowAllReviews(false);
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
-  }, [showAllReviews]);
+  }, []);
 
-  // Prevent scroll when modal is open
+  // Bloqueo de scroll al abrir modal
   useEffect(() => {
-    if (showAllReviews) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    document.body.style.overflow = showAllReviews ? 'hidden' : 'unset';
+    return () => { document.body.style.overflow = 'unset'; };
   }, [showAllReviews]);
 
   const ratingDistribution = [
@@ -127,60 +108,60 @@ export default function Reviews() {
   ];
 
   return (
-    <section id="reviews" className="py-20 bg-white/60">
-      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">
-            {t("reviews.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-700">{t("reviews.titleHighlight")}</span>
+    <section id="reviews" className="relative py-24 bg-slate-50 overflow-hidden">
+      {/* Decoración Azul de Fondo */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-100/40 blur-[120px] rounded-full -z-10" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-50 blur-[120px] rounded-full -z-10" />
+
+      <div className="container mx-auto px-6 lg:px-16">
+        {/* Header Unificado con Servicios */}
+        <div className="max-w-3xl mb-20 text-center mx-auto">
+          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 uppercase tracking-tighter leading-none">
+            {t("reviews.title")}{" "}
+            <span className="text-blue-600 italic">
+                {t("reviews.titleHighlight")}
+            </span>
           </h2>
-          <p className="max-w-2xl mx-auto text-xl text-gray-600">
+          <div className="w-24 h-2 bg-blue-600 mx-auto rounded-full mb-8"></div>
+          <p className="text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto">
             {t("reviews.subtitle")}
           </p>
         </div>
 
-        {/* Rating Summary */}
-        <div className="max-w-5xl mx-auto mb-16">
-          <div className="p-8 border-2 border-gray-200 shadow-xl bg-gradient-to-br from-gray-50 to-white rounded-2xl">
-            <div className="grid items-center gap-8 md:grid-cols-2">
-              {/* Overall Rating */}
-              <div className="text-center border-gray-200 md:border-r">
-                <div className="mb-2 text-6xl font-bold text-gray-900">{averageRating.toFixed(1)}</div>
-                <div className="flex justify-center mb-3">
+        {/* Resumen de Rating */}
+        <div className="max-w-5xl mx-auto mb-20">
+          <div className="p-10 border border-white bg-white/70 backdrop-blur-xl shadow-xl rounded-[2.5rem]">
+            <div className="grid items-center gap-12 md:grid-cols-2">
+              <div className="text-center md:border-r border-slate-100 md:pr-12">
+                <div className="flex items-baseline justify-center gap-2 mb-2">
+                    <span className="text-7xl font-black text-slate-900">{averageRating.toFixed(1)}</span>
+                    <span className="text-2xl font-bold text-slate-400">/ 5.0</span>
+                </div>
+                <div className="flex justify-center gap-1 mb-4">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <Star
-                      key={star}
-                      className={`w-8 h-8 ${
-                        star <= averageRating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-                      }`}
-                    />
+                    <Star key={star} className="w-8 h-8 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
-                <p className="font-semibold text-gray-600">{t("reviews.basedOn")} {totalReviews} {t("reviews.reviews")}</p>
+                <p className="font-semibold text-slate-600 mb-6">{t("reviews.basedOn")} {totalReviews} {t("reviews.reviews")}</p>
                 <a
-                  href="https://www.google.com/maps"
+                  href="https://maps.google.com"
                   target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 mt-4 text-accent-600 hover:text-accent-700 font-semibold"
+                  className="inline-flex items-center gap-2.5 py-4 px-8 font-black text-xs uppercase tracking-[0.2em] text-white transition-all bg-slate-950 rounded-2xl hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-200"
                 >
                   <MapPin className="w-5 h-5" />
                   {t("reviews.viewGoogle")}
-                  <ExternalLink className="w-4 h-4" />
+                  <ExternalLink className="w-4 h-4 opacity-50" />
                 </a>
               </div>
 
-              {/* Rating Distribution */}
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {ratingDistribution.map((item) => (
-                  <div key={item.stars} className="flex items-center gap-4">
-                    <span className="w-12 text-sm font-semibold text-gray-700">{item.stars} ★</span>
-                    <div className="flex-1 h-3 overflow-hidden bg-gray-200 rounded-full">
-                      <div
-                        className="h-full transition-all rounded-full bg-gradient-to-r from-yellow-400 to-orange-400"
-                        style={{ width: `${(item.count / totalReviews) * 100}%` }}
-                      />
+                  <div key={item.stars} className="flex items-center gap-4 text-sm font-medium">
+                    <span className="w-12 text-slate-600 font-bold">{item.stars} ★</span>
+                    <div className="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="h-full rounded-full bg-blue-600" style={{ width: `${(item.count / totalReviews) * 100}%` }} />
                     </div>
-                    <span className="w-12 text-sm text-right text-gray-600">{item.count}</span>
+                    <span className="w-12 text-right text-slate-400 font-bold">{item.count}</span>
                   </div>
                 ))}
               </div>
@@ -188,150 +169,37 @@ export default function Reviews() {
           </div>
         </div>
 
-        {/* Reviews - Mobile: Carousel */}
-        <div className="mb-12 md:hidden">
-          <div className="relative">
-            {/* Current Review Card */}
-            <div className="relative bg-white border-2 border-gray-200 shadow-xl rounded-2xl overflow-hidden">
-              {/* Header */}
-              <div className="p-4 border-b-2 border-gray-100">
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center justify-center flex-shrink-0 text-sm font-bold text-white rounded-full w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-600">
-                    {reviewsData[currentMobileReview].avatar}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-bold text-gray-900 text-sm">{reviewsData[currentMobileReview].author}</h3>
-                      {reviewsData[currentMobileReview].verified && (
-                        <span className="text-accent-600" title={t("reviews.verified")}>✓</span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star
-                          key={star}
-                          className={`w-3 h-3 ${
-                            star <= reviewsData[currentMobileReview].rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-4 space-y-3">
-                {/* Location and Date */}
-                <div className="flex items-center gap-2 text-xs text-gray-500">
-                  <MapPin className="w-3 h-3" />
-                  <span>{reviewsData[currentMobileReview].location}</span>
-                  <span>•</span>
-                  <span>{reviewsData[currentMobileReview].date}</span>
-                </div>
-
-                {/* Review Text */}
-                <p className="text-sm leading-relaxed text-gray-700">{reviewsData[currentMobileReview].text}</p>
-
-                {/* Helpful Button */}
-                <div className="pt-3 border-t border-gray-100">
-                  <button className="flex items-center gap-2 text-xs text-gray-600 transition-colors hover:text-primary-600">
-                    <ThumbsUp className="w-3 h-3" />
-                    <span>{t("reviews.helpful")}</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Navigation Buttons */}
-            <button
-              onClick={prevMobileReview}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white shadow-lg rounded-full p-2 hover:bg-gray-100 transition-all z-10"
-              aria-label="Previous review"
-            >
-              <ChevronLeft className="w-5 h-5 text-gray-700" />
-            </button>
-            <button
-              onClick={nextMobileReview}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white shadow-lg rounded-full p-2 hover:bg-gray-100 transition-all z-10"
-              aria-label="Next review"
-            >
-              <ChevronRight className="w-5 h-5 text-gray-700" />
-            </button>
-          </div>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-6">
-            {reviewsData.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentMobileReview(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentMobileReview 
-                    ? 'bg-primary-600 w-6' 
-                    : 'bg-gray-300'
-                }`}
-                aria-label={`Go to review ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Reviews Grid - Desktop */}
-        <div className="hidden md:grid gap-6 mb-12 md:grid-cols-2 lg:grid-cols-3 md:gap-8">
+        {/* Grid de Reseñas (Desktop) */}
+        <div className="hidden md:grid gap-8 mb-16 md:grid-cols-2 lg:grid-cols-3">
           {reviewsData.slice(0, 3).map((review) => (
             <div
               key={review.id}
-              className="relative bg-white border-2 border-gray-200 shadow-xl rounded-2xl hover:shadow-2xl hover:border-accent-200 transition-all overflow-hidden"
+              className="group relative p-8 border border-slate-200 bg-white rounded-[2.5rem] transition-all duration-500 hover:-translate-y-2 hover-neon-blue-shadow"
             >
-              {/* Quote Icon */}
-              <div className="absolute top-6 right-6 text-primary-100">
-                <Quote className="w-12 h-12" />
-              </div>
-
-              {/* Header */}
-              <div className="p-6 border-b-2 border-gray-100">
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center justify-center flex-shrink-0 text-base font-bold text-white rounded-full w-12 h-12 bg-gradient-to-br from-primary-600 to-accent-600">
+              <Quote className="absolute top-6 right-6 w-12 h-12 text-slate-50 transition-colors group-hover:text-blue-50" />
+              <div className="pb-6 mb-6 border-b border-slate-100">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center justify-center w-12 h-12 text-lg font-bold text-white rounded-2xl bg-gradient-to-tr from-blue-600 to-blue-400">
                     {review.avatar}
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-bold text-gray-900 text-base">{review.author}</h3>
-                      {review.verified && (
-                        <span className="text-accent-600" title={t("reviews.verified")}>✓</span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star
-                          key={star}
-                          className={`w-4 h-4 ${
-                            star <= review.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-                          }`}
-                        />
-                      ))}
+                  <div>
+                    <h3 className="font-bold text-slate-900 text-base">{review.author}</h3>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />)}
                     </div>
                   </div>
                 </div>
               </div>
-
-              {/* Content */}
-              <div className="p-6 space-y-4">
-                {/* Location and Date */}
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <MapPin className="w-4 h-4" />
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase">
+                  <MapPin className="w-4 h-4 text-blue-600" />
                   <span>{review.location}</span>
                   <span>•</span>
                   <span>{review.date}</span>
                 </div>
-
-                {/* Review Text */}
-                <p className="text-base leading-relaxed text-gray-700">{review.text}</p>
-
-                {/* Helpful Button */}
-                <div className="pt-4 border-t border-gray-100">
-                  <button className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-primary-600">
+                <p className="text-slate-600 italic line-clamp-4">"{review.text}"</p>
+                <div className="pt-5 border-t border-slate-50">
+                  <button className="flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors">
                     <ThumbsUp className="w-4 h-4" />
                     <span>{t("reviews.helpful")}</span>
                   </button>
@@ -341,122 +209,63 @@ export default function Reviews() {
           ))}
         </div>
 
-        {/* Ver Todas Button */}
+        {/* Botón Ver Todas */}
         <div className="text-center">
           <button
-            onClick={() => {
-              setShowAllReviews(true);
-              setCurrentModalReview(0);
-            }}
-            className="px-8 py-4 font-bold transition-all border-2 rounded-lg border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white"
+            onClick={() => { setShowAllReviews(true); setCurrentModalReview(0); }}
+            className="inline-flex items-center gap-3 bg-slate-950 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.3em] hover:bg-blue-600 transition-all shadow-2xl"
           >
             {t("reviews.viewAll")} ({reviewsData.length})
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Modal de Todas las Reseñas */}
+        {/* MODAL RESTAURADO */}
         {showAllReviews && (
-          <div 
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
-            onClick={() => setShowAllReviews(false)}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setShowAllReviews(false)}
-              className="absolute top-4 right-4 z-50 p-2 text-white transition-colors bg-white/10 rounded-full hover:bg-white/20 backdrop-blur-sm"
-              aria-label="Cerrar"
-            >
-              <X className="w-6 h-6" />
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 backdrop-blur-lg p-4" onClick={() => setShowAllReviews(false)}>
+            <button className="absolute top-6 right-6 p-3 text-white hover:bg-white/10 rounded-full transition-all">
+              <X className="w-8 h-8" />
             </button>
-
-            {/* Navigation Buttons */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                prevModalReview();
-              }}
-              className="absolute left-4 z-50 p-3 text-white transition-all bg-white/10 rounded-full hover:bg-white/20 backdrop-blur-sm"
-              aria-label="Anterior"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                nextModalReview();
-              }}
-              className="absolute right-4 z-50 p-3 text-white transition-all bg-white/10 rounded-full hover:bg-white/20 backdrop-blur-sm"
-              aria-label="Siguiente"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            {/* Review Card */}
-            <div className="w-full max-w-3xl mx-auto" onClick={(e) => e.stopPropagation()}>
-              <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
-                {/* Quote Icon */}
-                <div className="absolute top-6 right-6 text-primary-100">
-                  <Quote className="w-16 h-16" />
+            <div className="w-full max-w-3xl bg-white rounded-[2.5rem] overflow-hidden" onClick={e => e.stopPropagation()}>
+              <div className="p-10 border-b border-slate-100 flex items-center gap-5">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-blue-400 flex items-center justify-center text-white text-xl font-bold">
+                  {reviewsData[currentModalReview].avatar}
                 </div>
-
-                {/* Header */}
-                <div className="p-6 md:p-8 border-b-2 border-gray-100">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center flex-shrink-0 text-xl font-bold text-white rounded-full w-16 h-16 bg-gradient-to-br from-primary-600 to-accent-600">
-                      {reviewsData[currentModalReview].avatar}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-bold text-gray-900 text-xl">{reviewsData[currentModalReview].author}</h3>
-                        {reviewsData[currentModalReview].verified && (
-                          <span className="text-accent-600 text-xl" title={t("reviews.verified")}>✓</span>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Star
-                            key={star}
-                            className={`w-5 h-5 ${
-                              star <= reviewsData[currentModalReview].rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </div>
+                <div>
+                  <h3 className="font-black text-slate-900 text-2xl">{reviewsData[currentModalReview].author}</h3>
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />)}
                   </div>
                 </div>
-
-                {/* Content */}
-                <div className="p-6 md:p-8 space-y-4">
-                  {/* Location and Date */}
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <MapPin className="w-4 h-4" />
-                    <span>{reviewsData[currentModalReview].location}</span>
-                    <span>•</span>
-                    <span>{reviewsData[currentModalReview].date}</span>
-                  </div>
-
-                  {/* Review Text */}
-                  <p className="text-lg leading-relaxed text-gray-700">{reviewsData[currentModalReview].text}</p>
-
-                  {/* Helpful Button */}
-                  <div className="pt-4 border-t border-gray-100">
-                    <button className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-primary-600">
-                      <ThumbsUp className="w-4 h-4" />
-                      <span>{t("reviews.helpful")}</span>
-                    </button>
-                  </div>
+              </div>
+              <div className="p-10">
+                <p className="text-xl text-slate-700 leading-relaxed italic mb-6">"{reviewsData[currentModalReview].text}"</p>
+                <div className="flex items-center justify-between text-slate-400 font-bold uppercase text-sm">
+                  <div className="flex items-center gap-2"><MapPin size={18} className="text-blue-600" /> {reviewsData[currentModalReview].location}</div>
+                  <div>{reviewsData[currentModalReview].date}</div>
                 </div>
-
-                {/* Counter */}
-                <div className="px-6 py-4 text-center text-sm text-gray-500 bg-gray-50 border-t border-gray-100">
-                  {currentModalReview + 1} / {reviewsData.length}
-                </div>
+              </div>
+              <div className="bg-slate-50 p-6 flex items-center justify-between">
+                <button onClick={prevModalReview} className="p-3 hover:bg-blue-100 rounded-full transition-all text-blue-600"><ChevronLeft size={32}/></button>
+                <span className="font-black text-slate-900">{currentModalReview + 1} / {reviewsData.length}</span>
+                <button onClick={nextModalReview} className="p-3 hover:bg-blue-100 rounded-full transition-all text-blue-600"><ChevronRight size={32}/></button>
               </div>
             </div>
           </div>
         )}
       </div>
+
+      <style jsx global>{`
+        .hover-neon-blue-shadow:hover {
+          box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+          border-color: rgba(37, 99, 235, 0.4);
+        }
+        @keyframes fade-up {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .md\:grid > div { animation: fade-up 0.6s ease-out forwards; }
+      `}</style>
     </section>
   );
 }

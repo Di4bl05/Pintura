@@ -45,8 +45,8 @@ export default function Hero() {
               src={item.img}
               alt="Luisbety Inc Professional Painting"
               fill
-              priority={index === 0} // Prioridad de carga para la primera imagen (Mejora LCP)
-              quality={75} // Optimización de peso
+              priority={index === 0}
+              quality={75}
               sizes="100vw"
               className={`object-cover transform-gpu transition-transform duration-[7000ms] ease-linear brightness-[0.45] ${
                 index === current ? "scale-110" : "scale-100"
@@ -54,7 +54,6 @@ export default function Hero() {
             />
           </div>
         ))}
-        {/* Overlays para asegurar que el texto sea legible y el logo resalte */}
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/40 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
       </div>
@@ -63,13 +62,13 @@ export default function Hero() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-16 w-full">
         
         <div className="max-w-2xl">
-          {/* Título Principal - Ajustado para que no se desplace a la derecha */}
+          {/* Título Principal - Usando llaves del JSON para evitar duplicidad */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] tracking-tighter uppercase">
             <span className="block text-blue-400 text-lg md:text-2xl font-bold tracking-normal mb-2 normal-case italic">
               {t("hero.title1")}
             </span>
             <span className="block">
-              Interior &<br /> Exterior
+              {t("hero.title2")}
             </span>
           </h1>
 
@@ -83,7 +82,7 @@ export default function Hero() {
             </p>
           </div>
 
-          {/* Descripción con Glassmorphism para legibilidad extrema */}
+          {/* Descripción con Glassmorphism */}
           <div className="mt-6 max-w-lg">
             <p className="text-base md:text-lg text-slate-300 leading-relaxed font-light bg-slate-900/40 backdrop-blur-sm p-4 rounded-xl border-l-4 border-blue-600">
               {t("hero.description")}{" "}

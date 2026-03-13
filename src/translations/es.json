@@ -32,78 +32,68 @@
     "scroll": "Ver Servicios"
   },
   "services": {
-    "badge": "SERVICIOS PROFESIONALES",
+    "badge": "Servicios Profesionales de Pintura",
     "title": "Pintores Profesionales",
     "titleHighlight": "en Orlando FL",
-    "subtitle": "Expertos en acabados de alta calidad para residencias y comercios en Florida Central.",
+    "subtitle": "Transformamos espacios residenciales y comerciales con acabados de alta gama y protección climática garantizada en Florida Central.",
+    "socialProof": "+500 Proyectos Completados",
     "popular": "EL MÁS SOLICITADO",
     "interior": {
       "title": "Pintura de Interiores",
-      "description": "Renovación estética con acabados premium y protección de superficies.",
+      "description": "Renovación estética con acabados premium y protección total de superficies.",
       "price": "Desde $1,800",
-      "priceUnit": "est. por habitación/área",
       "features": [
         "Preparación de paredes y drywall",
         "Pintura Premium (Low VOC)",
-        "Protección total de pisos y muebles",
+        "Protección de pisos y muebles",
         "Limpieza profunda post-servicio"
       ]
     },
     "exterior": {
       "title": "Pintura de Exteriores",
-      "description": "Protección climática avanzada contra el sol de Florida y la humedad.",
+      "description": "Protección avanzada contra el sol de Florida, la humedad y el moho.",
       "price": "Desde $2,500",
-      "priceUnit": "según pies cuadrados",
       "features": [
         "Sellado de grietas y calafateo",
-        "Impermeabilización de paredes",
+        "Impermeabilización de fachadas",
         "Pintura resistente a rayos UV",
-        "Tratamiento anti-moho y hongo"
+        "Tratamiento anti-humedad"
       ]
     },
     "commercial": {
       "title": "Pintura Comercial",
-      "description": "Servicios de pintura para negocios con horarios flexibles para no detener tu operación.",
-      "price": "Cotización Personalizada",
-      "priceUnit": "basado en planos/visita",
+      "description": "Soluciones eficientes para negocios con horarios flexibles para no detener tu operación.",
+      "price": "Cotización Gratis",
       "features": [
         "Cumplimiento de normativas HOA",
         "Revestimientos industriales",
-        "Trabajos nocturnos y fines de semana",
+        "Trabajos nocturnos/fines de semana",
         "Garantía de durabilidad extendida"
       ]
     },
     "deck": {
-      "title": "Staining de Decks y Cercas",
-      "description": "Restauración y tinción de madera para resistir el clima tropical.",
+      "title": "Staining de Decks",
+      "description": "Restauración y sellado de madera para resistir el intenso clima tropical.",
       "price": "Desde $800",
-      "priceUnit": "según dimensiones",
       "features": [
         "Lijado y remoción de manchas",
         "Selladores de alta penetración",
         "Variedad de tonos y acabados",
-        "Protección contra termitas y agua"
+        "Protección contra termitas"
       ]
     },
     "pressure": {
-      "title": "Pressure Washing Profesional",
-      "description": "Lavado a presión para techos, calzadas y fachadas.",
+      "title": "Pressure Washing",
+      "description": "Lavado a presión profesional para techos, calzadas y fachadas exteriores.",
       "price": "Desde $350",
-      "priceUnit": "dependiendo del área",
       "features": [
-        "Soft Wash para superficies delicadas",
+        "Soft Wash para techos delicados",
         "Eliminación de manchas de aceite",
-        "Limpieza de techos y canaletas",
-        "Restauración de Driveways"
+        "Limpieza de Driveways y aceras",
+        "Remoción de moho y suciedad"
       ]
     },
-    "moreInfo": "Ver Detalles del Servicio",
-    "ctaTitle": "¿Necesitas un presupuesto exacto?",
-    "ctaSubtitle": "Realizamos visitas técnicas sin costo en todo el área de Orlando.",
-    "ctaFree": "Cotización Gratuita",
-    "ctaCall": "Hablar con un Experto",
-    "priceNote": "* Los precios son estimados. El valor final depende de la condición de la superficie.",
-    "priceNote2": "Garantía por escrito en cada contrato de pintura."
+    "moreInfo": "Ver Detalles del Servicio"
 },
   "gallery": {
     "badge": "🎨 PORTAFOLIO",

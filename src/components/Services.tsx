@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronRight, ChevronLeft, Check } from "lucide-react";
+import { ArrowRight, ChevronRight, ChevronLeft, Check, ShieldCheck } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRef } from "react";
 
@@ -33,67 +33,107 @@ export default function Services() {
     <section id="services" className="relative py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-6">
         
-        {/* Header Centrado */}
-        <div className="max-w-3xl mx-auto text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 uppercase tracking-tighter leading-none">
-            {t("services.title")} <span className="text-blue-600">{t("services.titleHighlight")}</span>
+        {/* --- HEADER SEO & MARKETING --- */}
+        <div className="max-w-4xl mx-auto text-center mb-20 relative px-4">
+          {/* Badge con fuente corregida: más grande y pesada */}
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-50 border border-blue-100 mb-6 shadow-sm">
+            <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+            <span className="text-xs font-black text-blue-700 uppercase tracking-[0.25em]">
+              {t("services.badge")}
+            </span>
+          </div>
+
+          <h2 className="text-5xl md:text-7xl font-black text-slate-900 mb-8 uppercase tracking-tighter leading-tight flex flex-col items-center">
+            <span className="block">{t("services.title")}</span>
+            <span className="relative inline-block text-blue-600 italic">
+              {t("services.titleHighlight")}
+              <div className="absolute -bottom-2 left-0 w-full h-3 bg-blue-600/10 rounded-full -rotate-1 -z-10" />
+              <div className="absolute -bottom-1 left-0 w-3/4 h-1.5 bg-blue-600 rounded-full -rotate-1" />
+            </span>
           </h2>
-          <div className="w-24 h-2 bg-blue-600 mx-auto rounded-full mb-6"></div>
-          <p className="text-lg text-slate-600 font-medium max-w-2xl mx-auto">
+
+          <p className="text-xl text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed mb-10 italic">
             {t("services.subtitle")}
           </p>
+
+          {/* Social Proof Bar */}
+          <div className="flex flex-wrap items-center justify-center gap-6 pt-6 border-t border-slate-50">
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-2">
+                {[11, 12, 13, 14].map((i) => (
+                  <div key={i} className="w-9 h-9 rounded-full border-2 border-white bg-slate-200 overflow-hidden">
+                    <img src={`https://i.pravatar.cc/100?img=${i}`} alt="Client" />
+                  </div>
+                ))}
+              </div>
+              <div className="text-left">
+                <div className="flex text-amber-400">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                  ))}
+                </div>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">
+                  {t("services.socialProof")}
+                </p>
+              </div>
+            </div>
+            <div className="h-8 w-px bg-slate-100 hidden md:block" />
+            <div className="flex items-center gap-2 text-slate-400">
+              <ShieldCheck className="w-5 h-5 text-blue-600" />
+              <span className="text-[10px] font-black uppercase tracking-widest">Garantía Certificada</span>
+            </div>
+          </div>
         </div>
 
-        {/* Contenedor de Carrusel */}
-        <div className="relative px-2">
-          
+        {/* --- CAROUSEL --- */}
+        <div className="relative group">
+          <div className="absolute left-0 top-0 bottom-16 w-24 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden md:block" />
+          <div className="absolute right-0 top-0 bottom-16 w-24 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none opacity-100 transition-opacity duration-500 hidden md:block" />
+
           <button 
             onClick={() => scroll("left")}
-            className="absolute -left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white border border-slate-200 rounded-full flex items-center justify-center shadow-lg hover:bg-slate-900 hover:text-white transition-all hidden md:flex active:scale-95"
+            className="absolute -left-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-2xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex active:scale-90"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
 
           <div 
             ref={scrollRef}
-            className="flex overflow-x-auto gap-8 pb-16 snap-x snap-mandatory scrollbar-hide"
+            className="flex overflow-x-auto gap-8 pb-16 snap-x snap-mandatory scrollbar-hide px-4 md:px-12"
           >
             {services.map((service, index) => (
               <div 
                 key={index} 
                 className="flex-[0_0_88%] md:flex-[0_0_45%] lg:flex-[0_0_31%] min-w-0 snap-center"
               >
-                <div className="group relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 h-full flex flex-col transition-all duration-500 hover:-translate-y-2 hover-neon-shadow">
-                  
-                  {/* Imagen */}
+                <div className="group/card relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 h-full flex flex-col transition-all duration-500 hover:-translate-y-2 hover-neon-shadow">
                   <div className="relative h-72 overflow-hidden">
                     <Image
                       src={service.img}
                       alt={t(`services.${service.key}.title`)}
                       fill
-                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                      className="object-cover transition-transform duration-1000 group-hover/card:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-transparent" />
                     <div className="absolute bottom-6 left-8">
-                      <h3 className="text-2xl font-black text-white uppercase tracking-tighter leading-none">
+                      <h3 className="text-2xl font-black text-white uppercase tracking-tighter italic">
                         {t(`services.${service.key}.title`)}
                       </h3>
                     </div>
                   </div>
 
-                  {/* Contenido */}
                   <div className="p-8 flex flex-col flex-grow">
-                    <div className="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
-                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Starting at</span>
+                    <div className="flex justify-between items-center mb-6 border-b border-slate-50 pb-4">
+                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest italic">Acabado Pro</span>
                       <span className="text-xl font-black text-blue-600">{t(`services.${service.key}.price`)}</span>
                     </div>
 
-                    <p className="text-slate-500 text-sm mb-8 line-clamp-3 font-medium italic">
+                    <p className="text-slate-500 text-sm mb-8 line-clamp-3 font-medium italic leading-relaxed">
                       {t(`services.${service.key}.description`)}
                     </p>
 
                     <ul className="space-y-3 mb-10 flex-grow">
-                      {[0, 1, 2].map((i) => (
+                      {[0, 1, 2, 3].map((i) => (
                         <li key={i} className="flex items-center gap-3 text-slate-800 text-[11px] font-bold uppercase">
                           <Check className="w-4 h-4 text-blue-600 stroke-[4px]" />
                           {t(`services.${service.key}.features.${i}`)}
@@ -103,7 +143,7 @@ export default function Services() {
 
                     <Link
                       href={service.link}
-                      className="flex items-center justify-center w-full bg-slate-950 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-blue-600 transition-all duration-300"
+                      className="flex items-center justify-center w-full bg-slate-950 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-blue-600 transition-all duration-300 shadow-lg shadow-slate-100"
                     >
                       <span>{t("services.moreInfo")}</span>
                       <ArrowRight className="w-4 h-4 ml-2" />
@@ -116,32 +156,28 @@ export default function Services() {
 
           <button 
             onClick={() => scroll("right")}
-            className="absolute -right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white border border-slate-200 rounded-full flex items-center justify-center shadow-lg hover:bg-slate-900 hover:text-white transition-all hidden md:flex active:scale-95"
+            className="absolute -right-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-2xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex active:scale-90"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
         </div>
       </div>
 
+      {/* --- SEPARADOR FINAL: RAYA SIMPLE CON SOMBREADO --- */}
+      <div className="absolute bottom-0 left-0 w-full h-px bg-slate-100 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]" />
+
       <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Efecto de Sombra Animada Rojo-Azul-Rojo */
         .hover-neon-shadow:hover {
-          animation: neon-glow 3s infinite alternate;
+          animation: neon-glow 4s infinite alternate;
         }
 
         @keyframes neon-glow {
-          0% {
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4), 0 0 30px rgba(255, 0, 0, 0.2);
-          }
-          50% {
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5), 0 0 40px rgba(37, 99, 235, 0.3);
-          }
-          100% {
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4), 0 0 30px rgba(255, 0, 0, 0.2);
-          }
+          0% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.05); }
+          50% { box-shadow: 0 0 25px rgba(37, 99, 235, 0.3), 0 20px 40px rgba(0, 0, 0, 0.1); }
+          100% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.05); }
         }
       `}</style>
     </section>
