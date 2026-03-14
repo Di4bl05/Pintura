@@ -32,79 +32,69 @@
     "scroll": "Scroll to Explore"
   },
   "services": {
-    "badge": "PROFESSIONAL SERVICES",
-    "title": "Professional Painters",
+    "badge": "Professional Ethics in Every Project",
+    "title": "Painting Specialists",
     "titleHighlight": "in Orlando FL",
-    "subtitle": "High-quality painting and restoration solutions for Central Florida homes and businesses.",
-    "popular": "MOST POPULAR",
-    "interior": {
-      "title": "Interior Painting",
-      "description": "Premium finishes and meticulous surface preparation to transform your living spaces.",
-      "price": "Starting at $1,800",
-      "priceUnit": "est. per project/area",
+    "subtitle": "Transforming your property with a rigorous process: from deep pressure washing to high-end final finishes.",
+    "socialProof": "+500 Successfully Completed Projects",
+    "serviceAreas": "Specialized service for Orlando, Winter Park, Lake Nona, and surrounding areas, following each community's color regulations.",
+    "moreInfo": "Get Free Estimate",
+    "exterior": {
+      "title": "Professional Exterior Painting",
+      "description": "Full protection against Florida sun and humidity. Deep wall preparation ensures color lasts for years, not months.",
+      "price": "Free Estimate",
       "features": [
-        "Drywall repair & texture matching",
-        "Two coats of premium low-VOC paint",
-        "Full furniture & flooring protection",
-        "Thorough post-project cleanup"
+        "Pro Pressure Washing included",
+        "Soffits and vents painting",
+        "Window frames & door details",
+        "Deep anti-moisture sealing"
       ]
     },
-    "exterior": {
-      "title": "Exterior Painting",
-      "description": "Advanced weatherproofing to protect your home from the Florida sun and humidity.",
-      "price": "Starting at $2,500",
-      "priceUnit": "based on square footage",
+    "interior": {
+      "title": "Interior Transformation",
+      "description": "From kids' bedrooms to dream kitchens. We focus on perfect finishes for baseboards and ceilings.",
+      "price": "Competitive Pricing",
       "features": [
-        "Full pressure wash & prep",
-        "Crack sealing & professional caulking",
-        "UV-resistant & mildew-proof finishes",
-        "Boosted curb appeal & protection"
+        "Wall and ceiling specialists",
+        "Baseboards & fine moldings",
+        "Custom accent colors",
+        "Experts in multi-color schemes"
+      ]
+    },
+    "pressure": {
+      "title": "Pro Pressure Washing",
+      "description": "Removing years of dirt and mold in minutes. Specialists in modern roofs (2024-2025) and recreation areas.",
+      "price": "Starting at $250",
+      "features": [
+        "Driveways and concrete areas",
+        "Metal and modern roof care",
+        "Pool decks and enclosures",
+        "Deep cleaning without damage"
+      ]
+    },
+    "repair": {
+      "title": "Surface Repair & Restoration",
+      "description": "Removed a TV or have damaged wood? We leave your surfaces smooth and ready for a fresh coat of paint.",
+      "price": "Technical Assessment",
+      "features": [
+        "Pro plastering, sanding & sealing",
+        "Patching holes (TV Mounts)",
+        "Wood & synthetic restoration",
+        "We make previous damage vanish"
       ]
     },
     "commercial": {
       "title": "Commercial Painting",
-      "description": "Efficient painting solutions for businesses with flexible scheduling to minimize downtime.",
-      "price": "Custom Quote",
-      "priceUnit": "based on site walkthrough",
+      "description": "Efficient solutions for Central Florida businesses with flexible hours to keep your operations running.",
+      "price": "Pro Quote",
       "features": [
-        "HOA & property manager compliant",
-        "Industrial-grade durable coatings",
-        "After-hours & weekend availability",
-        "Large-scale project management"
+        "High-resistance coatings",
+        "Record-time completion",
+        "Minimal business disruption",
+        "Commercial grade guarantee"
       ]
-    },
-    "deck": {
-      "title": "Deck & Fence Staining",
-      "description": "Wood restoration and sealing to prevent rot and sun damage in tropical climates.",
-      "price": "Starting at $800",
-      "priceUnit": "depending on dimensions",
-      "features": [
-        "Sanding & old stain removal",
-        "Deep-penetrating waterproof sealers",
-        "Solid, semi-transparent, or clear tints",
-        "Protection against water & termites"
-      ]
-    },
-    "pressure": {
-      "title": "Professional Pressure Washing",
-      "description": "Deep cleaning for roofs, driveways, and building facades.",
-      "price": "Starting at $350",
-      "priceUnit": "based on surface area",
-      "features": [
-        "Safe Soft Wash for delicate roofs",
-        "Oil stain & rust removal",
-        "Driveway & walkway restoration",
-        "Gutter & fascia cleaning"
-      ]
-    },
-    "moreInfo": "View Service Details",
-    "ctaTitle": "Ready for a transformation?",
-    "ctaSubtitle": "We offer free on-site estimates throughout the Orlando area.",
-    "ctaFree": "Get a Free Quote",
-    "ctaCall": "Call an Expert",
-    "priceNote": "* Estimated prices. Final cost depends on surface condition and materials.",
-    "priceNote2": "Written warranty included with every contract."
-},          
+    }
+  },          
   "gallery": {
     "badge": "🎨 PORTFOLIO",
     "title": "Before &",

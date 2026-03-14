@@ -32,69 +32,69 @@
     "scroll": "Ver Servicios"
   },
   "services": {
-    "badge": "Servicios Profesionales de Pintura",
-    "title": "Pintores Profesionales",
+    "badge": "Servicios con Ética Profesional",
+    "title": "Especialistas en Pintura",
     "titleHighlight": "en Orlando FL",
-    "subtitle": "Transformamos espacios residenciales y comerciales con acabados de alta gama y protección climática garantizada en Florida Central.",
-    "socialProof": "+500 Proyectos Completados",
-    "popular": "EL MÁS SOLICITADO",
-    "interior": {
-      "title": "Pintura de Interiores",
-      "description": "Renovación estética con acabados premium y protección total de superficies.",
-      "price": "Desde $1,800",
+    "subtitle": "Transformamos tu propiedad con un proceso riguroso: desde el lavado a presión profundo hasta el acabado final de alta gama.",
+    "socialProof": "+500 Proyectos Completados con Éxito",
+    "serviceAreas": "Servicio especializado en Orlando, Winter Park, Lake Nona y áreas circundantes, adaptándonos a las normativas de color de cada comunidad.",
+    "moreInfo": "Solicitar Estimado Gratis",
+    "exterior": {
+      "title": "Pintura Exterior Profesional",
+      "description": "Protección total contra el sol y la humedad de Florida. Preparación profunda de paredes para que el color dure años, no meses.",
+      "price": "Estimado Gratis",
       "features": [
-        "Preparación de paredes y drywall",
-        "Pintura Premium (Low VOC)",
-        "Protección de pisos y muebles",
-        "Limpieza profunda post-servicio"
+        "Incluye Pressure Washing pro",
+        "Pintura de Soffits y rejillas",
+        "Detalle en marcos y puertas",
+        "Sellado profundo anti-humedad"
       ]
     },
-    "exterior": {
-      "title": "Pintura de Exteriores",
-      "description": "Protección avanzada contra el sol de Florida, la humedad y el moho.",
-      "price": "Desde $2,500",
+    "interior": {
+      "title": "Transformación de Interiores",
+      "description": "Desde habitaciones infantiles hasta cocinas de ensueño. Nos enfocamos en acabados perfectos en rodapiés y techos.",
+      "price": "Precio Competitivo",
       "features": [
-        "Sellado de grietas y calafateo",
-        "Impermeabilización de fachadas",
-        "Pintura resistente a rayos UV",
-        "Tratamiento anti-humedad"
+        "Paredes y techos (Ceilings)",
+        "Baseboards y molduras finas",
+        "Acentos de color personalizados",
+        "Expertos en múltiples colores"
+      ]
+    },
+    "pressure": {
+      "title": "Lavado a Presión Pro",
+      "description": "Eliminamos años de suciedad y moho en minutos. Especialistas en techos modernos (2024-2025) y áreas de recreación.",
+      "price": "Desde $250",
+      "features": [
+        "Driveways y áreas de concreto",
+        "Techos de metal y modernos",
+        "Áreas de piscina y cubiertas",
+        "Limpieza profunda sin daños"
+      ]
+    },
+    "repair": {
+      "title": "Reparación de Superficies",
+      "description": "¿Quitaste un televisor o tienes madera dañada? Dejamos tus superficies lisas y listas para la pintura.",
+      "price": "Evaluación Técnica",
+      "features": [
+        "Plaster, lija y sellado pro",
+        "Reparación de huecos (TV Mounts)",
+        "Restauración de madera/sintético",
+        "Desaparecemos daños previos"
       ]
     },
     "commercial": {
       "title": "Pintura Comercial",
-      "description": "Soluciones eficientes para negocios con horarios flexibles para no detener tu operación.",
-      "price": "Cotización Gratis",
+      "description": "Soluciones eficientes para negocios en Florida Central con horarios flexibles para no detener tu operación.",
+      "price": "Cotización Pro",
       "features": [
-        "Cumplimiento de normativas HOA",
-        "Revestimientos industriales",
-        "Trabajos nocturnos/fines de semana",
-        "Garantía de durabilidad extendida"
+        "Acabados de alta resistencia",
+        "Cumplimiento de plazos récord",
+        "Mínima interrupción comercial",
+        "Garantía de calidad comercial"
       ]
-    },
-    "deck": {
-      "title": "Staining de Decks",
-      "description": "Restauración y sellado de madera para resistir el intenso clima tropical.",
-      "price": "Desde $800",
-      "features": [
-        "Lijado y remoción de manchas",
-        "Selladores de alta penetración",
-        "Variedad de tonos y acabados",
-        "Protección contra termitas"
-      ]
-    },
-    "pressure": {
-      "title": "Pressure Washing",
-      "description": "Lavado a presión profesional para techos, calzadas y fachadas exteriores.",
-      "price": "Desde $350",
-      "features": [
-        "Soft Wash para techos delicados",
-        "Eliminación de manchas de aceite",
-        "Limpieza de Driveways y aceras",
-        "Remoción de moho y suciedad"
-      ]
-    },
-    "moreInfo": "Ver Detalles del Servicio"
-},
+    }
+  },
   "gallery": {
     "badge": "🎨 PORTAFOLIO",
     "title": "Antes &",

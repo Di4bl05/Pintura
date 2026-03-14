@@ -169,7 +169,7 @@ export default function BeforeAfterGallery() {
   };
 
   return (
-    <section id="gallery" className="py-24 bg-slate-50 relative overflow-hidden">
+    <section id="gallery" className="py-24 bg-[#f8fafc] relative overflow-hidden">
       {/* Decoración Background */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-100/40 blur-[120px] rounded-full -z-10" />
 
