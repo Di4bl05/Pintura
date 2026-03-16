@@ -10,7 +10,7 @@ const reviewsData = [
     id: 1,
     author: "María González",
     rating: 5,
-    date: "Hace 2 semanas",
+    date: "reviews.timeAgo.twoWeeks",
     text: "Excelente trabajo! Pintaron mi casa completa y quedó impecable. El equipo fue muy profesional, llegaron a tiempo todos los días y se aseguraron de proteger todos nuestros muebles. Los precios fueron muy razonables y la calidad del trabajo superó nuestras expectativas.",
     avatar: "MG",
     verified: true,
@@ -20,7 +20,7 @@ const reviewsData = [
     id: 2,
     author: "Carlos Rodríguez",
     rating: 5,
-    date: "Hace 1 mes",
+    date: "reviews.timeAgo.oneMonth",
     text: "He contratado varios pintores en el pasado, pero estos chicos son los mejores. Muy detallistas y limpios. Recomiendo 100%. La atención al cliente fue excepcional desde el primer contacto.",
     avatar: "CR",
     verified: true,
@@ -30,7 +30,7 @@ const reviewsData = [
     id: 3,
     author: "Ana Martínez",
     rating: 5,
-    date: "Hace 1 mes",
+    date: "reviews.timeAgo.oneMonth",
     text: "Transformaron completamente mi oficina. El color que elegimos quedó perfecto y el acabado es impecable. Muy profesionales y terminaron antes del tiempo estimado. Sin duda los volveré a contratar.",
     avatar: "AM",
     verified: true,
@@ -40,7 +40,7 @@ const reviewsData = [
     id: 4,
     author: "Roberto Silva",
     rating: 5,
-    date: "Hace 2 meses",
+    date: "reviews.timeAgo.twoMonths",
     text: "Pintaron el exterior de mi casa y quedó como nueva. Soportó perfectamente el huracán que pasó después. Materiales de primera calidad y mano de obra excelente. Vale cada centavo.",
     avatar: "RS",
     verified: true,
@@ -50,7 +50,7 @@ const reviewsData = [
     id: 5,
     author: "Laura Fernández",
     rating: 5,
-    date: "Hace 2 meses",
+    date: "reviews.timeAgo.twoMonths",
     text: "Me encantó el resultado! Son muy profesionales, dan buenos consejos sobre colores y acabados. El presupuesto fue detallado sin sorpresas. Totalmente recomendados para cualquier proyecto de pintura.",
     avatar: "LF",
     verified: true,
@@ -60,7 +60,7 @@ const reviewsData = [
     id: 6,
     author: "Jorge Pérez",
     rating: 5,
-    date: "Hace 3 meses",
+    date: "reviews.timeAgo.threeMonths",
     text: "Contraté sus servicios para pintar mi restaurante y el trabajo fue impecable. Trabajaron en horarios que no afectaron mi negocio. Muy organizados y el equipo siempre fue respetuoso con mis empleados y clientes.",
     avatar: "JP",
     verified: true,
@@ -195,7 +195,7 @@ export default function Reviews() {
                   <MapPin className="w-4 h-4 text-blue-600" />
                   <span>{review.location}</span>
                   <span>•</span>
-                  <span>{review.date}</span>
+                  <span>{review.date ? t(review.date) : ""}</span>
                 </div>
                 <p className="text-slate-600 italic line-clamp-4">"{review.text}"</p>
                 <div className="pt-5 border-t border-slate-50">
@@ -242,7 +242,7 @@ export default function Reviews() {
                 <p className="text-xl text-slate-700 leading-relaxed italic mb-6">"{reviewsData[currentModalReview].text}"</p>
                 <div className="flex items-center justify-between text-slate-400 font-bold uppercase text-sm">
                   <div className="flex items-center gap-2"><MapPin size={18} className="text-blue-600" /> {reviewsData[currentModalReview].location}</div>
-                  <div>{reviewsData[currentModalReview].date}</div>
+                  <div>{t(reviewsData[currentModalReview].date)}</div>
                 </div>
               </div>
               <div className="bg-slate-50 p-6 flex items-center justify-between">

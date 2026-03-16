@@ -93,7 +93,14 @@
         "Minimal business disruption",
         "Commercial grade guarantee"
       ]
-    }
+    },
+    "finishLabel": "Pro Finish",
+    "localApproved": "Local Authority Approved",
+    "coveragePre": "Coverage in",
+    "coverageRegion": "Central Florida",
+    "statusLabel": "Status",
+    "expertLine1": "Local",
+    "expertLine2": "Expert"
   },          
   "gallery": {
     "badge": "🎨 PORTFOLIO",
@@ -206,7 +213,13 @@
     "loadMore": "Show More Reviews",
     "ctaTitle": "Ready to start?",
     "ctaSubtitle": "Join our satisfied customers",
-    "ctaButton": "Free Quote"
+    "ctaButton": "Free Quote",
+    "timeAgo": {
+      "twoWeeks": "2 weeks ago",
+      "oneMonth": "1 month ago",
+      "twoMonths": "2 months ago",
+      "threeMonths": "3 months ago"
+    }
   },
   "serviceAreas": {
     "badge": "AREAS",

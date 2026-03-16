@@ -104,7 +104,7 @@ export default function Services() {
 
                   <div className="p-8 flex flex-col flex-grow">
                     <div className="flex justify-between items-center mb-6 border-b border-slate-50 pb-4">
-                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest italic">Acabado Pro</span>
+                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest italic">{t("services.finishLabel")}</span>
                       <span className="text-xl font-black text-blue-600">{t(`services.${service.key}.price`)}</span>
                     </div>
 
@@ -129,8 +129,8 @@ export default function Services() {
                       className="group/btn relative overflow-hidden flex items-center justify-center w-full bg-slate-950 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 shadow-lg"
                     >
                       <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
-                      <span className="relative z-10">{t("services.moreInfo")}</span>
-                      <ArrowRight className="relative z-10 w-4 h-4 ml-2 group-hover/btn:translate-x-2 transition-transform" />
+                      <span className="relative z-10 flex-1 text-center">{t("services.moreInfo")}</span>
+                      <ArrowRight className="relative z-10 w-4 h-4 group-hover/btn:translate-x-2 transition-transform flex-shrink-0" />
                     </Link>
                   </div>
                 </div>
@@ -154,11 +154,11 @@ export default function Services() {
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-lg bg-slate-900 border border-slate-800 mb-4">
                   <MapPin className="w-4 h-4 text-blue-400" />
                   <span className="text-[10px] font-black text-blue-100 uppercase tracking-[0.2em]">
-                    Local Authority Approved
+                    {t("services.localApproved")}
                   </span>
                 </div>
                 <h4 className="text-2xl font-black text-white uppercase tracking-tighter leading-tight italic mb-2">
-                  Cobertura en <span className="text-blue-400">Florida Central</span>
+                  {t("services.coveragePre")} <span className="text-blue-400">{t("services.coverageRegion")}</span>
                 </h4>
                 <p className="text-sm font-bold text-slate-300 uppercase tracking-tight leading-relaxed max-w-xl">
                   {t("services.serviceAreas")}
@@ -171,9 +171,9 @@ export default function Services() {
                     <Building2 className="w-4 h-4 text-blue-400" />
                     <Palette className="w-4 h-4 text-blue-400" />
                   </div>
-                  <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest block mb-0.5">Estatus</span>
+                  <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest block mb-0.5">{t("services.statusLabel")}</span>
                   <span className="text-sm font-black text-white uppercase italic leading-none text-center">
-                    Local<br/>Expert
+                    {t("services.expertLine1")}<br/>{t("services.expertLine2")}
                   </span>
                 </div>
               </div>

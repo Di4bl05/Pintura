@@ -46,19 +46,13 @@ export default function Home() {
             <div className="order-2 md:order-1">
               <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1200&auto=format&fit=crop"
+                  src="/images/gallery/pintores-exteriores-residenciales-orlando.webp"
                   alt="Equipo profesional de pintores trabajando"
                   fill
                   className="object-cover"
                   priority
                 />
-                {/* Overlay con texto temporal */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
-                  <div className="p-6 text-white">
-                    <p className="text-sm font-semibold opacity-90">📸 Imagen de placeholder</p>
-                    <p className="text-xs opacity-75">Reemplazar con foto del equipo real</p>
-                  </div>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
               </div>
             </div>
             <div className="order-1 md:order-2">

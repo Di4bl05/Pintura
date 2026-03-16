@@ -93,7 +93,14 @@
         "Mínima interrupción comercial",
         "Garantía de calidad comercial"
       ]
-    }
+    },
+    "finishLabel": "Acabado Pro",
+    "localApproved": "Aprobado Localmente",
+    "coveragePre": "Cobertura en",
+    "coverageRegion": "Florida Central",
+    "statusLabel": "Estatus",
+    "expertLine1": "Experto",
+    "expertLine2": "Local"
   },
   "gallery": {
     "badge": "🎨 PORTAFOLIO",
@@ -206,7 +213,13 @@
     "loadMore": "Ver Más Reseñas",
     "ctaTitle": "¿Listo para empezar?",
     "ctaSubtitle": "Únete a nuestros clientes satisfechos",
-    "ctaButton": "Presupuesto Gratis"
+    "ctaButton": "Presupuesto Gratis",
+    "timeAgo": {
+      "twoWeeks": "Hace 2 semanas",
+      "oneMonth": "Hace 1 mes",
+      "twoMonths": "Hace 2 meses",
+      "threeMonths": "Hace 3 meses"
+    }
   },
   "serviceAreas": {
     "badge": "ÁREAS",
