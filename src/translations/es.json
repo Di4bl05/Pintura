@@ -38,7 +38,14 @@
     "subtitle": "Transformamos tu propiedad con un proceso riguroso: desde el lavado a presión profundo hasta el acabado final de alta gama.",
     "socialProof": "+500 Proyectos Completados con Éxito",
     "serviceAreas": "Servicio especializado en Orlando, Winter Park, Lake Nona y áreas circundantes, adaptándonos a las normativas de color de cada comunidad.",
-    "moreInfo": "Solicitar Estimado Gratis",
+    "moreInfo": "Leer más",
+    "finishLabel": "Acabado Pro",
+    "localApproved": "Aprobado Localmente",
+    "coveragePre": "Cobertura en",
+    "coverageRegion": "Florida Central",
+    "statusLabel": "Estatus",
+    "expertLine1": "Experto",
+    "expertLine2": "Local",
     "exterior": {
       "title": "Pintura Exterior Profesional",
       "description": "Protección total contra el sol y la humedad de Florida. Preparación profunda de paredes para que el color dure años, no meses.",
@@ -48,7 +55,13 @@
         "Pintura de Soffits y rejillas",
         "Detalle en marcos y puertas",
         "Sellado profundo anti-humedad"
-      ]
+      ],
+      "experience": {
+        "intro": "Todo gran acabado comienza con una superficie impecable. Antes de abrir la primera lata de pintura, realizamos una descontaminación profunda mediante un lavado a presión especializado que elimina el moho y el tizne típico de nuestra región.",
+        "process": "Nuestro secreto está en la preparación de precisión. Raspamos a mano cada imperfección y aplicamos selladores elastoméricos de primera calidad en cada grieta detectada. No solo pintamos, blindamos tu fachada contra la humedad.",
+        "climax": "El toque final es donde ocurre la magia: aplicamos dos capas de pintura de alto espesor con resistencia UV. El resultado es un color vibrante y profundo, diseñado para soportar el sol de Orlando.",
+        "footer": "Al terminar, lo único que notarás es una propiedad que parece recién construida. La transformación se queda contigo."
+      }
     },
     "interior": {
       "title": "Transformación de Interiores",
@@ -59,18 +72,30 @@
         "Baseboards y molduras finas",
         "Acentos de color personalizados",
         "Expertos en múltiples colores"
-      ]
+      ],
+     "experience": {
+        "intro": "Entendemos que tu hogar es tu santuario. Por eso, nuestra prioridad absoluta es la protección total: movemos tus muebles con cuidado y cubrimos cada centímetro de tus pisos con mantas de alta densidad.",
+        "process": "La verdadera calidad se siente al tacto. Restauramos tus paredes tapando cada agujero de drywall y reparando grietas de tensión hasta que la superficie quede suave como el cristal.",
+        "climax": "Nuestros maestros pintores ejecutan recortes manuales de alta precisión en techos y rodapiés, logrando líneas tan rectas que parecen trazadas con láser.",
+        "footer": "Tras una limpieza de élite, devolvemos cada mueble a su lugar. Te entregamos una casa renovada e impecable."
+      }
     },
     "pressure": {
       "title": "Lavado a Presión Pro",
       "description": "Eliminamos años de suciedad y moho en minutos. Especialistas en techos modernos (2024-2025) y áreas de recreación.",
-      "price": "Desde $250",
+      "price": "Desde 2000$",
       "features": [
         "Driveways y áreas de concreto",
         "Techos de metal y modernos",
         "Áreas de piscina y cubiertas",
         "Limpieza profunda sin daños"
-      ]
+      ],
+      "experience": {
+        "intro": "El clima de Orlando es implacable. Nuestra solución comienza con un pre-tratamiento químico biodegradable que elimina algas y musgo desde la raíz, protegiendo la salud de tu infraestructura.",
+        "process": "No creemos en la fuerza bruta, sino en la técnica. Ajustamos nuestros equipos para alternar entre limpieza profunda en concreto y un 'lavado suave' (soft wash) en áreas delicadas.",
+        "climax": "Atacamos incluso las manchas más difíciles de aceite y óxido con químicos de grado industrial. Finalmente, realizamos un enjuague meticuloso de toda la propiedad.",
+        "footer": "Resultados visibles en horas que aumentan el valor visual de tu propiedad al instante."
+      }
     },
     "repair": {
       "title": "Reparación de Superficies",
@@ -81,7 +106,13 @@
         "Reparación de huecos (TV Mounts)",
         "Restauración de madera/sintético",
         "Desaparecemos daños previos"
-      ]
+      ],
+      "experience": {
+        "intro": "Tus gabinetes y paredes son los detalles que definen el lujo de tu hogar. Nuestro proceso comienza con una limpieza profunda y técnica para asegurar que cualquier reparación se integre de forma invisible con la estructura original.",
+        "process": "La verdadera calidad se siente al tacto. Utilizamos sistemas de extracción de polvo para un lijado mecánico limpio, eliminando imperfecciones y creando el perfil de agarre perfecto para que el acabado sea suave como la seda.",
+        "climax": "Mediante tecnología de pulverización de acabado fino, aplicamos recubrimientos de grado industrial que son totalmente libres de marcas de brocha. Restauramos la estética de fábrica en cada superficie dañada.",
+        "footer": "Concluimos con un reensamblaje de precisión. Reinstalamos cada herraje con una alineación experta, entregándote detalles que parecen recién salidos de exhibición."
+      }
     },
     "commercial": {
       "title": "Pintura Comercial",
@@ -93,14 +124,7 @@
         "Mínima interrupción comercial",
         "Garantía de calidad comercial"
       ]
-    },
-    "finishLabel": "Acabado Pro",
-    "localApproved": "Aprobado Localmente",
-    "coveragePre": "Cobertura en",
-    "coverageRegion": "Florida Central",
-    "statusLabel": "Estatus",
-    "expertLine1": "Experto",
-    "expertLine2": "Local"
+    }
   },
   "gallery": {
     "badge": "🎨 PORTAFOLIO",

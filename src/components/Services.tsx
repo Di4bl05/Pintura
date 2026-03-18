@@ -1,14 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, ChevronRight, ChevronLeft, Check, ShieldCheck, MapPin, Building2, Palette } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+// Asegúrate de que la ruta de importación sea la correcta según tu estructura
+import ServiceModal from "./ServiceModal"; 
 
 export default function Services() {
   const { t } = useLanguage();
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // ESTADOS PARA EL MODAL
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedServiceData, setSelectedServiceData] = useState<any>(null);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -21,24 +26,37 @@ export default function Services() {
     }
   };
 
+  // LOGICA CORREGIDA: Recibe el objeto service completo e inyecta la imagen
+  const handleOpenDetails = (service: { key: string; img: string }) => {
+    // 1. Obtenemos el objeto base del JSON (cast como any para evitar errores de tipo)
+    const data = (t as any)(`services.${service.key}`, { returnObjects: true });
+    
+    // 2. Inyectamos la imagen del objeto de servicios al objeto de datos del modal
+    const dataWithImg = {
+      ...data,
+      img: service.img
+    };
+
+    setSelectedServiceData(dataWithImg);
+    setIsModalOpen(true);
+  };
+
   const services = [
-    { key: "exterior", img: "/images/gallery/pintores-exteriores-residenciales-orlando.webp", link: "/services/exterior" },
-    { key: "interior", img: "/images/gallery/pintura-interiores-casas-orlando-fl.webp", link: "/services/interior" },
-    { key: "pressure", img: "/images/gallery/pintura-interiores-casas-orlando-fl.webp", link: "/services/pressure" },
-    { key: "repair", img: "/images/gallery/lacado-gabinetes-cocina-profesional-florida.webp", link: "/services/repair" }
+    { key: "exterior", img: "/images/gallery/pintores-exteriores-residenciales-orlando.webp" },
+    { key: "interior", img: "/images/gallery/pintura-interiores-casas-orlando-fl.webp" },
+    { key: "pressure", img: "/images/gallery/pintura-interiores-casas-orlando-fl.webp" },
+    { key: "repair", img: "/images/gallery/lacado-gabinetes-cocina-profesional-florida.webp" }
   ];
 
   return (
-    /* APLICADO: Contraste de Color (bg-slate-50) para que las tarjetas blancas "salten" */
     <section id="services" className="relative pt-24 pb-32 bg-[#f8fafc] overflow-hidden antialiased">
       
-      {/* Decoración de fondo sutil */}
       <div className="absolute inset-0 z-0 opacity-[0.4]" 
            style={{ backgroundImage: `radial-gradient(#cbd5e1 1px, transparent 1px)`, backgroundSize: '32px 32px' }} />
 
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* --- HEADER BLINDADO (GRID SYSTEM) --- */}
+        {/* HEADER */}
         <div className="max-w-5xl mx-auto text-center mb-20 relative px-4">
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 border border-blue-500 mb-8 shadow-lg shadow-blue-200">
             <ShieldCheck className="w-5 h-5 text-white" />
@@ -67,7 +85,7 @@ export default function Services() {
           </div>
         </div>
 
-        {/* --- CAROUSEL --- */}
+        {/* CAROUSEL */}
         <div className="relative group mb-24">
           <button 
             onClick={() => scroll("left")}
@@ -85,7 +103,6 @@ export default function Services() {
                 key={index} 
                 className="flex-[0_0_88%] md:flex-[0_0_45%] lg:flex-[0_0_31%] min-w-0 snap-center"
               >
-                {/* APLICADO: Hover Dinámico (translate, rotate y shadow profunda) */}
                 <div className="group/card relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-200/60 h-full flex flex-col transition-all duration-700 hover:-translate-y-5 hover:rotate-1 hover:shadow-[20px_40px_80px_rgba(15,23,42,0.15)]">
                   <div className="relative h-72 overflow-hidden">
                     <Image
@@ -123,15 +140,15 @@ export default function Services() {
                       ))}
                     </ul>
 
-                    {/* Botón con efecto de barrido */}
-                    <Link
-                      href={service.link}
+                    {/* BOTÓN CORREGIDO: Pasa el objeto 'service' entero */}
+                    <button
+                      onClick={() => handleOpenDetails(service)}
                       className="group/btn relative overflow-hidden flex items-center justify-center w-full bg-slate-950 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 shadow-lg"
                     >
                       <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
                       <span className="relative z-10 flex-1 text-center">{t("services.moreInfo")}</span>
                       <ArrowRight className="relative z-10 w-4 h-4 group-hover/btn:translate-x-2 transition-transform flex-shrink-0" />
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -146,7 +163,7 @@ export default function Services() {
           </button>
         </div>
 
-        {/* --- BADGE DE CONFIANZA --- */}
+        {/* BADGE DE CONFIANZA */}
         <div className="max-w-4xl mx-auto px-4 mb-16">
           <div className="relative p-0.5 rounded-[2rem] bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 shadow-xl">
             <div className="relative bg-slate-950 rounded-[1.9rem] px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden">
@@ -182,10 +199,16 @@ export default function Services() {
         </div>
       </div>
 
-      {/* --- SEPARADOR FINAL --- */}
       <div className="absolute bottom-0 left-0 w-full h-[2px] bg-slate-400/60 z-10">
         <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-900/10 to-transparent blur-xl -z-10" />
       </div>
+
+      {/* COMPONENTE MODAL AL FINAL */}
+      <ServiceModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        serviceData={selectedServiceData} 
+      />
 
       <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
