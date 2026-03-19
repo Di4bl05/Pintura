@@ -63,9 +63,9 @@ export default function ContactForm() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10">
           {/* Información de Contacto - Estilo Premium */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-[2.5rem] border border-slate-200 p-10 shadow-xl shadow-slate-200/50">
               <h3 className="text-2xl font-black text-slate-900 mb-8 uppercase tracking-tight">
                 {t("contact.info.title")}
@@ -78,7 +78,7 @@ export default function ContactForm() {
                   </div>
                   <div>
                     <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">{t("contact.info.phone")}</p>
-                    <a href="tel:+17863506367" className="text-lg font-bold text-slate-900 hover:text-blue-600 transition-colors">
+                    <a href="tel:+17863506367" className="text-lg font-bold text-slate-900 hover:text-blue-600 transition-colors break-words">
                       (786) 350-6367
                     </a>
                   </div>
@@ -90,7 +90,7 @@ export default function ContactForm() {
                   </div>
                   <div>
                     <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Email</p>
-                    <a href="mailto:contact@luisbety.com" className="text-lg font-bold text-slate-900 hover:text-blue-600 transition-colors">
+                    <a href="mailto:contact@luisbety.com" className="text-lg font-bold text-slate-900 hover:text-blue-600 transition-colors break-all">
                       contact@luisbety.com
                     </a>
                   </div>
@@ -102,7 +102,7 @@ export default function ContactForm() {
                   </div>
                   <div>
                     <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">{t("contact.info.address")}</p>
-                    <p className="text-lg font-bold text-slate-900 leading-snug">
+                    <p className="text-lg font-bold text-slate-900 leading-snug break-words">
                       2381 Westwood Dr<br />
                       Longwood, FL 32779
                     </p>
@@ -141,7 +141,7 @@ export default function ContactForm() {
           </div>
 
           {/* Formulario - Estilo Limpio y Robusto */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <form onSubmit={handleSubmit} className="bg-white rounded-[2.5rem] border border-slate-200 p-8 md:p-12 shadow-xl shadow-slate-200/50">
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Inputs con estilo unificado */}

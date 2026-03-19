@@ -45,17 +45,17 @@ export default function Services() {
 
       <div className="container mx-auto px-6 relative z-10">
         {/* HEADER */}
-        <div className="max-w-5xl mx-auto text-center mb-20 relative px-4">
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 border border-blue-500 mb-8 shadow-lg shadow-blue-200">
-            <ShieldCheck className="w-5 h-5 text-white" />
+        <div className="max-w-5xl mx-auto text-center mb-12 md:mb-20 relative px-2 md:px-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2.5 md:px-6 md:py-3 rounded-full bg-blue-600 border border-blue-500 mb-6 md:mb-8 shadow-lg shadow-blue-200">
+            <ShieldCheck className="w-4 h-4 md:w-5 md:h-5 text-white" />
             <span className="text-xs font-black text-white uppercase tracking-[0.25em]">
               {t("services.badge")}
             </span>
           </div>
 
-          <div className="grid grid-rows-[180px_auto] md:grid-rows-[220px_auto] items-center">
+          <div className="grid grid-rows-[130px_auto] md:grid-rows-[220px_auto] items-center">
             <div className="flex flex-col justify-center items-center">
-              <h2 className="text-5xl md:text-7xl font-black text-slate-900 uppercase tracking-tighter leading-[0.9] flex flex-col items-center">
+              <h2 className="text-3xl sm:text-4xl md:text-7xl font-black text-slate-900 uppercase tracking-tighter leading-[0.95] md:leading-[0.9] flex flex-col items-center">
                 <span className="block">{t("services.title")}</span>
                 <span className="relative inline-block text-blue-600 italic">
                   {t("services.titleHighlight")}
@@ -73,7 +73,7 @@ export default function Services() {
         </div>
 
         {/* CAROUSEL */}
-        <div className="relative group mb-24">
+        <div className="relative group mb-14 md:mb-24">
           <button 
             onClick={() => scroll("left")}
             className="absolute -left-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-2xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex active:scale-90"
@@ -94,8 +94,8 @@ export default function Services() {
                       className="object-cover transition-transform duration-1000 group-hover/card:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-transparent" />
-                    <div className="absolute bottom-6 left-8">
-                      <h3 className="text-2xl font-black text-white uppercase tracking-tighter italic min-h-[60px] flex items-end leading-none">
+                    <div className="absolute bottom-4 md:bottom-6 left-5 md:left-8 right-5 md:right-8 text-center md:text-left">
+                      <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter italic min-h-[48px] md:min-h-[60px] flex items-end justify-center md:justify-start leading-none">
                         {t(`services.${service.key}.title`)}
                       </h3>
                     </div>
@@ -106,9 +106,9 @@ export default function Services() {
                     
                     <ul className="space-y-4 mb-10 flex-grow">
                       {[0, 1, 2, 3].map((i) => (
-                        <li key={i} className="flex items-center gap-3 text-slate-800 text-[13px] font-bold uppercase">
-                          <Check className="w-4 h-4 text-blue-600 stroke-[4px]" />
-                          {t(`services.${service.key}.features.${i}`)}
+                        <li key={i} className="grid grid-cols-[16px_1fr] md:grid-cols-[18px_1fr] items-start gap-2.5 md:gap-3 text-slate-800 text-[12px] md:text-[13px] font-bold uppercase text-left">
+                          <Check className="w-3.5 h-3.5 md:w-4 md:h-4 text-blue-600 stroke-[4px] mt-0.5" />
+                          <span className="leading-tight">{t(`services.${service.key}.features.${i}`)}</span>
                         </li>
                       ))}
                     </ul>
@@ -139,9 +139,9 @@ export default function Services() {
         </div>
 
         {/* BADGE DE CONFIANZA */}
-        <div className="max-w-4xl mx-auto px-4 mb-16">
+        <div className="max-w-4xl mx-auto px-2 md:px-4 mb-10 md:mb-16">
           <div className="relative p-0.5 rounded-[2rem] bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 shadow-xl">
-            <div className="relative bg-slate-950 rounded-[1.9rem] px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden">
+            <div className="relative bg-slate-950 rounded-[1.9rem] px-5 py-7 md:px-8 md:py-10 flex flex-col md:flex-row items-center justify-between gap-5 md:gap-8 overflow-hidden">
               <div className="flex-1 text-center md:text-left relative z-10">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-lg bg-slate-900 border border-slate-800 mb-4">
                   <MapPin className="w-4 h-4 text-blue-400" />
@@ -149,22 +149,22 @@ export default function Services() {
                     {t("services.localApproved")}
                   </span>
                 </div>
-                <h4 className="text-2xl font-black text-white uppercase tracking-tighter leading-tight italic mb-2">
+                <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter leading-tight italic mb-2">
                   {t("services.coveragePre")} <span className="text-blue-400">{t("services.coverageRegion")}</span>
                 </h4>
-                <p className="text-sm font-bold text-slate-300 uppercase tracking-tight leading-relaxed max-w-xl">
+                <p className="text-xs md:text-sm font-bold text-slate-300 uppercase tracking-tight leading-relaxed max-w-xl mx-auto md:mx-0">
                   {t("services.serviceAreas")}
                 </p>
               </div>
 
               <div className="flex-shrink-0 relative z-10">
-                <div className="w-32 h-32 rounded-full border-4 border-slate-900 bg-slate-900 shadow-2xl flex flex-col items-center justify-center">
-                  <div className="flex gap-1 mb-1">
-                    <Building2 className="w-4 h-4 text-blue-400" />
-                    <Palette className="w-4 h-4 text-blue-400" />
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-slate-900 bg-slate-900 shadow-2xl flex flex-col items-center justify-center">
+                  <div className="flex gap-1 mb-0.5 md:mb-1">
+                    <Building2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-blue-400" />
+                    <Palette className="w-3.5 h-3.5 md:w-4 md:h-4 text-blue-400" />
                   </div>
                   <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest block mb-0.5">{t("services.statusLabel")}</span>
-                  <span className="text-sm font-black text-white uppercase italic leading-none text-center">
+                  <span className="text-[10px] md:text-sm font-black text-white uppercase italic leading-none text-center">
                     {t("services.expertLine1")}<br/>{t("services.expertLine2")}
                   </span>
                 </div>
