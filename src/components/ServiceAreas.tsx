@@ -53,18 +53,23 @@ export default function ServiceAreas() {
           </button>
 
           {showAreasMobile && (
-            <div id="mobile-areas-list" className="mt-3 bg-white rounded-2xl border border-slate-200 px-4 py-3 shadow-md">
-              <ul className="space-y-2.5">
+            <div id="mobile-areas-list" className="mt-3 bg-white rounded-2xl border border-slate-200 px-3 py-3 shadow-md">
+              <div className="flex gap-2.5 overflow-x-auto pb-1 snap-x snap-mandatory hide-scrollbar">
                 {serviceAreas.map((area, index) => (
-                  <li key={index} className="grid grid-cols-[16px_1fr] items-start gap-2 text-left py-1">
-                    <MapPin className="w-4 h-4 text-blue-600 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-black text-slate-900 uppercase tracking-tight leading-tight">{area.name}</p>
-                      <p className="text-xs text-slate-500 italic leading-snug mt-0.5">{area.description}</p>
+                  <article
+                    key={index}
+                    className="min-w-[170px] snap-start rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5"
+                  >
+                    <div className="grid grid-cols-[16px_1fr] items-start gap-2 text-left">
+                      <MapPin className="w-4 h-4 text-blue-600 mt-0.5" />
+                      <div>
+                        <p className="text-sm font-black text-slate-900 uppercase tracking-tight leading-tight">{area.name}</p>
+                        <p className="text-[11px] text-slate-500 italic leading-snug mt-0.5">{area.description}</p>
+                      </div>
                     </div>
-                  </li>
+                  </article>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
         </div>
@@ -90,19 +95,19 @@ export default function ServiceAreas() {
 
         {/* Bloque de Información Adicional - Estilo Unificado */}
         <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-xl md:shadow-2xl shadow-slate-200/60 p-6 md:p-16 max-w-5xl mx-auto border border-slate-100">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             {/* Por qué elegirnos */}
-            <div>
-              <h3 className="text-xl md:text-2xl font-black mb-5 md:mb-8 text-slate-900 uppercase tracking-tighter italic border-l-4 border-blue-600 pl-3 md:pl-4 text-center md:text-left">
+            <div className="text-center">
+              <h3 className="w-full max-w-sm mx-auto text-xl md:text-2xl font-black mb-5 md:mb-8 text-slate-900 uppercase tracking-tighter italic border-b-4 border-blue-600 pb-2 text-center">
                 {t("serviceAreas.whyChoose.title")}
               </h3>
-              <ul className="space-y-3 md:space-y-4">
+              <ul className="space-y-3 md:space-y-4 max-w-sm mx-auto">
                 {[0, 1, 2, 3].map((i) => (
-                  <li key={i} className="grid grid-cols-[18px_1fr] items-start gap-3 md:gap-4 group text-left">
-                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-blue-600 flex items-center justify-center text-white text-[10px] flex-shrink-0 mt-1 shadow-lg shadow-blue-200">
+                  <li key={i} className="flex items-start justify-center gap-3 md:gap-4 group text-center">
+                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-blue-600 flex items-center justify-center text-white text-[10px] flex-shrink-0 mt-1 shadow-lg shadow-blue-200 md:-ml-2">
                       <Check className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     </div>
-                    <span className="text-slate-700 font-bold text-xs md:text-sm group-hover:text-blue-600 transition-colors leading-tight mt-1">
+                    <span className="text-slate-700 font-bold text-xs md:text-sm group-hover:text-blue-600 transition-colors leading-tight mt-1 text-left">
                       {t(`serviceAreas.whyChoose.items.${i}`)}
                     </span>
                   </li>
@@ -111,17 +116,17 @@ export default function ServiceAreas() {
             </div>
 
             {/* Especialidades */}
-            <div>
-              <h3 className="text-xl md:text-2xl font-black mb-5 md:mb-8 text-slate-900 uppercase tracking-tighter italic border-l-4 border-slate-900 pl-3 md:pl-4 text-center md:text-left">
+            <div className="text-center">
+              <h3 className="w-full max-w-sm mx-auto text-xl md:text-2xl font-black mb-5 md:mb-8 text-slate-900 uppercase tracking-tighter italic border-b-4 border-slate-900 pb-2 text-center">
                 {t("serviceAreas.specialized.title")}
               </h3>
-              <ul className="space-y-3 md:space-y-4">
+              <ul className="space-y-3 md:space-y-4 max-w-sm mx-auto">
                 {[0, 1, 2, 3].map((i) => (
-                  <li key={i} className="grid grid-cols-[18px_1fr] items-start gap-3 md:gap-4 group text-left">
-                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-slate-900 flex items-center justify-center text-white text-[10px] flex-shrink-0 mt-1">
+                  <li key={i} className="flex items-start justify-center gap-3 md:gap-4 group text-center">
+                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-slate-900 flex items-center justify-center text-white text-[10px] flex-shrink-0 mt-1 md:-ml-2">
                       <Check className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     </div>
-                    <span className="text-slate-700 font-bold text-xs md:text-sm group-hover:text-slate-900 transition-colors leading-tight mt-1">
+                    <span className="text-slate-700 font-bold text-xs md:text-sm group-hover:text-slate-900 transition-colors leading-tight mt-1 text-left">
                       {t(`serviceAreas.specialized.items.${i}`)}
                     </span>
                   </li>

@@ -73,9 +73,9 @@ export default function Hero() {
           </h1>
 
           {/* Texto dinámico del carrusel */}
-          <div className="h-12 md:h-16 mt-6 overflow-hidden">
+          <div className="min-h-[4.5rem] md:min-h-[5rem] mt-4 overflow-hidden flex items-start">
             <p 
-              className={`text-2xl md:text-3xl font-bold text-slate-200 transition-all duration-700 
+              className={`text-2xl md:text-3xl font-bold text-slate-200 leading-tight transition-all duration-700 
               ${isAnimate ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
             >
               {heroContent[current].title}
@@ -83,7 +83,7 @@ export default function Hero() {
           </div>
 
           {/* Descripción con Glassmorphism */}
-          <div className="mt-6 max-w-lg">
+          <div className="mt-4 max-w-lg">
             <p className="text-base md:text-lg text-slate-300 leading-relaxed font-light bg-slate-900/40 backdrop-blur-sm p-4 rounded-xl border-l-4 border-blue-600">
               {t("hero.description")}{" "}
               <span className="font-bold text-white border-b-2 border-blue-600/50"> 
@@ -93,7 +93,7 @@ export default function Hero() {
           </div>
 
           {/* Botones de Acción */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-10">
+          <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <Link
               href="#contact"
               className="group px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-full transition-all hover:shadow-[0_0_30px_rgba(37,99,235,0.4)] flex items-center justify-center gap-3 uppercase text-sm tracking-widest"
