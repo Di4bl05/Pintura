@@ -32,6 +32,8 @@
     "scroll": "View Services"
   },
   "services": {
+    "freeEstimate": "Free Estimate",
+    "premiumDetail": "Premium Detail",
     "badge": "Services with Professional Ethics",
     "title": "Painting Specialists",
     "titleHighlight": "in Orlando FL",

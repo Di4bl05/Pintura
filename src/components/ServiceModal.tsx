@@ -1,5 +1,8 @@
+"use client";
+
 import React, { useEffect } from 'react';
 import { X, ArrowRight, ShieldCheck, CheckCircle2, MapPin } from 'lucide-react';
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ServiceModalProps {
   isOpen: boolean;
@@ -8,6 +11,8 @@ interface ServiceModalProps {
 }
 
 const ServiceModal: React.FC<ServiceModalProps> = ({ isOpen, onClose, serviceData }) => {
+  const { t } = useLanguage();
+
   useEffect(() => {
     if (isOpen) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'unset';
@@ -35,7 +40,6 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ isOpen, onClose, serviceDat
             alt={serviceData.title}
           />
           
-          {/* Degradado profundo para legibilidad total del título */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
           
           <div className="absolute bottom-12 left-12 right-12 text-white z-10 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-500">
@@ -64,61 +68,49 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ isOpen, onClose, serviceDat
             <header className="mb-12">
               <div className="flex items-center gap-3 mb-6">
                 <span className="w-8 h-[1px] bg-blue-600" />
-                <span className="text-blue-600 font-light text-[10px] uppercase tracking-[0.6em]">Premium Detail</span>
+                <span className="text-blue-600 font-light text-[10px] uppercase tracking-[0.6em]">
+                  {t("services.premiumDetail")}
+                </span>
               </div>
               
+              {/* SUBTÍTULO: Viene del JSON del servicio específico */}
               <h3 className="text-2xl md:text-3xl font-bold text-slate-950 leading-tight mb-8 tracking-tight">
-                Desde habitaciones infantiles hasta cocinas de ensueño. Nos enfocamos en acabados perfectos en rodapiés y techos.
+                {serviceData.description}
               </h3>
               
               <div className="flex gap-4">
-                <span className="flex items-center gap-2 text-slate-500 text-[9px] font-bold uppercase tracking-[0.3em] border-b border-slate-100 pb-1">
+                <span className="flex items-center gap-2 text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em] border-b border-slate-100 pb-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-blue-600" /> Fully Insured
                 </span>
-                <span className="flex items-center gap-2 text-slate-500 text-[9px] font-bold uppercase tracking-[0.3em] border-b border-slate-100 pb-1">
+                <span className="flex items-center gap-2 text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em] border-b border-slate-100 pb-1">
                   <CheckCircle2 className="w-3.5 h-3.5 text-blue-600" /> Professional
                 </span>
               </div>
             </header>
 
-            <article className="mb-12 border-l-2 border-slate-50 pl-6">
-              <p className="text-[17px] text-slate-600 leading-[1.8] text-justify font-normal tracking-wide italic">
-                Entendemos que tu hogar es tu santuario. Por eso, nuestra prioridad absoluta es la protección total: movemos tus muebles con cuidado y cubrimos cada centímetro de tus pisos con mantas de alta densidad. La verdadera calidad se siente al tacto. Restauramos tus paredes tapando cada agujero de drywall y reparando grietas de tensión hasta que la superficie quede suave como el cristal. Nuestros maestros pintores ejecutan recortes manuales de alta precisión en techos y rodapiés, logrando líneas tan rectas que parecen trazadas con láser. Tras una limpieza de élite, devolvemos cada mueble a su lugar. Te entregamos una casa renovada e impecable.
+            {/* NARRATIVA: Viene del JSON del servicio específico */}
+            <article className="mb-12 border-l-2 border-slate-100 pl-6">
+              <p className="text-[19px] text-slate-600 leading-[1.7] text-justify font-normal tracking-tight italic">
+                {serviceData.experience?.intro} {serviceData.experience?.process} {serviceData.experience?.climax} {serviceData.experience?.footer}
               </p>
             </article>
 
-            {/* LISTA DE CARACTERÍSTICAS */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-10 mb-16 pt-10 border-t border-slate-100">
-                <div className="flex items-center gap-4 group">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-600 group-hover:scale-150 transition-transform duration-300" />
-                  <span className="text-[11px] font-bold text-slate-800 uppercase tracking-[0.15em] group-hover:text-blue-600 transition-colors">
-                    Paredes y techos (Ceilings)
-                  </span>
-                </div>
-                <div className="flex items-center gap-4 group">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-600 group-hover:scale-150 transition-transform duration-300" />
-                  <span className="text-[11px] font-bold text-slate-800 uppercase tracking-[0.15em] group-hover:text-blue-600 transition-colors">
-                    Baseboards y molduras finas
-                  </span>
-                </div>
-                <div className="flex items-center gap-4 group">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-600 group-hover:scale-150 transition-transform duration-300" />
-                  <span className="text-[11px] font-bold text-slate-800 uppercase tracking-[0.15em] group-hover:text-blue-600 transition-colors">
-                    Acentos de color personalizados
-                  </span>
-                </div>
-                <div className="flex items-center gap-4 group">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-600 group-hover:scale-150 transition-transform duration-300" />
-                  <span className="text-[11px] font-bold text-slate-800 uppercase tracking-[0.15em] group-hover:text-blue-600 transition-colors">
-                    Expertos en múltiples colores
-                  </span>
-                </div>
+            {/* LISTA DE CARACTERÍSTICAS: Se genera dinámicamente desde el array del JSON */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-7 gap-x-10 mb-16 pt-10 border-t border-slate-100">
+                {serviceData.features?.map((feature: string, index: number) => (
+                  <div key={index} className="flex items-center gap-4 group">
+                    <div className="w-2 h-2 rounded-full bg-blue-600 group-hover:scale-150 transition-transform duration-300 shadow-[0_0_8px_rgba(37,99,235,0.4)]" />
+                    <span className="text-[13px] font-bold text-slate-800 uppercase tracking-[0.12em] group-hover:text-blue-600 transition-colors">
+                      {feature}
+                    </span>
+                  </div>
+                ))}
             </div>
 
-            {/* FOOTER: Únicamente el botón centrado */}
+            {/* FOOTER: Botón traducido */}
             <footer className="relative mt-12 py-10 flex justify-center border-t border-slate-100 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700 fill-mode-both">
               <button className="group relative w-full sm:w-auto bg-blue-600 hover:bg-slate-950 text-white px-14 py-6 rounded-2xl font-black text-[12px] uppercase tracking-[0.3em] transition-all duration-500 flex items-center justify-center gap-4 shadow-[0_20px_40px_-10px_rgba(37,99,235,0.4)] active:scale-95">
-                Free Estimate
+                {t("services.freeEstimate")}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-500" />
               </button>
             </footer>

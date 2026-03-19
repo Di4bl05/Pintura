@@ -32,6 +32,8 @@
     "scroll": "Ver Servicios"
   },
   "services": {
+    "freeEstimate": "Presupuesto Gratis",
+    "premiumDetail": "Detalle Premium",
     "badge": "Servicios con Ética Profesional",
     "title": "Especialistas en Pintura",
     "titleHighlight": "en Orlando FL",
@@ -126,83 +128,84 @@
       ]
     }
   },
+  
   "gallery": {
-    "badge": "🎨 PORTAFOLIO",
-    "title": "Antes &",
-    "titleHighlight": "Después",
-    "subtitle": "Mira la transformación de nuestros proyectos",
+    "badge": "Portafolio de Excelencia",
+    "title": "Resultados de Luisbety",
+    "titleHighlight": "Impecables",
+    "subtitle": "No solo pintamos paredes, devolvemos la vida a sus espacios. Explore nuestras transformaciones más recientes en el área de Orlando.",
     "filters": {
       "all": "Todos",
-      "interior": "Interior",
-      "exterior": "Exterior",
+      "interior": "Interiores",
+      "exterior": "Exteriores",
       "commercial": "Comercial",
-      "deck": "Tinción de Deck",
-      "pressure": "Lavado a Presión"
+      "cabinet": "Gabinetes",
+      "deck": "Decks",
+      "pressure": "Lavado Pro"
     },
     "before": "ANTES",
     "after": "DESPUÉS",
-    "beforeAlt": "Antes",
-    "afterAlt": "Después",
-    "clickDetails": "Toca para ampliar",
+    "dragSlider": "Arrastra para comparar",
+    "clickToActivate": "Haz clic para activar el control. Luego arrastra para comparar.",
     "viewAll": "Ver Todas",
     "fullGallery": "Galería",
     "completedProjects": "proyectos",
+    "clickDetails": "Toca para ampliar",
     "preparation": "Preparación",
     "premiumPaint": "Pintura Premium",
     "guaranteed": "Garantizado",
     "cta": "¡Transforma Tu Espacio!",
     "projectLike": "Obtén un Proyecto Así",
-    "dragSlider": "Arrastra para comparar",
-    "clickToActivate": "Haz clic para activar el control. Luego arrastra para comparar.",
     "projects": {
       "1": {
-        "title": "Pintura Exterior",
-        "location": "Florida",
-        "service": "Exterior",
-        "description": "Transformación completa con colores modernos"
+        "title": "Repintado Exterior de Estuco",
+        "location": "Orlando",
+        "service": "exterior",
+        "description": "Reparación de grietas y aplicación de pintura acrílica resistente a los rayos UV y humedad."
       },
       "2": {
-        "title": "Pintura Interior Residencial",
-        "location": "Florida",
-        "service": "Pintura Interior",
-        "description": "Renovación completa de interiores con pintura premium de alta calidad"
+        "title": "Renovación de Interiores y Rodapiés",
+        "location": "Winter Park",
+        "service": "interior",
+        "description": "Pintura de paredes, techos y molduras con acabado mate lavable ideal para familias."
       },
       "3": {
-        "title": "Tinción de Deck Profesional",
-        "location": "Florida",
-        "service": "Tinción de Deck",
-        "description": "Tinción y sellado completo de deck exterior con protección duradera"
+        "title": "Restauración y Sellado de Deck",
+        "location": "Lake Nona",
+        "service": "deck",
+        "description": "Lavado profundo, lijado de madera exterior y aplicación de tinte protector semi-transparente."
       },
       "4": {
-        "title": "Proyecto Comercial",
-        "location": "Florida",
-        "service": "Pintura Comercial",
-        "description": "Pintura comercial profesional con acabados de alta calidad"
+        "title": "Repintado de Fachada Comercial",
+        "location": "Kissimmee",
+        "service": "commercial",
+        "description": "Aplicación de pintura elastomérica de alto tráfico. Trabajo realizado fuera de horario para no afectar al negocio."
       },
       "5": {
-        "title": "Pintura de Paredes",
-        "location": "Florida",
-        "service": "Pintura Interior",
-        "description": "Transformación de interiores con preparación completa de superficies"
+        "title": "Transformación de Gabinetes de Cocina",
+        "location": "Windermere",
+        "service": "cabinet",
+        "description": "Preparación intensiva y pintura de gabinetes con esmalte de poliuretano para un acabado liso de fábrica."
       },
       "6": {
-        "title": "Pintura Exterior Residencial",
-        "location": "Florida",
-        "service": "Pintura Exterior",
-        "description": "Pintura exterior con materiales resistentes al clima de Florida"
+        "title": "Pintura Exterior Aprobada por HOA",
+        "location": "Dr. Phillips",
+        "service": "exterior",
+        "description": "Cambio de paleta de colores cumpliendo con los estándares de la asociación de propietarios, incluyendo puertas y garaje."
       },
       "7": {
-        "title": "Proyecto Residencial",
-        "location": "Florida",
-        "service": "Pintura Interior",
-        "description": "Renovación completa con acabados profesionales y limpieza incluida"
+        "title": "Remoción de Popcorn y Pintura",
+        "location": "Altamonte Springs",
+        "service": "interior",
+        "description": "Eliminación de textura antigua en techos (popcorn ceiling), alisado completo y aplicación de pintura fresca."
       },
       "8": {
-        "title": "Limpieza a Presión",
-        "location": "Florida",
-        "service": "Lavado a Presión",
-        "description": "Limpieza profunda con lavado a presión profesional"
+        "title": "Lavado a Presión de Entradas (Driveways)",
+        "location": "Hunters Creek",
+        "service": "pressure",
+        "description": "Eliminación profunda de moho, aceite y suciedad incrustada en aceras y calzadas de concreto."
       }
+
     }
   },
   "whyChoose": {

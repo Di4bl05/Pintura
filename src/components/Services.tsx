@@ -4,14 +4,12 @@ import Image from "next/image";
 import { ArrowRight, ChevronRight, ChevronLeft, Check, ShieldCheck, MapPin, Building2, Palette } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRef, useState } from "react";
-// Asegúrate de que la ruta de importación sea la correcta según tu estructura
 import ServiceModal from "./ServiceModal"; 
 
 export default function Services() {
   const { t } = useLanguage();
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // ESTADOS PARA EL MODAL
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedServiceData, setSelectedServiceData] = useState<any>(null);
 
@@ -26,17 +24,9 @@ export default function Services() {
     }
   };
 
-  // LOGICA CORREGIDA: Recibe el objeto service completo e inyecta la imagen
   const handleOpenDetails = (service: { key: string; img: string }) => {
-    // 1. Obtenemos el objeto base del JSON (cast como any para evitar errores de tipo)
     const data = (t as any)(`services.${service.key}`, { returnObjects: true });
-    
-    // 2. Inyectamos la imagen del objeto de servicios al objeto de datos del modal
-    const dataWithImg = {
-      ...data,
-      img: service.img
-    };
-
+    const dataWithImg = { ...data, img: service.img };
     setSelectedServiceData(dataWithImg);
     setIsModalOpen(true);
   };
@@ -49,13 +39,11 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="relative pt-24 pb-32 bg-[#f8fafc] overflow-hidden antialiased">
-      
+    <section id="services" className="relative pt-24 pb-32 bg-white overflow-hidden antialiased">
       <div className="absolute inset-0 z-0 opacity-[0.4]" 
            style={{ backgroundImage: `radial-gradient(#cbd5e1 1px, transparent 1px)`, backgroundSize: '32px 32px' }} />
 
       <div className="container mx-auto px-6 relative z-10">
-        
         {/* HEADER */}
         <div className="max-w-5xl mx-auto text-center mb-20 relative px-4">
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 border border-blue-500 mb-8 shadow-lg shadow-blue-200">
@@ -76,7 +64,6 @@ export default function Services() {
                 </span>
               </h2>
             </div>
-
             <div className="flex items-start justify-center pt-6 min-h-[80px]">
               <p className="text-xl text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed italic">
                 {t("services.subtitle")}
@@ -94,16 +81,11 @@ export default function Services() {
             <ChevronLeft className="w-6 h-6" />
           </button>
 
-          <div 
-            ref={scrollRef}
-            className="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory scrollbar-hide px-4 md:px-12"
-          >
+          <div ref={scrollRef} className="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory scrollbar-hide px-4 md:px-12">
             {services.map((service, index) => (
-              <div 
-                key={index} 
-                className="flex-[0_0_88%] md:flex-[0_0_45%] lg:flex-[0_0_31%] min-w-0 snap-center"
-              >
+              <div key={index} className="flex-[0_0_88%] md:flex-[0_0_45%] lg:flex-[0_0_31%] min-w-0 snap-center">
                 <div className="group/card relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-200/60 h-full flex flex-col transition-all duration-700 hover:-translate-y-5 hover:rotate-1 hover:shadow-[20px_40px_80px_rgba(15,23,42,0.15)]">
+                  
                   <div className="relative h-72 overflow-hidden">
                     <Image
                       src={service.img}
@@ -120,18 +102,9 @@ export default function Services() {
                   </div>
 
                   <div className="p-8 flex flex-col flex-grow">
-                    <div className="flex justify-between items-center mb-6 border-b border-slate-50 pb-4">
-                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest italic">{t("services.finishLabel")}</span>
-                      <span className="text-xl font-black text-blue-600">{t(`services.${service.key}.price`)}</span>
-                    </div>
-
-                    <div className="min-h-[85px]">
-                      <p className="text-slate-500 text-sm mb-8 line-clamp-3 font-medium italic leading-relaxed">
-                        {t(`services.${service.key}.description`)}
-                      </p>
-                    </div>
-
-                    <ul className="space-y-3 mb-10 flex-grow">
+                    {/* SECCIÓN DE PRECIO Y DESCRIPCIÓN ELIMINADA PARA ACORTAR LA TARJETA */}
+                    
+                    <ul className="space-y-4 mb-10 flex-grow">
                       {[0, 1, 2, 3].map((i) => (
                         <li key={i} className="flex items-center gap-3 text-slate-800 text-[13px] font-bold uppercase">
                           <Check className="w-4 h-4 text-blue-600 stroke-[4px]" />
@@ -140,16 +113,18 @@ export default function Services() {
                       ))}
                     </ul>
 
-                    {/* BOTÓN CORREGIDO: Pasa el objeto 'service' entero */}
                     <button
                       onClick={() => handleOpenDetails(service)}
-                      className="group/btn relative overflow-hidden flex items-center justify-center w-full bg-slate-950 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 shadow-lg"
+                      className="group/btn relative overflow-hidden flex items-center justify-center gap-3 w-full bg-slate-950 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 shadow-lg"
                     >
                       <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
-                      <span className="relative z-10 flex-1 text-center">{t("services.moreInfo")}</span>
+                      <span className="relative z-10 text-center">{t("services.moreInfo")}
+                        
+                      </span>
                       <ArrowRight className="relative z-10 w-4 h-4 group-hover/btn:translate-x-2 transition-transform flex-shrink-0" />
                     </button>
                   </div>
+
                 </div>
               </div>
             ))}
@@ -203,7 +178,6 @@ export default function Services() {
         <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-900/10 to-transparent blur-xl -z-10" />
       </div>
 
-      {/* COMPONENTE MODAL AL FINAL */}
       <ServiceModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
