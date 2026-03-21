@@ -219,7 +219,7 @@ export default function BeforeAfterGallery() {
           >
             {/* Antes */}
             <div className="absolute inset-0 flex items-center justify-center p-4 md:p-12">
-              <img src={selectedItem.beforeImage} className="max-w-full max-h-full object-contain rounded-xl opacity-40 grayscale" alt="Before" />
+              <img src={selectedItem.beforeImage} loading="lazy" decoding="async" className="max-w-full max-h-full object-contain rounded-xl opacity-40 grayscale" alt="Before" />
             </div>
 
             {/* Después */}
@@ -227,7 +227,7 @@ export default function BeforeAfterGallery() {
               className="absolute inset-0 flex items-center justify-center p-4 md:p-12 pointer-events-none transform-gpu"
               style={{ clipPath: `inset(0 ${100 - comparePosition}% 0 0)` }}
             >
-              <img src={selectedItem.afterImage} className="max-w-full max-h-full object-contain rounded-xl shadow-2xl" alt="After" />
+              <img src={selectedItem.afterImage} loading="lazy" decoding="async" className="max-w-full max-h-full object-contain rounded-xl shadow-2xl" alt="After" />
             </div>
 
             {/* Handle */}

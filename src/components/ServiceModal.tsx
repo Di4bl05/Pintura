@@ -35,7 +35,9 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ isOpen, onClose, serviceDat
         {/* LADO IZQUIERDO: PORTADA CON CONTRASTE EXTREMO */}
         <div className="relative w-full lg:w-2/5 h-[35vh] lg:h-full bg-slate-900 shrink-0 overflow-hidden">
           <img 
-            src={serviceData.img || "/api/placeholder/800/1200"} 
+            src={serviceData.img || "/api/placeholder/800/1200"}
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover opacity-80 animate-in fade-in zoom-in-110 duration-1000 ease-out"
             alt={serviceData.title}
           />
