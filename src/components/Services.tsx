@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, ChevronRight, ChevronLeft, Check, ShieldCheck, MapPin, Building2, Palette } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRef, useState } from "react";
@@ -76,7 +77,7 @@ export default function Services() {
         <div className="relative group mb-14 md:mb-24">
           <button 
             onClick={() => scroll("left")}
-            className="absolute -left-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-2xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex active:scale-90"
+            className="absolute -left-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white border border-slate-100 rounded-2xl items-center justify-center shadow-2xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex active:scale-90"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
@@ -123,6 +124,13 @@ export default function Services() {
                       </span>
                       <ArrowRight className="relative z-10 flex-shrink-0 w-4 h-4 transition-transform group-hover/btn:translate-x-2" />
                     </button>
+
+                    <Link
+                      href={`/servicios/${service.key}`}
+                      className="mt-3 inline-flex items-center justify-center w-full text-[10px] font-black uppercase tracking-[0.2em] text-blue-700 hover:text-slate-900 transition-colors"
+                    >
+                      Ver pagina del servicio
+                    </Link>
                   </div>
 
                 </div>
@@ -132,7 +140,7 @@ export default function Services() {
 
           <button 
             onClick={() => scroll("right")}
-            className="absolute -right-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-2xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex active:scale-90"
+            className="absolute -right-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white border border-slate-100 rounded-2xl items-center justify-center shadow-2xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex active:scale-90"
           >
             <ChevronRight className="w-6 h-6" />
           </button>

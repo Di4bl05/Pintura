@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { MapPin, Check, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -9,14 +10,14 @@ export default function ServiceAreas() {
   const [showAreasMobile, setShowAreasMobile] = useState(false);
 
   const serviceAreas = useMemo(() => [
-    { name: t("serviceAreas.areas.0.name"), description: t("serviceAreas.areas.0.description") },
-    { name: t("serviceAreas.areas.1.name"), description: t("serviceAreas.areas.1.description") },
-    { name: t("serviceAreas.areas.2.name"), description: t("serviceAreas.areas.2.description") },
-    { name: t("serviceAreas.areas.3.name"), description: t("serviceAreas.areas.3.description") },
-    { name: t("serviceAreas.areas.4.name"), description: t("serviceAreas.areas.4.description") },
-    { name: t("serviceAreas.areas.5.name"), description: t("serviceAreas.areas.5.description") },
-    { name: t("serviceAreas.areas.6.name"), description: t("serviceAreas.areas.6.description") },
-    { name: t("serviceAreas.areas.7.name"), description: t("serviceAreas.areas.7.description") }
+    { name: t("serviceAreas.areas.0.name"), description: t("serviceAreas.areas.0.description"), slug: "longwood" },
+    { name: t("serviceAreas.areas.1.name"), description: t("serviceAreas.areas.1.description"), slug: "orlando" },
+    { name: t("serviceAreas.areas.2.name"), description: t("serviceAreas.areas.2.description"), slug: "winter-park" },
+    { name: t("serviceAreas.areas.3.name"), description: t("serviceAreas.areas.3.description"), slug: "altamonte-springs" },
+    { name: t("serviceAreas.areas.4.name"), description: t("serviceAreas.areas.4.description"), slug: "lake-mary" },
+    { name: t("serviceAreas.areas.5.name"), description: t("serviceAreas.areas.5.description"), slug: "sanford" },
+    { name: t("serviceAreas.areas.6.name"), description: t("serviceAreas.areas.6.description"), slug: "florida-central" },
+    { name: t("serviceAreas.areas.7.name"), description: t("serviceAreas.areas.7.description"), slug: "florida" }
   ], [t]);
 
   return (
@@ -56,8 +57,9 @@ export default function ServiceAreas() {
             <div id="mobile-areas-list" className="mt-3 bg-white rounded-2xl border border-slate-200 px-3 py-3 shadow-md">
               <div className="flex gap-2.5 overflow-x-auto pb-1 snap-x snap-mandatory hide-scrollbar">
                 {serviceAreas.map((area, index) => (
-                  <article
+                  <Link
                     key={index}
+                    href={`/areas/${area.slug}`}
                     className="min-w-[170px] snap-start rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5"
                   >
                     <div className="grid grid-cols-[16px_1fr] items-start gap-2 text-left">
@@ -67,7 +69,7 @@ export default function ServiceAreas() {
                         <p className="text-[11px] text-slate-500 italic leading-snug mt-0.5">{area.description}</p>
                       </div>
                     </div>
-                  </article>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -76,8 +78,9 @@ export default function ServiceAreas() {
 
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto mb-12 md:mb-20">
           {serviceAreas.map((area, index) => (
-            <div
+            <Link
               key={index}
+              href={`/areas/${area.slug}`}
               className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 border border-slate-200 shadow-lg md:shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-all duration-300 group"
             >
               <div className="flex flex-col items-center md:items-start gap-3 md:gap-4 text-center md:text-left">
@@ -89,7 +92,7 @@ export default function ServiceAreas() {
                   <p className="text-xs md:text-sm text-slate-500 font-medium leading-relaxed italic">{area.description}</p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

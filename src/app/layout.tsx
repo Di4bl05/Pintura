@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LanguageProvider } from "@/contexts/LanguageContext";
-import { AuthProvider } from "@/contexts/AuthContext";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://luisbety.com'),
+  alternates: {
+    canonical: '/'
+  },
   title: {
     default: "LUISBETY INC - Best House Painters Florida | Top-Rated Painting Company",
     template: "%s | LUISBETY INC - Florida's Premier Painting Company"
@@ -58,9 +60,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-  }
 };
 
 export default function RootLayout({
@@ -69,7 +68,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <link rel="icon" href="/favicon.ico" />
         <script
@@ -124,11 +123,9 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
-        <AuthProvider>
-          <LanguageProvider>
-            {children}
-          </LanguageProvider>
-        </AuthProvider>
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/admin/'],
+      disallow: ['/admin'],
     },
-    sitemap: 'https://yoursite.com/sitemap.xml',
+    sitemap: 'https://luisbety.com/sitemap.xml',
   }
 }

@@ -162,7 +162,7 @@ export default function BeforeAfterGallery() {
               >
                 <div className="bg-white rounded-[2rem] border border-slate-200/50 overflow-hidden transition-all duration-500 group-hover/card:-translate-y-3 group-hover/card:shadow-[0_30px_60px_rgba(0,0,0,0.1)] transform-gpu">
                   <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                    <img src={item.afterImage} loading="lazy" alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" />
+                    <img src={item.afterImage} loading="lazy" alt={`Proyecto de pintura en ${item.location}: ${item.title}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" />
                     <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-lg shadow-sm flex items-center gap-2">
                       <MapPin className="w-3 h-3 text-blue-600" />
                       <span className="text-[9px] font-bold text-slate-800 uppercase tracking-tighter">{item.location}</span>
@@ -273,7 +273,7 @@ export default function BeforeAfterGallery() {
                   onClick={() => {setShowAllPhotos(false); setSelectedItem(item);}}
                   className="group relative aspect-[4/3] rounded-3xl overflow-hidden cursor-pointer shadow-lg transform-gpu"
                 >
-                  <img src={item.afterImage} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="" />
+                  <img src={item.afterImage} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt={`Resultado final de ${item.title} en ${item.location}`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex flex-col justify-end p-6">
                     <span className="text-[10px] text-blue-400 font-black uppercase tracking-widest mb-1 text-left">{item.location}</span>
                     <h5 className="text-white font-bold text-lg leading-tight uppercase italic text-left">{item.title}</h5>
