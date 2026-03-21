@@ -92,6 +92,8 @@ export default function Services() {
                       src={service.img}
                       alt={t(`services.${service.key}.title`)}
                       fill
+                      quality={70}
+                      sizes="(max-width: 768px) 88vw, (max-width: 1024px) 45vw, 31vw"
                       className="object-cover transition-transform duration-1000 group-hover/card:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-transparent" />
@@ -199,3 +201,4 @@ export default function Services() {
     </section>
   );
 }
+

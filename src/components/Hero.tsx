@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 export default function Hero() {
   const { t } = useLanguage();
-  
+
   const heroContent = [
     { title: t("hero.carousel.0"), img: "/images/gallery/pintura-interiores-casas-orlando-fl.webp" },
     { title: t("hero.carousel.1"), img: "/images/gallery/pintores-exteriores-residenciales-orlando.webp" },
@@ -31,38 +31,27 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center pt-32 pb-16 overflow-hidden bg-slate-950">
-      
-      {/* --- FONDO OPTIMIZADO CON NEXT/IMAGE --- */}
+
+      {/* Render only the active slide to avoid downloading all hero images at once */}
       <div className="absolute inset-0 z-0">
-        {heroContent.map((item, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === current ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={item.img}
-              alt="Luisbety Inc Professional Painting"
-              fill
-              priority={index === 0}
-              quality={75}
-              sizes="100vw"
-              className={`object-cover transform-gpu transition-transform duration-[7000ms] ease-linear brightness-[0.45] ${
-                index === current ? "scale-110" : "scale-100"
-              }`}
-            />
-          </div>
-        ))}
+        <Image
+          key={heroContent[current].img}
+          src={heroContent[current].img}
+          alt="Luisbety Inc Professional Painting"
+          fill
+          priority
+          fetchPriority="high"
+          quality={70}
+          sizes="100vw"
+          className="object-cover transform-gpu transition-all duration-1000 ease-in-out brightness-[0.45] scale-110"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/40 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
       </div>
 
-      {/* --- CONTENIDO PRINCIPAL --- */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-16 w-full">
-        
+
         <div className="max-w-2xl">
-          {/* Título Principal - Usando llaves del JSON para evitar duplicidad */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] tracking-tighter uppercase">
             <span className="block text-blue-400 text-lg md:text-2xl font-bold tracking-normal mb-2 normal-case italic">
               {t("hero.title1")}
@@ -72,27 +61,24 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* Texto dinámico del carrusel */}
           <div className="min-h-[4.5rem] md:min-h-[5rem] mt-4 overflow-hidden flex items-start">
-            <p 
-              className={`text-2xl md:text-3xl font-bold text-slate-200 leading-tight transition-all duration-700 
+            <p
+              className={`text-2xl md:text-3xl font-bold text-slate-200 leading-tight transition-all duration-700
               ${isAnimate ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
             >
               {heroContent[current].title}
             </p>
           </div>
 
-          {/* Descripción con Glassmorphism */}
           <div className="mt-4 max-w-lg">
             <p className="text-base md:text-lg text-slate-300 leading-relaxed font-light bg-slate-900/40 backdrop-blur-sm p-4 rounded-xl border-l-4 border-blue-600">
               {t("hero.description")}{" "}
-              <span className="font-bold text-white border-b-2 border-blue-600/50"> 
+              <span className="font-bold text-white border-b-2 border-blue-600/50">
                 {t("hero.descriptionBold")}
               </span>
             </p>
           </div>
 
-          {/* Botones de Acción */}
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <Link
               href="#contact"
@@ -113,13 +99,12 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Barra de Progreso */}
       <div className="absolute bottom-0 left-0 h-1.5 bg-white/5 w-full z-20">
-        <div 
+        <div
           className="h-full bg-blue-600 transition-all ease-linear"
-          style={{ 
-            width: isAnimate ? '100%' : '0%', 
-            transitionDuration: isAnimate ? '5000ms' : '0ms' 
+          style={{
+            width: isAnimate ? "100%" : "0%",
+            transitionDuration: isAnimate ? "5000ms" : "0ms"
           }}
         ></div>
       </div>
