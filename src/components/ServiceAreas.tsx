@@ -103,11 +103,11 @@ export default function ServiceAreas() {
               </h3>
               <ul className="space-y-3 md:space-y-4 max-w-sm mx-auto">
                 {[0, 1, 2, 3].map((i) => (
-                  <li key={i} className="flex items-start justify-center gap-3 md:gap-4 group text-center">
-                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-blue-600 flex items-center justify-center text-white text-[10px] flex-shrink-0 mt-1 shadow-lg shadow-blue-200 md:-ml-2">
+                  <li key={i} className="grid grid-cols-[20px_1fr] md:grid-cols-[24px_1fr] items-start gap-3 md:gap-4 group text-left">
+                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-blue-600 flex items-center justify-center text-white text-[10px] flex-shrink-0 mt-0.5 shadow-lg shadow-blue-200">
                       <Check className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     </div>
-                    <span className="text-slate-700 font-bold text-xs md:text-sm group-hover:text-blue-600 transition-colors leading-tight mt-1 text-left">
+                    <span className="text-slate-700 font-bold text-xs md:text-sm group-hover:text-blue-600 transition-colors leading-tight mt-1">
                       {t(`serviceAreas.whyChoose.items.${i}`)}
                     </span>
                   </li>
@@ -122,11 +122,11 @@ export default function ServiceAreas() {
               </h3>
               <ul className="space-y-3 md:space-y-4 max-w-sm mx-auto">
                 {[0, 1, 2, 3].map((i) => (
-                  <li key={i} className="flex items-start justify-center gap-3 md:gap-4 group text-center">
-                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-slate-900 flex items-center justify-center text-white text-[10px] flex-shrink-0 mt-1 md:-ml-2">
+                  <li key={i} className="grid grid-cols-[20px_1fr] md:grid-cols-[24px_1fr] items-start gap-3 md:gap-4 group text-left">
+                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-slate-900 flex items-center justify-center text-white text-[10px] flex-shrink-0 mt-0.5">
                       <Check className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     </div>
-                    <span className="text-slate-700 font-bold text-xs md:text-sm group-hover:text-slate-900 transition-colors leading-tight mt-1 text-left">
+                    <span className="text-slate-700 font-bold text-xs md:text-sm group-hover:text-slate-900 transition-colors leading-tight mt-1">
                       {t(`serviceAreas.specialized.items.${i}`)}
                     </span>
                   </li>

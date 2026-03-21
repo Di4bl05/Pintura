@@ -100,36 +100,72 @@ export default function Header() {
           </div>
 
           {/* Mobile Button */}
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)} 
-            className={`md:hidden p-2 transition-colors ${scrolled ? "text-slate-900" : "text-white"}`}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className={`md:hidden w-11 h-11 rounded-xl border transition-all duration-300 flex items-center justify-center shadow-lg active:scale-95 ${
+              scrolled
+                ? "bg-slate-900 text-white border-slate-900"
+                : "bg-white/10 text-white border-white/30 backdrop-blur-md"
+            }`}
           >
-            {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Menu con efecto Glassmorphism */}
-        <div className={`md:hidden absolute left-0 right-0 top-full bg-white shadow-2xl transition-all duration-300 overflow-hidden ${
-          isMenuOpen ? "max-h-screen border-t border-slate-100 py-8 opacity-100" : "max-h-0 opacity-0"
-        }`}>
-          <div className="flex flex-col gap-6 px-8">
-            {navigation.map((item) => (
-              <a 
-                key={item.name} 
-                href={item.href} 
-                className="text-2xl font-black text-slate-900 tracking-tighter"
-                onClick={(e) => handleSmoothScroll(e, item.href)}
+        {/* Mobile Menu Overlay */}
+        <div
+          onClick={() => setIsMenuOpen(false)}
+          className={`md:hidden fixed inset-0 top-[73px] bg-slate-950/50 backdrop-blur-[2px] transition-opacity duration-300 ${
+            isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
+        />
+
+        {/* Mobile Menu Drawer */}
+        <div
+          className={`md:hidden absolute left-3 right-3 top-[calc(100%+10px)] rounded-3xl border border-white/20 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white shadow-[0_30px_70px_rgba(15,23,42,0.55)] transition-all duration-300 overflow-hidden ${
+            isMenuOpen
+              ? "max-h-[85vh] opacity-100 translate-y-0 pointer-events-auto"
+              : "max-h-0 opacity-0 -translate-y-2 pointer-events-none"
+          }`}
+        >
+          <div className="absolute -top-20 -right-16 w-44 h-44 rounded-full bg-blue-500/30 blur-3xl pointer-events-none" />
+          <div className="relative px-5 py-6">
+            <div className="mb-5 pb-4 border-b border-white/10">
+              <p className="text-[11px] uppercase tracking-[0.28em] font-black text-blue-200">Navigation</p>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              {navigation.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-lg font-black uppercase tracking-tight transition-all hover:bg-blue-600/30"
+                  onClick={(e) => handleSmoothScroll(e, item.href)}
+                >
+                  <span>{item.name}</span>
+                  <span className="text-blue-200 transition-transform group-hover:translate-x-1">→</span>
+                </a>
+              ))}
+            </div>
+
+            <div className="h-px bg-white/10 my-5"></div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setLanguage(language === "es" ? "en" : "es")}
+                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl border border-white/15 bg-white/10 text-sm font-black uppercase tracking-[0.2em]"
               >
-                {item.name}
+                <Globe className="w-4 h-4" />
+                {language}
+              </button>
+              <a
+                href="tel:+17863506367"
+                className="flex-[1.6] flex justify-center items-center gap-3 py-3.5 bg-blue-600 rounded-2xl font-black text-white text-sm tracking-[0.18em] uppercase shadow-lg shadow-blue-900/40"
+              >
+                <Phone size={18} fill="currentColor" /> Llamar
               </a>
-            ))}
-            <div className="h-[1px] bg-slate-100 my-2"></div>
-            <a 
-              href="tel:+17863506367" 
-              className="flex justify-center items-center gap-3 py-5 bg-blue-600 rounded-2xl font-black text-white text-xl shadow-lg shadow-blue-200"
-            >
-              <Phone size={24} fill="currentColor" /> (786) 350-6367
-            </a>
+            </div>
           </div>
         </div>
       </nav>

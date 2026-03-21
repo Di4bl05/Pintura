@@ -63,6 +63,12 @@ export default function BeforeAfterGallery() {
       : galleryData.filter(item => item.service.toLowerCase() === filter.toLowerCase());
   }, [galleryData, filter]);
 
+  const compareLabel = useMemo(() => {
+    if (comparePosition <= 45) return t("gallery.before");
+    if (comparePosition >= 55) return t("gallery.after");
+    return `${t("gallery.before")} / ${t("gallery.after")}`;
+  }, [comparePosition, t]);
+
   // 2. NAVEGACIÓN (Funcionalidad completa restaurada)
   const navigate = useCallback((direction: "prev" | "next") => {
     const currentIndex = galleryData.findIndex(i => i.id === selectedItem?.id);
@@ -214,7 +220,6 @@ export default function BeforeAfterGallery() {
             {/* Antes */}
             <div className="absolute inset-0 flex items-center justify-center p-4 md:p-12">
               <img src={selectedItem.beforeImage} className="max-w-full max-h-full object-contain rounded-xl opacity-40 grayscale" alt="Before" />
-              <div className="absolute top-10 right-10 px-4 py-2 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-black rounded-lg border border-white/10">{t("gallery.before")}</div>
             </div>
 
             {/* Después */}
@@ -223,11 +228,13 @@ export default function BeforeAfterGallery() {
               style={{ clipPath: `inset(0 ${100 - comparePosition}% 0 0)` }}
             >
               <img src={selectedItem.afterImage} className="max-w-full max-h-full object-contain rounded-xl shadow-2xl" alt="After" />
-              <div className="absolute top-10 left-10 px-4 py-2 bg-blue-600 text-white text-[10px] font-black rounded-lg shadow-xl">{t("gallery.after")}</div>
             </div>
 
             {/* Handle */}
             <div className="absolute inset-y-0 w-1 bg-white flex items-center justify-center pointer-events-none transform-gpu" style={{ left: `${comparePosition}%` }}>
+              <div className="absolute -top-14 left-1/2 -translate-x-1/2 px-4 py-2 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-black rounded-lg border border-white/10 whitespace-nowrap">
+                {compareLabel}
+              </div>
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-2xl border-4 border-blue-600">
                 <MoveHorizontal className="text-blue-600 w-6 h-6" />
               </div>
