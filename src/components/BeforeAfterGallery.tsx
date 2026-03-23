@@ -2,14 +2,14 @@
 
 import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { 
-  ChevronLeft, 
-  ChevronRight, 
-  Maximize2, 
   X, 
-  Palette, 
   MapPin, 
-  MousePointer2,
-  MoveHorizontal
+  MoveHorizontal,
+  ChevronRight,
+  Sparkles,
+  ShieldCheck,
+  Star,
+  Zap
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -23,18 +23,19 @@ interface GalleryItem {
   description: string;
 }
 
-export default function BeforeAfterGallery() {
+export default function CleanEpicLightBeforeAfterGallery() {
   const { t } = useLanguage();
   const carouselRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
   
-  const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
-  const [comparePosition, setComparePosition] = useState(50);
-  const [isManualControl, setIsManualControl] = useState(false);
   const [filter, setFilter] = useState("all");
   const [showAllPhotos, setShowAllPhotos] = useState(false);
+  const [activeId, setActiveId] = useState<number>(1);
+  const [comparePosition, setComparePosition] = useState(50);
+  const [isManualControl, setIsManualControl] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  // 1. GENERACIÓN DE DATOS (Mantiene los 8 slots con las 3 imágenes del Hero)
+  // --- DATOS DE LA GALERÍA ---
   const galleryData: GalleryItem[] = useMemo(() => {
     const heroImages = [
       "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
@@ -45,14 +46,19 @@ export default function BeforeAfterGallery() {
     return Array.from({ length: 8 }).map((_, index) => {
       const id = index + 1;
       const imagePath = heroImages[index % heroImages.length]; 
+      
+      const title = t(`gallery.projects.${id}.title`);
+      const location = t(`gallery.projects.${id}.location`);
+      const description = t(`gallery.projects.${id}.description`);
+
       return {
-        id: id,
-        title: t(`gallery.projects.${id}.title`) || "Project",
-        location: t(`gallery.projects.${id}.location`) || "Orlando",
-        service: t(`gallery.projects.${id}.service`) || "interior",
+        id,
+        title: title.includes("gallery.") ? `Luxury Paint Project ${id}` : title,
+        location: location.includes("gallery.") ? "Orlando, FL" : location,
+        service: t(`gallery.projects.${id}.service`) || (index % 2 === 0 ? "interior" : "exterior"),
         beforeImage: imagePath,
         afterImage: imagePath,
-        description: t(`gallery.projects.${id}.description`) || "",
+        description: description.includes("gallery.") ? "Transformación completa de espacios con acabados de alta durabilidad." : description,
       };
     });
   }, [t]);
@@ -63,225 +69,322 @@ export default function BeforeAfterGallery() {
       : galleryData.filter(item => item.service.toLowerCase() === filter.toLowerCase());
   }, [galleryData, filter]);
 
-  const compareLabel = useMemo(() => {
-    if (comparePosition <= 45) return t("gallery.before");
-    if (comparePosition >= 55) return t("gallery.after");
-    return `${t("gallery.before")} / ${t("gallery.after")}`;
-  }, [comparePosition, t]);
+  const activeItem = useMemo(() => {
+    return filteredGallery.find(item => item.id === activeId) || filteredGallery[0];
+  }, [filteredGallery, activeId]);
 
-  // 2. NAVEGACIÓN (Funcionalidad completa restaurada)
-  const navigate = useCallback((direction: "prev" | "next") => {
-    const currentIndex = galleryData.findIndex(i => i.id === selectedItem?.id);
-    const newIndex = direction === "prev" 
-      ? (currentIndex > 0 ? currentIndex - 1 : galleryData.length - 1)
-      : (currentIndex < galleryData.length - 1 ? currentIndex + 1 : 0);
-    setSelectedItem(galleryData[newIndex]);
-    setComparePosition(50);
-  }, [galleryData, selectedItem]);
+  // --- LÓGICA DE AUTO-PLAY ---
+  useEffect(() => {
+    if (isPaused || showAllPhotos) return;
 
-  // 3. OPTIMIZACIÓN DE MOVIMIENTO (Hardware Accelerated)
+    const interval = setInterval(() => {
+      const currentIndex = filteredGallery.findIndex(item => item.id === activeId);
+      const nextIndex = (currentIndex + 1) % filteredGallery.length;
+      
+      if (filteredGallery.length > 0) {
+        const nextItem = filteredGallery[nextIndex];
+        setActiveId(nextItem.id);
+        setComparePosition(50);
+
+        if (carouselRef.current) {
+          const container = carouselRef.current;
+          const activeThumb = container.children[nextIndex] as HTMLElement;
+          if (activeThumb) {
+            container.scrollTo({
+              left: activeThumb.offsetLeft - container.offsetWidth / 2 + activeThumb.offsetWidth / 2,
+              behavior: "smooth"
+            });
+          }
+        }
+      }
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [activeId, filteredGallery, isPaused, showAllPhotos]);
+
+  // --- MANEJO DEL SLIDER (BEFORE/AFTER) ---
   const handleMouseMove = useCallback((e: React.MouseEvent | React.TouchEvent) => {
     if (!isManualControl && e.type !== 'touchmove') return;
     
-    const container = e.currentTarget as HTMLElement;
-    const rect = container.getBoundingClientRect();
-    const x = 'touches' in e ? (e as React.TouchEvent).touches[0].clientX : (e as React.MouseEvent).clientX;
-    const position = ((x - rect.left) / rect.width) * 100;
-    
-    // Usamos requestAnimationFrame para sincronizar con los Hz del monitor
-    window.requestAnimationFrame(() => {
-      setComparePosition(Math.max(0, Math.min(100, position)));
-    });
+    if (sliderRef.current) {
+      const rect = sliderRef.current.getBoundingClientRect();
+      const x = 'touches' in e ? (e as React.TouchEvent).touches[0].clientX : (e as React.MouseEvent).clientX;
+      const position = ((x - rect.left) / rect.width) * 100;
+      
+      window.requestAnimationFrame(() => {
+        setComparePosition(Math.max(0, Math.min(100, position)));
+      });
+    }
   }, [isManualControl]);
 
-  // 4. AUTO-SCROLL (Mismo intervalo que el original)
-  useEffect(() => {
-    if (isPaused || showAllPhotos || selectedItem) return;
-    const interval = setInterval(() => {
-      if (carouselRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-        const target = scrollLeft + clientWidth >= scrollWidth - 10 ? 0 : scrollLeft + 400;
-        carouselRef.current.scrollTo({ left: target, behavior: "smooth" });
+  // --- SELECCIÓN Y ENFOQUE ---
+  const handleSelectProject = (id: number) => {
+    setActiveId(id);
+    setShowAllPhotos(false);
+    
+    setTimeout(() => {
+      const viewer = document.getElementById('main-viewer');
+      if (viewer) {
+        const y = viewer.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top: y, behavior: 'smooth' });
       }
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [isPaused, showAllPhotos, selectedItem]);
+    }, 150);
+  };
 
   return (
-    <section id="gallery" className="relative py-24 bg-[#f8fafc] overflow-hidden antialiased">
-      {/* Fondo Decorativo Original */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} />
+    <section id="gallery" className="relative py-12 lg:py-24 bg-white overflow-hidden antialiased selection:bg-none">
+      
+      <div className="absolute top-0 left-1/4 w-[60rem] h-[60rem] bg-blue-100 rounded-full blur-[150px] pointer-events-none -z-10 opacity-60" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 lg:px-8 max-w-[1400px]">
         
-        {/* HEADER */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 mb-6 shadow-xl shadow-blue-100">
-            <Palette className="w-4 h-4 text-white" />
-            <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">{t("gallery.badge")}</span>
+        {/* ENCABEZADO */}
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 mb-12 border-b border-slate-100 pb-12 items-center">
+          <div className="lg:col-span-7 text-left">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 mb-6 shadow-xl shadow-blue-100">
+              <Sparkles className="w-4 h-4 text-white" />
+              <span className="text-[10px] font-black text-white uppercase tracking-[0.3em]">
+                {t("gallery.badge") || "PORTAFOLIO DE EXCELENCIA"}
+              </span>
+            </div>
+            
+            <h2 className="text-5xl lg:text-7xl font-black text-slate-950 uppercase tracking-tighter leading-[0.9]">
+              {t("gallery.title") || "RESULTADOS DE"}<br/>
+              <span className="relative inline-block text-blue-600 italic mt-2">
+                {t("gallery.titleHighlight") || "LUISBETY IMPECABLES"}
+                <div className="absolute -bottom-2 left-0 w-full h-2 bg-blue-600/10 rounded-full -z-10" />
+              </span>
+            </h2>
+
+            <p className="text-lg text-slate-600 font-medium max-w-xl mt-6 italic leading-relaxed border-l-2 border-blue-600 pl-6">
+              {t("gallery.subtitle") || "No solo pintamos paredes, devolvemos la vida a sus espacios. Explore nuestras transformaciones más recientes."}
+            </p>
           </div>
-          <h2 className="text-5xl md:text-7xl font-black text-slate-900 uppercase tracking-tighter leading-[0.85] mb-8">
-            {t("gallery.title")}<br/>
-            <span className="relative inline-block text-blue-600 italic">
-              {t("gallery.titleHighlight")}
-              <div className="absolute -bottom-2 left-0 w-full h-2 bg-blue-600/10 rounded-full -z-10" />
-            </span>
-          </h2>
-          <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto italic">{t("gallery.subtitle")}</p>
+
+          {/* INDICADORES DE CONFIANZA */}
+          <div className="lg:col-span-5 w-full flex flex-col gap-8 pointer-events-none">
+            <div className="flex items-center gap-6 group">
+              <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
+                <ShieldCheck className="w-8 h-8 text-blue-600/80" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-black text-slate-900 uppercase tracking-tight leading-none">LICENCIADOS Y ASEGURADOS</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Estándar profesional de Florida</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-6">
+              <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
+                <div className="text-center">
+                  <span className="block text-sm font-black text-orange-500 leading-none">5.0</span>
+                  <div className="flex gap-0.5 mt-1">
+                    {[...Array(5)].map((_, i) => <Star key={i} size={8} fill="#f97316" className="text-orange-500 border-none" />)}
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-black text-slate-900 uppercase tracking-tight leading-none">LÍDERES LOCALES</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Satisfacción de clientes verificada</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-6">
+              <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
+                <Zap className="w-8 h-8 text-slate-950" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-black text-slate-900 uppercase tracking-tight leading-none">PRESUPUESTO GRATIS</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Respuesta en menos de 24h</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* FILTROS COMPLETOS */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {["all", "interior", "exterior", "commercial", "cabinet", "deck", "pressure"].map((f) => (
+        {/* VISOR PRINCIPAL (ID para enfoque) */}
+        {activeItem && (
+          <div 
+            id="main-viewer"
+            className="relative w-full aspect-[4/5] lg:aspect-[21/9] rounded-[2.5rem] overflow-hidden bg-white border border-slate-100 group mb-8 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.05)] transform-gpu transition-all duration-500"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => {
+              setIsPaused(false);
+              setIsManualControl(false);
+            }}
+          >
+            <div 
+              ref={sliderRef}
+              className="w-full h-full relative cursor-ew-resize touch-none"
+              onMouseMove={handleMouseMove}
+              onTouchMove={handleMouseMove}
+              onMouseDown={() => {setIsManualControl(true); setIsPaused(true);}}
+              onMouseUp={() => {setIsManualControl(false); setIsPaused(false);}}
+              onTouchEnd={() => setIsManualControl(false)}
+            >
+              {/* CAPA ANTES */}
+              <div className="absolute inset-0 select-none pointer-events-none">
+                <img src={activeItem.beforeImage} className="w-full h-full object-cover" alt="Antes" />
+                <div className="absolute top-8 right-8 px-6 py-3 bg-slate-900/90 backdrop-blur-md rounded-xl border border-white/20 text-white text-[10px] font-black uppercase tracking-widest z-10 shadow-2xl">
+                  {t("gallery.before") || "ANTES"}
+                </div>
+              </div>
+
+              {/* CAPA DESPUÉS (ClipPath) */}
+              <div 
+                className="absolute inset-0 transform-gpu z-10 select-none pointer-events-none"
+                style={{ clipPath: `inset(0 ${100 - comparePosition}% 0 0)` }}
+              >
+                <img src={activeItem.afterImage} className="w-full h-full object-cover" alt="Después" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute top-8 left-8 px-6 py-3 bg-blue-600 rounded-xl text-white text-[10px] font-black uppercase tracking-widest shadow-xl">
+                  {t("gallery.after") || "DESPUÉS"}
+                </div>
+
+                <div className="absolute bottom-10 left-10 right-12 lg:right-auto lg:max-w-xl text-left">
+                  {/* PÍLDORA DE UBICACIÓN */}
+                  <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full shadow-lg">
+                    <MapPin className="w-4 h-4 text-white" />
+                    <span className="text-xs font-black text-white uppercase tracking-widest drop-shadow-md">{activeItem.location}</span>
+                  </div>
+                  
+                  <h3 className="text-4xl lg:text-5xl font-black text-white uppercase italic tracking-tighter leading-none mb-4 drop-shadow-md">
+                    {activeItem.title}
+                  </h3>
+                  <p className="text-sm lg:text-base text-slate-100 font-medium line-clamp-2">
+                    {activeItem.description}
+                  </p>
+                </div>
+              </div>
+
+              {/* LÍNEA DIVISORIA E INSTRUCCIÓN */}
+              <div 
+                className="absolute inset-y-0 w-[3px] bg-white pointer-events-none transform-gpu z-20 shadow-[0_0_20px_rgba(0,0,0,0.3)]" 
+                style={{ left: `${comparePosition}%` }}
+              >
+                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+                  <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(0,0,0,0.4)] border border-slate-100">
+                    <MoveHorizontal className="text-slate-900 w-6 h-6" />
+                  </div>
+                  
+                  {/* Cartel: Se va al arrastrar */}
+                  <div className={`
+                    px-4 py-2 bg-slate-900/80 backdrop-blur-md rounded-full text-[9px] font-black text-white 
+                    uppercase tracking-widest shadow-xl border border-white/10 whitespace-nowrap
+                    transition-all duration-300 transform
+                    ${isManualControl 
+                      ? "opacity-0 scale-95 translate-y-2" 
+                      : "opacity-100 scale-100 translate-y-0 lg:opacity-0 lg:group-hover:opacity-100"
+                    }
+                  `}>
+                    Arrastra para comparar
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        )}
+
+        {/* CARRUSEL INFERIOR */}
+        <div className="flex items-center justify-between gap-6 pt-4 border-t border-slate-100 mb-8">
+          <div 
+            ref={carouselRef}
+            className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide flex-1 snap-x"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {filteredGallery.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActiveId(item.id);
+                  setComparePosition(50);
+                }}
+                className={`relative flex-[0_0_160px] lg:flex-[0_0_240px] aspect-[4/3] rounded-[2rem] overflow-hidden snap-start transition-all duration-500 transform opacity-100 ${
+                  activeId === item.id 
+                    ? "ring-4 ring-blue-600 ring-offset-4 ring-offset-white scale-100 shadow-2xl" 
+                    : "scale-95 hover:scale-100 border border-slate-100"
+                }`}
+              >
+                <img src={item.afterImage} className="w-full h-full object-cover" alt={item.title} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-5 text-left">
+                  <span className="text-[10px] font-black text-white uppercase tracking-widest truncate">{item.title}</span>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <button 
+            onClick={() => setShowAllPhotos(true)}
+            className="hidden lg:flex flex-col items-center justify-center flex-[0_0_140px] aspect-[4/3] bg-slate-950 text-white rounded-[2rem] hover:bg-blue-600 transition-all duration-300 group shadow-xl"
+          >
+            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+              <ChevronRight className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-[11px] font-black uppercase tracking-widest text-center px-2">Ver Todo</span>
+          </button>
+        </div>
+
+        {/* FILTROS */}
+        <div className="flex flex-wrap justify-center gap-3 py-3">
+          {["all", "interior", "exterior", "cabinet", "commercial"].map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${
-                filter === f ? "bg-slate-950 text-white shadow-xl scale-105" : "bg-white text-slate-400 border border-slate-100 hover:text-blue-600"
+              className={`px-8 py-3.5 rounded-full text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${
+                filter === f 
+                  ? "bg-slate-950 text-white shadow-xl scale-105" 
+                  : "bg-white text-slate-500 border border-slate-200 hover:bg-blue-600 hover:text-white"
               }`}
             >
-              {t(`gallery.filters.${f}`)}
+              {t(`gallery.filters.${f}`) || (f === "all" ? "Todos" : f)}
             </button>
           ))}
         </div>
 
-        {/* CAROUSEL */}
-        <div className="relative group">
-          <div 
-            ref={carouselRef}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            className="flex gap-6 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide px-4"
-          >
-            {filteredGallery.map((item) => (
-              <div 
-                key={item.id} 
-                onClick={() => {setSelectedItem(item); setComparePosition(50);}}
-                className="flex-[0_0_85%] md:flex-[0_0_400px] snap-center group/card cursor-pointer"
-              >
-                <div className="bg-white rounded-[2rem] border border-slate-200/50 overflow-hidden transition-all duration-500 group-hover/card:-translate-y-3 group-hover/card:shadow-[0_30px_60px_rgba(0,0,0,0.1)] transform-gpu">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                    <img src={item.afterImage} loading="lazy" decoding="async" alt={`Proyecto de pintura en ${item.location}: ${item.title}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" />
-                    <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-lg shadow-sm flex items-center gap-2">
-                      <MapPin className="w-3 h-3 text-blue-600" />
-                      <span className="text-[9px] font-bold text-slate-800 uppercase tracking-tighter">{item.location}</span>
-                    </div>
-                    <div className="absolute inset-0 bg-blue-600/10 opacity-0 group-hover/card:opacity-100 transition-opacity flex items-center justify-center">
-                       <div className="bg-white p-4 rounded-full shadow-2xl scale-0 group-hover/card:scale-100 transition-transform">
-                          <Maximize2 className="w-6 h-6 text-blue-600" />
-                       </div>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-black text-slate-900 uppercase italic tracking-tighter mb-1 leading-none">{item.title}</h3>
-                    <p className="text-xs text-slate-500 font-medium italic line-clamp-1 mb-4">{item.description}</p>
-                    <div className="flex items-center gap-2 text-[9px] font-black text-blue-600 uppercase tracking-widest">
-                      <MousePointer2 className="w-3 h-3" /> {t("gallery.clickDetails")}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* BOTÓN VER TODAS */}
-        <div className="mt-12 text-center">
-          <button 
-            onClick={() => setShowAllPhotos(true)}
-            className="px-10 py-5 bg-slate-950 text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] hover:bg-blue-600 transition-all shadow-2xl hover:scale-105 active:scale-95"
-          >
-            {t("gallery.viewAll")}
-          </button>
-        </div>
       </div>
 
-      {/* MODAL DE COMPARACIÓN COMPLETO */}
-      {selectedItem && (
-        <div className="fixed inset-0 z-[100] bg-slate-950 flex flex-col animate-in fade-in duration-300">
-          <div className="flex items-center justify-between p-6 bg-gradient-to-b from-slate-900 to-transparent relative z-20">
-            <div className="text-left">
-              <h4 className="text-white font-black uppercase italic text-xl leading-none">{selectedItem.title}</h4>
-              <p className="text-slate-400 text-xs font-bold tracking-widest uppercase mt-1">📍 {selectedItem.location}</p>
-            </div>
-            <button onClick={() => setSelectedItem(null)} className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors text-white">
-              <X size={24} />
-            </button>
-          </div>
-
-          <div 
-            className="flex-1 relative cursor-ew-resize select-none overflow-hidden flex items-center justify-center touch-none"
-            onMouseMove={handleMouseMove}
-            onTouchMove={handleMouseMove}
-            onMouseDown={() => setIsManualControl(true)}
-            onMouseUp={() => setIsManualControl(false)}
-          >
-            {/* Antes */}
-            <div className="absolute inset-0 flex items-center justify-center p-4 md:p-12">
-              <img src={selectedItem.beforeImage} loading="lazy" decoding="async" className="max-w-full max-h-full object-contain rounded-xl opacity-40 grayscale" alt="Before" />
-            </div>
-
-            {/* Después */}
-            <div 
-              className="absolute inset-0 flex items-center justify-center p-4 md:p-12 pointer-events-none transform-gpu"
-              style={{ clipPath: `inset(0 ${100 - comparePosition}% 0 0)` }}
-            >
-              <img src={selectedItem.afterImage} loading="lazy" decoding="async" className="max-w-full max-h-full object-contain rounded-xl shadow-2xl" alt="After" />
-            </div>
-
-            {/* Handle */}
-            <div className="absolute inset-y-0 w-1 bg-white flex items-center justify-center pointer-events-none transform-gpu" style={{ left: `${comparePosition}%` }}>
-              <div className="absolute -top-14 left-1/2 -translate-x-1/2 px-4 py-2 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-black rounded-lg border border-white/10 whitespace-nowrap">
-                {compareLabel}
-              </div>
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-2xl border-4 border-blue-600">
-                <MoveHorizontal className="text-blue-600 w-6 h-6" />
-              </div>
-            </div>
-          </div>
-
-          {/* Navegación dentro del Modal */}
-          <div className="p-8 bg-slate-900 text-center border-t border-white/5">
-             <p className="text-slate-400 text-xs font-medium italic mb-6">{t("gallery.dragSlider")}</p>
-             <div className="flex justify-center gap-4">
-                <button onClick={() => navigate("prev")} className="p-4 rounded-xl bg-white/5 hover:bg-white/10 text-white transition-all"><ChevronLeft /></button>
-                <button onClick={() => navigate("next")} className="p-4 rounded-xl bg-white/5 hover:bg-white/10 text-white transition-all"><ChevronRight /></button>
-             </div>
-          </div>
-        </div>
-      )}
-
-      {/* GRID VIEW MODAL (Show All) */}
+      {/* MODAL COMPLETO (Corrección Header Sticky) */}
       {showAllPhotos && (
-        <div className="fixed inset-0 z-[100] bg-white overflow-y-auto p-6 animate-in slide-in-from-bottom duration-500">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-center mb-12 sticky top-0 bg-white py-4 z-10 border-b">
-              <div className="text-left">
-                <h2 className="text-3xl font-black text-slate-900 uppercase italic tracking-tighter">{t("gallery.fullGallery")}</h2>
-                <p className="text-slate-500 font-bold text-xs uppercase tracking-widest">{galleryData.length} {t("gallery.completedProjects")}</p>
+        <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-in fade-in duration-500 selection:bg-none">
+          
+          <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-100 shadow-sm w-full px-4 lg:px-12 py-6">
+            <div className="max-w-[1400px] mx-auto flex justify-between items-center text-left">
+              <div>
+                <h2 className="text-3xl lg:text-4xl font-black text-slate-950 uppercase italic tracking-tighter leading-none">Galería Completa</h2>
+                <p className="text-blue-600 font-bold text-[10px] lg:text-xs uppercase tracking-widest mt-2">{galleryData.length} Proyectos Finalizados</p>
               </div>
-              <button onClick={() => setShowAllPhotos(false)} className="p-4 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors">
-                <X className="text-slate-900" />
+              <button 
+                onClick={() => setShowAllPhotos(false)} 
+                className="p-3 lg:p-4 bg-slate-100 text-slate-900 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
+              >
+                <X size={24} />
               </button>
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="max-w-[1400px] mx-auto px-4 lg:px-12 py-8 lg:py-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {galleryData.map((item) => (
                 <div 
                   key={item.id} 
-                  onClick={() => {setShowAllPhotos(false); setSelectedItem(item);}}
-                  className="group relative aspect-[4/3] rounded-3xl overflow-hidden cursor-pointer shadow-lg transform-gpu"
+                  onClick={() => handleSelectProject(item.id)}
+                  className="group relative aspect-[16/10] rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden cursor-pointer bg-slate-50 border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
                 >
-                  <img src={item.afterImage} loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt={`Resultado final de ${item.title} en ${item.location}`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex flex-col justify-end p-6">
-                    <span className="text-[10px] text-blue-400 font-black uppercase tracking-widest mb-1 text-left">{item.location}</span>
-                    <h5 className="text-white font-bold text-lg leading-tight uppercase italic text-left">{item.title}</h5>
+                  <img src={item.afterImage} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 p-6 lg:p-8 flex flex-col justify-end text-left">
+                    {/* Ubicación en miniatura */}
+                    <div className="inline-flex items-center gap-1.5 mb-3 px-3 py-1.5 bg-white/20 backdrop-blur-md border border-white/30 rounded-full w-fit">
+                      <MapPin className="w-3 h-3 text-white" />
+                      <span className="text-[10px] text-white font-black uppercase tracking-widest drop-shadow-md">{item.location}</span>
+                    </div>
+                    <h5 className="text-xl lg:text-2xl text-white font-black leading-tight uppercase italic drop-shadow-md">{item.title}</h5>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+
         </div>
       )}
 
