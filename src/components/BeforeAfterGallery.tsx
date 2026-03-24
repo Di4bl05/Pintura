@@ -392,6 +392,15 @@ export default function CleanEpicLightBeforeAfterGallery() {
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
+{/* SEPARADOR DE LÍNEA (ESTILO SERVICES) */}
+      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-slate-400/60 z-10">
+        <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-900/10 to-transparent blur-xl -z-10" />
+      </div>
+
+      <style jsx global>{`
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
     </section>
   );
 }

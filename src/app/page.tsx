@@ -1,110 +1,43 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { CheckCircle2 } from "lucide-react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import WhyChooseUs from "@/components/WhyChooseUs"; // La sección de la foto Fo.jpg
 import Services from "@/components/Services";
 import BeforeAfterGallery from "@/components/BeforeAfterGallery";
 import Reviews from "@/components/Reviews";
 import ServiceAreas from "@/components/ServiceAreas";
+import CTASection from "@/components/CTASection"; // El cierre azul con botones
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
-import MobileAccordion from "@/components/MobileAccordion";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Home() {
-  const { t } = useLanguage();
-  
-  const benefits = [
-    t("whyChoose.items.0"),
-    t("whyChoose.items.1"),
-    t("whyChoose.items.2"),
-    t("whyChoose.items.3"),
-    t("whyChoose.items.4"),
-    t("whyChoose.items.5"),
-    t("whyChoose.items.6"),
-    t("whyChoose.items.7")
-  ];
-
   return (
     <main className="min-h-screen">
       <Header />
+      
+      {/* 1. Inicio */}
       <Hero />
 
-      {/* Services Section with Pricing */}
+      {/* 3. Qué hacemos */}
       <Services />
 
-      {/* Before & After Gallery */}
+      {/* 4. Prueba visual */}
       <BeforeAfterGallery />
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-white/60">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <div className="order-2 md:order-1">
-              <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/images/gallery/pintores-exteriores-residenciales-orlando.webp"
-                  alt="Equipo profesional de pintores trabajando"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-              </div>
-            </div>
-            <div className="order-1 md:order-2">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                {t("whyChoose.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-700">{t("whyChoose.titleHighlight")}</span>
-              </h2>
-              <p className="text-gray-600 mb-6 text-lg">
-                {t("whyChoose.description")}
-              </p>
-              
-              <MobileAccordion
-                title={t("whyChoose.benefits")}
-                defaultOpen={true}
-                headerContent={
-                  <div className="text-left">
-                    <h3 className="text-base font-bold text-gray-900">{t("whyChoose.benefits")}</h3>
-                    <p className="text-xs text-gray-600">{t("whyChoose.benefitsCount")}</p>
-                  </div>
-                }
-              >
-                {/* Desktop Version */}
-                <ul className="space-y-4 hidden md:block">
-                  {benefits.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="text-primary-600 w-6 h-6 flex-shrink-0 mt-1" />
-                      <span className="text-gray-700 font-medium">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Mobile Version */}
-                <ul className="space-y-3 md:hidden">
-                  {benefits.map((item, index) => (
-                    <li key={index} className="flex items-start gap-2 px-4">
-                      <CheckCircle2 className="text-primary-600 w-5 h-5 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700 font-medium text-sm">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </MobileAccordion>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Reviews Section */}
+      {/* 5. Lo que dicen de nosotros */}
       <Reviews />
 
-      {/* Service Areas Section */}
+      {/* 6. Dónde estamos */}
       <ServiceAreas />
 
-      {/* Contact Form */}
+      {/* 2. Autoridad y Confianza (Aquí va la foto Fo.jpg) */}
+      <WhyChooseUs />
+
+      {/* 7. Empujón final antes del formulario */}
+      <CTASection />
+
+      {/* 8. Captura de datos */}
       <ContactForm />
       
       <Footer />

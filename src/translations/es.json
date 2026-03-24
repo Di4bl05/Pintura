@@ -225,27 +225,33 @@
       "Limpieza total incluida"
     ]
   },
-  "reviews": {
-    "badge": "⭐ RESEÑAS",
-    "title": "Nuestros",
-    "titleHighlight": "Clientes",
-    "subtitle": "Satisfacción garantizada",
-    "basedOn": "Basado en",
-    "reviews": "reseñas",
-    "viewGoogle": "Ver en Google Maps",
-    "verified": "Reseña Verificada",
-    "helpful": "Útil",
-    "viewAll": "Ver Todas las Reseñas",
-    "loadMore": "Ver Más Reseñas",
-    "ctaTitle": "¿Listo para empezar?",
-    "ctaSubtitle": "Únete a nuestros clientes satisfechos",
-    "ctaButton": "Presupuesto Gratis",
-    "timeAgo": {
-      "twoWeeks": "Hace 2 semanas",
-      "oneMonth": "Hace 1 mes",
-      "twoMonths": "Hace 2 meses",
-      "threeMonths": "Hace 3 meses"
-    }
+ "reviews": {
+  "badge": "100% Casos de Éxito",
+  "title": "Excelencia en",
+  "titleHighlight": "cada brochazo",
+  "subtitle": "Descubre por qué cientos de familias en Florida Central confían en nuestro compromiso con la limpieza, la puntualidad y los acabados de alta gama.",
+  "basedOn": "Calificación real en",
+  "reviews": "opiniones verificadas",
+  "viewGoogle": "Ver perfil en Google Business",
+  "verified": "Cliente Verificado",
+  "helpful": "Útil",
+  "viewAll": "Ver todas las experiencias",
+  "showLess": "Ocultar reseñas adicionales",
+  "readMore": "Leer más",
+  "readLess": "Ver menos",
+  "loadMore": "Cargar más testimonios",
+  "ctaTitle": "¿Quieres el mismo resultado en tu casa?",
+  "ctaSubtitle": "Únete a los propietarios que ya transformaron sus espacios con Luisbety Painting.",
+  "ctaButton": "Solicitar Presupuesto Gratis",
+  "timeAgo": {
+    "twoWeeks": "Hace 2 semanas",
+    "oneMonth": "Hace 1 mes",
+    "twoMonths": "Hace 2 meses",
+    "threeMonths": "Hace 3 meses",
+    "fourMonths": "Hace 4 meses",
+    "fiveMonths": "Hace 5 meses",
+    "sixMonths": "Hace 6 meses"
+  }
   },
   "serviceAreas": {
     "badge": "ÁREAS",

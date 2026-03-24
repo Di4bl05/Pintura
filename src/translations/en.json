@@ -225,26 +225,32 @@
     ]
   },
   "reviews": {
-    "badge": "⭐ REVIEWS",
-    "title": "Our",
-    "titleHighlight": "Customers",
-    "subtitle": "Guaranteed Satisfaction",
-    "basedOn": "Based on",
-    "reviews": "reviews",
-    "viewGoogle": "View on Google Maps",
-    "verified": "Verified Review",
-    "helpful": "Helpful",
-    "viewAll": "View All Reviews",
-    "loadMore": "Load More Reviews",
-    "ctaTitle": "Ready to start?",
-    "ctaSubtitle": "Join our satisfied customers",
-    "ctaButton": "Free Estimate",
-    "timeAgo": {
-      "twoWeeks": "2 weeks ago",
-      "oneMonth": "1 month ago",
-      "twoMonths": "2 months ago",
-      "threeMonths": "3 months ago"
-    }
+  "badge": "100% Success Rate",
+  "title": "Excellence in",
+  "titleHighlight": "every brushstroke",
+  "subtitle": "Discover why hundreds of families in Central Florida trust our commitment to cleanliness, punctuality, and high-end finishes.",
+  "basedOn": "Real rating on",
+  "reviews": "verified reviews",
+  "viewGoogle": "View Google Business profile",
+  "verified": "Verified Customer",
+  "helpful": "Helpful",
+  "viewAll": "View all experiences",
+  "showLess": "Hide additional reviews",
+  "readMore": "Read more",
+  "readLess": "Read less",
+  "loadMore": "Load more testimonials",
+  "ctaTitle": "Want the same results for your home?",
+  "ctaSubtitle": "Join the homeowners who have already transformed their spaces with Luisbety Painting.",
+  "ctaButton": "Get a Free Estimate",
+  "timeAgo": {
+    "twoWeeks": "2 weeks ago",
+    "oneMonth": "1 month ago",
+    "twoMonths": "2 months ago",
+    "threeMonths": "3 months ago",
+    "fourMonths": "4 months ago",
+    "fiveMonths": "5 months ago",
+    "sixMonths": "6 months ago"
+  }
   },
   "serviceAreas": {
     "badge": "AREAS",

@@ -1,271 +1,216 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Star, Quote, MapPin, ThumbsUp, ExternalLink, ChevronLeft, ChevronRight, X, CheckCircle2 } from "lucide-react";
+import { useState, useRef } from "react";
+import { Star, MapPin, ChevronRight, ChevronUp, CheckCircle, ShieldCheck, MoreVertical, ExternalLink, ThumbsUp } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// --- DATOS RESTAURADOS COMPLETAMENTE ---
 const reviewsData = [
-  {
-    id: 1,
-    author: "María González",
-    rating: 5,
-    date: "reviews.timeAgo.twoWeeks",
-    text: "Excelente trabajo! Pintaron mi casa completa y quedó impecable. El equipo fue muy profesional, llegaron a tiempo todos los días y se aseguraron de proteger todos nuestros muebles. Los precios fueron muy razonables y la calidad del trabajo superó nuestras expectativas.",
-    avatar: "MG",
-    verified: true,
-    location: "Miami, FL"
-  },
-  {
-    id: 2,
-    author: "Carlos Rodríguez",
-    rating: 5,
-    date: "reviews.timeAgo.oneMonth",
-    text: "He contratado varios pintores en el pasado, pero estos chicos son los mejores. Muy detallistas y limpios. Recomiendo 100%. La atención al cliente fue excepcional desde el primer contacto.",
-    avatar: "CR",
-    verified: true,
-    location: "Coral Gables, FL"
-  },
-  {
-    id: 3,
-    author: "Ana Martínez",
-    rating: 5,
-    date: "reviews.timeAgo.oneMonth",
-    text: "Transformaron completamente mi oficina. El color que elegimos quedó perfecto y el acabado es impecable. Muy profesionales y terminaron antes del tiempo estimado. Sin duda los volveré a contratar.",
-    avatar: "AM",
-    verified: true,
-    location: "Homestead, FL"
-  },
-  {
-    id: 4,
-    author: "Roberto Silva",
-    rating: 5,
-    date: "reviews.timeAgo.twoMonths",
-    text: "Pintaron el exterior de mi casa y quedó como nueva. Soportó perfectamente el huracán que pasó después. Materiales de primera calidad y mano de obra excelente. Vale cada centavo.",
-    avatar: "RS",
-    verified: true,
-    location: "Kendall, FL"
-  },
-  {
-    id: 5,
-    author: "Laura Fernández",
-    rating: 5,
-    date: "reviews.timeAgo.twoMonths",
-    text: "Me encantó el resultado! Son muy profesionales, dan buenos consejos sobre colores y acabados. El presupuesto fue detallado sin sorpresas. Totalmente recomendados para cualquier proyecto de pintura.",
-    avatar: "LF",
-    verified: true,
-    location: "Doral, FL"
-  },
-  {
-    id: 6,
-    author: "Jorge Pérez",
-    rating: 5,
-    date: "reviews.timeAgo.threeMonths",
-    text: "Contraté sus servicios para pintar mi restaurante y el trabajo fue impecable. Trabajaron en horarios que no afectaron mi negocio. Muy organizados y el equipo siempre fue respetuoso con mis empleados y clientes.",
-    avatar: "JP",
-    verified: true,
-    location: "Brickell, FL"
-  }
+  { id: 1, author: "María González", rating: 5, date: "twoWeeks", text: "¡Excelente trabajo! Pintaron mi casa completa y quedó impecable. El equipo fue muy profesional, detallista y dejaron todo limpio al terminar. 100% recomendados. Además, se encargaron de cubrir todos los muebles con plástico y no hubo ni una sola mancha de pintura en el suelo al finalizar el proyecto.", avatar: "M", location: "Miami, FL" },
+  { id: 2, author: "Carlos Rodríguez", rating: 5, date: "oneMonth", text: "Muy detallistas y limpios. Cumplieron con los tiempos acordados y el presupuesto inicial. El trato fue inmejorable desde el primer día.", avatar: "C", location: "Coral Gables, FL" },
+  { id: 3, author: "Ana Martínez", rating: 5, date: "oneMonth", text: "Transformaron mi oficina. Acabado impecable y puntualidad. Los materiales que usan son de primera calidad y eso se nota en el resultado final. Estuvieron siempre atentos a mis peticiones especiales sobre los colores.", avatar: "A", location: "Homestead, FL" },
+  { id: 4, author: "Roberto Silva", rating: 5, date: "twoMonths", text: "Pintaron el exterior y quedó como nueva. Es difícil encontrar contratistas serios hoy en día, pero ellos superaron mis expectativas.", avatar: "R", location: "Kendall, FL" },
+  { id: 5, author: "Elena P.", rating: 5, date: "threeMonths", text: "Servicio rápido y limpio. Muy satisfechos con el color elegido.", avatar: "E", location: "Orlando, FL" },
+  { id: 6, author: "Juan Castillo", rating: 5, date: "threeMonths", text: "Profesionales de confianza. Puntuales y el acabado es de lujo.", avatar: "J", location: "Miami, FL" },
+  { id: 7, author: "Patricia M.", rating: 5, date: "fourMonths", text: "Excelente atención al detalle. Recomiendo a Luis para cualquier trabajo de pintura residencial.", avatar: "P", location: "Orlando, FL" },
+  { id: 8, author: "Marcos V.", rating: 5, date: "fiveMonths", text: "Gran equipo de trabajo. Hicieron un trabajo increíble en la sala y los dormitorios.", avatar: "M", location: "Kissimmee, FL" },
+  { id: 9, author: "Sofía R.", rating: 5, date: "sixMonths", text: "Muy contenta con el resultado final. Son muy limpios y ordenados.", avatar: "S", location: "Winter Park, FL" },
 ];
 
 export default function Reviews() {
   const { t } = useLanguage();
-  
-  // --- LÓGICA RESTAURADA ---
-  const [currentMobileReview, setCurrentMobileReview] = useState(0);
   const [showAllReviews, setShowAllReviews] = useState(false);
-  const [currentModalReview, setCurrentModalReview] = useState(0);
-  
-  const averageRating = reviewsData.reduce((acc, review) => acc + review.rating, 0) / reviewsData.length;
-  const totalReviews = reviewsData.length;
+  const [expandedTexts, setExpandedTexts] = useState<Record<number, boolean>>({});
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  const nextMobileReview = () => setCurrentMobileReview(prev => (prev + 1) % reviewsData.length);
-  const prevMobileReview = () => setCurrentMobileReview(prev => (prev - 1 + reviewsData.length) % reviewsData.length);
-  const nextModalReview = () => setCurrentModalReview(prev => (prev + 1) % reviewsData.length);
-  const prevModalReview = () => setCurrentModalReview(prev => (prev - 1 + reviewsData.length) % reviewsData.length);
+  const toggleText = (id: number) => {
+    setExpandedTexts(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
-  // Manejo de ESC para cerrar modal
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setShowAllReviews(false);
-    };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
-  }, []);
+  const toggleShowAll = () => {
+    if (showAllReviews) {
+      sectionRef.current?.scrollIntoView({ behavior: "smooth" });
+      setShowAllReviews(false);
+    } else {
+      setShowAllReviews(true);
+    }
+  };
 
-  // Bloqueo de scroll al abrir modal
-  useEffect(() => {
-    document.body.style.overflow = showAllReviews ? 'hidden' : 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [showAllReviews]);
-
-  const ratingDistribution = [
-    { stars: 5, count: reviewsData.filter(r => r.rating === 5).length },
-    { stars: 4, count: reviewsData.filter(r => r.rating === 4).length },
-    { stars: 3, count: reviewsData.filter(r => r.rating === 3).length },
-    { stars: 2, count: reviewsData.filter(r => r.rating === 2).length },
-    { stars: 1, count: reviewsData.filter(r => r.rating === 1).length },
-  ];
+  const displayedReviews = showAllReviews ? reviewsData : reviewsData.slice(0, 4);
 
   return (
-    <section id="reviews" className="relative py-24 bg-slate-50 overflow-hidden">
-      {/* Decoración Azul de Fondo */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-100/40 blur-[120px] rounded-full -z-10" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-50 blur-[120px] rounded-full -z-10" />
+    <section ref={sectionRef} id="reviews" className="relative pt-24 pb-32 bg-white antialiased overflow-x-hidden">
+      <div className="container relative z-10 mx-auto px-6">
+        
+        {/* TITULO PRINCIPAL */}
+        <div className="max-w-4xl text-left mb-16">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 border border-blue-500 mb-6 shadow-sm">
+            <ShieldCheck className="w-4 h-4 text-white" />
+            <span className="text-[10px] font-black text-white uppercase tracking-[0.3em]">
+              {t("reviews.badge")}
+            </span>
+          </div>
 
-      <div className="container mx-auto px-6 lg:px-16">
-        {/* Header Unificado con Servicios */}
-        <div className="max-w-3xl mb-20 text-center mx-auto">
-          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 uppercase tracking-tighter leading-none">
-            {t("reviews.title")}{" "}
-            <span className="text-blue-600 italic">
-                {t("reviews.titleHighlight")}
+          <h2 className="text-5xl md:text-7xl font-black text-slate-950 uppercase tracking-tighter leading-[0.9] flex flex-col items-start mb-6">
+            <span className="block">{t("reviews.title")}</span>
+            <span className="relative inline-block italic text-blue-600 mt-2">
+              {t("reviews.titleHighlight")}
+              <div className="absolute left-0 w-full h-3 rounded-full -bottom-2 bg-blue-600/10 -rotate-1 -z-10" />
+              <div className="absolute -bottom-1 left-0 w-3/4 h-1.5 bg-blue-600 rounded-full -rotate-1" />
             </span>
           </h2>
-          <div className="w-24 h-2 bg-blue-600 mx-auto rounded-full mb-8"></div>
-          <p className="text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto">
+
+          <p className="text-lg text-slate-600 font-medium italic leading-relaxed border-l-2 border-blue-600 pl-6 max-w-2xl">
             {t("reviews.subtitle")}
           </p>
         </div>
 
-        {/* Resumen de Rating */}
-        <div className="max-w-5xl mx-auto mb-20">
-          <div className="p-10 border border-white bg-white/70 backdrop-blur-xl shadow-xl rounded-[2.5rem]">
-            <div className="grid items-center gap-12 md:grid-cols-2">
-              <div className="text-center md:border-r border-slate-100 md:pr-12">
-                <div className="flex items-baseline justify-center gap-2 mb-2">
-                    <span className="text-7xl font-black text-slate-900">{averageRating.toFixed(1)}</span>
-                    <span className="text-2xl font-bold text-slate-400">/ 5.0</span>
-                </div>
-                <div className="flex justify-center gap-1 mb-4">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} className="w-8 h-8 text-yellow-400 fill-yellow-400" />
-                  ))}
-                </div>
-                <p className="font-semibold text-slate-600 mb-6">{t("reviews.basedOn")} {totalReviews} {t("reviews.reviews")}</p>
-                <a
-                  href="https://maps.google.com"
-                  target="_blank"
-                  className="inline-flex items-center gap-2.5 py-4 px-8 font-black text-xs uppercase tracking-[0.2em] text-white transition-all bg-slate-950 rounded-2xl hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-200"
-                >
-                  <MapPin className="w-5 h-5" />
-                  {t("reviews.viewGoogle")}
-                  <ExternalLink className="w-4 h-4 opacity-50" />
-                </a>
-              </div>
+        {/* CUERPO: GRID DE 2 COLUMNAS */}
+        <div className="grid lg:grid-cols-[1fr_380px] gap-16 items-start">
+          
+          {/* COLUMNA IZQUIERDA: FEED DE RESEÑAS */}
+          <div className="flex flex-col space-y-12 max-w-4xl">
+            <div className="flex flex-col space-y-10">
+              {displayedReviews.map((review) => {
+                const isTextExpanded = expandedTexts[review.id];
+                const shouldTruncate = review.text.length > 160;
+                const displayText = shouldTruncate && !isTextExpanded 
+                  ? `${review.text.substring(0, 160)}...` 
+                  : review.text;
 
-              <div className="space-y-4">
-                {ratingDistribution.map((item) => (
-                  <div key={item.stars} className="flex items-center gap-4 text-sm font-medium">
-                    <span className="w-12 text-slate-600 font-bold">{item.stars} ★</span>
-                    <div className="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
-                      <div className="h-full rounded-full bg-blue-600" style={{ width: `${(item.count / totalReviews) * 100}%` }} />
+                return (
+                  <div key={review.id} className="flex flex-col pb-10 border-b border-slate-100 last:border-0 animate-in fade-in duration-700">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-blue-600 font-bold text-xl border border-slate-200">
+                          {review.avatar}
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h4 className="font-bold text-slate-900 text-lg leading-none">{review.author}</h4>
+                            <span className="flex items-center gap-1 text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full uppercase tracking-tighter">
+                              <CheckCircle size={10} /> {t("reviews.verified")}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1 text-sm text-slate-500 mt-1.5 font-medium">
+                            <MapPin size={12} /> {review.location}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <span className="w-12 text-right text-slate-400 font-bold">{item.count}</span>
+
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="flex gap-0.5 text-orange-400">
+                        {[...Array(5)].map((_, i) => <Star key={i} size={16} className="fill-current" stroke="none" />)}
+                      </div>
+                      <span className="text-sm text-slate-400">• {t(`reviews.timeAgo.${review.date}`)}</span>
+                    </div>
+
+                    <p className="text-slate-700 text-lg leading-relaxed font-medium mb-4">
+                      {displayText}
+                      {shouldTruncate && (
+                        <button onClick={() => toggleText(review.id)} className="ml-2 text-blue-600 font-bold hover:underline">
+                          {isTextExpanded ? t("reviews.readLess") : t("reviews.readMore")}
+                        </button>
+                      )}
+                    </p>
+
+                    <button className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors w-fit">
+                      <ThumbsUp size={14} /> {t("reviews.helpful")}
+                    </button>
                   </div>
-                ))}
-              </div>
+                );
+              })}
+            </div>
+
+            {/* BOTÓN VER TODAS */}
+            <div className="flex justify-start pt-4">
+              <button 
+                onClick={toggleShowAll}
+                className={`group flex items-center justify-center gap-3 py-5 px-10 rounded-2xl font-black text-sm uppercase tracking-[0.2em] transition-all border-2
+                  ${showAllReviews 
+                    ? "bg-white border-slate-200 text-slate-500 hover:bg-slate-50" 
+                    : "bg-blue-600 border-blue-600 text-white shadow-2xl shadow-blue-100 hover:bg-blue-700 hover:-translate-y-1"
+                  }`}
+              >
+                {showAllReviews ? (
+                  <><span>{t("reviews.showLess")}</span><ChevronUp size={20} /></>
+                ) : (
+                  <><span>{t("reviews.viewAll")} ({reviewsData.length})</span><ChevronRight size={20} /></>
+                )}
+              </button>
             </div>
           </div>
-        </div>
 
-        {/* Grid de Reseñas (Desktop) */}
-        <div className="hidden md:grid gap-8 mb-16 md:grid-cols-2 lg:grid-cols-3">
-          {reviewsData.slice(0, 3).map((review) => (
-            <div
-              key={review.id}
-              className="group relative p-8 border border-slate-200 bg-white rounded-[2.5rem] transition-all duration-500 hover:-translate-y-2 hover-neon-blue-shadow"
+          {/* COLUMNA DERECHA: TARJETA STICKY DE GOOGLE */}
+          <div className="hidden lg:block sticky top-32 h-fit">
+            <a 
+              href="#" // Reemplazar con el link real de Google Maps
+              target="_blank"
+              className="group bg-white p-8 rounded-[40px] shadow-2xl shadow-slate-200/40 border border-slate-100 flex flex-col gap-8 hover:border-blue-200 transition-all active:scale-95"
             >
-              <Quote className="absolute top-6 right-6 w-12 h-12 text-slate-50 transition-colors group-hover:text-blue-50" />
-              <div className="pb-6 mb-6 border-b border-slate-100">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center justify-center w-12 h-12 text-lg font-bold text-white rounded-2xl bg-gradient-to-tr from-blue-600 to-blue-400">
-                    {review.avatar}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900 text-base">{review.author}</h3>
-                    <div className="flex gap-0.5">
-                      {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase">
-                  <MapPin className="w-4 h-4 text-blue-600" />
-                  <span>{review.location}</span>
-                  <span>•</span>
-                  <span>{review.date ? t(review.date) : ""}</span>
-                </div>
-                <p className="text-slate-600 italic line-clamp-4">"{review.text}"</p>
-                <div className="pt-5 border-t border-slate-50">
-                  <button className="flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors">
-                    <ThumbsUp className="w-4 h-4" />
-                    <span>{t("reviews.helpful")}</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Botón Ver Todas */}
-        <div className="text-center">
-          <button
-            onClick={() => { setShowAllReviews(true); setCurrentModalReview(0); }}
-            className="inline-flex items-center gap-3 bg-slate-950 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.3em] hover:bg-blue-600 transition-all shadow-2xl"
-          >
-            {t("reviews.viewAll")} ({reviewsData.length})
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-
-        {/* MODAL RESTAURADO */}
-        {showAllReviews && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 backdrop-blur-lg p-4" onClick={() => setShowAllReviews(false)}>
-            <button className="absolute top-6 right-6 p-3 text-white hover:bg-white/10 rounded-full transition-all">
-              <X className="w-8 h-8" />
-            </button>
-            <div className="w-full max-w-3xl bg-white rounded-[2.5rem] overflow-hidden" onClick={e => e.stopPropagation()}>
-              <div className="p-10 border-b border-slate-100 flex items-center gap-5">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-blue-400 flex items-center justify-center text-white text-xl font-bold">
-                  {reviewsData[currentModalReview].avatar}
+              <div className="flex items-center gap-4 border-b border-slate-50 pb-6">
+                <div className="w-14 h-14 bg-white shadow-sm border border-slate-100 rounded-2xl flex items-center justify-center">
+                   <svg className="w-8 h-8" viewBox="0 0 24 24">
+                      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+                      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-black text-slate-900 text-2xl">{reviewsData[currentModalReview].author}</h3>
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />)}
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">
+                    {t("reviews.basedOn")}
+                  </p>
+                  <div className="text-xl font-bold text-slate-950 flex items-center gap-2">
+                    Google <ExternalLink size={14} className="text-blue-600" />
                   </div>
                 </div>
               </div>
-              <div className="p-10">
-                <p className="text-xl text-slate-700 leading-relaxed italic mb-6">"{reviewsData[currentModalReview].text}"</p>
-                <div className="flex items-center justify-between text-slate-400 font-bold uppercase text-sm">
-                  <div className="flex items-center gap-2"><MapPin size={18} className="text-blue-600" /> {reviewsData[currentModalReview].location}</div>
-                  <div>{t(reviewsData[currentModalReview].date)}</div>
+
+              <div className="flex flex-col gap-2">
+                <div className="text-6xl font-black text-slate-950 leading-none">4.9</div>
+                <div className="flex gap-1 text-orange-400">
+                   {[1, 2, 3, 4, 5].map((s) => <Star key={s} size={20} className="fill-current" stroke="none" />)}
                 </div>
+                <span className="text-sm font-bold text-slate-500 uppercase tracking-tight">
+                   152 {t("reviews.reviews")}
+                </span>
               </div>
-              <div className="bg-slate-50 p-6 flex items-center justify-between">
-                <button onClick={prevModalReview} className="p-3 hover:bg-blue-100 rounded-full transition-all text-blue-600"><ChevronLeft size={32}/></button>
-                <span className="font-black text-slate-900">{currentModalReview + 1} / {reviewsData.length}</span>
-                <button onClick={nextModalReview} className="p-3 hover:bg-blue-100 rounded-full transition-all text-blue-600"><ChevronRight size={32}/></button>
+
+              <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                <p className="text-sm font-semibold text-slate-600 leading-relaxed italic">
+                  "The best painting service in Orlando. Clean, fast and professional."
+                </p>
               </div>
+
+              <div className="text-xs font-black text-blue-600 uppercase tracking-[0.2em] flex items-center justify-between group-hover:text-blue-700 transition-colors">
+                {t("reviews.viewGoogle")} <ChevronRight size={16} />
+              </div>
+            </a>
+          </div>
+        </div>
+
+        {/* BLOQUE CTA FINAL */}
+        <div className="max-w-4xl text-left mt-24">
+          <div className="relative overflow-hidden bg-slate-950 rounded-[40px] p-8 md:p-16">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 blur-[100px] -mr-32 -mt-32" />
+            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+              <div className="max-w-xl">
+                <h3 className="text-3xl md:text-5xl font-black text-white leading-tight mb-4 uppercase italic">
+                  {t("reviews.ctaTitle")}
+                </h3>
+                <p className="text-slate-400 text-lg font-medium leading-relaxed">
+                  {t("reviews.ctaSubtitle")}
+                </p>
+              </div>
+              <button className="w-full lg:w-auto bg-blue-600 text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] hover:bg-blue-500 transition-all shadow-2xl shadow-blue-900/20 active:scale-95">
+                {t("reviews.ctaButton")}
+              </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
 
-      <style jsx global>{`
-        .hover-neon-blue-shadow:hover {
-          box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
-          border-color: rgba(37, 99, 235, 0.4);
-        }
-        @keyframes fade-up {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .md\:grid > div { animation: fade-up 0.6s ease-out forwards; }
-      `}</style>
+      </div>
     </section>
   );
 }
