@@ -1,7 +1,9 @@
+
+
 "use client";
 
-import { useState, useRef } from "react";
-import { Star, MapPin, ChevronRight, ChevronUp, CheckCircle, ShieldCheck, MoreVertical, ExternalLink, ThumbsUp } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Star, MapPin, ChevronRight, ChevronUp, CheckCircle, ShieldCheck, ExternalLink, ThumbsUp } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const reviewsData = [
@@ -16,11 +18,41 @@ const reviewsData = [
   { id: 9, author: "Sofía R.", rating: 5, date: "sixMonths", text: "Muy contenta con el resultado final. Son muy limpios y ordenados.", avatar: "S", location: "Winter Park, FL" },
 ];
 
+
 export default function Reviews() {
   const { t } = useLanguage();
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [expandedTexts, setExpandedTexts] = useState<Record<number, boolean>>({});
+  const [rating, setRating] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // EFECTO 2: Contador Animado para el 4.9
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          let start = 0;
+          const end = 4.9;
+          const duration = 1500;
+          const increment = end / (duration / 16);
+
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= end) {
+              setRating(end);
+              clearInterval(timer);
+            } else {
+              setRating(Number(start.toFixed(1)));
+            }
+          }, 16);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const toggleText = (id: number) => {
     setExpandedTexts(prev => ({ ...prev, [id]: !prev[id] }));
@@ -43,7 +75,7 @@ export default function Reviews() {
         
         {/* TITULO PRINCIPAL */}
         <div className="max-w-4xl text-left mb-16">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 border border-blue-500 mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 border border-blue-500 mb-6 shadow-sm animate-bounce-subtle">
             <ShieldCheck className="w-4 h-4 text-white" />
             <span className="text-[10px] font-black text-white uppercase tracking-[0.3em]">
               {t("reviews.badge")}
@@ -67,10 +99,10 @@ export default function Reviews() {
         {/* CUERPO: GRID DE 2 COLUMNAS */}
         <div className="grid lg:grid-cols-[1fr_380px] gap-16 items-start">
           
-          {/* COLUMNA IZQUIERDA: FEED DE RESEÑAS */}
-          <div className="flex flex-col space-y-12 max-w-4xl">
+          {/* COLUMNA IZQUIERDA: FEED DE RESEÑAS CON EFECTO 1 */}
+          <div className="relative flex flex-col space-y-12 max-w-4xl">
             <div className="flex flex-col space-y-10">
-              {displayedReviews.map((review) => {
+              {displayedReviews.map((review, index) => {
                 const isTextExpanded = expandedTexts[review.id];
                 const shouldTruncate = review.text.length > 160;
                 const displayText = shouldTruncate && !isTextExpanded 
@@ -78,10 +110,17 @@ export default function Reviews() {
                   : review.text;
 
                 return (
-                  <div key={review.id} className="flex flex-col pb-10 border-b border-slate-100 last:border-0 animate-in fade-in duration-700">
+                  <div 
+                    key={review.id} 
+                    className="group flex flex-col pb-10 border-b border-slate-100 last:border-0 hover:pl-4 transition-all duration-500 ease-out"
+                    style={{ 
+                      animation: `fadeInSlide 0.6s ease-out forwards ${index * 0.1}s`,
+                      opacity: 0 
+                    }}
+                  >
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-blue-600 font-bold text-xl border border-slate-200">
+                        <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-blue-600 font-bold text-xl border border-slate-200 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
                           {review.avatar}
                         </div>
                         <div>
@@ -102,25 +141,30 @@ export default function Reviews() {
                       <div className="flex gap-0.5 text-orange-400">
                         {[...Array(5)].map((_, i) => <Star key={i} size={16} className="fill-current" stroke="none" />)}
                       </div>
-                      <span className="text-sm text-slate-400">• {t(`reviews.timeAgo.${review.date}`)}</span>
+                      <span className="text-sm text-slate-400 font-medium">• {t(`reviews.timeAgo.${review.date}`)}</span>
                     </div>
 
-                    <p className="text-slate-700 text-lg leading-relaxed font-medium mb-4">
+                    <p className="text-slate-700 text-lg leading-relaxed font-medium mb-4 group-hover:text-slate-900 transition-colors">
                       {displayText}
                       {shouldTruncate && (
-                        <button onClick={() => toggleText(review.id)} className="ml-2 text-blue-600 font-bold hover:underline">
+                        <button onClick={() => toggleText(review.id)} className="ml-2 text-blue-600 font-black hover:underline">
                           {isTextExpanded ? t("reviews.readLess") : t("reviews.readMore")}
                         </button>
                       )}
                     </p>
 
                     <button className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors w-fit">
-                      <ThumbsUp size={14} /> {t("reviews.helpful")}
+                      <ThumbsUp size={14} className="group-hover:scale-110 transition-transform" /> {t("reviews.helpful")}
                     </button>
                   </div>
                 );
               })}
             </div>
+
+            {/* Degradado para invitar al scroll (solo si no se muestran todas) */}
+            {!showAllReviews && (
+                <div className="absolute bottom-20 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+            )}
 
             {/* BOTÓN VER TODAS */}
             <div className="flex justify-start pt-4">
@@ -141,15 +185,15 @@ export default function Reviews() {
             </div>
           </div>
 
-          {/* COLUMNA DERECHA: TARJETA STICKY DE GOOGLE */}
+          {/* COLUMNA DERECHA: TARJETA STICKY CON CONTADOR ANIMADO */}
           <div className="hidden lg:block sticky top-32 h-fit">
             <a 
-              href="#" // Reemplazar con el link real de Google Maps
+              href="#" 
               target="_blank"
-              className="group bg-white p-8 rounded-[40px] shadow-2xl shadow-slate-200/40 border border-slate-100 flex flex-col gap-8 hover:border-blue-200 transition-all active:scale-95"
+              className="group bg-white p-8 rounded-[40px] shadow-2xl shadow-slate-200/40 border border-slate-100 flex flex-col gap-8 hover:border-blue-200 hover:shadow-blue-100 transition-all duration-500 active:scale-95"
             >
               <div className="flex items-center gap-4 border-b border-slate-50 pb-6">
-                <div className="w-14 h-14 bg-white shadow-sm border border-slate-100 rounded-2xl flex items-center justify-center">
+                <div className="w-14 h-14 bg-white shadow-sm border border-slate-100 rounded-2xl flex items-center justify-center group-hover:rotate-6 transition-transform">
                    <svg className="w-8 h-8" viewBox="0 0 24 24">
                       <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                       <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -168,7 +212,10 @@ export default function Reviews() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <div className="text-6xl font-black text-slate-950 leading-none">4.9</div>
+                {/* CONTADOR ANIMADO */}
+                <div className="text-7xl font-black text-slate-950 leading-none tracking-tighter">
+                  {rating.toFixed(1)}
+                </div>
                 <div className="flex gap-1 text-orange-400">
                    {[1, 2, 3, 4, 5].map((s) => <Star key={s} size={20} className="fill-current" stroke="none" />)}
                 </div>
@@ -177,40 +224,40 @@ export default function Reviews() {
                 </span>
               </div>
 
-              <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+              <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100 group-hover:bg-white transition-colors">
                 <p className="text-sm font-semibold text-slate-600 leading-relaxed italic">
                   "The best painting service in Orlando. Clean, fast and professional."
                 </p>
               </div>
 
-              <div className="text-xs font-black text-blue-600 uppercase tracking-[0.2em] flex items-center justify-between group-hover:text-blue-700 transition-colors">
+              <div className="text-xs font-black text-blue-600 uppercase tracking-[0.2em] flex items-center justify-between group-hover:translate-x-1 transition-all">
                 {t("reviews.viewGoogle")} <ChevronRight size={16} />
               </div>
             </a>
           </div>
         </div>
 
-        {/* BLOQUE CTA FINAL */}
-        <div className="max-w-4xl text-left mt-24">
-          <div className="relative overflow-hidden bg-slate-950 rounded-[40px] p-8 md:p-16">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 blur-[100px] -mr-32 -mt-32" />
-            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
-              <div className="max-w-xl">
-                <h3 className="text-3xl md:text-5xl font-black text-white leading-tight mb-4 uppercase italic">
-                  {t("reviews.ctaTitle")}
-                </h3>
-                <p className="text-slate-400 text-lg font-medium leading-relaxed">
-                  {t("reviews.ctaSubtitle")}
-                </p>
-              </div>
-              <button className="w-full lg:w-auto bg-blue-600 text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] hover:bg-blue-500 transition-all shadow-2xl shadow-blue-900/20 active:scale-95">
-                {t("reviews.ctaButton")}
-              </button>
-            </div>
-          </div>
-        </div>
-
       </div>
+
+      <style jsx>{`
+        @keyframes fadeInSlide {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes bounce-subtle {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
+        }
+        .animate-bounce-subtle {
+          animation: bounce-subtle 3s infinite ease-in-out;
+        }
+      `}</style>
     </section>
   );
 }
