@@ -32,6 +32,22 @@ export default function CleanEpicLightBeforeAfterGallery() {
   const [isManualControl, setIsManualControl] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
+  const updateComparePosition = useCallback((clientX: number) => {
+    if (!sliderRef.current) return;
+
+    const rect = sliderRef.current.getBoundingClientRect();
+    const position = ((clientX - rect.left) / rect.width) * 100;
+
+    window.requestAnimationFrame(() => {
+      setComparePosition(Math.max(0, Math.min(100, position)));
+    });
+  }, []);
+
+  const handleDragEnd = useCallback(() => {
+    setIsManualControl(false);
+    setIsPaused(false);
+  }, []);
+
   const galleryData: GalleryItem[] = useMemo(() => {
     const heroImages = [
       "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
@@ -97,19 +113,33 @@ export default function CleanEpicLightBeforeAfterGallery() {
     return () => clearInterval(interval);
   }, [activeId, filteredGallery, isPaused, showAllPhotos]);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent | React.TouchEvent) => {
-    if (!isManualControl && e.type !== 'touchmove') return;
-    
-    if (sliderRef.current) {
-      const rect = sliderRef.current.getBoundingClientRect();
-      const x = 'touches' in e ? (e as React.TouchEvent).touches[0].clientX : (e as React.MouseEvent).clientX;
-      const position = ((x - rect.left) / rect.width) * 100;
-      
-      window.requestAnimationFrame(() => {
-        setComparePosition(Math.max(0, Math.min(100, position)));
-      });
-    }
-  }, [isManualControl]);
+  useEffect(() => {
+    if (!isManualControl) return;
+
+    const handleWindowMouseMove = (e: MouseEvent) => {
+      updateComparePosition(e.clientX);
+    };
+
+    const handleWindowTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        updateComparePosition(e.touches[0].clientX);
+      }
+    };
+
+    window.addEventListener("mousemove", handleWindowMouseMove);
+    window.addEventListener("mouseup", handleDragEnd);
+    window.addEventListener("touchmove", handleWindowTouchMove, { passive: true });
+    window.addEventListener("touchend", handleDragEnd);
+    window.addEventListener("touchcancel", handleDragEnd);
+
+    return () => {
+      window.removeEventListener("mousemove", handleWindowMouseMove);
+      window.removeEventListener("mouseup", handleDragEnd);
+      window.removeEventListener("touchmove", handleWindowTouchMove);
+      window.removeEventListener("touchend", handleDragEnd);
+      window.removeEventListener("touchcancel", handleDragEnd);
+    };
+  }, [isManualControl, updateComparePosition, handleDragEnd]);
 
   const handleSelectProject = (id: number) => {
     setActiveId(id);
@@ -159,18 +189,14 @@ export default function CleanEpicLightBeforeAfterGallery() {
               className="relative w-full aspect-[4/5] lg:aspect-[21/9] rounded-[1.5rem] lg:rounded-[2.5rem] overflow-hidden bg-white border border-slate-100 group shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] transform-gpu transition-all duration-500"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => {
-                setIsPaused(false);
-                setIsManualControl(false);
+                if (!isManualControl) {
+                  setIsPaused(false);
+                }
               }}
             >
               <div 
                 ref={sliderRef}
-                className="w-full h-full relative cursor-ew-resize touch-none"
-                onMouseMove={handleMouseMove}
-                onTouchMove={handleMouseMove}
-                onMouseDown={() => {setIsManualControl(true); setIsPaused(true);}}
-                onMouseUp={() => {setIsManualControl(false); setIsPaused(false);}}
-                onTouchEnd={() => setIsManualControl(false)}
+                className="w-full h-full relative touch-none"
               >
                 {/* CAPA ANTES */}
                 <div className="absolute inset-0 select-none pointer-events-none">
@@ -208,11 +234,21 @@ export default function CleanEpicLightBeforeAfterGallery() {
 
                 {/* LÍNEA DIVISORIA */}
                 <div 
-                  className="absolute inset-y-0 w-[2px] lg:w-[3px] bg-white pointer-events-none transform-gpu z-20 shadow-[0_0_20px_rgba(0,0,0,0.3)]" 
+                  className="absolute inset-y-0 w-[2px] lg:w-[3px] bg-white pointer-events-auto transform-gpu z-20 shadow-[0_0_20px_rgba(0,0,0,0.3)]" 
                   style={{ left: `${comparePosition}%` }}
                 >
                   <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-                    <div className="w-10 h-10 lg:w-14 lg:h-14 bg-white rounded-full flex items-center justify-center shadow-xl border border-slate-100">
+                    <div
+                      className="w-10 h-10 lg:w-14 lg:h-14 bg-white rounded-full flex items-center justify-center shadow-xl border border-slate-100 cursor-ew-resize"
+                      onMouseDown={() => {
+                        setIsManualControl(true);
+                        setIsPaused(true);
+                      }}
+                      onTouchStart={() => {
+                        setIsManualControl(true);
+                        setIsPaused(true);
+                      }}
+                    >
                       <MoveHorizontal className="text-slate-900 w-5 h-5 lg:w-6 lg:h-6" />
                     </div>
                   </div>
