@@ -53,95 +53,69 @@ export default function ContactForm() {
       <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-16">
         {/* Header Unificado */}
         <div className="max-w-3xl mb-16 text-center mx-auto">
-          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 uppercase tracking-tighter leading-none">
+          <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-5 tracking-tight leading-[1.05]">
             {t("contact.title")}{" "}
-            <span className="text-blue-600 italic">{t("contact.titleHighlight")}</span>
+            <span className="text-blue-600 italic font-bold">{t("contact.titleHighlight")}</span>
           </h2>
           <div className="w-24 h-2 bg-blue-600 mx-auto rounded-full mb-8"></div>
-          <p className="text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto italic">
+          <p className="text-lg md:text-xl text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
             {t("contact.subtitle")}
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10">
-          {/* Información de Contacto - Estilo Premium */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-[2.5rem] border border-slate-200 p-10 shadow-xl shadow-slate-200/50">
-              <h3 className="text-2xl font-black text-slate-900 mb-8 uppercase tracking-tight">
-                {t("contact.info.title")}
-              </h3>
-              
-              <div className="space-y-8">
-                <div className="flex items-start gap-5">
-                  <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center flex-shrink-0 text-blue-600">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">{t("contact.info.phone")}</p>
-                    <a href="tel:+17863506367" className="text-lg font-bold text-slate-900 hover:text-blue-600 transition-colors break-words">
-                      (786) 350-6367
-                    </a>
-                  </div>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <a href="tel:+17863506367" className="bg-white rounded-2xl border border-slate-200 p-4 md:p-5 shadow-sm hover:border-blue-300 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                  <Phone className="w-5 h-5" />
                 </div>
-
-                <div className="flex items-start gap-5">
-                  <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center flex-shrink-0 text-blue-600">
-                    <Mail className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Email</p>
-                    <a href="mailto:contact@luisbety.com" className="text-lg font-bold text-slate-900 hover:text-blue-600 transition-colors break-all">
-                      contact@luisbety.com
-                    </a>
-                  </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-slate-500 tracking-wide">{t("contact.info.phone")}</p>
+                  <p className="text-sm md:text-base font-semibold text-slate-900">(786) 350-6367</p>
                 </div>
+              </div>
+            </a>
 
-                <div className="flex items-start gap-5">
-                  <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center flex-shrink-0 text-blue-600">
-                    <MapPin className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">{t("contact.info.address")}</p>
-                    <p className="text-lg font-bold text-slate-900 leading-snug break-words">
-                      2381 Westwood Dr<br />
-                      Longwood, FL 32779
-                    </p>
-                  </div>
+            <a href="mailto:contact@luisbety.com" className="bg-white rounded-2xl border border-slate-200 p-4 md:p-5 shadow-sm hover:border-blue-300 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                  <Mail className="w-5 h-5" />
                 </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-slate-500 tracking-wide">Email</p>
+                  <p className="text-sm md:text-base font-semibold text-slate-900">contact@luisbety.com</p>
+                </div>
+              </div>
+            </a>
 
-                <div className="flex items-start gap-5">
-                  <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center flex-shrink-0 text-blue-600">
-                    <Clock className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">{t("contact.info.hours")}</p>
-                    <p className="text-lg font-bold text-slate-900">
-                      {t("contact.info.hoursText")}
-                    </p>
-                  </div>
+            <div className="bg-white rounded-2xl border border-slate-200 p-4 md:p-5 shadow-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-slate-500 tracking-wide">{t("contact.info.address")}</p>
+                  <p className="text-sm md:text-base font-semibold text-slate-900 leading-tight">Longwood, FL</p>
                 </div>
               </div>
             </div>
 
-            {/* Quick Benefits - Estilo Dark Premium */}
-            <div className="bg-slate-950 rounded-[2.5rem] p-10 text-white shadow-2xl shadow-blue-900/20 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 blur-3xl group-hover:bg-blue-600/20 transition-all"></div>
-              <h3 className="text-xl font-black mb-6 uppercase tracking-widest text-blue-500">{t("contact.benefits.title")}</h3>
-              <ul className="space-y-4">
-                {[0, 1, 2, 3].map((i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[10px] font-black italic">
-                      ✓
-                    </div>
-                    <span className="font-bold text-slate-200">{t(`contact.benefits.items.${i}`)}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="bg-white rounded-2xl border border-slate-200 p-4 md:p-5 shadow-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                  <Clock className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-slate-500 tracking-wide">{t("contact.info.hours")}</p>
+                  <p className="text-sm md:text-base font-semibold text-slate-900 leading-tight">{t("contact.info.hoursText")}</p>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Formulario - Estilo Limpio y Robusto */}
-          <div className="lg:col-span-3">
+          <div>
             <form onSubmit={handleSubmit} className="bg-white rounded-[2.5rem] border border-slate-200 p-8 md:p-12 shadow-xl shadow-slate-200/50">
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Inputs con estilo unificado */}
@@ -151,7 +125,7 @@ export default function ContactForm() {
                   { id: "phone", label: t("contact.form.phone"), type: "tel", placeholder: t("contact.form.phonePlaceholder") }
                 ].map((input) => (
                   <div key={input.id}>
-                    <label htmlFor={input.id} className="block text-xs font-black text-slate-900 uppercase tracking-[0.2em] mb-3 ml-1">
+                    <label htmlFor={input.id} className="block text-sm font-semibold text-slate-800 mb-2.5 ml-1">
                       {input.label} *
                     </label>
                     <input
@@ -161,14 +135,14 @@ export default function ContactForm() {
                       required
                       value={(formData as any)[input.id]}
                       onChange={handleChange}
-                      className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all outline-none font-medium"
+                      className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all outline-none font-normal text-slate-800"
                       placeholder={input.placeholder}
                     />
                   </div>
                 ))}
 
                 <div>
-                  <label htmlFor="serviceType" className="block text-xs font-black text-slate-900 uppercase tracking-[0.2em] mb-3 ml-1">
+                  <label htmlFor="serviceType" className="block text-sm font-semibold text-slate-800 mb-2.5 ml-1">
                     {t("contact.form.serviceType")} *
                   </label>
                   <select
@@ -177,7 +151,7 @@ export default function ContactForm() {
                     required
                     value={formData.serviceType}
                     onChange={handleChange}
-                    className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all outline-none font-medium appearance-none"
+                    className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all outline-none font-normal text-slate-800 appearance-none"
                   >
                     <option value="">{t("contact.form.selectService")}</option>
                     <option value="interior">{t("contact.form.services.interior")}</option>
@@ -190,7 +164,7 @@ export default function ContactForm() {
                 </div>
 
                 <div className="md:col-span-2">
-                  <label htmlFor="address" className="block text-xs font-black text-slate-900 uppercase tracking-[0.2em] mb-3 ml-1">
+                  <label htmlFor="address" className="block text-sm font-semibold text-slate-800 mb-2.5 ml-1">
                     {t("contact.form.address")} *
                   </label>
                   <input
@@ -200,17 +174,17 @@ export default function ContactForm() {
                     required
                     value={formData.address}
                     onChange={handleChange}
-                    className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all outline-none font-medium"
+                    className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all outline-none font-normal text-slate-800"
                     placeholder={t("contact.form.addressPlaceholder")}
                   />
                 </div>
 
                 {/* Grid secundario para selects pequeños */}
                 <div>
-                  <label htmlFor="projectSize" className="block text-xs font-black text-slate-900 uppercase tracking-[0.2em] mb-3 ml-1">
+                  <label htmlFor="projectSize" className="block text-sm font-semibold text-slate-800 mb-2.5 ml-1">
                     {t("contact.form.projectSize")}
                   </label>
-                  <select id="projectSize" name="projectSize" value={formData.projectSize} onChange={handleChange} className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-blue-600 transition-all outline-none font-medium">
+                  <select id="projectSize" name="projectSize" value={formData.projectSize} onChange={handleChange} className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-blue-600 transition-all outline-none font-normal text-slate-800">
                     <option value="">{t("contact.form.select")}</option>
                     <option value="small">{t("contact.form.size.small")}</option>
                     <option value="medium">{t("contact.form.size.medium")}</option>
@@ -219,10 +193,10 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                  <label htmlFor="budget" className="block text-xs font-black text-slate-900 uppercase tracking-[0.2em] mb-3 ml-1">
+                  <label htmlFor="budget" className="block text-sm font-semibold text-slate-800 mb-2.5 ml-1">
                     {t("contact.form.budget")}
                   </label>
-                  <select id="budget" name="budget" value={formData.budget} onChange={handleChange} className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-blue-600 transition-all outline-none font-medium">
+                  <select id="budget" name="budget" value={formData.budget} onChange={handleChange} className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-blue-600 transition-all outline-none font-normal text-slate-800">
                     <option value="">{t("contact.form.select")}</option>
                     <option value="under-1k">{t("contact.form.budgetRange.under1k")}</option>
                     <option value="1k-3k">{t("contact.form.budgetRange.1k3k")}</option>
@@ -232,7 +206,7 @@ export default function ContactForm() {
                 </div>
 
                 <div className="md:col-span-2">
-                  <label htmlFor="message" className="block text-xs font-black text-slate-900 uppercase tracking-[0.2em] mb-3 ml-1">
+                  <label htmlFor="message" className="block text-sm font-semibold text-slate-800 mb-2.5 ml-1">
                     {t("contact.form.message")}
                   </label>
                   <textarea
@@ -241,7 +215,7 @@ export default function ContactForm() {
                     rows={4}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all outline-none font-medium resize-none"
+                    className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-600/5 focus:border-blue-600 transition-all outline-none font-normal text-slate-800 resize-none"
                     placeholder={t("contact.form.messagePlaceholder")}
                   />
                 </div>
@@ -252,7 +226,7 @@ export default function ContactForm() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-blue-600 text-white px-8 py-5 rounded-[1.5rem] font-black text-sm uppercase tracking-[0.3em] hover:bg-slate-950 transition-all disabled:opacity-50 flex items-center justify-center gap-4 group shadow-xl shadow-blue-200"
+                  className="w-full bg-blue-600 text-white px-8 py-5 rounded-[1.5rem] font-bold text-sm md:text-base tracking-wide hover:bg-slate-950 transition-all disabled:opacity-50 flex items-center justify-center gap-3 group shadow-xl shadow-blue-200"
                 >
                   {isSubmitting ? (
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
@@ -271,7 +245,7 @@ export default function ContactForm() {
                 )}
               </div>
 
-              <p className="text-[10px] text-slate-400 mt-6 text-center font-bold uppercase tracking-widest">
+              <p className="text-xs text-slate-500 mt-6 text-center font-medium">
                 {t("contact.form.disclaimer")}
               </p>
             </form>

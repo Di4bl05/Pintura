@@ -75,7 +75,7 @@ export default function Reviews() {
         
         {/* TITULO PRINCIPAL */}
         <div className="max-w-4xl text-left mb-16">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 border border-blue-500 mb-6 shadow-sm animate-bounce-subtle">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 border border-blue-500 mb-6 shadow-sm">
             <ShieldCheck className="w-4 h-4 text-white" />
             <span className="text-[10px] font-black text-white uppercase tracking-[0.3em]">
               {t("reviews.badge")}
@@ -102,7 +102,7 @@ export default function Reviews() {
           {/* COLUMNA IZQUIERDA: FEED DE RESEÑAS CON EFECTO 1 */}
           <div className="relative flex flex-col space-y-12 max-w-4xl">
             <div className="flex flex-col space-y-10">
-              {displayedReviews.map((review, index) => {
+              {displayedReviews.map((review) => {
                 const isTextExpanded = expandedTexts[review.id];
                 const shouldTruncate = review.text.length > 160;
                 const displayText = shouldTruncate && !isTextExpanded 
@@ -112,15 +112,11 @@ export default function Reviews() {
                 return (
                   <div 
                     key={review.id} 
-                    className="group flex flex-col pb-10 border-b border-slate-100 last:border-0 hover:pl-4 transition-all duration-500 ease-out"
-                    style={{ 
-                      animation: `fadeInSlide 0.6s ease-out forwards ${index * 0.1}s`,
-                      opacity: 0 
-                    }}
+                    className="flex flex-col pb-10 border-b border-slate-100 last:border-0"
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-blue-600 font-bold text-xl border border-slate-200 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
+                        <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-blue-600 font-bold text-xl border border-slate-200">
                           {review.avatar}
                         </div>
                         <div>
@@ -144,7 +140,7 @@ export default function Reviews() {
                       <span className="text-sm text-slate-400 font-medium">• {t(`reviews.timeAgo.${review.date}`)}</span>
                     </div>
 
-                    <p className="text-slate-700 text-lg leading-relaxed font-medium mb-4 group-hover:text-slate-900 transition-colors">
+                    <p className="text-slate-700 text-lg leading-relaxed font-medium mb-4">
                       {displayText}
                       {shouldTruncate && (
                         <button onClick={() => toggleText(review.id)} className="ml-2 text-blue-600 font-black hover:underline">
@@ -153,8 +149,8 @@ export default function Reviews() {
                       )}
                     </p>
 
-                    <button className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors w-fit">
-                      <ThumbsUp size={14} className="group-hover:scale-110 transition-transform" /> {t("reviews.helpful")}
+                    <button className="flex items-center gap-2 text-xs font-bold text-slate-400 w-fit">
+                      <ThumbsUp size={14} /> {t("reviews.helpful")}
                     </button>
                   </div>
                 );
@@ -173,7 +169,7 @@ export default function Reviews() {
                 className={`group flex items-center justify-center gap-3 py-5 px-10 rounded-2xl font-black text-sm uppercase tracking-[0.2em] transition-all border-2
                   ${showAllReviews 
                     ? "bg-white border-slate-200 text-slate-500 hover:bg-slate-50" 
-                    : "bg-blue-600 border-blue-600 text-white shadow-2xl shadow-blue-100 hover:bg-blue-700 hover:-translate-y-1"
+                    : "bg-blue-600 border-blue-600 text-white shadow-2xl shadow-blue-100 hover:bg-blue-700"
                   }`}
               >
                 {showAllReviews ? (
@@ -239,25 +235,7 @@ export default function Reviews() {
 
       </div>
 
-      <style jsx>{`
-        @keyframes fadeInSlide {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        @keyframes bounce-subtle {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-3px); }
-        }
-        .animate-bounce-subtle {
-          animation: bounce-subtle 3s infinite ease-in-out;
-        }
-      `}</style>
+
     </section>
   );
 }

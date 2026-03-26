@@ -72,7 +72,7 @@ export default function Services() {
           {/* Botones de scroll: solo visibles en desktop */}
           <button 
             onClick={() => scroll("left")}
-            className="absolute -left-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-slate-950 text-white border border-slate-800 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 transition-all hidden md:flex"
+            className="absolute -left-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white text-blue-700 border border-blue-100 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
@@ -128,7 +128,7 @@ export default function Services() {
 
           <button 
             onClick={() => scroll("right")}
-            className="absolute -right-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-slate-950 text-white border border-slate-800 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 transition-all hidden md:flex"
+            className="absolute -right-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white text-blue-700 border border-blue-100 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
