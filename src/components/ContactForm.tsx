@@ -50,7 +50,7 @@ export default function ContactForm() {
       {/* Elemento Decorativo de Fondo */}
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100/50 blur-[120px] rounded-full -z-10" />
 
-      <div className="container mx-auto px-6 lg:px-16">
+      <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-16">
         {/* Header Unificado */}
         <div className="max-w-3xl mb-16 text-center mx-auto">
           <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 uppercase tracking-tighter leading-none">

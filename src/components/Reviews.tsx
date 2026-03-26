@@ -71,7 +71,7 @@ export default function Reviews() {
 
   return (
     <section ref={sectionRef} id="reviews" className="relative pt-24 pb-32 bg-white antialiased overflow-x-hidden">
-      <div className="container relative z-10 mx-auto px-6">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-16">
         
         {/* TITULO PRINCIPAL */}
         <div className="max-w-4xl text-left mb-16">

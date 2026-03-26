@@ -41,13 +41,13 @@ export default function Services() {
       {/* Glow de fondo adaptado a pantallas pequeñas */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 md:left-1/4 w-[30rem] md:w-[60rem] h-[30rem] md:h-[60rem] bg-blue-100 rounded-full blur-[80px] md:blur-[150px] pointer-events-none -z-10 opacity-60" />
 
-      <div className="container relative z-10 px-4 md:px-6 mx-auto max-w-[1400px]">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-16">
         
         {/* ENCABEZADO: Responsive h2 y paddings */}
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 md:gap-12 mb-10 md:mb-16 items-start lg:items-center">
           <div className="lg:col-span-8 text-left">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 md:px-5 md:py-2 rounded-full bg-blue-600 mb-4 md:mb-6 shadow-xl shadow-blue-100">
-              <ShieldCheck className="w-3.5 h-3.5 md:w-4 h-4 text-white" />
+              <ShieldCheck className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
               <span className="text-[9px] md:text-[10px] font-black text-white uppercase tracking-[0.2em] md:tracking-[0.3em]">
                 {t("services.badge")}
               </span>
@@ -72,7 +72,7 @@ export default function Services() {
           {/* Botones de scroll: solo visibles en desktop */}
           <button 
             onClick={() => scroll("left")}
-            className="absolute -left-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white border border-slate-100 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex"
+            className="absolute -left-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-slate-950 text-white border border-slate-800 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 transition-all hidden md:flex"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
@@ -128,7 +128,7 @@ export default function Services() {
 
           <button 
             onClick={() => scroll("right")}
-            className="absolute -right-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white border border-slate-100 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex"
+            className="absolute -right-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-slate-950 text-white border border-slate-800 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 transition-all hidden md:flex"
           >
             <ChevronRight className="w-6 h-6" />
           </button>

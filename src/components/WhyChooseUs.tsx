@@ -21,7 +21,7 @@ export default function WhyChooseUs() {
 
   return (
     <section className="py-20 bg-white/60">
-      <div className="container mx-auto px-4">
+      <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-16">
         <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           <div className="order-2 md:order-1">
             <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">

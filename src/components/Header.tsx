@@ -35,24 +35,22 @@ export default function Header() {
     <header 
       className={`fixed top-0 z-50 w-full transition-all duration-500 ${
         scrolled 
-          ? "bg-white/90 backdrop-blur-md py-3 shadow-lg border-b border-slate-200" 
+          ? "bg-slate-950/80 backdrop-blur-md py-3 shadow-lg" 
           : "bg-transparent py-5"
       }`}
     >
-      <nav className="px-6 lg:px-16">
+      <nav className="mx-auto w-full max-w-[1400px] px-6 lg:px-16">
         <div className="flex items-center justify-between">
           
           {/* Logo con efecto de escala */}
-          <Link href="/" className="flex-shrink-0 transition-transform hover:scale-105 active:scale-95 ml-12">
+          <Link href="/" className="flex-shrink-0 transition-transform hover:scale-105 active:scale-95 ml-0">
             <img 
               src="/images/logo/logo-mejorado-removebg-preview.png" 
               alt="LUISBETY INC" 
               className={`transition-all duration-300 ${
                 scrolled ? "h-12" : "h-16 md:h-20"
-              } w-auto brightness-0 invert-[${scrolled ? '0' : '1'}]`} 
-              /* La lógica de brightness asegura que el logo se vea blanco sobre el hero oscuro 
-                 y negro/original cuando el header se vuelve blanco */
-              style={{ filter: scrolled ? 'none' : 'brightness(0) invert(1)' }}
+              } w-auto`} 
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
           </Link>
 
@@ -64,7 +62,7 @@ export default function Header() {
                 href={item.href}
                 onClick={(e) => handleSmoothScroll(e, item.href)}
                 className={`text-sm font-bold uppercase tracking-widest transition-all hover:text-blue-500 relative group ${
-                  scrolled ? "text-slate-800" : "text-white"
+                  scrolled ? "text-white/95" : "text-white"
                 }`}
               >
                 {item.name}
@@ -77,9 +75,7 @@ export default function Header() {
           <div className="hidden md:flex items-center space-x-6">
             <button
               onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
-              className={`flex items-center gap-1.5 font-bold uppercase text-xs tracking-tighter transition-colors ${
-                scrolled ? "text-slate-600 hover:text-blue-600" : "text-white/80 hover:text-white"
-              }`}
+              className="flex items-center gap-1.5 font-bold uppercase text-xs tracking-tighter transition-colors text-white/80 hover:text-white"
             >
               <Globe className="w-4 h-4" />
               {language}
@@ -88,11 +84,7 @@ export default function Header() {
 
             <a
               href="tel:+17863506367"
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-black text-sm tracking-widest transition-all shadow-md active:scale-95 ${
-                scrolled 
-                  ? "bg-slate-900 text-white hover:bg-blue-600" 
-                  : "bg-white text-slate-900 hover:bg-blue-500 hover:text-white"
-              }`}
+              className="flex items-center gap-2 px-6 py-3 rounded-full font-black text-sm tracking-widest transition-all shadow-md active:scale-95 bg-white text-slate-900 hover:bg-blue-500 hover:text-white"
             >
               <Phone className="w-4 h-4 fill-current" />
               <span className="font-mono text-sm font-bold">(786) 350-6367</span>
@@ -103,11 +95,7 @@ export default function Header() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className={`md:hidden w-11 h-11 rounded-xl border transition-all duration-300 flex items-center justify-center shadow-lg active:scale-95 ${
-              scrolled
-                ? "bg-slate-900 text-white border-slate-900"
-                : "bg-white/10 text-white border-white/30 backdrop-blur-md"
-            }`}
+            className="md:hidden w-11 h-11 rounded-xl border transition-all duration-300 flex items-center justify-center shadow-lg active:scale-95 bg-white/10 text-white border-white/30 backdrop-blur-md"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
