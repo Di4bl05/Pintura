@@ -6,7 +6,6 @@ import WhyChooseUs from "@/components/WhyChooseUs"; // La sección de la foto Fo
 import Services from "@/components/Services";
 import BeforeAfterGallery from "@/components/BeforeAfterGallery";
 import Reviews from "@/components/Reviews";
-import ServiceAreas from "@/components/ServiceAreas";
 import CTASection from "@/components/CTASection"; // El cierre azul con botones
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
@@ -19,27 +18,25 @@ export default function Home() {
       {/* 1. Inicio */}
       <Hero />
 
-      {/* 3. Qué hacemos */}
+      {/* 2. Qué hacemos */}
       <Services />
 
-      {/* 4. Prueba visual */}
+      {/* 3. Prueba visual */}
       <BeforeAfterGallery />
 
-      {/* 5. Lo que dicen de nosotros */}
+      {/* 4. Lo que dicen de nosotros */}
       <Reviews />
 
-      {/* 6. Dónde estamos */}
-      <ServiceAreas />
-
-      {/* 2. Autoridad y Confianza (Aquí va la foto Fo.jpg) */}
+      {/* 5. Autoridad y Confianza (Aquí va la foto Fo.jpg) */}
       <WhyChooseUs />
 
-      {/* 7. Empujón final antes del formulario */}
+      {/* 6. Empujón final antes del formulario */}
       <CTASection />
 
-      {/* 8. Captura de datos */}
+      {/* 7. Captura de datos */}
       <ContactForm />
       
+      {/* 8. Resumen de nosotros*/}
       <Footer />
     </main>
   );

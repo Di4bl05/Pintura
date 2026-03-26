@@ -1,68 +1,79 @@
 "use client";
 
 import Image from "next/image";
-import { CheckCircle2 } from "lucide-react";
-import MobileAccordion from "@/components/MobileAccordion";
+import { ShieldCheck, Clock, Award, Sparkles, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function WhyChooseUs() {
   const { t } = useLanguage();
-  
-  const benefits = [
-    t("whyChoose.items.0"),
-    t("whyChoose.items.1"),
-    t("whyChoose.items.2"),
-    t("whyChoose.items.3"),
-    t("whyChoose.items.4"),
-    t("whyChoose.items.5"),
-    t("whyChoose.items.6"),
-    t("whyChoose.items.7")
-  ];
 
   return (
-    <section className="py-20 bg-white/60">
+    <section id="why-choose-us" className="py-20 md:py-32 bg-white antialiased">
       <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-16">
-        <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          <div className="order-2 md:order-1">
-            <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-              <Image
-                src="/images/gallery/pintores-exteriores-residenciales-orlando.webp"
-                alt="Professional painting team"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        
+        {/* Encabezado Simple (Sin animaciones pesadas) */}
+        <div className="mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600 mb-6 shadow-md shadow-blue-100">
+            <Sparkles className="w-3.5 h-3.5 text-white" />
+            <span className="text-[9px] font-black text-white uppercase tracking-[0.2em]">
+              {t("whyChoose.badge") || "EXCELENCIA COMPROBADA"}
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black text-slate-950 uppercase tracking-tighter leading-none">
+            {t("whyChoose.title")} <span className="text-blue-600 italic">{t("whyChoose.titleHighlight")}</span>
+          </h2>
+        </div>
+
+        {/* BENTO GRID OPTIMIZADO (Sin transformaciones costosas) */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6">
+          
+          {/* Bloque de Texto Principal (Col 7) */}
+          <div className="md:col-span-7 bg-slate-950 rounded-[2rem] p-8 md:p-12 text-white flex flex-col justify-center">
+             <h3 className="text-3xl md:text-4xl font-black italic uppercase mb-6 tracking-tight">
+                {t("whyChoose.mainBenefit") || "Más que pintura, es protección"}
+             </h3>
+             <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
+                {t("whyChoose.description")}
+             </p>
+          </div>
+
+          {/* Imagen (Col 5) - Optimizada con priority */}
+          <div className="md:col-span-5 relative h-64 md:h-auto rounded-[2rem] overflow-hidden border border-slate-100">
+            <Image
+              src="/images/gallery/pintores-exteriores-residenciales-orlando.webp"
+              alt="Quality"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 40vw"
+              priority
+            />
+          </div>
+
+          {/* Fila Inferior de Beneficios (3 columnas) */}
+          <div className="md:col-span-4 bg-blue-600 rounded-[2rem] p-8 text-white flex items-center gap-5">
+            <ShieldCheck className="w-10 h-10 flex-shrink-0" />
+            <div>
+              <h4 className="font-black uppercase text-sm tracking-widest">Garantía Real</h4>
+              <p className="text-blue-100 text-[11px] font-bold uppercase mt-1">Soporte post-servicio incluido.</p>
             </div>
           </div>
-          <div className="order-1 md:order-2">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              {t("whyChoose.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-primary-700">{t("whyChoose.titleHighlight")}</span>
-            </h2>
-            <p className="text-gray-600 mb-6 text-lg">
-              {t("whyChoose.description")}
-            </p>
-            
-            <MobileAccordion
-              title={t("whyChoose.benefits")}
-              defaultOpen={true}
-              headerContent={
-                <div className="text-left">
-                  <h3 className="text-base font-bold text-gray-900">{t("whyChoose.benefits")}</h3>
-                  <p className="text-xs text-gray-600">{t("whyChoose.benefitsCount")}</p>
-                </div>
-              }
-            >
-              <ul className="space-y-4">
-                {benefits.map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <CheckCircle2 className="text-primary-600 w-6 h-6 flex-shrink-0 mt-1" />
-                    <span className="text-gray-700 font-medium">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </MobileAccordion>
+
+          <div className="md:col-span-4 bg-slate-100 rounded-[2rem] p-8 text-slate-900 flex items-center gap-5">
+            <Clock className="w-10 h-10 text-blue-600 flex-shrink-0" />
+            <div>
+              <h4 className="font-black uppercase text-sm tracking-widest">Puntualidad</h4>
+              <p className="text-slate-500 text-[11px] font-bold uppercase mt-1">Cronogramas estrictos.</p>
+            </div>
           </div>
+
+          <div className="md:col-span-4 bg-slate-100 rounded-[2rem] p-8 text-slate-900 flex items-center gap-5">
+            <Award className="w-10 h-10 text-blue-600 flex-shrink-0" />
+            <div>
+              <h4 className="font-black uppercase text-sm tracking-widest">Material Premium</h4>
+              <p className="text-slate-500 text-[11px] font-bold uppercase mt-1">Sherwin-Williams & Benjamin Moore.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
