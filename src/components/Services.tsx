@@ -41,17 +41,17 @@ export default function Services() {
   return (
     <section 
       id="services" 
-      className="relative pt-36 md:pt-24 pb-20 md:pb-32 overflow-hidden antialiased bg-white"
+      className="relative py-16 lg:py-24 overflow-hidden antialiased bg-white"
     >
-      {/* Glow de fondo */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 md:left-1/4 w-[30rem] md:w-[60rem] h-[30rem] md:h-[60rem] bg-blue-50 rounded-full blur-[100px] pointer-events-none -z-10 opacity-50" />
+      {/* Glow de fondo suavizado igual al de CombinedConversion */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 lg:left-1/4 w-[30rem] lg:w-[60rem] h-[30rem] lg:h-[60rem] bg-blue-50 rounded-full blur-[100px] pointer-events-none -z-10 opacity-50" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-16">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-12">
         
-        {/* ENCABEZADO */}
+        {/* ENCABEZADO CON JERARQUÍA UNIFICADA */}
         <div className="max-w-5xl text-left mb-12 md:mb-20 px-4 md:px-0">
           
-          {/* Badge Estilo Galería (Restaurado y Actualizado) */}
+          {/* Badge Estilo Galería */}
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 mb-8 shadow-xl shadow-blue-100 w-fit">
             <Sparkles className="w-4 h-4 text-white" />
             <span className="text-[10px] font-black text-white uppercase tracking-[0.3em]">
@@ -59,12 +59,14 @@ export default function Services() {
             </span>
           </div>
 
-          {/* Títulos Masivos */}
-          <h2 className="flex flex-col -space-y-1 md:-space-y-2 mb-10">
-            <span className="text-4xl md:text-7xl font-black text-[#0f172a] uppercase tracking-tighter leading-none">
+          {/* Títulos Masivos: Ajustados para igualar a CombinedConversion */}
+          <h2 className="flex flex-col mb-10">
+            {/* Tamaño 4xl a 6xl para igualar el "hook" de la otra sección */}
+            <span className="text-4xl md:text-6xl font-extrabold text-slate-950 uppercase tracking-tighter leading-[0.9]">
               {t("services.title")}
             </span>
-            <span className="text-4xl md:text-7xl font-black italic text-blue-600 uppercase tracking-tighter leading-none">
+            {/* Letra bonita: font-serif italic font-semibold para trazo grueso */}
+            <span className="text-4xl md:text-6xl font-serif italic font-semibold text-blue-600 block lowercase md:mt-2 tracking-tight">
               {t("services.titleHighlight")}
             </span>
           </h2>
@@ -72,7 +74,7 @@ export default function Services() {
           {/* Bloque de Párrafo con línea azul */}
           <div className="flex gap-4 md:gap-6 items-stretch mb-10 md:mb-14">
             <div className="w-[2px] bg-blue-600 rounded-full flex-shrink-0" />
-            <p className="text-base md:text-lg text-slate-500 font-medium italic leading-relaxed max-w-2xl">
+            <p className="text-xl text-slate-600 font-medium leading-relaxed max-w-lg">
               {t("services.subtitle")}
             </p>
           </div>
@@ -89,12 +91,11 @@ export default function Services() {
               </span>
             </div>
 
-            {/* Píldoras Dark */}
             <div className="flex flex-wrap items-center gap-2 md:gap-3">
               {serviceAreas.map((city) => (
                 <span 
                   key={city} 
-                  className="px-4 md:px-5 py-2.5 rounded-full bg-[#0f172a] text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.15em] transition-all cursor-default hover:bg-blue-600 hover:shadow-xl hover:shadow-blue-100 active:scale-95"
+                  className="px-4 md:px-5 py-2.5 rounded-full bg-[#0f172a] text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.15em] transition-all cursor-default hover:bg-blue-600 hover:shadow-xl hover:shadow-blue-100 active:scale-95 shadow-sm"
                 >
                   {city}
                 </span>
@@ -103,9 +104,10 @@ export default function Services() {
           </div>
         </div>
 
-        {/* CARRUSEL DE SERVICIOS */}
+        {/* CARRUSEL DE SERVICIOS - CONTENIDO COMPLETO RECUPERADO */}
         <div className="relative group mt-16 md:mt-24 mb-8 md:mb-12">
-          {/* Botones de navegación (Desktop) */}
+          
+          {/* Botón Navegación Izquierda */}
           <button 
             onClick={() => scroll("left")}
             className="absolute -left-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white text-blue-700 border border-blue-500/10 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex"
@@ -119,6 +121,7 @@ export default function Services() {
           >
             {services.map((service, index) => (
               <div key={index} className="flex-[0_0_88%] sm:flex-[0_0_60%] md:flex-[0_0_45%] lg:flex-[0_0_31%] min-w-0 snap-center">
+                {/* Tarjetas con bordes suaves rounded-[2.5rem] */}
                 <div className="group/card relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 h-full flex flex-col transition-all duration-500 hover:shadow-2xl md:hover:-translate-y-2">
                   <div className="relative h-56 md:h-72 overflow-hidden">
                     <Image
@@ -129,7 +132,8 @@ export default function Services() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
                     <div className="absolute bottom-5 left-6 right-6 text-left">
-                      <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter italic leading-none">
+                      {/* Título interno con serif suave */}
+                      <h3 className="text-xl md:text-2xl font-serif italic font-semibold text-white uppercase tracking-tighter leading-none">
                         {t(`services.${service.key}.title`)}
                       </h3>
                     </div>
@@ -159,6 +163,7 @@ export default function Services() {
             ))}
           </div>
 
+          {/* Botón Navegación Derecha */}
           <button 
             onClick={() => scroll("right")}
             className="absolute -right-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white text-blue-700 border border-blue-500/10 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex"
@@ -167,13 +172,36 @@ export default function Services() {
           </button>
         </div>
 
-        {/* Dots (Mobile) */}
+        {/* Dots (Mobile) Recuperados */}
         <div className="flex justify-center gap-2 md:hidden -mt-4">
           {services.map((_, i) => (
             <div key={i} className="w-1.5 h-1.5 rounded-full bg-slate-200" />
           ))}
         </div>
       </div>
+      
+{/* SEPARADOR FLOTANTE CON LÍNEA INTEGRADA */}
+      <div className="absolute bottom-4 left-0 w-full z-30 pointer-events-none">
+        <div className="max-w-5xl mx-auto px-4 relative flex items-center justify-center">
+          
+          {/* La Línea (ahora es visible y no llega a los bordes) */}
+          <div className="absolute w-full h-px bg-slate-200" />
+          
+          {/* El Badge (con fondo blanco para tapar la línea justo detrás del texto) */}
+          <div className="relative flex items-center gap-3 bg-white px-7 py-3 rounded-2xl border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
+            <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
+            
+            <span className="text-[11px] font-black text-slate-800 uppercase tracking-[0.4em] whitespace-nowrap">
+              Flawless Results
+            </span>
+            
+            <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
+          </div>
+          
+        </div>
+      </div>
+
+      
 
       <ServiceModal 
         isOpen={isModalOpen} 
@@ -185,6 +213,7 @@ export default function Services() {
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
+      
       
     </section>
   );

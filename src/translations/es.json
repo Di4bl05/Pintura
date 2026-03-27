@@ -207,24 +207,95 @@
 
     }
   },
-  "whyChoose": {
-    "badge": "POR QUÉ NOSOTROS",
-    "title": "La Mejor Opción",
-    "titleHighlight": "Para Ti",
-    "description": "3 años de experiencia en Florida.",
-    "benefits": "Ver Beneficios",
-    "benefitsCount": "5 razones",
-    "items": [
-      "Presupuestos gratis",
-      "Precios competitivos",
-      "Licenciados y asegurados",
-      "Materiales premium",
-      "Garantía 100%",
-      "Equipo experimentado",
-      "Atención personalizada",
-      "Limpieza total incluida"
-    ]
+ "whyChoose": {
+    "section_id": "why-choose-us",
+    "meta_strategy": {
+      "target_objective": "Eliminar objeciones de precio y tiempo",
+      "seo_focus": "Professional Painters Orlando - High Value / Low Cost",
+      "tone": "Directo, honesto, competitivo y profesional"
+    },
+    "business_identity": {
+      "legal_name": "LUISBETY INC.",
+      "location": {
+        "street": "2381 Westwood dr",
+        "city": "Longwood",
+        "state": "FL",
+        "zip": "32779",
+        "primary_service_area": "Orlando & Central Florida",
+        "extended_coverage": "Florida State-wide"
+      },
+      "market_authority": {
+        "years_experience": 3,
+        "satisfaction_rate": "100% verified",
+        "hours_of_operation": "9AM - 5PM"
+      }
+    },
+    "core_value_proposition": {
+      "hook": "Misma calidad de las empresas 'Top', a una fracción del precio y tiempo.",
+      "the_difference": [
+        {
+          "id": "price_disruption",
+          "label": "Precios Disruptivos",
+          "argument": "Costos absurdamente por debajo de la competencia corporativa en Florida sin sacrificar estándares.",
+          "benefit": "Inversión inteligente: Resultados de $10,000 por un promedio real de $6,000."
+        },
+        {
+          "id": "time_efficiency",
+          "label": "Ejecución Ágil",
+          "argument": "Misma o mejor calidad verificada en menor tiempo de demora que los competidores locales.",
+          "benefit": "Mínima interrupción: Entramos, transformamos su propiedad y salimos en tiempo récord."
+        },
+        {
+          "id": "payment_flexibility",
+          "label": "Flexibilidad de Pago",
+          "argument": "Sistema de pago por adelantado flexible para asegurar su cupo y compromiso mutuo.",
+          "benefit": "Garantía de prioridad: Su proyecto se convierte en nuestra prioridad #1 en el calendario."
+        }
+      ]
+      
+    },
+    "service_portfolio": [
+      "Exterior Painting",
+      "Interior Painting",
+      "Commercial Painting",
+      "Pressure Washing",
+      "Deck Staining"
+    ],
+    "conversion_triggers": {
+      "pricing_range": {
+        "min": 2000,
+        "max": 10000,
+        "average": 6000,
+        "currency": "USD"
+      },
+      "social_proof": {
+        "platform": "TikTok",
+        "user": "luisenriquecardenas86",
+        "content_type": "Reels de procesos reales y resultados"
+      },
+      "primary_cta": "Solicitar Estimado Gratis",
+      "contact_primary": "(786) 350-6367",
+      "contact_secondary": "(786) 956-3550"
+    },
+    "marketing_narrative": {
+      "problem": "El mercado de pintura en Florida está inflado por burocracia y sobrecostos innecesarios.",
+      "solution": "LuisBety Inc ofrece un modelo directo, ágil y de alta gama para el propietario que busca valor real sobre el marketing inflado.",
+      "seo_keywords": [
+        "pintores económicos orlando",
+        "best price painting florida",
+        "luisbety inc painting reviews",
+        "pintura residencial longwood fl"
+      ]
+    }
   },
+  "combined_conversion_section": {
+  "arguments": "Nuestros 3 pilares de valor...",
+  "cta_box": {
+    "title": "¿Listo para ahorrar un 40% en su próximo proyecto?",
+    "action": "Solicitar Estimado",
+    "phone": "(786) 350-6367"
+  }
+},
  "reviews": {
   "badge": "100% Casos de Éxito",
   "title": "Excelencia en",
@@ -248,68 +319,6 @@
     "fiveMonths": "Hace 5 meses",
     "sixMonths": "Hace 6 meses"
   }
-  },
-  "serviceAreas": {
-    "badge": "ÁREAS",
-    "title": "Servicio en",
-    "titleHighlight": "Florida",
-    "subtitle": "Longwood, Orlando y más",
-    "areas": [
-      {
-        "name": "Longwood FL",
-        "description": "Servicio profesional"
-      },
-      {
-        "name": "Orlando",
-        "description": "Pintores calificados"
-      },
-      {
-        "name": "Winter Park",
-        "description": "Expertos locales"
-      },
-      {
-        "name": "Altamonte Springs",
-        "description": "Servicio confiable"
-      },
-      {
-        "name": "Lake Mary",
-        "description": "Calidad garantizada"
-      },
-      {
-        "name": "Sanford FL",
-        "description": "Licenciados"
-      },
-      {
-        "name": "Florida Central",
-        "description": "Cobertura amplia"
-      },
-      {
-        "name": "Todo Florida",
-        "description": "Servicio estatal"
-      }
-    ],
-    "whyChoose": {
-      "title": "¿Por qué elegirnos?",
-      "items": [
-        "Licenciados y asegurados",
-        "Precios transparentes",
-        "Trabajo especializado",
-        "Listo para mudanza"
-      ]
-    },
-    "specialized": {
-      "title": "Servicios Extra",
-      "items": [
-        "Epoxy para garage",
-        "Limpieza incluida",
-        "Diagnóstico gratis",
-        "Pintura de gabinetes"
-      ]
-    },
-    "cta": {
-      "text": "Cotizaciones gratis hoy",
-      "button": "Cotización Gratis"
-    }
   },
   "contact": {
     "badge": "CONTACTO",

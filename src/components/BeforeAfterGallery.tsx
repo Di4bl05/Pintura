@@ -34,10 +34,8 @@ export default function CleanEpicLightBeforeAfterGallery() {
 
   const updateComparePosition = useCallback((clientX: number) => {
     if (!sliderRef.current) return;
-
     const rect = sliderRef.current.getBoundingClientRect();
     const position = ((clientX - rect.left) / rect.width) * 100;
-
     window.requestAnimationFrame(() => {
       setComparePosition(Math.max(0, Math.min(100, position)));
     });
@@ -58,7 +56,6 @@ export default function CleanEpicLightBeforeAfterGallery() {
     return Array.from({ length: 8 }).map((_, index) => {
       const id = index + 1;
       const imagePath = heroImages[index % heroImages.length]; 
-      
       const title = t(`gallery.projects.${id}.title`);
       const location = t(`gallery.projects.${id}.location`);
       const description = t(`gallery.projects.${id}.description`);
@@ -87,16 +84,13 @@ export default function CleanEpicLightBeforeAfterGallery() {
 
   useEffect(() => {
     if (isPaused || showAllPhotos) return;
-
     const interval = setInterval(() => {
       const currentIndex = filteredGallery.findIndex(item => item.id === activeId);
       const nextIndex = (currentIndex + 1) % filteredGallery.length;
-      
       if (filteredGallery.length > 0) {
         const nextItem = filteredGallery[nextIndex];
         setActiveId(nextItem.id);
         setComparePosition(50);
-
         if (carouselRef.current) {
           const container = carouselRef.current;
           const activeThumb = container.children[nextIndex] as HTMLElement;
@@ -109,29 +103,20 @@ export default function CleanEpicLightBeforeAfterGallery() {
         }
       }
     }, 4500);
-
     return () => clearInterval(interval);
   }, [activeId, filteredGallery, isPaused, showAllPhotos]);
 
   useEffect(() => {
     if (!isManualControl) return;
-
-    const handleWindowMouseMove = (e: MouseEvent) => {
-      updateComparePosition(e.clientX);
-    };
-
+    const handleWindowMouseMove = (e: MouseEvent) => updateComparePosition(e.clientX);
     const handleWindowTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        updateComparePosition(e.touches[0].clientX);
-      }
+      if (e.touches.length > 0) updateComparePosition(e.touches[0].clientX);
     };
-
     window.addEventListener("mousemove", handleWindowMouseMove);
     window.addEventListener("mouseup", handleDragEnd);
     window.addEventListener("touchmove", handleWindowTouchMove, { passive: true });
     window.addEventListener("touchend", handleDragEnd);
     window.addEventListener("touchcancel", handleDragEnd);
-
     return () => {
       window.removeEventListener("mousemove", handleWindowMouseMove);
       window.removeEventListener("mouseup", handleDragEnd);
@@ -144,7 +129,6 @@ export default function CleanEpicLightBeforeAfterGallery() {
   const handleSelectProject = (id: number) => {
     setActiveId(id);
     setShowAllPhotos(false);
-    
     setTimeout(() => {
       const viewer = document.getElementById('main-viewer');
       if (viewer) {
@@ -155,128 +139,116 @@ export default function CleanEpicLightBeforeAfterGallery() {
   };
 
   return (
-    <section id="gallery" className="relative py-12 lg:py-24 bg-white overflow-hidden antialiased selection:bg-none">
-      <div className="absolute top-0 left-1/4 w-[60rem] h-[60rem] bg-blue-100 rounded-full blur-[150px] pointer-events-none -z-10 opacity-60" />
+    <section id="gallery" className="relative py-16 lg:py-24 bg-white overflow-hidden antialiased selection:bg-none">
+      
+      <div className="absolute top-0 right-[-10%] w-[50%] h-[50%] bg-blue-100/30 blur-[130px] rounded-full -z-10" />
 
-      <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-16">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-12">
         
-        <div className="flex flex-col mb-10 lg:mb-16 border-b border-slate-100 pb-8 lg:pb-12 text-left">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 mb-6 shadow-xl shadow-blue-100 w-fit">
+        {/* ENCABEZADO */}
+        <div className="flex flex-col mb-16 md:mb-24 text-left max-w-5xl">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 mb-8 shadow-xl shadow-blue-100 w-fit">
             <Sparkles className="w-4 h-4 text-white" />
             <span className="text-[10px] font-black text-white uppercase tracking-[0.3em]">
               {t("gallery.badge") || "PORTAFOLIO DE EXCELENCIA"}
             </span>
           </div>
           
-          <h2 className="text-4xl lg:text-7xl font-black text-slate-950 uppercase tracking-tighter leading-[0.9]">
-            {t("gallery.title") || "RESULTADOS DE"}<br/>
-            <span className="relative inline-block text-blue-600 italic mt-2">
-              {t("gallery.titleHighlight") || "LUISBETY IMPECABLES"}
-              <div className="absolute -bottom-2 left-0 w-full h-2 bg-blue-600/10 rounded-full -z-10" />
+          <h2 className="flex flex-col mb-10">
+            <span className="text-4xl md:text-6xl font-extrabold text-slate-950 uppercase tracking-tighter leading-[0.9]">
+              {t("gallery.title") || "RESULTADOS DE"}
+            </span>
+            <span className="text-4xl md:text-6xl font-serif italic font-semibold text-blue-600 block lowercase md:mt-2 tracking-tight relative w-fit">
+              {t("gallery.titleHighlight") || "Luisbety Impecables"}
             </span>
           </h2>
 
-          <p className="text-base lg:text-lg text-slate-600 font-medium max-w-2xl mt-6 lg:mt-8 italic leading-relaxed border-l-2 border-blue-600 pl-6">
-            {t("gallery.subtitle") || "No solo pintamos paredes, devolvemos la vida a sus espacios."}
-          </p>
+          <div className="flex gap-4 md:gap-6 items-stretch max-w-2xl">
+            <div className="w-[2px] bg-blue-600 rounded-full flex-shrink-0" />
+            <p className="text-xl text-slate-600 font-medium leading-relaxed max-w-lg pl-2 italic">
+              {t("gallery.subtitle") || "No solo pintamos paredes, devolvemos la vida a sus espacios."}
+            </p>
+          </div>
         </div>
 
-        {/* VISOR PRINCIPAL */}
+        {/* Visor Principal */}
         {activeItem && (
-          <div className="flex flex-col gap-6 mb-8">
+          <div className="flex flex-col gap-8 mb-12">
             <div 
               id="main-viewer"
-              className="relative w-full aspect-[4/5] lg:aspect-[21/9] rounded-[1.5rem] lg:rounded-[2.5rem] overflow-hidden bg-white border border-slate-100 group shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] transform-gpu transition-all duration-500"
+              className="relative w-full aspect-[4/5] lg:aspect-[21/9] rounded-[3rem] overflow-hidden bg-white border border-slate-100 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.05)] transform-gpu"
               onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => {
-                if (!isManualControl) {
-                  setIsPaused(false);
-                }
-              }}
+              onMouseLeave={() => !isManualControl && setIsPaused(false)}
             >
-              <div 
-                ref={sliderRef}
-                className="w-full h-full relative touch-none"
-              >
-                {/* CAPA ANTES */}
+              <div ref={sliderRef} className="w-full h-full relative touch-none">
                 <div className="absolute inset-0 select-none pointer-events-none">
                   <img src={activeItem.beforeImage} className="w-full h-full object-cover" alt="Antes" />
-                  <div className="absolute top-4 lg:top-8 right-4 lg:right-8 px-4 lg:px-6 py-2 lg:py-3 bg-slate-900/90 backdrop-blur-md rounded-lg lg:rounded-xl border border-white/20 text-white text-[9px] lg:text-[10px] font-black uppercase tracking-widest z-10 shadow-2xl">
+                  <div className="absolute top-8 right-8 px-5 py-2 bg-slate-900/80 backdrop-blur-md rounded-xl border border-white/20 text-white text-[10px] font-black uppercase tracking-widest z-10">
                     {t("gallery.before") || "ANTES"}
                   </div>
                 </div>
 
-                {/* CAPA DESPUÉS */}
                 <div 
                   className="absolute inset-0 transform-gpu z-10 select-none pointer-events-none"
                   style={{ clipPath: `inset(0 ${100 - comparePosition}% 0 0)` }}
                 >
                   <img src={activeItem.afterImage} className="w-full h-full object-cover" alt="Después" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none hidden lg:block" />
-                  <div className="absolute top-4 lg:top-8 left-4 lg:left-8 px-4 lg:px-6 py-2 lg:py-3 bg-blue-600 rounded-lg lg:rounded-xl text-white text-[9px] lg:text-[10px] font-black uppercase tracking-widest shadow-xl">
+                  <div className="absolute top-8 left-8 px-5 py-2 bg-blue-600 rounded-xl text-white text-[10px] font-black uppercase tracking-widest shadow-xl">
                     {t("gallery.after") || "DESPUÉS"}
                   </div>
 
-                  {/* INFO PROYECTO (DENTRO SOLO EN DESKTOP) */}
-                  <div className="hidden lg:block absolute bottom-10 left-10 right-12 lg:right-auto lg:max-w-xl text-left">
-                    <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full shadow-lg">
-                      <MapPin className="w-4 h-4 text-white" />
-                      <span className="text-xs font-black text-white uppercase tracking-widest drop-shadow-md">{activeItem.location}</span>
+                  <div className="hidden lg:block absolute bottom-12 left-12 max-w-xl text-left">
+                    <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full">
+                      <MapPin className="w-3.5 h-3.5 text-white" />
+                      <span className="text-[10px] font-bold text-white uppercase tracking-widest">{activeItem.location}</span>
                     </div>
-                    <h3 className="text-4xl lg:text-5xl font-black text-white uppercase italic tracking-tighter leading-none mb-4 drop-shadow-md">
+                    <h3 className="text-5xl font-serif italic text-white leading-none mb-4 drop-shadow-xl font-semibold">
                       {activeItem.title}
                     </h3>
-                    <p className="text-sm lg:text-base text-slate-100 font-medium line-clamp-2">
+                    <p className="text-sm lg:text-base text-slate-100 font-medium line-clamp-2 pl-1">
                       {activeItem.description}
                     </p>
                   </div>
                 </div>
 
-                {/* LÍNEA DIVISORIA */}
                 <div 
-                  className="absolute inset-y-0 w-[2px] lg:w-[3px] bg-white pointer-events-auto transform-gpu z-20 shadow-[0_0_20px_rgba(0,0,0,0.3)]" 
+                  className="absolute inset-y-0 w-[2px] bg-white pointer-events-auto transform-gpu z-20 shadow-[0_0_20px_rgba(0,0,0,0.3)]" 
                   style={{ left: `${comparePosition}%` }}
                 >
-                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2">
                     <div
-                      className="w-10 h-10 lg:w-14 lg:h-14 bg-white rounded-full flex items-center justify-center shadow-xl border border-slate-100 cursor-ew-resize"
-                      onMouseDown={() => {
-                        setIsManualControl(true);
-                        setIsPaused(true);
-                      }}
-                      onTouchStart={() => {
-                        setIsManualControl(true);
-                        setIsPaused(true);
-                      }}
+                      className="w-12 h-12 lg:w-16 lg:h-16 bg-white rounded-2xl flex items-center justify-center shadow-2xl border border-slate-100 cursor-ew-resize hover:scale-110 transition-transform duration-300"
+                      onMouseDown={() => { setIsManualControl(true); setIsPaused(true); }}
+                      onTouchStart={() => { setIsManualControl(true); setIsPaused(true); }}
                     >
-                      <MoveHorizontal className="text-slate-900 w-5 h-5 lg:w-6 lg:h-6" />
+                      <MoveHorizontal className="text-blue-600 w-6 h-6" />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* INFO PROYECTO (ABAJO EN MÓVIL) */}
-            <div className="block lg:hidden text-left px-2">
+            <div className="block lg:hidden text-left px-4">
               <div className="inline-flex items-center gap-1.5 mb-2">
                 <MapPin className="w-3.5 h-3.5 text-blue-600" />
                 <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{activeItem.location}</span>
               </div>
-              <h3 className="text-2xl font-black text-slate-900 uppercase italic tracking-tighter leading-none mb-2">
+              <h3 className="text-3xl font-serif italic font-semibold text-slate-900 leading-tight mb-2 uppercase lowercase-first">
                 {activeItem.title}
               </h3>
-              <p className="text-sm text-slate-600 font-medium leading-relaxed">
+              <p className="text-sm text-slate-500 font-medium leading-relaxed italic">
                 {activeItem.description}
               </p>
             </div>
           </div>
         )}
 
-        {/* CARRUSEL INFERIOR */}
-        <div className="flex items-center justify-between gap-4 lg:gap-6 pt-4 border-t border-slate-100 mb-8">
+        {/* Carrusel Inferior */}
+        <div className="flex items-center justify-between gap-6 pt-8 border-t border-slate-200/60 mb-12">
           <div 
             ref={carouselRef}
-            className="flex gap-3 lg:gap-4 overflow-x-auto pb-4 scrollbar-hide flex-1 snap-x"
+            className="flex gap-4 lg:gap-6 overflow-x-auto pb-6 scrollbar-hide flex-1 snap-x"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -284,83 +256,100 @@ export default function CleanEpicLightBeforeAfterGallery() {
               <button
                 key={item.id}
                 onClick={() => handleSelectProject(item.id)}
-                className={`relative flex-[0_0_140px] lg:flex-[0_0_240px] aspect-[4/3] rounded-[1.2rem] lg:rounded-[2rem] overflow-hidden snap-start transition-all duration-500 transform ${
+                className={`relative flex-[0_0_160px] lg:flex-[0_0_280px] aspect-[4/3] rounded-[2rem] p-2 border overflow-hidden snap-start transition-all duration-700 transform ${
                   activeId === item.id 
-                    ? "ring-2 lg:ring-4 ring-blue-600 ring-offset-2 lg:ring-offset-4 ring-offset-white scale-100 shadow-xl" 
-                    : "scale-95 opacity-70 hover:opacity-100"
+                    ? "bg-white border-blue-100 shadow-xl scale-105" 
+                    : "bg-transparent border-transparent opacity-60 hover:opacity-100"
                 }`}
               >
-                <img src={item.afterImage} className="w-full h-full object-cover" alt={item.title} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-3 lg:p-5 text-left">
-                  <span className="text-[8px] lg:text-[10px] font-black text-white uppercase tracking-widest truncate">{item.title}</span>
+                <div className="relative w-full h-full overflow-hidden rounded-[1.5rem]">
+                   <img src={item.afterImage} className="w-full h-full object-cover" alt={item.title} />
+                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-4 text-left">
+                      <span className="text-[9px] font-black text-white uppercase tracking-widest truncate">{item.title}</span>
+                   </div>
                 </div>
               </button>
             ))}
           </div>
 
+          {/* Botón Ver Todo con efecto Slide-Up */}
           <button 
             onClick={() => setShowAllPhotos(true)}
-            className="hidden lg:flex flex-col items-center justify-center flex-[0_0_140px] aspect-[4/3] bg-slate-950 text-white rounded-[2rem] hover:bg-blue-600 transition-all duration-300 group shadow-xl"
+            className="group relative overflow-hidden hidden lg:flex flex-col items-center justify-center flex-[0_0_120px] aspect-[4/3] bg-slate-950 text-white rounded-[2.5rem] shadow-xl transition-all"
           >
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-              <ChevronRight className="w-6 h-6 text-white" />
+            {/* Fondo que sube en hover */}
+            <div className="absolute inset-0 translate-y-full bg-blue-600 transition-transform duration-300 group-hover:translate-y-0" />
+            
+            <div className="relative z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+              <ChevronRight className="w-5 h-5 text-white" />
             </div>
-            <span className="text-[11px] font-black uppercase tracking-widest text-center px-2">Ver Todo</span>
+            <span className="relative z-10 text-[9px] font-black uppercase tracking-tighter text-center px-1">Ver Todo</span>
           </button>
         </div>
 
-        {/* FILTROS */}
-        <div className="flex flex-wrap justify-center gap-2 lg:gap-3 py-3">
-          {["all", "interior", "exterior", "cabinet", "commercial"].map((f) => (
-            <button
-              key={f}
-              onClick={() => setFilter(f)}
-              className={`px-5 lg:px-8 py-2.5 lg:py-3.5 rounded-full text-[9px] lg:text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${
-                filter === f 
-                  ? "bg-slate-950 text-white shadow-xl scale-105" 
-                  : "bg-white text-slate-500 border border-slate-200 hover:bg-blue-600 hover:text-white"
-              }`}
-            >
-              {t(`gallery.filters.${f}`) || (f === "all" ? "Todos" : f)}
-            </button>
-          ))}
+        {/* Filtros Suavizados con efecto Slide-Up y colores Negro/Azul */}
+        <div className="flex flex-wrap justify-center gap-3 py-3">
+          {["all", "interior", "exterior", "cabinet", "commercial"].map((f) => {
+            const isActive = filter === f;
+            return (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`group relative overflow-hidden px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-[0.15em] transition-all duration-300 shadow-sm ${
+                  isActive ? "bg-blue-600 text-white scale-105 shadow-blue-100" : "bg-slate-950 text-white"
+                }`}
+              >
+                {/* Capa de efecto (solo visible si no está activo, para simular la transición a azul) */}
+                {!isActive && (
+                  <div className="absolute inset-0 translate-y-full bg-blue-600 transition-transform duration-300 group-hover:translate-y-0" />
+                )}
+                
+                <span className="relative z-10">
+                  {t(`gallery.filters.${f}`) || (f === "all" ? "Todos" : f)}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* MODAL COMPLETO */}
+      {/* Modal Galería Completa */}
       {showAllPhotos && (
-        <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-in fade-in duration-500 selection:bg-none">
-          <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-100 shadow-sm w-full px-4 lg:px-12 py-6">
-            <div className="max-w-[1400px] mx-auto flex justify-between items-center text-left">
+        <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-in fade-in duration-500">
+          <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-100 w-full px-6 md:px-12 py-6">
+            <div className="max-w-[1400px] mx-auto flex justify-between items-center text-left gap-4">
               <div>
-                <h2 className="text-2xl lg:text-4xl font-black text-slate-950 uppercase italic tracking-tighter leading-none">Galería Completa</h2>
-                <p className="text-blue-600 font-bold text-[10px] lg:text-xs uppercase tracking-widest mt-2">{galleryData.length} Proyectos Finalizados</p>
+                <h2 className="text-3xl md:text-5xl font-serif italic text-slate-950 lowercase tracking-tight leading-none font-semibold">
+                   {t("gallery.fullGallery") || "Galería Completa"}
+                </h2>
+                <p className="text-blue-600 font-bold text-xs uppercase tracking-widest mt-2">
+                  {galleryData.length} {t("gallery.completedProjects") || "Proyectos Finalizados"}
+                </p>
               </div>
               <button 
                 onClick={() => setShowAllPhotos(false)} 
-                className="p-2 lg:p-4 bg-slate-100 text-slate-900 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
+                className="p-3 bg-slate-100 text-slate-900 rounded-full hover:bg-blue-600 hover:text-white transition-colors flex-shrink-0"
               >
                 <X size={20} />
               </button>
             </div>
           </div>
-
-          <div className="max-w-[1400px] mx-auto px-4 lg:px-12 py-8 lg:py-12 text-left">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-12 md:py-16 text-left">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {galleryData.map((item) => (
                 <div 
                   key={item.id} 
                   onClick={() => handleSelectProject(item.id)}
-                  className="group relative aspect-[16/10] rounded-[1.5rem] lg:rounded-[2.5rem] overflow-hidden cursor-pointer bg-slate-50 border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                  className="group relative aspect-[16/10] rounded-[2.5rem] overflow-hidden cursor-pointer bg-slate-50 border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
                 >
                   <img src={item.afterImage} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute inset-0 p-5 lg:p-8 flex flex-col justify-end">
-                    <div className="inline-flex items-center gap-1.5 mb-2 lg:mb-3 px-3 py-1.5 bg-white/20 backdrop-blur-md border border-white/30 rounded-full w-fit">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 group-hover:opacity-100" />
+                  <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+                    <div className="inline-flex items-center gap-1.5 mb-2 px-3 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full w-fit">
                       <MapPin className="w-3 h-3 text-white" />
-                      <span className="text-[9px] lg:text-[10px] text-white font-black uppercase tracking-widest">{item.location}</span>
+                      <span className="text-[9px] lg:text-[10px] text-white font-black uppercase tracking-widest truncate">{item.location}</span>
                     </div>
-                    <h5 className="text-lg lg:text-2xl text-white font-black leading-tight uppercase italic">{item.title}</h5>
+                    <h5 className="text-2xl lg:text-3xl font-serif italic text-white leading-tight mb-1 font-semibold">{item.title}</h5>
                   </div>
                 </div>
               ))}
@@ -369,10 +358,27 @@ export default function CleanEpicLightBeforeAfterGallery() {
         </div>
       )}
 
-      {/* SEPARADOR DE LÍNEA */}
-      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-slate-400/60 z-10">
-        <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-900/10 to-transparent blur-xl -z-10" />
+      {/* SEPARADOR FLOTANTE CON LÍNEA INTEGRADA */}
+      <div className="absolute bottom-4 left-0 w-full z-30 pointer-events-none">
+        <div className="max-w-5xl mx-auto px-4 relative flex items-center justify-center">
+          
+          {/* La Línea (ahora es visible y no llega a los bordes) */}
+          <div className="absolute w-full h-px bg-slate-200" />
+          
+          {/* El Badge (con fondo blanco para tapar la línea justo detrás del texto) */}
+          <div className="relative flex items-center gap-3 bg-white px-7 py-3 rounded-2xl border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
+            <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
+            
+            <span className="text-[11px] font-black text-slate-800 uppercase tracking-[0.4em] whitespace-nowrap">
+              Flawless Results
+            </span>
+            
+            <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
+          </div>
+          
+        </div>
       </div>
+ 
 
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }

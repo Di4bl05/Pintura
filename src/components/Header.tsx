@@ -42,17 +42,36 @@ export default function Header() {
       <nav className="mx-auto w-full max-w-[1400px] px-6 lg:px-16">
         <div className="flex items-center justify-between">
           
-          {/* Logo con efecto de escala */}
-          <Link href="/" className="flex-shrink-0 transition-transform hover:scale-105 active:scale-95 ml-0">
-            <img 
-              src="/images/logo/logo-mejorado-removebg-preview.png" 
-              alt="LUISBETY INC" 
-              className={`transition-all duration-300 ${
-                scrolled ? "h-12" : "h-16 md:h-20"
-              } w-auto`} 
-              style={{ filter: 'brightness(0) invert(1)' }}
-            />
-          </Link>
+        {/* Logo con efecto de escala - Imagen y Texto AL LADO */}
+<Link href="/" className="flex-shrink-0 flex items-center gap-3 transition-transform hover:scale-105 active:scale-95 ml-0">
+  {/* 1. LA IMAGEN (Símbolo o Isotípo) */}
+  <img 
+    src="/images/logo/logo-original.png" 
+    alt="LUISBETY INC" 
+    className={`transition-all duration-300 ${
+      scrolled ? "h-10" : "h-14 md:h-18"
+    } w-auto`} 
+    style={{ filter: 'brightness(0) invert(1)' }}
+  />
+  
+  {/* 2. EL TEXTO (Alineado en dos líneas verticalmente) */}
+  <div className="flex flex-col leading-none text-left">
+    
+    {/* Línea Superior: Nombre de la Empresa */}
+    <span className={`font-black tracking-tighter text-white transition-all duration-300 ${
+      scrolled ? "text-xl" : "text-2xl md:text-3xl"
+    }`}>
+      LUISBETY <span className="text-blue-500 italic">INC.</span>
+    </span>
+    
+    {/* Línea Inferior: Eslogan */}
+    <span className={`font-bold uppercase tracking-[0.3em] text-white/90 transition-all duration-300 ${
+      scrolled ? "text-[8px] mt-0.5" : "text-[10px] md:text-xs mt-1"
+    }`}>
+      Painting and Remodeling
+    </span>
+  </div>
+</Link>
 
           {/* Desktop Navigation - Minimalista y Elegante */}
           <div className="hidden md:flex items-center space-x-8">
