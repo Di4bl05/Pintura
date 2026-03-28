@@ -186,7 +186,7 @@ export default function Reviews() {
         </div>
       </div>
 {/* SEPARADOR FLOTANTE CON LÍNEA INTEGRADA */}
-      <div className="absolute bottom-4 left-0 w-full z-30 pointer-events-none">
+      <div className="absolute bottom-1 left-0 w-full z-30 pointer-events-none">
         <div className="max-w-5xl mx-auto px-4 relative flex items-center justify-center">
           
           {/* La Línea (ahora es visible y no llega a los bordes) */}

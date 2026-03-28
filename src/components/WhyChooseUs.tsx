@@ -138,20 +138,7 @@ export default function CombinedConversion() {
         </div>
       </div>
 
-      {/* SEPARADOR FLOTANTE FINAL (NIVEL INFERIOR) */}
-      <div className="absolute bottom-12 left-0 w-full z-30 pointer-events-none">
-        <div className="max-w-5xl mx-auto px-4 relative flex items-center justify-center">
-          <div className="absolute w-full h-px bg-slate-200" />
-          <div className="relative flex items-center gap-3 bg-white px-7 py-3 rounded-2xl border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
-            <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
-            <span className="text-[11px] font-black text-slate-800 uppercase tracking-[0.4em] whitespace-nowrap">
-              Elite Quality
-            </span>
-            <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
-          </div>
-        </div>
-      </div>
-      
+
       <style jsx global>{`
         @keyframes float {
           0%, 100% { transform: translateY(0) rotate(-1deg); }

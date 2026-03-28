@@ -4,12 +4,13 @@ import Image from "next/image";
 import { ArrowRight, ChevronRight, ChevronLeft, Check, Sparkles } from "lucide-react"; 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRef, useState } from "react";
-import ServiceModal from "./ServiceModal"; 
+// 1. IMPORTACIÓN CORREGIDA
+import ServiceDetail from "./ServiceDetails"; 
 
 export default function Services() {
   const { t } = useLanguage();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false); // Nombre más descriptivo
   const [selectedServiceData, setSelectedServiceData] = useState<any>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -23,10 +24,11 @@ export default function Services() {
   };
 
   const handleOpenDetails = (service: { key: string; img: string }) => {
+    // Obtenemos los datos dinámicos del JSON según el idioma
     const data = (t as any)(`services.${service.key}`, { returnObjects: true });
     const dataWithImg = { ...data, img: service.img };
     setSelectedServiceData(dataWithImg);
-    setIsModalOpen(true);
+    setIsDetailsOpen(true);
   };
 
   const services = [
@@ -43,15 +45,13 @@ export default function Services() {
       id="services" 
       className="relative py-16 lg:py-24 overflow-hidden antialiased bg-white"
     >
-      {/* Glow de fondo suavizado igual al de CombinedConversion */}
+      {/* Glow de fondo suavizado */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 lg:left-1/4 w-[30rem] lg:w-[60rem] h-[30rem] lg:h-[60rem] bg-blue-50 rounded-full blur-[100px] pointer-events-none -z-10 opacity-50" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-12">
         
-        {/* ENCABEZADO CON JERARQUÍA UNIFICADA */}
+        {/* ENCABEZADO */}
         <div className="max-w-5xl text-left mb-12 md:mb-20 px-4 md:px-0">
-          
-          {/* Badge Estilo Galería */}
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 mb-8 shadow-xl shadow-blue-100 w-fit">
             <Sparkles className="w-4 h-4 text-white" />
             <span className="text-[10px] font-black text-white uppercase tracking-[0.3em]">
@@ -59,19 +59,15 @@ export default function Services() {
             </span>
           </div>
 
-          {/* Títulos Masivos: Ajustados para igualar a CombinedConversion */}
           <h2 className="flex flex-col mb-10">
-            {/* Tamaño 4xl a 6xl para igualar el "hook" de la otra sección */}
             <span className="text-4xl md:text-6xl font-extrabold text-slate-950 uppercase tracking-tighter leading-[0.9]">
               {t("services.title")}
             </span>
-            {/* Letra bonita: font-serif italic font-semibold para trazo grueso */}
             <span className="text-4xl md:text-6xl font-serif italic font-semibold text-blue-600 block lowercase md:mt-2 tracking-tight">
               {t("services.titleHighlight")}
             </span>
           </h2>
 
-          {/* Bloque de Párrafo con línea azul */}
           <div className="flex gap-4 md:gap-6 items-stretch mb-10 md:mb-14">
             <div className="w-[2px] bg-blue-600 rounded-full flex-shrink-0" />
             <p className="text-xl text-slate-600 font-medium leading-relaxed max-w-lg">
@@ -104,10 +100,8 @@ export default function Services() {
           </div>
         </div>
 
-        {/* CARRUSEL DE SERVICIOS - CONTENIDO COMPLETO RECUPERADO */}
+        {/* CARRUSEL */}
         <div className="relative group mt-16 md:mt-24 mb-8 md:mb-12">
-          
-          {/* Botón Navegación Izquierda */}
           <button 
             onClick={() => scroll("left")}
             className="absolute -left-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white text-blue-700 border border-blue-500/10 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex"
@@ -121,7 +115,6 @@ export default function Services() {
           >
             {services.map((service, index) => (
               <div key={index} className="flex-[0_0_88%] sm:flex-[0_0_60%] md:flex-[0_0_45%] lg:flex-[0_0_31%] min-w-0 snap-center">
-                {/* Tarjetas con bordes suaves rounded-[2.5rem] */}
                 <div className="group/card relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 h-full flex flex-col transition-all duration-500 hover:shadow-2xl md:hover:-translate-y-2">
                   <div className="relative h-56 md:h-72 overflow-hidden">
                     <Image
@@ -132,7 +125,6 @@ export default function Services() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
                     <div className="absolute bottom-5 left-6 right-6 text-left">
-                      {/* Título interno con serif suave */}
                       <h3 className="text-xl md:text-2xl font-serif italic font-semibold text-white uppercase tracking-tighter leading-none">
                         {t(`services.${service.key}.title`)}
                       </h3>
@@ -163,7 +155,6 @@ export default function Services() {
             ))}
           </div>
 
-          {/* Botón Navegación Derecha */}
           <button 
             onClick={() => scroll("right")}
             className="absolute -right-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white text-blue-700 border border-blue-500/10 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex"
@@ -171,41 +162,26 @@ export default function Services() {
             <ChevronRight className="w-6 h-6" />
           </button>
         </div>
-
-        {/* Dots (Mobile) Recuperados */}
-        <div className="flex justify-center gap-2 md:hidden -mt-4">
-          {services.map((_, i) => (
-            <div key={i} className="w-1.5 h-1.5 rounded-full bg-slate-200" />
-          ))}
-        </div>
       </div>
       
-{/* SEPARADOR FLOTANTE CON LÍNEA INTEGRADA */}
-      <div className="absolute bottom-4 left-0 w-full z-30 pointer-events-none">
+      {/* SEPARADOR FLOTANTE */}
+      <div className="absolute bottom-1 left-0 w-full z-30 pointer-events-none">
         <div className="max-w-5xl mx-auto px-4 relative flex items-center justify-center">
-          
-          {/* La Línea (ahora es visible y no llega a los bordes) */}
           <div className="absolute w-full h-px bg-slate-200" />
-          
-          {/* El Badge (con fondo blanco para tapar la línea justo detrás del texto) */}
           <div className="relative flex items-center gap-3 bg-white px-7 py-3 rounded-2xl border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
             <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
-            
             <span className="text-[11px] font-black text-slate-800 uppercase tracking-[0.4em] whitespace-nowrap">
               Flawless Results
             </span>
-            
             <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
           </div>
-          
         </div>
       </div>
 
-      
-
-      <ServiceModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+      {/* 2. LLAMADA AL COMPONENTE ACTUALIZADA */}
+      <ServiceDetail 
+        isOpen={isDetailsOpen} 
+        onClose={() => setIsDetailsOpen(false)} 
         serviceData={selectedServiceData} 
       />
 
@@ -213,8 +189,6 @@ export default function Services() {
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
-      
-      
     </section>
   );
 }

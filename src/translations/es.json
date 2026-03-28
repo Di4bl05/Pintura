@@ -4,7 +4,8 @@
     "services": "Servicios",
     "gallery": "Galería",
     "reviews": "Reseñas",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "why": "Nosotoros"
   },
   "hero": {
     "badge": "PINTORES #1 EN ORLANDO",
@@ -39,92 +40,118 @@
     "titleHighlight": "Pintura en Orlando FL",
     "subtitle": "Transformamos tu propiedad con un proceso riguroso: desde el lavado a presión profundo hasta el acabado final de alta gama.",
     "socialProof": "+500 Proyectos Completados con Éxito",
-    "serviceAreas": "Servicio especializado en Orlando, Winter Park, Lake Nona y áreas circundantes, adaptándonos a las normativas de color de cada comunidad.",
+    "serviceAreas": "Servicio especializado en Orlando, Winter Park, Lake Nona y áreas circundantes.",
     "moreInfo": "Leer más",
-    "finishLabel": "Acabado Pro",
-    "localApproved": "Aprobado Localmente",
-    "coveragePre": "Cobertura en",
-    "coverageRegion": "Florida Central",
-    "statusLabel": "Estatus",
-    "expertLine1": "Experto",
-    "expertLine2": "Local",
+
     "exterior": {
       "title": "Pintura Exterior Profesional",
-      "description": "Protección total contra el sol y la humedad de Florida. Preparación profunda de paredes para que el color dure años, no meses.",
-      "price": "Estimado Gratis",
-      "features": [
-        "Incluye Pressure Washing pro",
-        "Pintura de Soffits y rejillas",
-        "Detalle en marcos y puertas",
-        "Sellado profundo anti-humedad"
-      ],
-      "experience": {
-        "intro": "Todo gran acabado comienza con una superficie impecable. Antes de abrir la primera lata de pintura, realizamos una descontaminación profunda mediante un lavado a presión especializado que elimina el moho y el tizne típico de nuestra región.",
-        "process": "Nuestro secreto está en la preparación de precisión. Raspamos a mano cada imperfección y aplicamos selladores elastoméricos de primera calidad en cada grieta detectada. No solo pintamos, blindamos tu fachada contra la humedad.",
-        "climax": "El toque final es donde ocurre la magia: aplicamos dos capas de pintura de alto espesor con resistencia UV. El resultado es un color vibrante y profundo, diseñado para soportar el sol de Orlando.",
-        "footer": "Al terminar, lo único que notarás es una propiedad que parece recién construida. La transformación se queda contigo."
-      }
+      "description": "Protección total contra el sol y la humedad de Florida con preparación profunda de superficies.",
+      "features": ["Pressure Washing pro", "Soffits y rejillas", "Sellado anti-humedad"],
+      "steps": [
+        {
+          "header": "Lavado Industrial",
+          "content": "Eliminamos moho, tizne y contaminantes con hidrolavado de alta presión para garantizar la máxima adherencia.",
+          "img": "/images/services/ext-1.webp"
+        },
+        {
+          "header": "Sellado Elastomérico",
+          "content": "Raspamos imperfecciones y aplicamos selladores de alta elasticidad que bloquean filtraciones y blindan la fachada.",
+          "img": "/images/services/ext-2.webp"
+        },
+        {
+          "header": "Protección UV",
+          "content": "Aplicamos dos capas de pintura de alto espesor con filtros UV, diseñada para resistir el clima extremo de Orlando.",
+          "img": "/images/services/ext-3.webp"
+        },
+        {
+          "header": "Acabado Final",
+          "content": "Inspección de detalles en cortes y marcos para entregar una propiedad con apariencia de recién construida.",
+          "img": "/images/services/ext-4.webp"
+        }
+      ]
     },
+
     "interior": {
       "title": "Transformación de Interiores",
-      "description": "Desde habitaciones infantiles hasta cocinas de ensueño. Nos enfocamos en acabados perfectos en rodapiés y techos.",
-      "price": "Precio Competitivo",
-      "features": [
-        "Paredes y techos (Ceilings)",
-        "Baseboards y molduras finas",
-        "Acentos de color personalizados",
-        "Expertos en múltiples colores"
-      ],
-     "experience": {
-        "intro": "Entendemos que tu hogar es tu santuario. Por eso, nuestra prioridad absoluta es la protección total: movemos tus muebles con cuidado y cubrimos cada centímetro de tus pisos con mantas de alta densidad.",
-        "process": "La verdadera calidad se siente al tacto. Restauramos tus paredes tapando cada agujero de drywall y reparando grietas de tensión hasta que la superficie quede suave como el cristal.",
-        "climax": "Nuestros maestros pintores ejecutan recortes manuales de alta precisión en techos y rodapiés, logrando líneas tan rectas que parecen trazadas con láser.",
-        "footer": "Tras una limpieza de élite, devolvemos cada mueble a su lugar. Te entregamos una casa renovada e impecable."
-      }
+      "description": "Acabados perfectos en paredes, techos y rodapiés con máxima protección de su propiedad.",
+      "features": ["Paredes y techos", "Baseboards y molduras", "Expertos multi-color"],
+      "steps": [
+        {
+          "header": "Protección Total",
+          "content": "Cubrimos pisos y muebles con mantas de alta densidad para asegurar un espacio libre de manchas y polvo.",
+          "img": "/images/services/int-1.webp"
+        },
+        {
+          "header": "Reparación de Drywall",
+          "content": "Corregimos agujeros, grietas de tensión y texturas hasta lograr una superficie suave y uniforme al tacto.",
+          "img": "/images/services/int-2.webp"
+        },
+        {
+          "header": "Cortes de Precisión",
+          "content": "Ejecutamos recortes manuales de alta precisión en techos y rodapiés, logrando líneas rectas y limpias.",
+          "img": "/images/services/int-3.webp"
+        },
+        {
+          "header": "Entrega Impecable",
+          "content": "Realizamos una limpieza profunda y devolvemos cada mueble a su lugar. Casa renovada y lista para habitar.",
+          "img": "/images/services/int-4.webp"
+        }
+      ]
     },
+
     "pressure": {
       "title": "Lavado a Presión Pro",
-      "description": "Eliminamos años de suciedad y moho en minutos. Especialistas en techos modernos (2024-2025) y áreas de recreación.",
-      "price": "Desde 2000$",
-      "features": [
-        "Driveways y áreas de concreto",
-        "Techos de metal y modernos",
-        "Áreas de piscina y cubiertas",
-        "Limpieza profunda sin daños"
-      ],
-      "experience": {
-        "intro": "El clima de Orlando es implacable. Nuestra solución comienza con un pre-tratamiento químico biodegradable que elimina algas y musgo desde la raíz, protegiendo la salud de tu infraestructura.",
-        "process": "No creemos en la fuerza bruta, sino en la técnica. Ajustamos nuestros equipos para alternar entre limpieza profunda en concreto y un 'lavado suave' (soft wash) en áreas delicadas.",
-        "climax": "Atacamos incluso las manchas más difíciles de aceite y óxido con químicos de grado industrial. Finalmente, realizamos un enjuague meticuloso de toda la propiedad.",
-        "footer": "Resultados visibles en horas que aumentan el valor visual de tu propiedad al instante."
-      }
+      "description": "Eliminamos años de suciedad y moho en minutos. Especialistas en techos y concreto.",
+      "features": ["Driveways y concreto", "Techos modernos", "Soft wash delicado"],
+      "steps": [
+        {
+          "header": "Tratamiento Químico",
+          "content": "Aplicamos agentes biodegradables que eliminan algas y musgo desde la raíz sin dañar la estructura.",
+          "img": "/images/services/press-1.webp"
+        },
+        {
+          "header": "Técnica Soft Wash",
+          "content": "Usamos baja presión para techos y áreas delicadas, alternando con alta presión solo para concreto sólido.",
+          "img": "/images/services/press-2.webp"
+        },
+        {
+          "header": "Limpieza Profunda",
+          "content": "Atacamos manchas difíciles de aceite, óxido y grasa con químicos industriales y enjuague meticuloso.",
+          "img": "/images/services/press-3.webp"
+        },
+        {
+          "header": "Restauración Visual",
+          "content": "Resultados inmediatos que aumentan el valor de la propiedad y devuelven el brillo original a las superficies.",
+          "img": "/images/services/press-4.webp"
+        }
+      ]
     },
+
     "repair": {
       "title": "Reparación de Superficies",
-      "description": "¿Quitaste un televisor o tienes madera dañada? Dejamos tus superficies lisas y listas para la pintura.",
-      "price": "Evaluación Técnica",
-      "features": [
-        "Plaster, lija y sellado pro",
-        "Reparación de huecos (TV Mounts)",
-        "Restauración de madera/sintético",
-        "Desaparecemos daños previos"
-      ],
-      "experience": {
-        "intro": "Tus gabinetes y paredes son los detalles que definen el lujo de tu hogar. Nuestro proceso comienza con una limpieza profunda y técnica para asegurar que cualquier reparación se integre de forma invisible con la estructura original.",
-        "process": "La verdadera calidad se siente al tacto. Utilizamos sistemas de extracción de polvo para un lijado mecánico limpio, eliminando imperfecciones y creando el perfil de agarre perfecto para que el acabado sea suave como la seda.",
-        "climax": "Mediante tecnología de pulverización de acabado fino, aplicamos recubrimientos de grado industrial que son totalmente libres de marcas de brocha. Restauramos la estética de fábrica en cada superficie dañada.",
-        "footer": "Concluimos con un reensamblaje de precisión. Reinstalamos cada herraje con una alineación experta, entregándote detalles que parecen recién salidos de exhibición."
-      }
-    },
-    "commercial": {
-      "title": "Pintura Comercial",
-      "description": "Soluciones eficientes para negocios en Florida Central con horarios flexibles para no detener tu operación.",
-      "price": "Cotización Pro",
-      "features": [
-        "Acabados de alta resistencia",
-        "Cumplimiento de plazos récord",
-        "Mínima interrupción comercial",
-        "Garantía de calidad comercial"
+      "description": "Restauración técnica de madera y paredes dañadas con acabados invisibles.",
+      "features": ["Plaster y lija pro", "Reparación de TV Mounts", "Restauración de madera"],
+      "steps": [
+        {
+          "header": "Saneamiento Técnico",
+          "content": "Limpiamos y preparamos el área dañada para asegurar que el parche se integre de forma invisible.",
+          "img": "/images/services/rep-1.webp"
+        },
+        {
+          "header": "Lijado Libre de Polvo",
+          "content": "Usamos sistemas de extracción y lijado mecánico para crear una superficie lisa sin ensuciar su hogar.",
+          "img": "/images/services/rep-2.webp"
+        },
+        {
+          "header": "Aplicación Pro",
+          "content": "Aplicamos recubrimientos mediante pulverización o llana experta, garantizando cero marcas de brocha.",
+          "img": "/images/services/rep-3.webp"
+        },
+        {
+          "header": "Ajuste de Herrajes",
+          "content": "Reinstalamos accesorios y verificamos alineaciones. Detalles que parecen nuevos de fábrica.",
+          "img": "/images/services/rep-4.webp"
+        }
       ]
     }
   },
