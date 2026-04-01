@@ -4,13 +4,12 @@ import Image from "next/image";
 import { ArrowRight, ChevronRight, ChevronLeft, Check, Sparkles } from "lucide-react"; 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRef, useState } from "react";
-// 1. IMPORTACIÓN CORREGIDA
 import ServiceDetail from "./ServiceDetails"; 
 
 export default function Services() {
   const { t } = useLanguage();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false); // Nombre más descriptivo
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false); 
   const [selectedServiceData, setSelectedServiceData] = useState<any>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -24,7 +23,6 @@ export default function Services() {
   };
 
   const handleOpenDetails = (service: { key: string; img: string }) => {
-    // Obtenemos los datos dinámicos del JSON según el idioma
     const data = (t as any)(`services.${service.key}`, { returnObjects: true });
     const dataWithImg = { ...data, img: service.img };
     setSelectedServiceData(dataWithImg);
@@ -43,46 +41,47 @@ export default function Services() {
   return (
     <section 
       id="services" 
-      className="relative py-16 lg:py-24 overflow-hidden antialiased bg-white"
+      className="relative py-20 lg:py-32 overflow-hidden antialiased bg-white"
     >
-      {/* Glow de fondo suavizado */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 lg:left-1/4 w-[30rem] lg:w-[60rem] h-[30rem] lg:h-[60rem] bg-blue-50 rounded-full blur-[100px] pointer-events-none -z-10 opacity-50" />
+      {/* Círculo de fondo decorativo original */}
+      <div className="absolute top-0 left-1/4 w-[60rem] h-[60rem] bg-primary-50 rounded-full blur-[120px] pointer-events-none -z-10 opacity-60" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-12">
+      {/* Contenedor con el margen izquierdo grabado (lg:px-16) */}
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 lg:px-16">
         
         {/* ENCABEZADO */}
-        <div className="max-w-5xl text-left mb-12 md:mb-20 px-4 md:px-0">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 mb-8 shadow-xl shadow-blue-100 w-fit">
-            <Sparkles className="w-4 h-4 text-white" />
-            <span className="text-[10px] font-black text-white uppercase tracking-[0.3em]">
+        <div className="max-w-5xl text-left mb-16 md:mb-24">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary-600 mb-8 shadow-xl shadow-primary-100 w-fit">
+            <Sparkles className="w-3.5 h-3.5 text-white" />
+            <span className="font-sans text-[10px] font-bold text-white uppercase tracking-[0.3em]">
               {t("services.badge") || "PORTAFOLIO DE EXCELENCIA"}
             </span>
           </div>
 
           <h2 className="flex flex-col mb-10">
-            <span className="text-4xl md:text-6xl font-extrabold text-slate-950 uppercase tracking-tighter leading-[0.9]">
+            <span className="font-display text-5xl md:text-8xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.9]">
               {t("services.title")}
             </span>
-            <span className="text-4xl md:text-6xl font-serif italic font-semibold text-blue-600 block lowercase md:mt-2 tracking-tight">
+            <span className="font-serif text-4xl md:text-7xl italic font-normal text-primary-600 block leading-none mt-2">
               {t("services.titleHighlight")}
             </span>
           </h2>
 
-          <div className="flex gap-4 md:gap-6 items-stretch mb-10 md:mb-14">
-            <div className="w-[2px] bg-blue-600 rounded-full flex-shrink-0" />
-            <p className="text-xl text-slate-600 font-medium leading-relaxed max-w-lg">
+          <div className="flex gap-6 items-stretch mb-12">
+            <div className="w-[2px] bg-primary-600 rounded-full flex-shrink-0" />
+            <p className="font-sans text-lg md:text-xl text-slate-600 font-light leading-relaxed max-w-xl">
               {t("services.subtitle")}
             </p>
           </div>
 
           {/* ÁREAS DE SERVICIO */}
-          <div className="pl-[calc(1rem+2px)] md:pl-[calc(1.5rem+2px)] flex flex-col gap-5 mt-10"> 
+          <div className="flex flex-col gap-5 mt-12"> 
             <div className="flex items-center gap-3">
-              <div className="relative flex h-2 w-2 flex-shrink-0">
+              <div className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </div>
-              <span className="text-[11px] md:text-xs font-bold text-[#0f172a] uppercase tracking-[0.2em]">
+              <span className="font-sans text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                 Zonas de Operación Actual
               </span>
             </div>
@@ -91,7 +90,7 @@ export default function Services() {
               {serviceAreas.map((city) => (
                 <span 
                   key={city} 
-                  className="px-4 md:px-5 py-2.5 rounded-full bg-[#0f172a] text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.15em] transition-all cursor-default hover:bg-blue-600 hover:shadow-xl hover:shadow-blue-100 active:scale-95 shadow-sm"
+                  className="font-sans px-4 py-2.5 rounded-xl border border-slate-100 bg-white text-slate-900 text-[10px] font-bold uppercase tracking-widest transition-all cursor-default hover:bg-primary-600 hover:text-white hover:border-primary-600 active:scale-95 shadow-sm"
                 >
                   {city}
                 </span>
@@ -101,51 +100,54 @@ export default function Services() {
         </div>
 
         {/* CARRUSEL */}
-        <div className="relative group mt-16 md:mt-24 mb-8 md:mb-12">
+        <div className="relative group mb-12">
+          {/* Botones de navegación ajustados */}
           <button 
             onClick={() => scroll("left")}
-            className="absolute -left-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white text-blue-700 border border-blue-500/10 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex"
+            className="absolute -left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white text-primary-700 border border-slate-100 rounded-full items-center justify-center shadow-xl hover:bg-primary-600 hover:text-white transition-all hidden md:flex"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
 
           <div 
             ref={scrollRef} 
-            className="flex gap-4 md:gap-8 pb-10 overflow-x-auto snap-x snap-mandatory scrollbar-hide touch-pan-x"
+            className="flex gap-6 md:gap-10 pb-12 overflow-x-auto snap-x snap-mandatory scrollbar-hide touch-pan-x"
           >
             {services.map((service, index) => (
-              <div key={index} className="flex-[0_0_88%] sm:flex-[0_0_60%] md:flex-[0_0_45%] lg:flex-[0_0_31%] min-w-0 snap-center">
-                <div className="group/card relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 h-full flex flex-col transition-all duration-500 hover:shadow-2xl md:hover:-translate-y-2">
-                  <div className="relative h-56 md:h-72 overflow-hidden">
+              <div key={index} className="flex-[0_0_90%] sm:flex-[0_0_65%] md:flex-[0_0_45%] lg:flex-[0_0_32%] min-w-0 snap-center">
+                <div className="group/card relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 h-full flex flex-col transition-all duration-700 hover:shadow-2xl">
+                  <div className="relative h-64 md:h-80 overflow-hidden">
                     <Image
                       src={service.img}
                       alt={t(`services.${service.key}.title`)}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover/card:scale-110"
+                      className="object-cover transition-transform duration-1000 group-hover/card:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
-                    <div className="absolute bottom-5 left-6 right-6 text-left">
-                      <h3 className="text-xl md:text-2xl font-serif italic font-semibold text-white uppercase tracking-tighter leading-none">
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                    <div className="absolute bottom-8 left-8 right-8">
+                      <h3 className="font-display text-2xl md:text-3xl font-bold text-white uppercase tracking-tight leading-none">
                         {t(`services.${service.key}.title`)}
                       </h3>
                     </div>
                   </div>
 
-                  <div className="flex flex-col flex-grow p-6 md:p-8">
-                    <ul className="flex-grow mb-6 md:mb-8 space-y-4 text-left">
+                  <div className="flex flex-col flex-grow p-10">
+                    <ul className="flex-grow mb-10 space-y-4">
                       {[0, 1, 2, 3].map((i) => (
-                        <li key={i} className="flex items-start gap-3 text-slate-700 text-[11px] md:text-[12px] font-bold uppercase tracking-tight">
-                          <Check className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                          <span className="leading-tight">{t(`services.${service.key}.features.${i}`)}</span>
+                        <li key={i} className="flex items-start gap-3">
+                          <Check className="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5" />
+                          <span className="font-sans text-[11px] font-bold text-slate-700 uppercase tracking-wider">
+                            {t(`services.${service.key}.features.${i}`)}
+                          </span>
                         </li>
                       ))}
                     </ul>
 
                     <button
                       onClick={() => handleOpenDetails(service)}
-                      className="group/btn relative overflow-hidden flex items-center justify-center gap-3 w-full bg-slate-950 text-white py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-[0.2em] transition-all"
+                      className="font-sans group/btn relative overflow-hidden flex items-center justify-center gap-3 w-full bg-slate-950 text-white py-5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.2em] transition-all"
                     >
-                      <div className="absolute inset-0 translate-y-full bg-blue-600 transition-transform duration-300 group-hover/btn:translate-y-0" />
+                      <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-300 group-hover/btn:translate-y-0" />
                       <span className="relative z-10">{t("services.moreInfo")}</span>
                       <ArrowRight className="relative z-10 w-4 h-4 transition-transform group-hover/btn:translate-x-2" />
                     </button>
@@ -157,28 +159,33 @@ export default function Services() {
 
           <button 
             onClick={() => scroll("right")}
-            className="absolute -right-4 top-[40%] -translate-y-1/2 z-30 w-14 h-14 bg-white text-blue-700 border border-blue-500/10 rounded-2xl items-center justify-center shadow-xl hover:bg-blue-600 hover:text-white transition-all hidden md:flex"
+            className="absolute -right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white text-primary-700 border border-slate-100 rounded-full items-center justify-center shadow-xl hover:bg-primary-600 hover:text-white transition-all hidden md:flex"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
       </div>
       
-      {/* SEPARADOR FLOTANTE */}
-      <div className="absolute bottom-1 left-0 w-full z-30 pointer-events-none">
-        <div className="max-w-5xl mx-auto px-4 relative flex items-center justify-center">
-          <div className="absolute w-full h-px bg-slate-200" />
-          <div className="relative flex items-center gap-3 bg-white px-7 py-3 rounded-2xl border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
-            <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
-            <span className="text-[11px] font-black text-slate-800 uppercase tracking-[0.4em] whitespace-nowrap">
-              Flawless Results
-            </span>
-            <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
-          </div>
-        </div>
-      </div>
+     {/* SEPARADOR INFERIOR - Estilo Revista con Línea Original */}
+<div className="-mb-32 lg:mt-40 w-full flex items-center justify-center"> 
+  <div className="flex items-center gap-8 w-full max-w-[1440px] px-6 lg:px-16">
+    {/* Línea Izquierda */}
+    <div className="h-[1px] flex-grow bg-slate-200" />
+    
+    {/* Bloque Central */}
+    <div className="flex items-center gap-4 bg-slate-50 px-8 py-3 rounded-full border border-slate-100 flex-shrink-0">
+      <div className="w-1.5 h-1.5 rounded-full bg-primary-600 animate-pulse" />
+      <span className="font-sans text-[9px] md:text-[10px] font-black text-slate-500 uppercase tracking-[0.5em]">
+        Before-After-Gallery
+      </span>
+      <div className="w-1.5 h-1.5 rounded-full bg-primary-600 animate-pulse" />
+    </div>
 
-      {/* 2. LLAMADA AL COMPONENTE ACTUALIZADA */}
+    {/* Línea Derecha */}
+    <div className="h-[1px] flex-grow bg-slate-200" />
+  </div>
+</div>
+
       <ServiceDetail 
         isOpen={isDetailsOpen} 
         onClose={() => setIsDetailsOpen(false)} 

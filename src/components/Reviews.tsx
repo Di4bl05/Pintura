@@ -1,14 +1,25 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { Star, MapPin, ChevronRight, ExternalLink, Quote, Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const reviewsData = [
-  { id: 1, author: "María González", rating: 5, date: "twoWeeks", text: "¡Excelente trabajo! Pintaron mi casa completa y quedó impecable. El equipo fue muy profesional, detallista y dejaron todo limpio al terminar. 100% recomendados. Además, se encargaron de cubrir todos los muebles con plástico y no hubo ni una sola mancha de pintura en el suelo.", avatar: "MG", location: "Orlando, FL", color: "bg-blue-100 text-blue-600" },
-  { id: 2, author: "Carlos Rodríguez", rating: 5, date: "oneMonth", text: "Muy detallistas y limpios. Cumplieron con los tiempos acordados y el presupuesto inicial. El trato fue inmejorable desde el primer día.", avatar: "CR", location: "Kissimmee, FL", color: "bg-purple-100 text-purple-600" },
-  { id: 3, author: "Ana Martínez", rating: 5, date: "oneMonth", text: "Transformaron mi oficina. Acabado impecable y puntualidad. Los materiales que usan son de primera calidad y eso se nota en el resultado final.", avatar: "AM", location: "Windermere, FL", color: "bg-emerald-100 text-emerald-600" },
-  { id: 4, author: "Roberto Silva", rating: 5, date: "twoMonths", text: "Pintaron el exterior y quedó como nueva. Es difícil encontrar contratistas serios hoy en día, pero ellos superaron mis expectativas.", avatar: "RS", location: "Winter Park, FL", color: "bg-orange-100 text-orange-600" },
+// Datos tipados para mejor mantenimiento
+interface Review {
+  id: number;
+  author: string;
+  rating: number;
+  text: string;
+  avatar: string;
+  location: string;
+  color: string;
+}
+
+const reviewsData: Review[] = [
+  { id: 1, author: "María González", rating: 5, text: "Excellent work! They painted my entire house and it looks flawless. The team was professional, detailed, and left everything spotless. 100% recommended.", avatar: "MG", location: "Orlando, FL", color: "bg-primary-100 text-primary-600" },
+  { id: 2, author: "Carlos Rodríguez", rating: 5, text: "Very detailed and clean. They met the agreed times and the initial budget. The service was unbeatable from day one.", avatar: "CR", location: "Kissimmee, FL", color: "bg-slate-100 text-slate-600" },
+  { id: 3, author: "Ana Martínez", rating: 5, text: "They transformed my office. Impeccable finish and punctuality. The materials they use are top quality and it shows.", avatar: "AM", location: "Windermere, FL", color: "bg-primary-50 text-primary-700" },
+  { id: 4, author: "Roberto Silva", rating: 5, text: "They painted the exterior and it looks like new. It's hard to find serious contractors, but they exceeded my expectations.", avatar: "RS", location: "Winter Park, FL", color: "bg-slate-200 text-slate-800" },
 ];
 
 const GoogleIcon = ({ className = "w-3 h-3" }: { className?: string }) => (
@@ -27,103 +38,99 @@ export default function Reviews() {
   const [rating, setRating] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  // Animación del contador de rating
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          let start = 0;
-          const end = 4.9;
-          const timer = setInterval(() => {
-            start += 0.1;
-            if (start >= end) {
-              setRating(end);
-              clearInterval(timer);
-            } else { setRating(Number(start.toFixed(1))); }
-          }, 30);
-        }
-      }, { threshold: 0.1 });
+      if (entry.isIntersecting) {
+        let start = 0;
+        const end = 5.0;
+        const timer = setInterval(() => {
+          start += 0.1;
+          if (start >= end) {
+            setRating(end);
+            clearInterval(timer);
+          } else { setRating(Number(start.toFixed(1))); }
+        }, 40);
+      }
+    }, { threshold: 0.2 });
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
   const toggleText = (id: number) => setExpandedTexts(prev => ({ ...prev, [id]: !prev[id] }));
-  const displayedReviews = showAllReviews ? reviewsData : reviewsData.slice(0, 4);
+  const displayedReviews = useMemo(() => 
+    showAllReviews ? reviewsData : reviewsData.slice(0, 3)
+  , [showAllReviews]);
 
   return (
-    <section id="reviews" className="relative py-16 lg:py-24 bg-white antialiased overflow-hidden">
+    <section id="reviews" ref={sectionRef} className="relative py-24 lg:py-32 bg-white overflow-hidden">
       
-      <div className="absolute top-0 right-[-5%] w-[45rem] h-[45rem] bg-blue-50/60 rounded-full blur-[130px] -z-10" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[35rem] h-[35rem] bg-slate-50 rounded-full blur-[110px] -z-10" />
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-slate-50/80 blur-[120px] rounded-full -z-10" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-6 lg:px-16">
         
-        {/* ENCABEZADO */}
-        <div className="max-w-5xl text-left mb-16 md:mb-24">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 mb-8 shadow-xl shadow-blue-100 w-fit">
+        {/* HEADER */}
+        <div className="max-w-4xl mb-20 lg:mb-28">
+          <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-primary-600 mb-10 shadow-xl shadow-primary-100">
             <Sparkles className="w-4 h-4 text-white" />
-            <span className="text-[10px] font-black text-white uppercase tracking-[0.3em]">
-              {t("reviews.badge") || "CLIENTES SATISFECHOS"}
+            <span className="font-sans text-[10px] font-black text-white uppercase tracking-[0.4em]">
+              {t("reviews.badge") || "Social Proof"}
             </span>
           </div>
 
-          <h2 className="flex flex-col mb-10">
-            <span className="text-4xl md:text-6xl font-extrabold text-slate-950 uppercase tracking-tighter leading-[0.9]">
-              {t("reviews.title") || "OPINIONES DE"}
+          <h2 className="mb-10">
+            <span className="font-display text-5xl md:text-8xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.85] block">
+              {t("reviews.title") || "Trusted by"}
             </span>
-            <span className="text-4xl md:text-6xl font-serif italic font-semibold text-blue-600 block lowercase md:mt-2 tracking-tight relative w-fit">
-              {t("reviews.titleHighlight") || "Nuestros Clientes"}
+            <span className="font-serif text-5xl md:text-8xl italic font-normal text-primary-600 block leading-[1.1] lowercase">
+              {t("reviews.titleHighlight") || "The Community"}
             </span>
           </h2>
-
-          <div className="flex gap-4 md:gap-6 items-stretch max-w-2xl">
-            <div className="w-[2px] bg-blue-600 rounded-full flex-shrink-0" />
-            <p className="text-xl text-slate-600 font-medium leading-relaxed max-w-lg pl-2 italic">
-              {t("reviews.subtitle") || "La confianza de nuestros clientes es nuestro mejor acabado."}
-            </p>
-          </div>
         </div>
 
-        <div className="grid lg:grid-cols-[1fr_380px] gap-16 items-start">
+        <div className="grid lg:grid-cols-[1fr_450px] gap-20 items-start">
           
-          {/* LISTADO DE RESEÑAS */}
-          <div className="space-y-10 order-2 lg:order-1">
-            <div className="grid grid-cols-1 gap-8">
+          {/* REVIEWS FEED */}
+          <div className="space-y-12 order-2 lg:order-1">
+            <div className="grid grid-cols-1 gap-12">
               {displayedReviews.map((review) => {
                 const isExpanded = expandedTexts[review.id];
                 return (
-                  <div key={review.id} className="group relative bg-slate-50/40 p-8 md:p-10 rounded-[3rem] border border-transparent hover:border-blue-100 hover:bg-white hover:shadow-2xl hover:shadow-blue-50/50 transition-all duration-500">
-                    <Quote className="absolute top-8 right-10 w-12 h-12 text-blue-600/5 group-hover:text-blue-600/10 transition-colors" />
+                  <div key={review.id} className="group relative bg-slate-50/50 p-10 md:p-14 rounded-[3rem] border border-transparent hover:border-primary-100 hover:bg-white hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.05)] transition-all duration-700">
+                    <Quote className="absolute top-12 right-12 w-16 h-16 text-primary-600/5 group-hover:text-primary-600/10 transition-colors" />
                     
-                    <div className="flex flex-col sm:flex-row gap-6 mb-6">
-                      <div className={`w-14 h-14 rounded-2xl ${review.color} flex-shrink-0 flex items-center justify-center font-black text-xl shadow-sm`}>
+                    <div className="flex flex-col md:flex-row gap-8 mb-10">
+                      <div className={`w-20 h-20 rounded-3xl ${review.color} flex-shrink-0 flex items-center justify-center font-display font-bold text-3xl shadow-inner`}>
                         {review.avatar}
                       </div>
                       
-                      <div className="flex-1 space-y-1">
-                        <div className="flex flex-wrap items-center gap-3">
-                          <h4 className="font-black text-slate-900 text-xl uppercase tracking-tighter leading-none">
+                      <div className="flex-1">
+                        <div className="flex flex-wrap items-center gap-4 mb-2">
+                          <h4 className="font-display font-bold text-slate-900 text-3xl tracking-tight leading-none uppercase">
                             {review.author}
                           </h4>
-                          <span className="flex items-center gap-1.5 text-[9px] font-black text-blue-600 bg-white px-3 py-1 rounded-full uppercase tracking-widest border border-blue-50 shadow-sm">
-                            <GoogleIcon className="w-2.5 h-2.5" /> Google
+                          <span className="font-sans flex items-center gap-2 text-[9px] font-black text-primary-600 bg-white px-4 py-2 rounded-full uppercase tracking-widest border border-primary-50 shadow-sm">
+                            <GoogleIcon className="w-3.5 h-3.5" /> Verified
                           </span>
                         </div>
-                        <div className="flex items-center gap-4">
-                          <div className="flex gap-0.5 text-yellow-400">
-                            {[...Array(5)].map((_, i) => <Star key={i} size={14} className="fill-current" stroke="none" />)}
+                        <div className="flex items-center gap-6">
+                          <div className="flex gap-1 text-yellow-400">
+                            {[...Array(5)].map((_, i) => <Star key={i} size={18} className="fill-current" stroke="none" />)}
                           </div>
-                          <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-bold uppercase tracking-widest">
-                            <MapPin size={10} className="text-blue-400" /> {review.location}
+                          <div className="font-sans flex items-center gap-2 text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                            <MapPin size={12} className="text-primary-500" /> {review.location}
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium italic">
-                      "{isExpanded ? review.text : `${review.text.substring(0, 150)}...`}"
-                      {review.text.length > 150 && (
+                    <p className="font-serif text-2xl md:text-3xl text-slate-700 leading-[1.4] italic">
+                      "{isExpanded ? review.text : `${review.text.substring(0, 160)}...`}"
+                      {review.text.length > 160 && (
                         <button 
                           onClick={() => toggleText(review.id)}
-                          className="ml-3 text-blue-600 font-black uppercase text-[10px] tracking-widest hover:underline transition-all"
+                          className="font-sans ml-4 text-primary-600 font-black uppercase text-[10px] tracking-widest hover:text-slate-950 transition-colors"
                         >
                           {isExpanded ? t("reviews.readLess") : t("reviews.readMore")}
                         </button>
@@ -134,50 +141,47 @@ export default function Reviews() {
               })}
             </div>
 
-            {/* Botón Ver Todas (Efecto Slide-Up) */}
             <button 
               onClick={() => setShowAllReviews(!showAllReviews)}
-              className="group relative overflow-hidden flex items-center justify-center gap-4 py-5 px-14 rounded-2xl font-black text-xs bg-slate-950 text-white uppercase tracking-widest transition-all shadow-2xl shadow-slate-200"
+              className="font-sans group relative overflow-hidden flex items-center justify-center gap-6 py-8 px-20 rounded-2xl font-black text-[10px] bg-slate-950 text-white uppercase tracking-[0.3em] transition-all shadow-3xl hover:shadow-primary-100"
             >
-              <div className="absolute inset-0 translate-y-full bg-blue-600 transition-transform duration-300 group-hover:translate-y-0" />
+              <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
               <span className="relative z-10">
-                {showAllReviews ? t("reviews.showLess") : `${t("reviews.viewAll")} (${reviewsData.length})`}
+                {showAllReviews ? "Show Less" : `View All Stories (${reviewsData.length})`}
               </span>
-              <ChevronRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+              <ChevronRight size={18} className="relative z-10 group-hover:translate-x-2 transition-transform" />
             </button>
           </div>
 
-          {/* SCORE CARD */}
+          {/* SIDEBAR SCORE CARD */}
           <div className="lg:sticky lg:top-32 order-1 lg:order-2">
-            <div className="bg-white/80 backdrop-blur-2xl p-10 rounded-[3.5rem] border border-slate-100 shadow-2xl shadow-slate-200/50 text-center space-y-8">
-              <div className="space-y-2">
-                <div className="w-16 h-16 bg-slate-50 rounded-[1.5rem] flex items-center justify-center border border-slate-100 mx-auto mb-4">
-                  <GoogleIcon className="w-8 h-8" />
+            <div className="bg-slate-950 p-16 rounded-[4.5rem] text-center space-y-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)]">
+              <div className="space-y-6">
+                <div className="w-24 h-24 bg-white/5 rounded-[2.5rem] flex items-center justify-center border border-white/10 mx-auto mb-10">
+                  <GoogleIcon className="w-12 h-12" />
                 </div>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Puntaje Total</p>
-                <div className="text-7xl md:text-8xl font-black text-slate-950 tracking-tighter leading-none">
+                <p className="font-sans text-[11px] font-black text-primary-400 uppercase tracking-[0.4em]">Average Rating</p>
+                <div className="font-display text-[10rem] font-bold text-white tracking-tighter leading-none animate-in fade-in zoom-in duration-1000">
                   {rating.toFixed(1)}
                 </div>
-                <div className="flex justify-center gap-1 text-yellow-400 pt-2">
-                   {[...Array(5)].map((_, s) => <Star key={s} size={20} className="fill-current" stroke="none" />)}
+                <div className="flex justify-center gap-2 text-yellow-400 pt-4">
+                   {[...Array(5)].map((_, s) => <Star key={s} size={28} className="fill-current" stroke="none" />)}
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <p className="text-xs font-bold text-slate-500 uppercase tracking-widest leading-relaxed px-4">
-                  Basado en <span className="text-slate-950">152 reseñas verificadas</span> de dueños de casas en Orlando.
+              <div className="space-y-8">
+                <p className="font-sans text-xs font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
+                  Based on <span className="text-white">150+ verified</span> painting projects in Central Florida.
                 </p>
                 
-                {/* Botón Dejar Reseña (Efecto Slide-Up) */}
                 <a 
                   href="https://google.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="group relative overflow-hidden flex items-center justify-center gap-3 w-full py-5 bg-slate-950 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all shadow-xl"
+                  className="font-sans group relative overflow-hidden flex items-center justify-center gap-4 w-full py-7 bg-primary-600 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.3em] transition-all"
                 >
-                  <div className="absolute inset-0 translate-y-full bg-blue-600 transition-transform duration-300 group-hover:translate-y-0" />
-                  <span className="relative z-10">Dejar una reseña</span>
-                  <ExternalLink size={14} className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <span className="relative z-10">Leave a Review</span>
+                  <ExternalLink size={16} className="relative z-10 group-hover:scale-110 transition-transform" />
                 </a>
               </div>
             </div>
@@ -185,27 +189,6 @@ export default function Reviews() {
 
         </div>
       </div>
-{/* SEPARADOR FLOTANTE CON LÍNEA INTEGRADA */}
-      <div className="absolute bottom-1 left-0 w-full z-30 pointer-events-none">
-        <div className="max-w-5xl mx-auto px-4 relative flex items-center justify-center">
-          
-          {/* La Línea (ahora es visible y no llega a los bordes) */}
-          <div className="absolute w-full h-px bg-slate-200" />
-          
-          {/* El Badge (con fondo blanco para tapar la línea justo detrás del texto) */}
-          <div className="relative flex items-center gap-3 bg-white px-7 py-3 rounded-2xl border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
-            <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
-            
-            <span className="text-[11px] font-black text-slate-800 uppercase tracking-[0.4em] whitespace-nowrap">
-              Flawless Results
-            </span>
-            
-            <div className="w-2 h-2 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.4)] animate-pulse" />
-          </div>
-          
-        </div>
-      </div>
     </section>
-    
   );
 }
