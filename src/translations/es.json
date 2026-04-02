@@ -32,129 +32,53 @@
     },
     "scroll": "Ver Servicios"
   },
-  "services": {
-    "freeEstimate": "Presupuesto Gratis",
-    "premiumDetail": "Detalle Premium",
-    "badge": "Servicios con Ética Profesional",
-    "title": "Especialistas en",
-    "titleHighlight": "Pintura en Orlando FL",
-    "subtitle": "Transformamos tu propiedad con un proceso riguroso: desde el lavado a presión profundo hasta el acabado final de alta gama.",
-    "socialProof": "+500 Proyectos Completados con Éxito",
-    "serviceAreas": "Servicio especializado en Orlando, Winter Park, Lake Nona y áreas circundantes.",
-    "moreInfo": "Leer más",
+ "services": {
+  "badge": "Servicios con Ética Profesional",
+  "title": "Especialistas en",
+  "titleHighlight": "Pintura en Orlando FL",
+  "subtitle": "Transformamos tu propiedad con un proceso riguroso: desde el lavado a presión profundo hasta el acabado final de alta gama.",
+  "moreInfo": "Leer más",
 
-    "exterior": {
-      "title": "Pintura Exterior Profesional",
-      "description": "Protección total contra el sol y la humedad de Florida con preparación profunda de superficies.",
-      "features": ["Pressure Washing pro", "Soffits y rejillas", "Sellado anti-humedad"],
-      "steps": [
-        {
-          "header": "Lavado Industrial",
-          "content": "Eliminamos moho, tizne y contaminantes con hidrolavado de alta presión para garantizar la máxima adherencia.",
-          "img": "/images/services/ext-1.webp"
-        },
-        {
-          "header": "Sellado Elastomérico",
-          "content": "Raspamos imperfecciones y aplicamos selladores de alta elasticidad que bloquean filtraciones y blindan la fachada.",
-          "img": "/images/services/ext-2.webp"
-        },
-        {
-          "header": "Protección UV",
-          "content": "Aplicamos dos capas de pintura de alto espesor con filtros UV, diseñada para resistir el clima extremo de Orlando.",
-          "img": "/images/services/ext-3.webp"
-        },
-        {
-          "header": "Acabado Final",
-          "content": "Inspección de detalles en cortes y marcos para entregar una propiedad con apariencia de recién construida.",
-          "img": "/images/services/ext-4.webp"
-        }
-      ]
-    },
-
-    "interior": {
-      "title": "Transformación de Interiores",
-      "description": "Acabados perfectos en paredes, techos y rodapiés con máxima protección de su propiedad.",
-      "features": ["Paredes y techos", "Baseboards y molduras", "Expertos multi-color"],
-      "steps": [
-        {
-          "header": "Protección Total",
-          "content": "Cubrimos pisos y muebles con mantas de alta densidad para asegurar un espacio libre de manchas y polvo.",
-          "img": "/images/services/int-1.webp"
-        },
-        {
-          "header": "Reparación de Drywall",
-          "content": "Corregimos agujeros, grietas de tensión y texturas hasta lograr una superficie suave y uniforme al tacto.",
-          "img": "/images/services/int-2.webp"
-        },
-        {
-          "header": "Cortes de Precisión",
-          "content": "Ejecutamos recortes manuales de alta precisión en techos y rodapiés, logrando líneas rectas y limpias.",
-          "img": "/images/services/int-3.webp"
-        },
-        {
-          "header": "Entrega Impecable",
-          "content": "Realizamos una limpieza profunda y devolvemos cada mueble a su lugar. Casa renovada y lista para habitar.",
-          "img": "/images/services/int-4.webp"
-        }
-      ]
-    },
-
-    "pressure": {
-      "title": "Lavado a Presión Pro",
-      "description": "Eliminamos años de suciedad y moho en minutos. Especialistas en techos y concreto.",
-      "features": ["Driveways y concreto", "Techos modernos", "Soft wash delicado"],
-      "steps": [
-        {
-          "header": "Tratamiento Químico",
-          "content": "Aplicamos agentes biodegradables que eliminan algas y musgo desde la raíz sin dañar la estructura.",
-          "img": "/images/services/press-1.webp"
-        },
-        {
-          "header": "Técnica Soft Wash",
-          "content": "Usamos baja presión para techos y áreas delicadas, alternando con alta presión solo para concreto sólido.",
-          "img": "/images/services/press-2.webp"
-        },
-        {
-          "header": "Limpieza Profunda",
-          "content": "Atacamos manchas difíciles de aceite, óxido y grasa con químicos industriales y enjuague meticuloso.",
-          "img": "/images/services/press-3.webp"
-        },
-        {
-          "header": "Restauración Visual",
-          "content": "Resultados inmediatos que aumentan el valor de la propiedad y devuelven el brillo original a las superficies.",
-          "img": "/images/services/press-4.webp"
-        }
-      ]
-    },
-
-    "repair": {
-      "title": "Reparación de Superficies",
-      "description": "Restauración técnica de madera y paredes dañadas con acabados invisibles.",
-      "features": ["Plaster y lija pro", "Reparación de TV Mounts", "Restauración de madera"],
-      "steps": [
-        {
-          "header": "Saneamiento Técnico",
-          "content": "Limpiamos y preparamos el área dañada para asegurar que el parche se integre de forma invisible.",
-          "img": "/images/services/rep-1.webp"
-        },
-        {
-          "header": "Lijado Libre de Polvo",
-          "content": "Usamos sistemas de extracción y lijado mecánico para crear una superficie lisa sin ensuciar su hogar.",
-          "img": "/images/services/rep-2.webp"
-        },
-        {
-          "header": "Aplicación Pro",
-          "content": "Aplicamos recubrimientos mediante pulverización o llana experta, garantizando cero marcas de brocha.",
-          "img": "/images/services/rep-3.webp"
-        },
-        {
-          "header": "Ajuste de Herrajes",
-          "content": "Reinstalamos accesorios y verificamos alineaciones. Detalles que parecen nuevos de fábrica.",
-          "img": "/images/services/rep-4.webp"
-        }
-      ]
-    }
+  "exterior": {
+    "title": "Pintura Exterior Profesional",
+    "features": [
+      "Pressure Washing pro",
+      "Soffits y rejillas",
+      "Sellado anti-humedad",
+      "Protección UV"
+    ]
   },
+
+  "interior": {
+    "title": "Transformación de Interiores",
+    "features": [
+      "Paredes y techos",
+      "Baseboards y molduras",
+      "Expertos multi-color",
+      "Reparación de Drywall"
+    ]
+  },
+
+  "pressure": {
+    "title": "Lavado a Presión Pro",
+    "features": [
+      "Driveways y concreto",
+      "Techos modernos",
+      "Soft wash delicado",
+      "Limpieza de moho"
+    ]
+  },
+
+  "repair": {
+    "title": "Reparación de Superficies",
+    "features": [
+      "Plaster y lija pro",
+      "Reparación de TV Mounts",
+      "Restauración de madera",
+      "Acabados invisibles"
+    ]
+  }
+},
   "gallery": {
     "badge": "Portafolio de Excelencia",
     "title": "Resultados de",

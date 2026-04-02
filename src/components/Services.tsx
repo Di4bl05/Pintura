@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, ChevronRight, ChevronLeft, Check, Sparkles } from "lucide-react"; 
+import { ArrowRight, ChevronRight, ChevronLeft, Check, Sparkles, MapPin } from "lucide-react"; 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRef, useState } from "react";
 import ServiceDetail from "./ServiceDetails"; 
@@ -9,7 +9,8 @@ import ServiceDetail from "./ServiceDetails";
 export default function Services() {
   const { t } = useLanguage();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false); 
+  
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedServiceData, setSelectedServiceData] = useState<any>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -39,104 +40,95 @@ export default function Services() {
   const serviceAreas = ["Orlando", "Kissimmee", "Windermere", "Winter Park", "Lake Nona"];
 
   return (
-    <section 
-      id="services" 
-      className="relative py-20 lg:py-32 overflow-hidden antialiased bg-white"
-    >
-      {/* Círculo de fondo decorativo original */}
-      <div className="absolute top-0 left-1/4 w-[60rem] h-[60rem] bg-primary-50 rounded-full blur-[120px] pointer-events-none -z-10 opacity-60" />
+    <section id="services" className="relative py-24 lg:py-32 overflow-hidden antialiased bg-white">
+      <div className="absolute top-0 left-[-10%] w-[60rem] h-[60rem] bg-slate-50/50 rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      {/* Contenedor con el margen izquierdo grabado (lg:px-16) */}
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 lg:px-16">
         
-        {/* ENCABEZADO */}
-        <div className="max-w-5xl text-left mb-16 md:mb-24">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary-600 mb-8 shadow-xl shadow-primary-100 w-fit">
-            <Sparkles className="w-3.5 h-3.5 text-white" />
-            <span className="font-sans text-[10px] font-bold text-white uppercase tracking-[0.3em]">
-              {t("services.badge") || "PORTAFOLIO DE EXCELENCIA"}
-            </span>
-          </div>
-
-          <h2 className="flex flex-col mb-10">
-            <span className="font-display text-5xl md:text-8xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.9]">
-              {t("services.title")}
-            </span>
-            <span className="font-serif text-4xl md:text-7xl italic font-normal text-primary-600 block leading-none mt-2">
-              {t("services.titleHighlight")}
-            </span>
-          </h2>
-
-          <div className="flex gap-6 items-stretch mb-12">
-            <div className="w-[2px] bg-primary-600 rounded-full flex-shrink-0" />
-            <p className="font-sans text-lg md:text-xl text-slate-600 font-light leading-relaxed max-w-xl">
-              {t("services.subtitle")}
-            </p>
-          </div>
-
-          {/* ÁREAS DE SERVICIO */}
-          <div className="flex flex-col gap-5 mt-12"> 
-            <div className="flex items-center gap-3">
-              <div className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </div>
-              <span className="font-sans text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                Zonas de Operación Actual
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-16 lg:mb-24">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-primary-600 shadow-lg shadow-primary-100 mb-6">
+              <Sparkles className="w-3.5 h-3.5 text-white" />
+              <span className="font-sans text-[9px] font-black text-white uppercase tracking-[0.3em]">
+                {t("services.badge")}
               </span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 md:gap-3">
-              {serviceAreas.map((city) => (
-                <span 
-                  key={city} 
-                  className="font-sans px-4 py-2.5 rounded-xl border border-slate-100 bg-white text-slate-900 text-[10px] font-bold uppercase tracking-widest transition-all cursor-default hover:bg-primary-600 hover:text-white hover:border-primary-600 active:scale-95 shadow-sm"
-                >
-                  {city}
+            <h2 className="flex flex-col gap-1 mb-8">
+              <span className="font-display text-4xl md:text-7xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.95]">
+                {t("services.title")}
+              </span>
+              <span className="font-serif text-3xl md:text-5xl italic font-normal text-primary-600 leading-none">
+                {t("services.titleHighlight")}
+              </span>
+            </h2>
+
+            <p className="font-sans text-base md:text-lg text-slate-500 font-medium leading-relaxed max-w-xl border-l-2 border-primary-600 pl-8 mb-10">
+              {t("services.subtitle")}
+            </p>
+
+            <div className="space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </div>
+                <span className="font-sans text-[11px] font-black text-slate-400 uppercase tracking-[0.3em]">
+                  Active Service Zones
                 </span>
-              ))}
+              </div>
+
+              <div className="flex flex-wrap gap-x-8 gap-y-4">
+                {serviceAreas.map((city) => (
+                  <div key={city} className="group relative flex items-center gap-2 py-1 cursor-default">
+                    <MapPin className="w-3.5 h-3.5 text-primary-600" />
+                    <span className="font-sans text-[11px] font-black text-slate-900 uppercase tracking-[0.2em]">
+                      {city}
+                    </span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary-500 transition-all duration-500 group-hover:w-full" />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* CARRUSEL */}
-        <div className="relative group mb-12">
-          {/* Botones de navegación ajustados */}
+        <div className="relative group/carousel">
+          {/* BOTONES DE NAVEGACIÓN (FLECHAS) */}
           <button 
             onClick={() => scroll("left")}
-            className="absolute -left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white text-primary-700 border border-slate-100 rounded-full items-center justify-center shadow-xl hover:bg-primary-600 hover:text-white transition-all hidden md:flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-8 z-40 w-12 h-12 bg-white text-slate-950 border border-slate-200 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all shadow-xl active:scale-90 opacity-0 group-hover/carousel:opacity-100"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-6 h-6" />
           </button>
 
-          <div 
-            ref={scrollRef} 
-            className="flex gap-6 md:gap-10 pb-12 overflow-x-auto snap-x snap-mandatory scrollbar-hide touch-pan-x"
+          <button 
+            onClick={() => scroll("right")}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-8 z-40 w-12 h-12 bg-white text-slate-950 border border-slate-200 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all shadow-xl active:scale-90 opacity-0 group-hover/carousel:opacity-100"
           >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          <div ref={scrollRef} className="flex gap-6 lg:gap-8 pb-12 overflow-x-auto snap-x snap-mandatory scrollbar-hide touch-pan-x">
             {services.map((service, index) => (
-              <div key={index} className="flex-[0_0_90%] sm:flex-[0_0_65%] md:flex-[0_0_45%] lg:flex-[0_0_32%] min-w-0 snap-center">
-                <div className="group/card relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 h-full flex flex-col transition-all duration-700 hover:shadow-2xl">
-                  <div className="relative h-64 md:h-80 overflow-hidden">
-                    <Image
-                      src={service.img}
-                      alt={t(`services.${service.key}.title`)}
-                      fill
-                      className="object-cover transition-transform duration-1000 group-hover/card:scale-110"
-                    />
+              <div key={index} className="flex-[0_0_85%] sm:flex-[0_0_60%] lg:flex-[0_0_31%] min-w-0 snap-start">
+                <div className="group/card relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 h-full flex flex-col transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
+                  <div className="relative h-64 lg:h-80 overflow-hidden">
+                    <Image src={service.img} alt={t(`services.${service.key}.title`)} fill className="object-cover transition-transform duration-[3000ms] group-hover/card:scale-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                     <div className="absolute bottom-8 left-8 right-8">
-                      <h3 className="font-display text-2xl md:text-3xl font-bold text-white uppercase tracking-tight leading-none">
+                      <h3 className="font-display text-xl lg:text-2xl font-bold text-white uppercase tracking-tight leading-none">
                         {t(`services.${service.key}.title`)}
                       </h3>
                     </div>
                   </div>
 
-                  <div className="flex flex-col flex-grow p-10">
-                    <ul className="flex-grow mb-10 space-y-4">
+                  <div className="flex flex-col flex-grow p-8 lg:p-10">
+                    <ul className="flex-grow mb-8 space-y-4">
                       {[0, 1, 2, 3].map((i) => (
                         <li key={i} className="flex items-start gap-3">
-                          <Check className="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5" />
-                          <span className="font-sans text-[11px] font-bold text-slate-700 uppercase tracking-wider">
+                          <Check className="w-3.5 h-3.5 text-primary-600 flex-shrink-0 mt-0.5" />
+                          <span className="font-sans text-[10px] lg:text-[11px] font-bold text-slate-600 uppercase tracking-wide leading-tight">
                             {t(`services.${service.key}.features.${i}`)}
                           </span>
                         </li>
@@ -145,44 +137,32 @@ export default function Services() {
 
                     <button
                       onClick={() => handleOpenDetails(service)}
-                      className="font-sans group/btn relative overflow-hidden flex items-center justify-center gap-3 w-full bg-slate-950 text-white py-5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.2em] transition-all"
+                      className="font-sans group/btn relative overflow-hidden flex items-center justify-center gap-3 w-full bg-slate-950 text-white py-5 rounded-2xl font-black text-[9px] uppercase tracking-[0.25em] transition-all"
                     >
                       <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-300 group-hover/btn:translate-y-0" />
                       <span className="relative z-10">{t("services.moreInfo")}</span>
-                      <ArrowRight className="relative z-10 w-4 h-4 transition-transform group-hover/btn:translate-x-2" />
+                      <ArrowRight className="relative z-10 w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
                     </button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-
-          <button 
-            onClick={() => scroll("right")}
-            className="absolute -right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white text-primary-700 border border-slate-100 rounded-full items-center justify-center shadow-xl hover:bg-primary-600 hover:text-white transition-all hidden md:flex"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
         </div>
       </div>
-      
-     {/* SEPARADOR INFERIOR - Estilo Revista con Línea Original */}
-<div className="-mb-32 lg:mt-40 w-full flex items-center justify-center"> 
-  <div className="flex items-center gap-8 w-full max-w-[1440px] px-6 lg:px-16">
-    {/* Línea Izquierda */}
-    <div className="h-[1px] flex-grow bg-slate-200" />
-    
-    {/* Bloque Central */}
-    <div className="flex items-center gap-4 bg-slate-50 px-8 py-3 rounded-full border border-slate-100 flex-shrink-0">
-      <div className="w-1.5 h-1.5 rounded-full bg-primary-600 animate-pulse" />
-      <span className="font-sans text-[9px] md:text-[10px] font-black text-slate-500 uppercase tracking-[0.5em]">
-        Before-After-Gallery
+         
+       {/* SEPARADOR INTEGRADO - VISIBILIDAD MEJORADA */}
+  <div className="absolute bottom-6 left-0 w-full translate-y-1/2 z-30 pointer-events-none">
+  <div className="flex items-center gap-6 w-full max-w-[1440px] px-6 lg:px-16">
+    <div className="h-[2px] flex-grow bg-slate-200" />
+    <div className="flex items-center gap-4 bg-white px-8 py-3 rounded-full border border-slate-200 flex-shrink-0 shadow-md">
+      <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
+      <span className="font-sans text-[10px] font-black text-slate-600 uppercase tracking-[0.5em]">
+        Section Portfolio
       </span>
-      <div className="w-1.5 h-1.5 rounded-full bg-primary-600 animate-pulse" />
+      <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
     </div>
-
-    {/* Línea Derecha */}
-    <div className="h-[1px] flex-grow bg-slate-200" />
+    <div className="h-[2px] flex-grow bg-slate-200" />
   </div>
 </div>
 
@@ -196,6 +176,21 @@ export default function Services() {
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
+
+       {/* SEPARADOR INTEGRADO - VISIBILIDAD MEJORADA */}
+  <div className="absolute bottom-6 left-0 w-full translate-y-1/2 z-30 pointer-events-none">
+  <div className="flex items-center gap-6 w-full max-w-[1440px] px-6 lg:px-16">
+    <div className="h-[2px] flex-grow bg-slate-200" />
+    <div className="flex items-center gap-4 bg-white px-8 py-3 rounded-full border border-slate-200 flex-shrink-0 shadow-md">
+      <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
+      <span className="font-sans text-[10px] font-black text-slate-600 uppercase tracking-[0.5em]">
+        Section Portfolio
+      </span>
+      <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
+    </div>
+    <div className="h-[2px] flex-grow bg-slate-200" />
+  </div>
+</div>
     </section>
   );
 }

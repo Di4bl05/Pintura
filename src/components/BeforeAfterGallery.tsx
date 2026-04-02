@@ -7,9 +7,11 @@ import {
   MapPin, 
   MoveHorizontal,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  Construction
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Header from "@/components/Header"; 
 
 interface GalleryItem {
   id: number;
@@ -33,6 +35,34 @@ export default function CleanEpicLightBeforeAfterGallery() {
   const [isManualControl, setIsManualControl] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
+  // --- 1. LÓGICA DE CIERRE POR NAVEGACIÓN ---
+  useEffect(() => {
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (showAllPhotos && target.closest('a')) {
+        setShowAllPhotos(false);
+      }
+    };
+
+    if (showAllPhotos) {
+      window.addEventListener('click', handleGlobalClick);
+    }
+    return () => window.removeEventListener('click', handleGlobalClick);
+  }, [showAllPhotos]);
+
+  // --- 2. BLOQUEO DE SCROLL EN EL BODY (AGREGADO) ---
+  useEffect(() => {
+    if (showAllPhotos) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [showAllPhotos]);
+
+  // --- MÉTODOS DE CONTROL Y SCROLL ---
   const scrollToViewer = () => {
     const viewer = document.getElementById("main-viewer");
     if (viewer) {
@@ -54,18 +84,18 @@ export default function CleanEpicLightBeforeAfterGallery() {
     setIsPaused(false);
   }, []);
 
+  // --- DATOS DE LA GALERÍA ---
   const galleryData: GalleryItem[] = useMemo(() => {
-    // Imágenes de ejemplo para simular la comparación
     const imagesBefore = [
-      "/images/gallery/pintura-interiores-casas-orlando-fl.webp", // Simulando Before 1
-      "/images/gallery/pintores-exteriores-residenciales-orlando.webp", // Simulando Before 2
-      "/images/gallery/lacado-gabinetes-cocina-profesional-florida.webp" // Simulando Before 3
+      "/images/gallery/pintura-interiores-casas-orlando-fl.webp", 
+      "/images/gallery/pintores-exteriores-residenciales-orlando.webp",
+      "/images/gallery/lacado-gabinetes-cocina-profesional-florida.webp"
     ];
     
     const imagesAfter = [
-      "/images/gallery/pintores-exteriores-residenciales-orlando.webp", // Simulando After 1 (diferente)
-      "/images/gallery/pintura-interiores-casas-orlando-fl.webp", // Simulando After 2 (diferente)
-      "/images/gallery/pintura-interiores-casas-orlando-fl.webp" // Simulando After 3 (diferente)
+      "/images/gallery/pintores-exteriores-residenciales-orlando.webp", 
+      "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
+      "/images/gallery/pintura-interiores-casas-orlando-fl.webp"
     ];
 
     return Array.from({ length: 8 }).map((_, index) => {
@@ -75,8 +105,8 @@ export default function CleanEpicLightBeforeAfterGallery() {
         title: t(`gallery.projects.${id}.title`) || `Premier Project ${id}`,
         location: t(`gallery.projects.${id}.location`) || "Orlando, FL",
         service: t(`gallery.projects.${id}.service`) || (index % 2 === 0 ? "interior" : "exterior"),
-        beforeImage: imagesBefore[index % imagesBefore.length], // Imagen ANTES
-        afterImage: imagesAfter[index % imagesAfter.length],   // Imagen DESPUÉS (diferente)
+        beforeImage: imagesBefore[index % imagesBefore.length],
+        afterImage: imagesAfter[index % imagesAfter.length],
         description: t(`gallery.projects.${id}.description`) || "Precision coating and restoration for high-end properties.",
       };
     });
@@ -92,6 +122,7 @@ export default function CleanEpicLightBeforeAfterGallery() {
     return filteredGallery.find(item => item.id === activeId) || filteredGallery[0];
   }, [filteredGallery, activeId]);
 
+  // --- EFECTOS DE AUTOPLAY Y EVENTOS ---
   useEffect(() => {
     if (isPaused || showAllPhotos || isManualControl) return;
     const interval = setInterval(() => {
@@ -126,7 +157,7 @@ export default function CleanEpicLightBeforeAfterGallery() {
       
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 lg:px-16 text-left">
         
-        {/* HEADER */}
+        {/* HEADER DE SECCIÓN */}
         <div className="max-w-5xl mb-16 md:mb-24">
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary-600 mb-8 shadow-xl shadow-primary-100 w-fit">
             <Sparkles className="w-3.5 h-3.5 text-white" />
@@ -135,24 +166,24 @@ export default function CleanEpicLightBeforeAfterGallery() {
             </span>
           </div>
           
-          <h2 className="flex flex-col mb-10">
-            <span className="font-display text-5xl md:text-8xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.9]">
+          <h2 className="flex flex-col gap-1 mb-10">
+            <span className="font-display text-4xl md:text-7xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.95]">
               {t("gallery.title") || "STUNNING"}
             </span>
-            <span className="font-serif text-4xl md:text-7xl italic font-normal text-primary-600 block leading-none mt-2">
+            <span className="font-serif text-3xl md:text-5xl italic font-normal text-primary-600 leading-none">
               {t("gallery.titleHighlight") || "transformations"}
             </span>
           </h2>
 
           <div className="flex gap-6 items-stretch mb-12">
             <div className="w-[2px] bg-primary-600 rounded-full flex-shrink-0" />
-            <p className="font-sans text-lg md:text-xl text-slate-600 font-light leading-relaxed max-w-xl opacity-90">
+            <p className="font-sans text-lg text-slate-500 font-medium leading-relaxed max-w-xl opacity-90">
               {t("gallery.subtitle") || "Witness the power of precision. Every brushstroke is a commitment to perfection."}
             </p>
           </div>
         </div>
 
-        {/* MAIN VIEWER (Comparación Restaurada) */}
+        {/* MAIN VIEWER (BEFORE/AFTER) */}
         {activeItem && (
           <div id="main-viewer" className="relative mb-16 scroll-mt-28">
             <div 
@@ -161,37 +192,19 @@ export default function CleanEpicLightBeforeAfterGallery() {
               onMouseLeave={() => !isManualControl && setIsPaused(false)}
             >
               <div ref={sliderRef} className="w-full h-full relative cursor-ew-resize touch-none select-none">
-                {/* BEFORE LAYER - USA beforeImage */}
                 <div className="absolute inset-0 z-0">
-                  <Image 
-                    src={activeItem.beforeImage} 
-                    alt="LuisBety Before"
-                    fill
-                    priority
-                    quality={95}
-                    className="object-cover"
-                  />
+                  <Image src={activeItem.beforeImage} alt="Before" fill priority quality={95} className="object-cover" />
                   <div className="font-sans absolute top-8 right-8 px-5 py-2 bg-slate-950/80 backdrop-blur-md rounded-full text-white text-[9px] font-bold uppercase tracking-[0.2em] z-20 border border-white/10">
                     {t("gallery.before") || "Before"}
                   </div>
                 </div>
 
-                {/* AFTER LAYER - USA afterImage */}
                 <div 
                   className="absolute inset-0 transform-gpu z-10 pointer-events-none"
                   style={{ clipPath: `inset(0 ${100 - comparePosition}% 0 0)` }}
                 >
-                  <Image 
-                    src={activeItem.afterImage} 
-                    alt="LuisBety After"
-                    fill
-                    priority
-                    quality={95}
-                    className="object-cover"
-                  />
-                  
+                  <Image src={activeItem.afterImage} alt="After" fill priority quality={95} className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-90" />
-
                   <div className="font-sans absolute top-8 left-8 px-5 py-2 bg-primary-600 rounded-full text-white text-[9px] font-bold uppercase tracking-[0.2em] shadow-xl z-20">
                     {t("gallery.after") || "After"}
                   </div>
@@ -212,7 +225,6 @@ export default function CleanEpicLightBeforeAfterGallery() {
                   </div>
                 </div>
 
-                {/* MANEJADOR (HANDLE) */}
                 <div 
                   className="absolute inset-y-0 w-1 bg-white/50 backdrop-blur-sm pointer-events-auto z-40 transform-gpu" 
                   style={{ left: `${comparePosition}%`, transform: 'translateX(-50%)' }}
@@ -232,7 +244,7 @@ export default function CleanEpicLightBeforeAfterGallery() {
           </div>
         )}
 
-        {/* THUMBNAILS CAROUSEL */}
+        {/* CAROUSEL Y BOTÓN "VER TODAS" */}
         <div className="flex flex-col md:flex-row items-stretch gap-6 pt-10 border-t border-slate-100">
           <div ref={carouselRef} className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide flex-1 snap-x no-scrollbar">
             {filteredGallery.map((item) => (
@@ -253,7 +265,7 @@ export default function CleanEpicLightBeforeAfterGallery() {
 
           <button 
             onClick={() => setShowAllPhotos(true)}
-            className="group relative flex flex-col items-center justify-center w-full md:w-52 bg-slate-950 text-white rounded-[2rem] overflow-hidden py-10 md:py-0 transition-all duration-500"
+            className="group relative flex flex-col items-center justify-center w-full md:w-52 bg-slate-950 text-white rounded-[2rem] overflow-hidden py-10 md:py-0 transition-all duration-500 shadow-xl"
           >
             <div className="absolute inset-0 bg-primary-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             <div className="relative z-10 flex flex-col items-center gap-3">
@@ -284,55 +296,52 @@ export default function CleanEpicLightBeforeAfterGallery() {
         </div>
       </div>
 
-      {/* SEPARADOR BASE (RESTAURADO) */}
-      <div className="-mb-32 lg:mt-48 w-full flex items-center justify-center relative z-20 pointer-events-none antialiased"> 
-        <div className="flex items-center gap-8 w-full max-w-[1440px] px-6 lg:px-16">
-          <div className="h-[1px] flex-grow bg-slate-200" />
-          <div className="flex items-center gap-4 bg-white px-8 py-3 rounded-full border border-slate-100 flex-shrink-0 shadow-sm">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary-600" />
-            <span className="font-sans text-[10px] font-black text-slate-400 uppercase tracking-[0.5em]">Transformation Gallery</span>
-            <div className="w-1.5 h-1.5 rounded-full bg-primary-600" />
+      {/* SEPARADOR DE SECCIÓN */}
+      <div className="absolute bottom-6 left-0 w-full translate-y-1/2 z-30 pointer-events-none">
+        <div className="flex items-center gap-6 w-full max-w-[1440px] px-6 lg:px-16 mx-auto">
+          <div className="h-[2px] flex-grow bg-slate-200" />
+          <div className="flex items-center gap-4 bg-white px-8 py-3 rounded-full border border-slate-200 flex-shrink-0 shadow-md">
+            <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
+            <span className="font-sans text-[10px] font-black text-slate-600 uppercase tracking-[0.5em]">Section Portfolio</span>
+            <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
           </div>
-          <div className="h-[1px] flex-grow bg-slate-200" />
+          <div className="h-[2px] flex-grow bg-slate-200" />
         </div>
       </div>
 
-      {/* MODAL FULL GALLERY */}
+      {/* --- MODAL FULL GALLERY --- */}
       {showAllPhotos && (
-        <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-in fade-in duration-500">
-          <div className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-100 px-6 lg:px-16 py-6">
-            <div className="max-w-[1440px] mx-auto flex justify-between items-center">
-              <h2 className="font-display text-4xl lg:text-6xl font-bold text-slate-950 uppercase tracking-tightest">
-                {t("gallery.fullGallery") || "Portfolio"}
-              </h2>
-              <button 
-                onClick={() => setShowAllPhotos(false)} 
-                className="group relative overflow-hidden bg-slate-950 text-white p-5 rounded-2xl transition-all"
-              >
-                <div className="absolute inset-0 bg-primary-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                <div className="relative z-10 flex items-center gap-3">
-                  <span className="font-sans text-[10px] font-black uppercase tracking-widest hidden md:inline">Close</span>
-                  <X size={20} />
+        <div className="fixed inset-0 z-[40] bg-white overflow-y-auto animate-in fade-in duration-500">
+          <Header />
+          <div className="pt-32 md:pt-48 pb-20 px-6 lg:px-16">
+            <div className="max-w-[1440px] mx-auto">
+              <div className="flex flex-col items-center justify-center min-h-[50vh] text-center space-y-8">
+                <div className="w-24 h-24 bg-slate-50 rounded-[2.5rem] border border-slate-100 flex items-center justify-center shadow-sm">
+                  <Construction className="w-10 h-10 text-primary-600 animate-pulse" />
                 </div>
-              </button>
-            </div>
-          </div>
-          <div className="max-w-[1440px] mx-auto px-6 lg:px-16 py-20">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {galleryData.map((item) => (
-                <div 
-                  key={item.id} 
-                  onClick={() => { setActiveId(item.id); setShowAllPhotos(false); scrollToViewer(); }}
-                  className="group relative aspect-square rounded-[2.5rem] overflow-hidden cursor-pointer border border-slate-100 shadow-sm"
-                >
-                  <Image src={item.afterImage} alt="" fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute inset-0 p-10 flex flex-col justify-end translate-y-10 group-hover:translate-y-0 transition-all opacity-0 group-hover:opacity-100">
-                    <span className="font-sans text-[10px] text-primary-400 font-black uppercase tracking-[0.3em] mb-4">{item.location}</span>
-                    <h5 className="font-display text-3xl text-white font-bold uppercase leading-none">{item.title}</h5>
+                <div className="space-y-4">
+                  <h2 className="font-display text-4xl md:text-7xl font-black uppercase tracking-tightest text-slate-950">
+                    PORTAFOLIO DE PROYECTOS
+                  </h2>
+                  <div className="flex justify-center">
+                    <div className="h-1 w-24 bg-primary-600 rounded-full" />
                   </div>
+                  <p className="font-sans text-slate-400 font-black uppercase tracking-[0.6em] text-[10px] md:text-xs">
+                    TRABAJANDO EN ELLO...
+                  </p>
                 </div>
-              ))}
+                <div className="pt-10">
+                  <button 
+                    onClick={() => setShowAllPhotos(false)} 
+                    className="group flex items-center gap-4 px-12 py-5 bg-slate-950 text-white rounded-2xl transition-all hover:bg-primary-600 active:scale-95 shadow-2xl"
+                  >
+                    <X size={16} />
+                    <span className="font-sans text-[10px] font-black uppercase tracking-widest">
+                      Cerrar Portafolio
+                    </span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
