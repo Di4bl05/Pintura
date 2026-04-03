@@ -1,17 +1,19 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { Phone, ArrowRight, ShieldCheck, Zap, Star, Sparkles, Wand2, Flower2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useState } from "react";
+import ContactForm from "@/components/ContactForm";
 
 export default function CombinedConversion() {
   const { t } = useLanguage();
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   // Casting seguro para datos de i18n
-  const differences = (t("whyChoose.core_value_proposition.the_difference", { returnObjects: true }) as any[]) || [];
-  const pricing = (t("whyChoose.conversion_triggers.pricing_range", { returnObjects: true }) as any) || { average: "2,500" };
-  const marketAuthority = (t("whyChoose.business_identity.market_authority", { returnObjects: true }) as any) || {};
+  const differences = ((t as any)("whyChoose.core_value_proposition.the_difference", { returnObjects: true }) as any[]) || [];
+  const pricing = ((t as any)("whyChoose.conversion_triggers.pricing_range", { returnObjects: true }) as any) || { average: "2,500" };
+  const marketAuthority = ((t as any)("whyChoose.business_identity.market_authority", { returnObjects: true }) as any) || {};
 
   const icons: Record<string, JSX.Element> = {
     price_disruption: <Wand2 className="w-5 h-5 lg:w-6 lg:h-6 text-primary-600" />,
@@ -23,14 +25,14 @@ export default function CombinedConversion() {
   const [hookMain, hookItalic] = hookText.includes(',') ? hookText.split(',') : [hookText, ""];
 
   return (
-    <section id="why-choose-us" className="relative py-20 lg:py-28 bg-white antialiased overflow-hidden">
+    <section id="why-choose-us" className="relative py-20 overflow-hidden antialiased bg-white lg:py-28">
       
       {/* DECORACIÓN ORGÁNICA SUTIL */}
       <div className="absolute top-0 right-[-5%] w-[50%] h-[50%] bg-primary-50/30 blur-[120px] rounded-full -z-10" />
       <div className="absolute bottom-[-5%] left-[-5%] w-[40%] h-[40%] bg-slate-50 blur-[100px] rounded-full -z-10" />
 
       <div className="mx-auto px-6 lg:px-16 z-10 max-w-[1440px] text-left">
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 lg:items-center">
+        <div className="flex flex-col gap-16 lg:flex-row lg:gap-24 lg:items-center">
           
           {/* LADO IZQUIERDO: COLLAGE DE BURBUJAS REFINADO */}
           <div className="w-full lg:w-1/2 relative min-h-[500px] md:min-h-[650px] flex items-center justify-center">
@@ -57,14 +59,14 @@ export default function CombinedConversion() {
 
             {/* Badge de Autoridad V2 */}
             <div className="absolute z-30 -bottom-4 left-0 md:left-8 bg-white/95 backdrop-blur-md p-6 lg:p-8 rounded-[2rem] shadow-xl border border-slate-100 flex items-center gap-4 transition-transform hover:-translate-y-1 duration-500">
-              <div className="w-12 h-12 rounded-xl bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-100">
+              <div className="flex items-center justify-center w-12 h-12 shadow-lg rounded-xl bg-primary-600 shadow-primary-100">
                 <Star className="w-6 h-6 text-white fill-current" />
               </div>
               <div>
                 <p className="font-sans text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] mb-1">
                   {marketAuthority.satisfaction_rate || "99% SATISFACTION"}
                 </p>
-                <p className="font-display text-sm font-bold text-slate-950 uppercase tracking-tight">
+                <p className="text-sm font-bold tracking-tight uppercase font-display text-slate-950">
                   Verified Local Results
                 </p>
               </div>
@@ -72,7 +74,7 @@ export default function CombinedConversion() {
           </div>
 
           {/* LADO DERECHO: NARRATIVA DE VENTAS */}
-          <div className="w-full lg:w-1/2 space-y-12 lg:space-y-16">
+          <div className="w-full space-y-12 lg:w-1/2 lg:space-y-16">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-primary-600 shadow-lg shadow-primary-100">
                 <ShieldCheck className="w-3.5 h-3.5 text-white" />
@@ -82,17 +84,17 @@ export default function CombinedConversion() {
               </div>
 
               <h2 className="flex flex-col gap-1">
-                <span className="font-display text-4xl md:text-6xl font-bold text-slate-950 uppercase tracking-tightest leading-tight">
+                <span className="text-4xl font-bold leading-tight uppercase font-display md:text-6xl text-slate-950 tracking-tightest">
                   {hookMain}
                 </span>
                 {hookItalic && (
-                  <span className="font-serif text-3xl md:text-5xl italic font-normal text-primary-600 leading-none">
+                  <span className="font-serif text-3xl italic font-normal leading-none md:text-5xl text-primary-600">
                     {hookItalic}
                   </span>
                 )}
               </h2>
 
-              <p className="font-sans text-base md:text-lg text-slate-600 leading-relaxed max-w-xl">
+              <p className="max-w-xl font-sans text-base leading-relaxed md:text-lg text-slate-600">
                 {t("whyChoose.marketing_narrative.solution")}
               </p>
             </div>
@@ -101,15 +103,15 @@ export default function CombinedConversion() {
             <div className="grid gap-6">
               {differences.map((item: any) => (
                 <div key={item.id} className="group flex gap-6 items-start p-6 rounded-[2rem] bg-slate-50/50 border border-slate-100 hover:border-primary-100 hover:bg-white hover:shadow-xl transition-all duration-500">
-                  <div className="flex-shrink-0 w-12 h-12 lg:w-14 lg:h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                  <div className="flex items-center justify-center flex-shrink-0 w-12 h-12 transition-transform bg-white border shadow-sm lg:w-14 lg:h-14 rounded-2xl border-slate-100 group-hover:scale-110">
                     {icons[item.id] || <Sparkles className="w-5 h-5 text-primary-600" />}
                   </div>
-                  <div className="space-y-1 flex-1">
-                    <h3 className="font-display font-bold text-slate-950 uppercase tracking-widest text-base lg:text-lg">
+                  <div className="flex-1 space-y-1">
+                    <h3 className="text-base font-bold tracking-widest uppercase font-display text-slate-950 lg:text-lg">
                       {item.label}
                     </h3>
-                    <p className="font-sans text-slate-500 text-sm lg:text-base leading-snug">
-                      {item.argument} <span className="text-primary-600 font-bold ml-1">• {item.benefit}</span>
+                    <p className="font-sans text-sm leading-snug text-slate-500 lg:text-base">
+                      {item.argument} <span className="ml-1 font-bold text-primary-600">• {item.benefit}</span>
                     </p>
                   </div>
                 </div>
@@ -118,17 +120,18 @@ export default function CombinedConversion() {
 
             {/* ACCIONES Y TRIGGER DE PRECIO */}
             <div className="pt-8 space-y-8">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/contact"
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={() => setIsContactOpen(true)}
                   className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white px-10 py-5 rounded-2xl transition-all font-black text-[10px] uppercase tracking-[0.3em]"
                 >
-                  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+                  <div className="absolute inset-0 transition-transform duration-500 translate-y-full bg-primary-600 group-hover:translate-y-0" />
                   <span className="relative z-10 flex items-center gap-3">
                     {t("combined_conversion_section.cta_box.action")}
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </span>
-                </Link>
+                </button>
 
                 <a
                   href={`tel:${t("combined_conversion_section.cta_box.phone")}`}
@@ -139,7 +142,7 @@ export default function CombinedConversion() {
                 </a>
               </div>
               
-              <div className="flex items-center gap-3 px-4 py-2 bg-emerald-50/50 rounded-full w-fit border border-emerald-100/50">
+              <div className="flex items-center gap-3 px-4 py-2 border rounded-full bg-emerald-50/50 w-fit border-emerald-100/50">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <p className="font-sans text-[9px] font-bold text-emerald-800 uppercase tracking-[0.2em]">
                   Market baseline: <span className="font-black text-emerald-950">${pricing.average} USD</span> average project
@@ -164,6 +167,8 @@ export default function CombinedConversion() {
         .animate-float { animation: float 8s ease-in-out infinite; }
         .animate-float-delayed { animation: float-delayed 10s ease-in-out infinite 1s; }
       `}</style>
+
+      <ContactForm isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
       
     </section>
   );

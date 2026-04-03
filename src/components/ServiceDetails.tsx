@@ -24,12 +24,28 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ isOpen, onClose, serviceD
       }
     };
 
+    const handleCloseOverlays = () => {
+      if (isOpen) onClose();
+    };
+
     if (isOpen) {
       window.addEventListener('click', handleGlobalClick);
+      window.addEventListener('app:close-overlays', handleCloseOverlays as EventListener);
     }
 
-    return () => window.removeEventListener('click', handleGlobalClick);
+    return () => {
+      window.removeEventListener('click', handleGlobalClick);
+      window.removeEventListener('app:close-overlays', handleCloseOverlays as EventListener);
+    };
   }, [isOpen, onClose]);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('app:overlay-state', { detail: { open: isOpen } }));
+
+    return () => {
+      window.dispatchEvent(new CustomEvent('app:overlay-state', { detail: { open: false } }));
+    };
+  }, [isOpen]);
 
   // 2. Respaldo por si cambia la ruta (Next.js Navigation)
   useEffect(() => {

@@ -44,10 +44,27 @@ export default function CleanEpicLightBeforeAfterGallery() {
       }
     };
 
+    const handleCloseOverlays = () => {
+      if (showAllPhotos) setShowAllPhotos(false);
+    };
+
     if (showAllPhotos) {
       window.addEventListener('click', handleGlobalClick);
+      window.addEventListener('app:close-overlays', handleCloseOverlays as EventListener);
     }
-    return () => window.removeEventListener('click', handleGlobalClick);
+
+    return () => {
+      window.removeEventListener('click', handleGlobalClick);
+      window.removeEventListener('app:close-overlays', handleCloseOverlays as EventListener);
+    };
+  }, [showAllPhotos]);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('app:overlay-state', { detail: { open: showAllPhotos } }));
+
+    return () => {
+      window.dispatchEvent(new CustomEvent('app:overlay-state', { detail: { open: false } }));
+    };
   }, [showAllPhotos]);
 
   // --- 2. BLOQUEO DE SCROLL EN EL BODY (AGREGADO) ---
@@ -235,7 +252,7 @@ export default function CleanEpicLightBeforeAfterGallery() {
                       onMouseDown={() => { setIsManualControl(true); setIsPaused(true); }}
                       onTouchStart={() => { setIsManualControl(true); setIsPaused(true); }}
                     >
-                      <MoveHorizontal className="text-primary-600 w-6 h-6 lg:w-8 h-8" />
+                      <MoveHorizontal className="text-primary-600 w-6 h-6 lg:w-8 lg:h-8" />
                     </div>
                   </div>
                 </div>
@@ -312,7 +329,7 @@ export default function CleanEpicLightBeforeAfterGallery() {
       {/* --- MODAL FULL GALLERY --- */}
       {showAllPhotos && (
         <div className="fixed inset-0 z-[40] bg-white overflow-y-auto animate-in fade-in duration-500">
-          <Header />
+          <Header forceSolid />
           <div className="pt-32 md:pt-48 pb-20 px-6 lg:px-16">
             <div className="max-w-[1440px] mx-auto">
               <div className="flex flex-col items-center justify-center min-h-[50vh] text-center space-y-8">

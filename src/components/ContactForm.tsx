@@ -22,18 +22,32 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
       }
     };
 
+    const handleCloseOverlays = () => {
+      if (isOpen) onClose();
+    };
+
     if (isOpen) {
       window.addEventListener('click', handleGlobalClick);
+      window.addEventListener('app:close-overlays', handleCloseOverlays as EventListener);
       // Bloqueamos el scroll del body para que no se mueva el fondo al estar abierto
       document.body.style.overflow = 'hidden';
     }
 
     return () => {
       window.removeEventListener('click', handleGlobalClick);
+      window.removeEventListener('app:close-overlays', handleCloseOverlays as EventListener);
       // Devolvemos el scroll al cerrar
       document.body.style.overflow = 'unset';
     };
   }, [isOpen, onClose]);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('app:overlay-state', { detail: { open: isOpen } }));
+
+    return () => {
+      window.dispatchEvent(new CustomEvent('app:overlay-state', { detail: { open: false } }));
+    };
+  }, [isOpen]);
 
   // 2. Cierre automático por cambio de ruta (Next.js Navigation)
   useEffect(() => {
