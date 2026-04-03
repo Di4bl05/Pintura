@@ -55,10 +55,10 @@ export default function Services() {
             </div>
 
             <h2 className="flex flex-col gap-1 mb-8">
-              <span className="font-display text-4xl md:text-7xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.95]">
+              <span className="font-display text-4xl md:text-6xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.95]">
                 {t("services.title")}
               </span>
-              <span className="font-serif text-3xl md:text-5xl italic font-normal text-primary-600 leading-none">
+              <span className="font-serif text-3xl md:text-6xl italic font-normal text-primary-600 leading-none">
                 {t("services.titleHighlight")}
               </span>
             </h2>

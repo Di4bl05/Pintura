@@ -8,7 +8,6 @@
     "why": "Nosotoros"
   },
   "hero": {
-    "badge": "PINTORES #1 EN ORLANDO",
     "title1": "PINTURA DE",
     "title2": "INTERIOR & EXTERIOR",
     "description": "Pintura residencial profesional en Orlando, FL. Especialistas en reparación de drywall, enlacado de gabinetes y lavado a presión.",
@@ -20,22 +19,12 @@
       "Reparación Profesional de Paredes",
       "Limpieza de Techos y Lavado a Presión",
       "Limpieza Detallada Post-Trabajo"
-    ],
-    "card": {
-      "transform": "Transforma",
-      "yourSpace": "tu Hogar",
-      "professionalResults": "Resultados Pro"
-    },
-    "badge2": {
-      "licensed": "Licencia &",
-      "insured": "Seguro"
-    },
-    "scroll": "Ver Servicios"
+    ]
   },
  "services": {
   "badge": "Servicios con Ética Profesional",
-  "title": "Especialistas en",
-  "titleHighlight": "Pintura en Orlando FL",
+  "title": "Especialistas",
+  "titleHighlight": "en pintura en Orlando FL",
   "subtitle": "Transformamos tu propiedad con un proceso riguroso: desde el lavado a presión profundo hasta el acabado final de alta gama.",
   "moreInfo": "Leer más",
 
@@ -81,8 +70,8 @@
 },
   "gallery": {
     "badge": "Portafolio de Excelencia",
-    "title": "Resultados de",
-    "titleHighlight": "Luisbety Impecables",
+    "title": "Resultados ",
+    "titleHighlight": "impecables de Luisbety",
     "subtitle": "No solo pintamos paredes, devolvemos la vida a sus espacios. Explore nuestras transformaciones más recientes en el área de Orlando.",
     "filters": {
       "all": "Todos",
@@ -249,16 +238,14 @@
 },
  "reviews": {
   "badge": "100% Casos de Éxito",
-  "title": "Excelencia en",
-  "titleHighlight": "cada brochazo",
+  "title": "Excelencia ",
+  "titleHighlight": "en cada brochazo",
   "subtitle": "Descubre por qué cientos de familias en Florida Central confían en nuestro compromiso con la limpieza, la puntualidad y los acabados de alta gama.",
   "basedOn": "Calificación real en",
   "reviews": "opiniones verificadas",
   "viewGoogle": "Ver perfil en Google Business",
   "verified": "Cliente Verificado",
-  "helpful": "Útil",
-  "viewAll": "Ver todas las experiencias",
-  "showLess": "Ocultar reseñas adicionales",
+  "viewAll": "Ver más en google",
   "readMore": "Leer más",
   "readLess": "Ver menos",
   "timeAgo": {
