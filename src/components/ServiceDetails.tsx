@@ -71,7 +71,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ isOpen, onClose, serviceD
         </div>
 
       </div>
-    </div>
+    </div> 
   );
 };
 

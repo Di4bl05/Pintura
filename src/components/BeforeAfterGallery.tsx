@@ -167,10 +167,10 @@ export default function CleanEpicLightBeforeAfterGallery() {
           </div>
           
           <h2 className="flex flex-col gap-1 mb-10">
-            <span className="font-display text-4xl md:text-7xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.95]">
+            <span className="font-display text-4xl md:text-6xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.95]">
               {t("gallery.title") || "STUNNING"}
             </span>
-            <span className="font-serif text-3xl md:text-5xl italic font-normal text-primary-600 leading-none">
+            <span className="font-serif text-3xl md:text-6xl italic font-normal text-primary-600 leading-none">
               {t("gallery.titleHighlight") || "transformations"}
             </span>
           </h2>
