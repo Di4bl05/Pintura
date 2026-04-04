@@ -21,10 +21,13 @@
       "Limpieza Detallada Post-Trabajo"
     ]
   },
+
+
+  
  "services": {
   "badge": "Servicios con Ética Profesional",
   "title": "Especialistas",
-  "titleHighlight": "en pintura en Orlando FL",
+  "titleHighlight": "EN PINTURA EN ORLANDO FL",
   "subtitle": "Transformamos tu propiedad con un proceso riguroso: desde el lavado a presión profundo hasta el acabado final de alta gama.",
   "moreInfo": "Leer más", 
 
@@ -68,10 +71,13 @@
     ]
   }
 },
+
+
+
   "gallery": {
     "badge": "Portafolio de Excelencia",
     "title": "Resultados ",
-    "titleHighlight": "impecables de Luisbety",
+    "titleHighlight": "IMPECABLES DE LUISBETY",
     "subtitle": "No solo pintamos paredes, devolvemos la vida a sus espacios. Explore nuestras transformaciones más recientes en el área de Orlando.",
     "filters": {
       "all": "Todos",
@@ -147,6 +153,9 @@
 
     }
   },
+
+
+
  "whyChoose": {
     "section_id": "why-choose-us",
     "meta_strategy": {
@@ -236,10 +245,13 @@
     "phone": "(786) 350-6367"
   }
 },
+
+
+
  "reviews": {
   "badge": "100% Casos de Éxito",
   "title": "Excelencia ",
-  "titleHighlight": "en cada brochazo",
+  "titleHighlight": "EN CADA BROCHAZO",
   "subtitle": "Descubre por qué cientos de familias en Florida Central confían en nuestro compromiso con la limpieza, la puntualidad y los acabados de alta gama.",
   "basedOn": "Calificación real en",
   "reviews": "opiniones verificadas",
@@ -258,57 +270,94 @@
     "sixMonths": "Hace 6 meses"
   }
   },
+
   "contact": {
     "header": {
-      "title": "Tu casa merece un acabado impecable. Comencemos aquí.",
-      "subtitle": "No creemos en precios genéricos por pies cuadrados; creemos en soluciones reales para paredes reales.",
-      "description": "Completa este breve formulario y prepararemos una visita para darte un Estimado Gratis sin compromisos en Orlando y Florida Central."
+      "title": "Adelanta tu proyecto y recibe un estimado preciso.",
+      "subtitle": "ACCESO PRIORITARIO",
+      "description": "Recopilamos estos detalles para que nuestros especialistas lleguen a tu propiedad en Orlando con una solución lista, reduciendo el tiempo de negociación y acelerando el inicio de tu obra."
     },
-    "form": {
-      "steps": {
-        "contact_info": "Datos de Contacto",
-        "project_type": "¿Qué proyecto tienes en mente?",
-        "status_check": "El Ojo del Dueño",
-        "evidence": "Carga de Evidencia"
-      },
-      "labels": {
-        "full_name": "Nombre completo",
-        "phone_whatsapp": "Teléfono / WhatsApp",
-        "property_address": "Dirección de la propiedad (Ciudad)",
-        "photos_upload": "Sube 3 fotos de las áreas principales o de los daños que te preocupan",
-        "color_count": "¿Cuántos colores tienes en mente?"
-      },
-      "placeholders": {
-        "name": "EJ. JUAN PÉREZ",
-        "phone": "407-XXX-XXXX",
-        "address": "EJ. WINTER PARK, FL",
-        "upload_btn": "SELECCIONAR FOTOS"
-      },
-      "options": {
-        "services": {
-          "exterior": "Exterior Total (Incluye Pressure Washing)",
-          "interior": "Interior Detallado (Paredes, techos, molduras)",
-          "pressure_wash": "Solo Lavado a Presión (Driveway, techos de metal)",
-          "repairs": "Reparaciones Críticas (Drywall, Madera, TV Mounts)"
-        },
-        "surface_status": {
-          "title": "¿En qué estado se encuentran las superficies?",
-          "excellent": "Excelente: Solo quiero cambiar el color.",
-          "regular": "Regular: Hay algunos huecos de cuadros o tornillos.",
-          "needs_attention": "Necesita Atención: Grietas grandes, huecos de TV o madera dañada."
-        },
-        "colors": {
-          "one": "1 Color",
-          "two": "2 Colores (Estándar)",
-          "three_plus": "3 o más colores (Custom / Especialista)"
+    "stepper": {
+      "step_1": "Contacto",
+      "step_2": "Proyecto",
+      "step_3": "Diagnóstico",
+      "step_4": "Cierre"
+    },
+    "steps": {
+      "step_1": {
+        "title": "Datos de Contacto y Ubicación",
+        "description": "Información esencial para tu estimado gratuito.",
+        "fields": {
+          "name": "Nombre Completo",
+          "phone": "Teléfono de Contacto",
+          "address": "Dirección de la Propiedad",
+          "date": "Fecha Deseada para Visita"
         }
       },
-      "tooltips": {
-        "repairs_bonus": "No te preocupes por esos pequeños huecos de clavos o tornillos; en nuestra compañía esos detalles van por nuestra cuenta como cortesía al elegirnos. Si tienes daños mayores, somos expertos en restauración invisible."
+      "step_2": {
+        "title": "Definición del Proyecto",
+        "fields": {
+          "service_type": "Tipo de Servicio",
+          "specifics": "Servicios Específicos",
+          "colors": "Cantidad de Colores",
+          "paint_type": "Tipo de Pintura Específico"
+        },
+        "options": {
+          "service_type": {
+            "interior": "Interior",
+            "exterior": "Exterior",
+            "both": "Ambos"
+          },
+          "specifics": {
+            "exterior": ["Pressure Washer", "Soffits", "Sellado"],
+            "interior": ["Paredes", "Techos", "Baseboards"],
+            "pro": ["Driveways", "Techos de metal", "Piscinas"]
+          },
+          "colors": ["1", "2", "3+"]
+        }
       },
-      "submit_btn": "SOLICITAR MI VISITA Y ESTIMADO GRATIS"
+      "step_3": {
+        "title": "Diagnóstico y Evidencia",
+        "fields": {
+          "status": "Estado de las Superficies",
+          "upload": "Carga de Evidencia Visual",
+          "special": "¿Tienes un proyecto especial o algo que no ves en la lista?"
+        },
+        "placeholders": {
+          "status": "Ej: Huecos de TV, moho en fachada, madera podrida...",
+          "special": "Ej: Pintar solo los gabinetes de la cocina, restaurar una cerca de madera, etc."
+        }
+      },
+      "step_4": {
+        "title": "Cierre y Presupuesto",
+        "fields": {
+          "budget": "Rango de Inversión Estimado",
+          "comments": "Descripción Adicional",
+          "vip_label": "Modo Fast-Track Prioritario",
+          "vip_text": "Estoy listo para empezar. No necesito negociación, quiero agendar la visita para confirmar detalles y comenzar a pintar directamente."
+        },
+        "ranges": {
+          "low": "$2,000 - $4,000",
+          "mid": "$4,000 - $6,000",
+          "high": "$6,000 - $10,000+"
+        }
+      }
+    },
+    "success": {
+      "title": "¡Solicitud Recibida con Éxito!",
+      "message": "Gracias por confiar en nuestra compañía. Tu solicitud está siendo evaluada por nuestro equipo técnico. En breve recibirás un correo electrónico confirmando si tu proyecto ha sido aprobado o si requerimos más detalles.",
+      "call_btn": "Llamar Directamente",
+      "close": "Volver al inicio"
+    },
+    "buttons": {
+      "next": "Siguiente Paso",
+      "prev": "Anterior",
+      "submit": "Solicitar Prioridad de Pintura",
+      "submit_btn": "RESERVAR MI PRIORIDAD",
+      "close": "Cerrar Formulario"
     }
   },
+
   "footer": {
     "description": "Pintores profesionales en Florida - Licenciados y asegurados.",
     "services": {
