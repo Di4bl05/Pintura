@@ -1,10 +1,12 @@
 "use client";
 
+
 import React, { useEffect, useState } from "react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Star, Plus, Check } from 'lucide-react';
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
+
 
 interface ContactFormProps {
   isOpen: boolean;
@@ -97,335 +99,442 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
 
-      <div className={`flex h-full w-full pt-32 bg-white ${step >= 2 ? "justify-center" : ""}`}>
-        <div
-          className={`h-full flex flex-col justify-center pb-10 bg-white transition-all duration-500 ${
-            step >= 2 ? "w-full max-w-[720px] px-6 lg:px-12 mx-auto" : "w-full lg:w-1/2 px-8 lg:px-24"
-          }`}
+  <div className="flex h-full w-full pt-32 bg-white justify-center items-center overflow-y-auto">
+   <div className="w-full flex flex-col items-center">
+     <div className="w-full animate-in slide-in-from-left-6 duration-700 flex flex-col justify-center items-center">
+{step === 1 && (
+  <div className="flex w-full h-full items-center justify-between px-8 lg:px-20 animate-in fade-in duration-700">
+    
+    {/* Información a la izquierda - Escala Reducida */}
+    <div className="w-full lg:w-1/2 flex flex-col justify-center">
+      <div className="max-w-[500px]"> {/* Bajé el max-width de 600 a 500 */}
+        
+        {/* BADGE - Más pequeño */}
+        <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-100 mb-6">
+          <Star className="text-primary-600 fill-primary-600" size={8} />
+          <span className="font-sans font-black text-[8px] tracking-[0.15em] text-slate-900 uppercase">
+            {t("contact.header.subtitle")}
+          </span>
+        </div>
+        
+        {/* TÍTULO - Bajado de 6xl a 4xl/5xl */}
+        <h1 className="font-display font-black text-4xl lg:text-5xl text-slate-950 leading-[0.95] uppercase tracking-tighter mb-6">
+          {t("contact.header.title").split("preciso")[0]}
+          <span className="text-primary-600 block">
+            preciso.
+          </span>
+        </h1>
+        
+        {/* DESCRIPCIÓN - Texto más pequeño (sm/base) y margen reducido */}
+        <p className="font-sans text-sm lg:text-base font-medium text-slate-500 leading-relaxed mb-10 max-w-[450px] border-l-2 border-primary-600 pl-6">
+          {t("contact.header.description")}
+        </p>
+        
+        {/* BOTONES - Altura reducida de p-5 a p-4 y texto más pequeño */}
+        <div className="flex flex-col sm:flex-row gap-3 mt-4">
+          {/* Botón Principal */}
+          <button
+            type="button"
+            onClick={() => setStep(2)}
+            className="group relative flex-[1.2] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg shadow-slate-100"
+          >
+            <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+            <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.15em] uppercase text-left">
+              {t("contact.buttons.submit_btn")}
+            </span>
+            <ChevronRight className="relative z-10 group-hover:translate-x-1 transition-transform" size={18} />
+          </button>
+
+          {/* Botón Secundario */}
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-1 p-4 rounded-xl border border-slate-200 bg-white text-slate-400 font-sans font-black text-[9px] tracking-[0.2em] uppercase hover:text-slate-950 hover:border-slate-300 transition-all"
+          >
+            {t("contact.buttons.close")}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {/* LADO DERECHO: Se mantiene igual pero con px-12 para dar más aire */}
+    <div className="hidden lg:flex w-1/2 h-full items-center justify-center p-12">
+      <div className="relative w-full h-[80%] max-h-[600px] group">
+        <div className="relative h-full w-full rounded-[2.5rem] overflow-hidden border-[10px] border-white shadow-[0_30px_80px_-15px_rgba(0,0,0,0.1)] ring-1 ring-slate-100">
+          <Image 
+            src={currentImage} 
+            alt="Luisbety Preview" 
+            fill 
+            className="object-cover transition-transform duration-[6s] group-hover:scale-105"
+            priority
+          />
+          <div className="absolute inset-0 bg-slate-950/5" />
+        </div>
+      </div>
+    </div>
+    
+  </div>
+)}
+
+{step === 2 && (
+  <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700 overflow-hidden">
+    <div className="w-full max-w-[580px] flex flex-col items-center">
+      
+      {/* TÍTULO */}
+      <div className="text-center mb-10">
+        <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+          {t("contact.steps.step_1.title")}
+        </h2>
+        <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
+        <p className="font-sans text-sm font-medium text-slate-500 mt-3 max-w-[350px] mx-auto leading-relaxed">
+          {t("contact.steps.step_1.description")}
+        </p>
+      </div>
+
+      {/* FORMULARIO */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 w-full">
+        {["name", "phone", "address", "date"].map((field) => (
+          <div key={field} className={`w-full space-y-1.5 ${field === "address" || field === "date" ? "md:col-span-2" : ""}`}>
+            <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+              {t(`contact.steps.step_1.fields.${field}`)}
+            </label>
+            <input
+              type={field === "date" ? "date" : "text"}
+              name={field}
+              value={contactData[field]}
+              onChange={(e) => setContactData((prev: any) => ({ ...prev, [field]: e.target.value }))}
+              placeholder={
+                field === "name" ? "Ej: Juan Pérez" :
+                field === "phone" ? "Ej: +1 555 123 4567" :
+                field === "address" ? "Ej: 123 Main St, Orlando" : ""
+              }
+              className="w-full p-2.5 border-b-2 border-slate-200 bg-transparent outline-none font-sans font-medium text-slate-900 text-sm transition-all duration-300 placeholder:text-slate-300 focus:border-primary-600"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* NAVEGACIÓN */}
+      <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
+        <button
+          type="button"
+          onClick={() => setStep(3)}
+          className="group relative w-full md:flex-[1.5] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg"
         >
-          <div className="max-w-[600px] animate-in slide-in-from-left-6 duration-700">
-            {step === 1 && (
-              <div className="flex flex-col items-start space-y-6">
-                <h2 className="text-4xl font-black text-slate-950">{t("contact.steps.step_0.title")}</h2>
-                <p className="text-sm text-slate-700">{t("contact.steps.step_0.description")}</p>
-                <button
-                  onClick={() => setStep(2)}
-                  className="mt-4 p-3 rounded-2xl bg-primary-600 text-white font-black uppercase"
-                >
-                  {t("contact.buttons.next")}
-                </button>
-              </div>
-            )}
+          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+          <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.2em] uppercase pl-2">
+            {t("contact.buttons.next")}
+          </span>
+          <ChevronRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+        </button>
 
-            {step === 2 && (
-              <div className="mt-8 flex flex-col items-center w-full max-w-[720px] space-y-4">
-                <h2 className="text-center font-display font-black text-3xl lg:text-4xl leading-[1.1] uppercase tracking-tighter mb-4">
-                  <span className="text-slate-950">
-                    {t("contact.steps.step_1.title").split(" ")[0]}{" "}
-                  </span>
-                  <span className="text-primary-600">
-                    {t("contact.steps.step_1.title").split(" ").slice(1).join(" ")}
-                  </span>
-                </h2>
-                {["name", "phone", "address", "date"].map((field) => (
-                  <div key={field} className="w-full space-y-1.5">
-                    <label className="font-sans text-[10px] font-black tracking-[0.1em] uppercase text-slate-400">
-                      {t(`contact.steps.step_1.fields.${field}`)}
-                    </label>
-                    <input
-                      type={field === "date" ? "date" : "text"}
-                      name={field}
-                      value={contactData[field]}
-                      onChange={(e) => setContactData((prev: any) => ({ ...prev, [field]: e.target.value }))}
-                      placeholder={
-                        field === "name" ? "Ej: Juan Pérez" :
-                        field === "phone" ? "Ej: +1 555 123 4567" :
-                        field === "address" ? "Ej: 123 Main St, Orlando" : ""
-                      }
-                      className="w-full p-3 rounded-2xl border border-slate-200 outline-none font-sans text-sm transition-all duration-300 shadow-sm focus:shadow-lg focus:scale-[1.02] focus:border-primary-600"
-                    />
-                  </div>
-                ))}
-                <div className="flex gap-3 w-full pt-3">
-                  <button
-                    type="button"
-                    onClick={() => setStep(1)}
-                    className="w-full p-3 rounded-2xl border border-slate-200 font-sans text-[10px] font-black uppercase tracking-[0.1em] transition-all duration-300 hover:bg-slate-50"
-                  >
-                    {t("contact.buttons.prev")}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setStep(3)}
-                    className="group relative w-full overflow-hidden flex items-center justify-between p-3 rounded-2xl bg-slate-950 text-white transition-all duration-500 hover:scale-[1.02] shadow-lg"
-                  >
-                    <span className="font-sans font-black text-[10px] tracking-[0.15em] uppercase">{t("contact.buttons.next")}</span>
-                    <ChevronRight size={20} />
-                  </button>
-                </div>
-              </div>
-            )}
+        <button
+          type="button"
+          onClick={() => setStep(1)}
+          className="w-full md:flex-1 p-4 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-950 transition-all"
+        >
+          {t("contact.buttons.prev")}
+        </button>
+      </div>
 
-            {step === 3 && (
-              <div className="mt-8 flex flex-col items-center w-full max-w-[720px] space-y-4">
-                <h2 className="text-center font-display font-black text-3xl lg:text-4xl leading-[1.1] uppercase tracking-tighter mb-4 mt-6 lg:mt-7">
-                  {t("contact.steps.step_2.title")}
-                </h2>
-                <div className="w-full space-y-1.5">
-                  <label className="font-sans text-[10px] font-black tracking-[0.1em] uppercase text-slate-400">
-                    {t("contact.steps.step_2.fields.service_type")}
-                  </label>
-                  <select
-                    name="service_type"
-                    value={contactData.service_type || ""}
-                    onChange={(e) => setContactData((prev) => ({ ...prev, service_type: e.target.value }))}
-                    className="w-full p-3 rounded-2xl border border-slate-200 outline-none font-sans text-sm transition-all duration-300 shadow-sm focus:shadow-lg focus:scale-[1.02] focus:border-primary-600"
-                  >
-                    <option value="">{t("contact.select_option")}</option>
-                    {Object.entries(t("contact.steps.step_2.options.service_type")).map(([key, label]) => (
-                      <option key={key} value={key}>{label}</option>
-                    ))}
-                  </select>
-                </div>
+    </div>
+  </div>
+)}
 
-                <div className="w-full space-y-1.5">
-                  <label className="font-sans text-[10px] font-black tracking-[0.1em] uppercase text-slate-400">
-                    {t("contact.steps.step_2.fields.specifics")}
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {[...t("contact.steps.step_2.options.specifics.exterior"),
-                      ...t("contact.steps.step_2.options.specifics.interior"),
-                      ...t("contact.steps.step_2.options.specifics.pro")].map((service: string) => (
-                      <label key={service} className="flex items-center gap-2 text-sm text-slate-700">
-                        <input
-                          type="checkbox"
-                          value={service}
-                          checked={(contactData.specifics || []).includes(service)}
-                          onChange={(e) => {
-                            const checked = e.target.checked;
-                            setContactData((prev: any) => {
-                              const current = prev.specifics || [];
-                              return {
-                                ...prev,
-                                specifics: checked ? [...current, service] : current.filter((v) => v !== service)
-                              };
-                            });
-                          }}
-                          className="accent-primary-600"
-                        />
-                        {service}
-                      </label>
-                    ))}
-                  </div>
-                </div>
+{step === 3 && (
+  <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700 overflow-hidden">
+    <div className="w-full max-w-[580px] flex flex-col items-center">
+      
+      <div className="text-center mb-10">
+        <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+          {t("contact.steps.step_2.title")}
+        </h2>
+        <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
+      </div>
 
-                <div className="w-full space-y-1.5">
-                  <label className="font-sans text-[10px] font-black tracking-[0.1em] uppercase text-slate-400">
-                    {t("contact.steps.step_2.fields.colors")}
-                  </label>
-                  <select
-                    name="colors"
-                    value={contactData.colors || ""}
-                    onChange={(e) => setContactData((prev) => ({ ...prev, colors: e.target.value }))}
-                    className="w-full p-3 rounded-2xl border border-slate-200 outline-none font-sans text-sm transition-all duration-300 shadow-sm focus:shadow-lg focus:scale-[1.02] focus:border-primary-600"
-                  >
-                    <option value="">{t("contact.select_option")}</option>
-                    {t("contact.steps.step_2.options.colors").map((color: string) => (
-                      <option key={color} value={color}>{color}</option>
-                    ))}
-                  </select>
-                </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 w-full">
+        {["service_type", "colors"].map((field) => (
+          <div key={field} className="w-full space-y-1.5">
+            <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+              {t(`contact.steps.step_2.fields.${field}`)}
+            </label>
+            <select
+              name={field}
+              value={contactData[field] || ""}
+              onChange={(e) => setContactData((prev: any) => ({ ...prev, [field]: e.target.value }))}
+              className="w-full p-2.5 border-b-2 border-slate-200 bg-transparent outline-none font-sans font-medium text-slate-900 text-sm transition-all appearance-none focus:border-primary-600 cursor-pointer"
+            >
+              <option value="">{t("contact.select_option")}</option>
+              {field === "service_type" 
+                ? Object.entries(t("contact.steps.step_2.options.service_type")).map(([key, label]) => (
+                    <option key={key} value={key}>{label as string}</option>
+                  ))
+                : (t("contact.steps.step_2.options.colors") as string[]).map((color) => (
+                    <option key={color} value={color}>{color}</option>
+                  ))
+              }
+            </select>
+          </div>
+        ))}
 
-                <div className="w-full space-y-1.5">
-                  <label className="font-sans text-[10px] font-black tracking-[0.1em] uppercase text-slate-400">
-                    {t("contact.steps.step_2.fields.paint_type")}
-                  </label>
-                  <input
-                    type="text"
-                    name="paint_type"
-                    value={contactData.paint_type || ""}
-                    onChange={(e) => setContactData((prev) => ({ ...prev, paint_type: e.target.value }))}
-                    placeholder="Ej: Mate, Satinado, Sherwin-Williams..."
-                    className="w-full p-3 rounded-2xl border border-slate-200 outline-none font-sans text-sm transition-all duration-300 shadow-sm focus:shadow-lg focus:scale-[1.02] focus:border-primary-600"
-                  />
-                </div>
+        <div className="md:col-span-2 space-y-3 mt-2">
+          <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+            {t("contact.steps.step_2.fields.specifics")}
+          </label>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {[...t("contact.steps.step_2.options.specifics.exterior"),
+              ...t("contact.steps.step_2.options.specifics.interior"),
+              ...t("contact.steps.step_2.options.specifics.pro")].map((service: string) => (
+              <label key={service} className="flex items-center gap-2 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={(contactData.specifics || []).includes(service)}
+                  onChange={(e) => {
+                    const checked = e.target.checked;
+                    setContactData((prev: any) => {
+                      const current = prev.specifics || [];
+                      return { ...prev, specifics: checked ? [...current, service] : current.filter((v: string) => v !== service) };
+                    });
+                  }}
+                  className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600"
+                />
+                <span className="font-sans font-medium text-slate-500 text-[11px] group-hover:text-primary-600 transition-colors uppercase tracking-tight">
+                  {service}
+                </span>
+              </label>
+            ))}
+          </div>
+        </div>
 
-                <div className="flex gap-3 w-full pt-3">
-                  <button type="button" onClick={() => setStep(2)}
-                    className="w-full p-3 rounded-2xl border border-slate-200 font-sans text-[10px] font-black uppercase tracking-[0.1em] transition-all duration-300 hover:bg-slate-50">
-                    {t("contact.buttons.prev")}
-                  </button>
-                  <button type="button" onClick={() => setStep(4)}
-                    className="group relative w-full overflow-hidden flex items-center justify-between p-3 rounded-2xl bg-slate-950 text-white transition-all duration-500 hover:scale-[1.02] shadow-lg">
-                    <span className="font-sans font-black text-[10px] tracking-[0.15em] uppercase">{t("contact.buttons.next")}</span>
-                    <ChevronRight size={20} />
-                  </button>
-                </div>
-              </div>
-            )}
+        <div className="md:col-span-2 w-full space-y-1.5">
+          <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+            {t("contact.steps.step_2.fields.paint_type")}
+          </label>
+          <input
+            type="text"
+            name="paint_type"
+            value={contactData.paint_type || ""}
+            onChange={(e) => setContactData((prev: any) => ({ ...prev, paint_type: e.target.value }))}
+            placeholder="Ej: Mate, Satinado, Sherwin-Williams..."
+            className="w-full p-2.5 border-b-2 border-slate-200 bg-transparent outline-none font-sans font-medium text-slate-900 text-sm transition-all focus:border-primary-600 placeholder:text-slate-300"
+          />
+        </div>
+      </div>
 
-            {step === 4 && (
-              <div className="mt-12 w-full max-w-[720px] mx-auto flex flex-col gap-8">
-                <h2 className="text-center font-display font-black text-4xl leading-tight uppercase tracking-tight">
-                  {t("contact.steps.step_3.title")}
-                </h2>
+      <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
+        <button type="button" onClick={() => setStep(4)}
+          className="group relative w-full md:flex-[1.5] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg">
+          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+          <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.2em] uppercase pl-2">{t("contact.buttons.next")}</span>
+          <ChevronRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+        </button>
+        <button type="button" onClick={() => setStep(2)}
+          className="w-full md:flex-1 p-4 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-950 transition-all">
+          {t("contact.buttons.prev")}
+        </button>
+      </div>
+    </div>
+  </div>
+)}  
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-slate-400 font-black text-[10px] uppercase tracking-wide">
-                    {t("contact.steps.step_3.fields.status")}
-                  </label>
-                  <textarea
-                    name="status"
-                    value={contactData.status || ""}
-                    onChange={(e) => setContactData((prev) => ({ ...prev, status: e.target.value }))}
-                    placeholder={t("contact.steps.step_3.placeholders.status")}
-                    className="w-full p-4 rounded-2xl border border-slate-200 outline-none text-sm shadow-sm focus:shadow-lg focus:border-primary-600 resize-none h-[120px]"
-                  />
-                </div>
+{step === 4 && (
+  <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700 overflow-hidden">
+    <div className="w-full max-w-[580px] flex flex-col items-center">
+      
+      <div className="text-center mb-10">
+        <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+          {t("contact.steps.step_3.title")}
+        </h2>
+        <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
+      </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-slate-400 font-black text-[10px] uppercase tracking-wide">
-                    {t("contact.steps.step_3.fields.upload")}
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="file"
-                      multiple
-                      onChange={(e) => setContactData((prev) => ({ ...prev, upload: e.target.files }))}
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                    />
-                    <div className="border-2 border-dashed border-slate-300 rounded-2xl p-8 text-center transition-colors duration-300 hover:border-primary-600 cursor-pointer">
-                      <p className="text-slate-400 text-sm">Arrastra tus archivos aquí o haz clic para seleccionar</p>
-                    </div>
-                  </div>
+      <div className="space-y-6 w-full">
+        <div className="flex flex-col gap-1.5">
+          <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+            {t("contact.steps.step_3.fields.status")}
+          </label>
+          <textarea
+            name="status"
+            value={contactData.status || ""}
+            onChange={(e) => setContactData((prev: any) => ({ ...prev, status: e.target.value }))}
+            placeholder={t("contact.steps.step_3.placeholders.status")}
+            className="w-full p-2.5 border-b-2 border-slate-200 bg-transparent outline-none font-sans font-medium text-slate-900 text-sm transition-all focus:border-primary-600 resize-none h-[90px] placeholder:text-slate-300"
+          />
+        </div>
 
-                  {contactData.upload && contactData.upload.length > 0 && (
-                    <ul className="mt-2 list-disc list-inside text-sm text-slate-700 max-h-48 overflow-y-auto">
-                      {Array.from(contactData.upload).map((file: File, idx: number) => (
-                        <li key={idx}>{file.name}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-slate-400 font-black text-[10px] uppercase tracking-wide">
-                    {t("contact.steps.step_3.fields.special")}
-                  </label>
-                  <input
-                    type="text"
-                    name="special"
-                    value={contactData.special || ""}
-                    onChange={(e) => setContactData((prev) => ({ ...prev, special: e.target.value }))}
-                    placeholder={t("contact.steps.step_3.placeholders.special")}
-                    className="w-full p-4 rounded-2xl border border-slate-200 outline-none text-sm shadow-sm focus:shadow-lg focus:border-primary-600"
-                  />
-                </div>
-
-                <div className="flex gap-4 mt-6">
-                  <button type="button" onClick={() => setStep(3)}
-                    className="w-full p-4 rounded-2xl border border-slate-200 font-black text-[10px] uppercase tracking-wide hover:bg-slate-50">
-                    {t("contact.buttons.prev")}
-                  </button>
-                  <button type="button" onClick={() => setStep(5)}
-                    className="w-full flex items-center justify-between p-4 rounded-2xl bg-slate-950 text-white font-black text-[10px] uppercase tracking-wide shadow-lg hover:scale-[1.02] transition-all">
-                    <span>{t("contact.buttons.next")}</span>
-                    <ChevronRight size={20} />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {step === 5 && (
-              <div className="mt-12 w-full max-w-[720px] mx-auto flex flex-col gap-8">
-                <h2 className="text-center font-display font-black text-4xl leading-tight uppercase tracking-tight">
-                  {t("contact.steps.step_4.title")}
-                </h2>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-slate-400 font-black text-[10px] uppercase tracking-wide">
-                    {t("contact.steps.step_4.fields.budget")}
-                  </label>
-                  <select
-                    name="budget"
-                    value={contactData.budget || ""}
-                    onChange={(e) => setContactData((prev) => ({ ...prev, budget: e.target.value }))}
-                    className="w-full p-3 rounded-2xl border border-slate-200 outline-none font-sans text-sm shadow-sm focus:shadow-lg focus:border-primary-600"
-                  >
-                    <option value="">{t("contact.select_option")}</option>
-                    <option value="low">{t("contact.steps.step_4.ranges.low")}</option>
-                    <option value="mid">{t("contact.steps.step_4.ranges.mid")}</option>
-                    <option value="high">{t("contact.steps.step_4.ranges.high")}</option>
-                  </select>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-slate-400 font-black text-[10px] uppercase tracking-wide">
-                    {t("contact.steps.step_4.fields.comments")}
-                  </label>
-                  <textarea
-                    name="comments"
-                    value={contactData.comments || ""}
-                    onChange={(e) => setContactData((prev) => ({ ...prev, comments: e.target.value }))}
-                    placeholder={t("contact.steps.step_4.placeholders.comments")}
-                    className="w-full p-4 rounded-2xl border border-slate-200 outline-none text-sm shadow-sm focus:shadow-lg focus:border-primary-600 resize-none h-[120px]"
-                  />
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <input
-                    type="checkbox"
-                    checked={contactData.vip}
-                    onChange={(e) => setContactData((prev) => ({ ...prev, vip: e.target.checked }))}
-                    className="accent-primary-600"
-                  />
-                  <span className="text-sm text-slate-700 font-black uppercase tracking-wide">{t("contact.steps.step_4.vip")}</span>
-                </div>
-
-                <div className="flex gap-4 mt-6">
-                  <button type="button" onClick={() => setStep(4)}
-                    className="w-full p-4 rounded-2xl border border-slate-200 font-black text-[10px] uppercase tracking-wide hover:bg-slate-50">
-                    {t("contact.buttons.prev")}
-                  </button>
-                  <button type="button" onClick={() => setStep(6)}
-                    className="w-full flex items-center justify-between p-4 rounded-2xl bg-slate-950 text-white font-black text-[10px] uppercase tracking-wide shadow-lg hover:scale-[1.02] transition-all">
-                    <span>{t("contact.buttons.submit")}</span>
-                    <ChevronRight size={20} />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {step === 6 && (
-              <div className="mt-12 w-full max-w-[720px] mx-auto flex flex-col items-center gap-6 text-center">
-                <h2 className="text-4xl font-black text-slate-950 uppercase">{t("contact.success.title")}</h2>
-                <p className="text-sm text-slate-700">{t("contact.success.message")}</p>
-                <button
-                  onClick={onClose}
-                  className="mt-6 p-4 w-full max-w-xs rounded-2xl bg-primary-600 text-white font-black uppercase tracking-wide shadow-lg hover:scale-[1.02] transition-all"
-                >
-                  {t("contact.success.close")}
-                </button>
-                <button
-                  onClick={() => window.location.href = "tel:+15551234567"}
-                  className="mt-2 p-4 w-full max-w-xs rounded-2xl bg-yellow-500 text-white font-black uppercase tracking-wide shadow-lg hover:scale-[1.02] transition-all"
-                >
-                  {t("contact.success.call_btn")}
-                </button>
-              </div>
+        <div className="flex flex-col gap-1.5">
+          <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+            {t("contact.steps.step_3.fields.upload")}
+          </label>
+          <div className="relative group border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center transition-all hover:border-primary-600 bg-slate-50/50">
+            <input 
+              type="file" 
+              multiple 
+              onChange={(e) => setContactData((prev: any) => ({ ...prev, upload: e.target.files }))} 
+              className="absolute inset-0 opacity-0 cursor-pointer z-10" 
+            />
+            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm border border-slate-100">
+              <Plus size={18} className="text-primary-600" />
+            </div>
+            <p className="font-sans font-medium text-slate-500 text-[11px] uppercase tracking-widest">
+              Arrastra tus fotos aquí o haz clic
+            </p>
+            {contactData.upload && contactData.upload.length > 0 && (
+              <p className="font-sans font-black text-[9px] text-primary-600 mt-2 uppercase">
+                {contactData.upload.length} Archivos listos
+              </p>
             )}
           </div>
         </div>
 
-        {step === 1 && (
-          <div className="hidden lg:flex w-1/2 h-full bg-white items-center justify-center p-16">
-            <div className="relative w-full h-[85%] max-h-[700px] group">
-              <div className="relative h-full w-full rounded-[3rem] overflow-hidden border-[12px] border-white shadow-[0_40px_100px_-20px_rgba(0,0,0,0.12)] ring-1 ring-slate-100">
-                <Image src={currentImage} alt="Preview" fill className="object-cover" priority />
-              </div>
+        <div className="flex flex-col gap-1.5">
+          <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+            {t("contact.steps.step_3.fields.special")}
+          </label>
+          <input
+            type="text"
+            name="special"
+            value={contactData.special || ""}
+            onChange={(e) => setContactData((prev: any) => ({ ...prev, special: e.target.value }))}
+            placeholder={t("contact.steps.step_3.placeholders.special")}
+            className="w-full p-2.5 border-b-2 border-slate-200 bg-transparent outline-none font-sans font-medium text-slate-900 text-sm transition-all focus:border-primary-600 placeholder:text-slate-300"
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
+        <button type="button" onClick={() => setStep(5)} className="group relative w-full md:flex-[1.5] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg">
+          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+          <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.2em] uppercase pl-2">{t("contact.buttons.next")}</span>
+          <ChevronRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+        </button>
+        <button type="button" onClick={() => setStep(3)} className="w-full md:flex-1 p-4 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-950 transition-all">{t("contact.buttons.prev")}</button>
+      </div>
+    </div>
+  </div>
+)}
+
+{step === 5 && (
+  <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700 overflow-hidden">
+    <div className="w-full max-w-[580px] flex flex-col items-center">
+      
+      <div className="text-center mb-10">
+        <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+          {t("contact.steps.step_4.title")}
+        </h2>
+        <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
+      </div>
+
+      <div className="space-y-6 w-full">
+        <div className="flex flex-col gap-1.5">
+          <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+            {t("contact.steps.step_4.fields.budget")}
+          </label>
+          <select
+            name="budget"
+            value={contactData.budget || ""}
+            onChange={(e) => setContactData((prev: any) => ({ ...prev, budget: e.target.value }))}
+            className="w-full p-2.5 border-b-2 border-slate-200 bg-transparent outline-none font-sans font-medium text-slate-900 text-sm transition-all focus:border-primary-600 appearance-none cursor-pointer"
+          >
+            <option value="">{t("contact.select_option")}</option>
+            {Object.entries(t("contact.steps.step_4.ranges")).map(([key, value]) => (
+              <option key={key} value={value as string}>{value as string}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+            {t("contact.steps.step_4.fields.comments")}
+          </label>
+          <textarea
+            name="comments"
+            value={contactData.comments || ""}
+            onChange={(e) => setContactData((prev: any) => ({ ...prev, comments: e.target.value }))}
+            className="w-full p-2.5 border-b-2 border-slate-200 bg-transparent outline-none font-sans font-medium text-slate-900 text-sm transition-all focus:border-primary-600 resize-none h-[90px] placeholder:text-slate-300"
+          />
+        </div>
+
+        <div className="pt-2">
+          <label className="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50 cursor-pointer group hover:border-primary-600 transition-all">
+            <div className="relative flex items-center justify-center mt-1">
+              <input
+                type="checkbox"
+                checked={contactData.vip || false}
+                onChange={(e) => setContactData((prev: any) => ({ ...prev, vip: e.target.checked }))}
+                className="peer h-5 w-5 cursor-pointer appearance-none rounded border-2 border-slate-300 checked:border-primary-600 checked:bg-primary-600 transition-all"
+              />
+              <Star size={10} className="absolute text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
             </div>
+            <div className="flex flex-col gap-1">
+              <span className="font-sans font-black text-[10px] uppercase tracking-widest text-slate-950 group-hover:text-primary-600 transition-colors">
+                {t("contact.steps.step_4.fields.vip_label")}
+              </span>
+              <p className="font-sans font-medium text-slate-500 text-[10px] leading-relaxed uppercase tracking-tight">
+                {t("contact.steps.step_4.fields.vip_text")}
+              </p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
+        <button type="button" onClick={() => setStep(6)} className="group relative w-full md:flex-[1.5] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg">
+          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+          <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.2em] uppercase pl-2">Finalizar estimado</span>
+          <ChevronRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+        </button>
+        <button type="button" onClick={() => setStep(4)} className="w-full md:flex-1 p-4 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-950 transition-all">{t("contact.buttons.prev")}</button>
+      </div>
+    </div>
+  </div>
+)}
+
+       {step === 6 && (
+  <div className="w-full h-full flex flex-col items-center justify-center bg-slate-50/30 px-6 pt-20 animate-in zoom-in-95 duration-700">
+    <div className="w-full max-w-[550px] bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl p-10 lg:p-16 text-center relative overflow-hidden">
+      
+      {/* DECORACIÓN DE FONDO SUTIL */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-1 bg-primary-600 rounded-b-full" />
+      
+      {/* ICONO DE ÉXITO ANIMADO */}
+      <div className="mb-8 relative inline-flex">
+        <div className="absolute inset-0 bg-primary-600/20 blur-2xl rounded-full animate-pulse" />
+        <div className="relative w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center shadow-xl shadow-primary-600/30">
+          <Check size={40} className="text-white stroke-[3px]" />
+        </div>
+      </div>
+
+      {/* TÍTULO - Usando font-display */}
+      <h2 className="font-display font-black text-3xl lg:text-4xl text-slate-950 leading-tight uppercase tracking-tighter mb-4">
+        {t("contact.steps.step_5.title")}
+      </h2>
+
+      {/* DESCRIPCIÓN - Con estilo de párrafo de la web */}
+      <p className="font-sans text-sm lg:text-base font-medium text-slate-500 leading-relaxed mb-10 max-w-[320px] mx-auto">
+        {t("contact.steps.step_5.description")}
+      </p>
+
+      {/* BOTÓN FINAL - Estilo igual al botón de inicio pero en azul */}
+      <button 
+        onClick={onClose} 
+        className="group relative w-full overflow-hidden flex items-center justify-center p-5 rounded-2xl bg-slate-950 text-white transition-all duration-500 shadow-xl hover:scale-[1.02]"
+      >
+        <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+        <span className="relative z-10 font-sans font-black text-[11px] tracking-[0.25em] uppercase">
+          {t("contact.steps.step_5.finish_btn")}
+        </span>
+      </button>
+
+      {/* DETALLE INFERIOR */}
+      <p className="mt-8 text-[9px] font-black uppercase tracking-[0.3em] text-slate-300">
+        Luisbety Painting • Florida
+      </p>
+    </div>
+  </div>
+)}  
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
