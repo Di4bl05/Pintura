@@ -94,7 +94,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                 LUISBETY <span className="font-serif italic font-normal tracking-normal lowercase text-primary-500">Inc.</span>
               </span>
               <span className={`font-sans font-bold uppercase tracking-[0.4em] text-primary-200/50 transition-all duration-500 ${isSolid ? "text-[7px] mt-1" : "text-[9px] md:text-[10px] mt-2"}`}>
-                Paiting and Remodeling
+                Painting and Remodeling
               </span>
             </div>
           </Link>

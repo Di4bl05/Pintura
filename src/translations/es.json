@@ -26,8 +26,8 @@
   
  "services": {
   "badge": "Servicios con Ética Profesional",
-  "title": "Especialistas",
-  "titleHighlight": "EN PINTURA EN ORLANDO FL",
+  "title": "Pintura profesional",
+  "titleHighlight": "de lujo con acabados de alta gama",
   "subtitle": "Transformamos tu propiedad con un proceso riguroso: desde el lavado a presión profundo hasta el acabado final de alta gama.",
   "moreInfo": "Leer más", 
 
@@ -76,8 +76,8 @@
 
   "gallery": {
     "badge": "Portafolio de Excelencia",
-    "title": "Resultados ",
-    "titleHighlight": "IMPECABLES DE LUISBETY",
+    "title": "Proyectos reales:",
+    "titleHighlight": "la excelencia en cada detalle",
     "subtitle": "No solo pintamos paredes, devolvemos la vida a sus espacios. Explore nuestras transformaciones más recientes en el área de Orlando.",
     "filters": {
       "all": "Todos",
@@ -157,30 +157,8 @@
 
 
  "whyChoose": {
-    "section_id": "why-choose-us",
-    "meta_strategy": {
-      "target_objective": "Eliminar objeciones de precio y tiempo",
-      "seo_focus": "Professional Painters Orlando - High Value / Low Cost",
-      "tone": "Directo, honesto, competitivo y profesional"
-    },
-    "business_identity": {
-      "legal_name": "LUISBETY INC.",
-      "location": {
-        "street": "2381 Westwood dr",
-        "city": "Longwood",
-        "state": "FL",
-        "zip": "32779",
-        "primary_service_area": "Orlando & Central Florida",
-        "extended_coverage": "Florida State-wide"
-      },
-      "market_authority": {
-        "years_experience": 3,
-        "satisfaction_rate": "100% verified",
-        "hours_of_operation": "9AM - 5PM"
-      }
-    },
     "core_value_proposition": {
-      "hook": "Misma calidad de las empresas 'Top', a una fracción del precio y tiempo.",
+      "hook": "Misma calidad de empresas 'Top', a una fracción del precio y tiempo.",
       "the_difference": [
         {
           "id": "price_disruption",
@@ -250,8 +228,8 @@
 
  "reviews": {
   "badge": "100% Casos de Éxito",
-  "title": "Excelencia ",
-  "titleHighlight": "EN CADA BROCHAZO",
+  "title": "Nuestra reputación",
+  "titleHighlight": "construida por clientes satisfechos",
   "subtitle": "Descubre por qué cientos de familias en Florida Central confían en nuestro compromiso con la limpieza, la puntualidad y los acabados de alta gama.",
   "basedOn": "Calificación real en",
   "reviews": "opiniones verificadas",
@@ -286,7 +264,6 @@
     "steps": {
       "step_1": {
         "title": "Datos de Contacto y Ubicación",
-        "description": "Información esencial para tu estimado gratuito.",
         "fields": {
           "name": "Nombre Completo",
           "phone": "Teléfono de Contacto",
@@ -353,7 +330,7 @@
       "next": "Siguiente Paso",
       "prev": "Anterior",
       "submit": "Solicitar Prioridad de Pintura",
-      "submit_btn": "RESERVAR MI PRIORIDAD",
+      "submit_btn": "Reservar mi prioridad",
       "close": "Cerrar Formulario"
     }
   },

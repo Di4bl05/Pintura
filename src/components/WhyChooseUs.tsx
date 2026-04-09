@@ -42,17 +42,19 @@ export default function CombinedConversion() {
                 </span>
               </div>
 
-              <h2 className="flex flex-col gap-2">
-                <span className="relative font-display text-4xl md:text-6xl font-bold text-slate-950 uppercase tracking-tightest leading-[1.1]">
-                  {hookMain}
-                  <span className="absolute left-0 hidden w-48 h-2 rounded-full -bottom-2 bg-primary-600/10 md:block" />
-                </span>
-                {hookItalic && (
-                  <span className="font-serif text-3xl italic font-normal leading-none md:text-6xl text-primary-600">
-                    {hookItalic}
-                  </span>
-                )}
-              </h2>
+        <h2 className="flex flex-col mb-8">
+  {/* LÍNEA SUPERIOR: Cambiamos tracking-tightest por tracking-tight y font-black por font-bold */}
+  <span className="font-display text-4xl md:text-6xl font-bold text-slate-950 uppercase tracking-tight leading-[0.95]">
+    {hookMain}
+  </span>
+  
+  {/* LÍNEA INFERIOR: Recuperamos el Serif Italic y quitamos el margen negativo excesivo */}
+  {hookItalic && (
+    <span className="font-serif text-3xl md:text-6xl italic font-normal text-primary-600 leading-none mt-2">
+      {hookItalic}
+    </span>
+  )}
+</h2>
 
               <p className="max-w-xl pl-6 font-sans text-lg leading-relaxed border-l-2 text-slate-500 border-primary-600/20">
                 {t("whyChoose.marketing_narrative.solution")}
