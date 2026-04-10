@@ -59,7 +59,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     window.dispatchEvent(new CustomEvent("app:overlay-state", { detail: { open: isOpen } }));
-    return () => window.dispatchEvent(new CustomEvent("app:overlay-state", { detail: { open: false } }));
+    return () => {
+      window.dispatchEvent(new CustomEvent("app:overlay-state", { detail: { open: false } }));
+    };
   }, [isOpen]);
 
   useEffect(() => { if (isOpen) onClose(); }, [pathname, onClose]);
