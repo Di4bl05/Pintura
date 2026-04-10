@@ -38,6 +38,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
   const currentImage = "/images/gallery/pintores-exteriores-residenciales-orlando.webp";
     const [openSelect, setOpenSelect] = useState<string | null>(null);
 
+  const colorOptions = React.useMemo(() => {
+    const value = t("contact.steps.step_2.options.colors");
+    if (Array.isArray(value)) {
+      return value.map((option) => String(option));
+    }
+    return ["1", "2", "3+"];
+  }, [t]);
+
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -325,7 +333,7 @@ return (
                           {label as string}
                         </div>
                       ))
-                    : (t("contact.steps.step_2.options.colors") as string[]).map((color) => (
+                    : colorOptions.map((color) => (
                         <div 
                           key={color}
                           onClick={() => {
