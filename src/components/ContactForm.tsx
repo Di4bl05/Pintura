@@ -358,9 +358,11 @@ return (
             {t("contact.steps.step_2.fields.specifics")}
           </label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {[...t("contact.steps.step_2.options.specifics.exterior"),
-              ...t("contact.steps.step_2.options.specifics.interior"),
-              ...t("contact.steps.step_2.options.specifics.pro")].map((service: string) => (
+            {[
+              t("contact.steps.step_2.options.specifics.exterior"),
+              t("contact.steps.step_2.options.specifics.interior"),
+              t("contact.steps.step_2.options.specifics.pro"),
+            ].map((service: string) => (
               <label key={service} className="flex items-center gap-2 cursor-pointer group">
                 <input
                   type="checkbox"
