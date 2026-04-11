@@ -5,135 +5,151 @@
     "gallery": "Gallery",
     "reviews": "Reviews",
     "contact": "Contact",
-    "why": "Why Us"
+    "why": "About Us"
   },
   "hero": {
-    "badge": "#1 PAINTERS IN ORLANDO",
     "title1": "INTERIOR & EXTERIOR",
     "title2": "PAINTING SERVICES",
     "description": "Professional residential painting in Orlando, FL. Specialists in drywall repair, cabinet refinishing, and pressure washing.",
-    "descriptionBold": "Licensed, Insured, and Detailed Cleanup Included.",
+    "descriptionBold": "Licensed, Insured, and Detailed Post-Job Cleaning Included.",
     "ctaFree": "FREE ESTIMATE",
     "ctaCall": "Call Now",
     "carousel": [
       "Kitchen Cabinet Painting",
       "Professional Wall Repair",
       "Roof Cleaning & Pressure Washing",
-      "Detailed Post-Job Cleanup"
-    ],
-    "card": {
-      "transform": "Transform",
-      "yourSpace": "your Home",
-      "professionalResults": "Pro Results"
-    },
-    "badge2": {
-      "licensed": "Licensed &",
-      "insured": "Insured"
-    },
-    "scroll": "View Services"
+      "Detailed Post-Job Cleaning"
+    ]
   },
   "services": {
-    "freeEstimate": "Free Estimate",
-    "premiumDetail": "Premium Detail",
     "badge": "Services with Professional Ethics",
-    "title": "Specialists in",
-    "titleHighlight": "Orlando FL Painting",
-    "subtitle": "We transform your property with a rigorous process: from deep pressure washing to high-end final finishes.",
-    "socialProof": "+500 Projects Successfully Completed",
-    "serviceAreas": "Specialized service in Orlando, Winter Park, Lake Nona, and surrounding areas, strictly following HOA color regulations.",
+    "title": "Professional Painting",
+    "titleHighlight": "luxury finishes for high-end results",
+    "subtitle": "We transform your property with a rigorous process: from deep pressure washing to the final high-end finish.",
     "moreInfo": "Read more",
-    "finishLabel": "Pro Finish",
-    "localApproved": "Locally Approved",
-    "coveragePre": "Coverage in",
-    "coverageRegion": "Central Florida",
-    "statusLabel": "Status",
-    "expertLine1": "Local",
-    "expertLine2": "Expert",
     "exterior": {
       "title": "Professional Exterior Painting",
-      "description": "Total protection against Florida's sun and humidity. Deep surface preparation so color lasts years, not months.",
-      "price": "Free Estimate",
       "features": [
-        "Includes pro Pressure Washing",
-        "Soffits and vents painting",
-        "Trim and door detailing",
-        "Deep anti-moisture sealing"
-      ],
-      "experience": {
-        "intro": "Every great finish begins with an impeccable surface. Before opening the first can of paint, we perform deep decontamination using specialized pressure washing to remove mold and grime typical of our region.",
-        "process": "Our secret lies in precision preparation. We hand-scrape every imperfection and apply premium elastomeric sealants to every detected crack. We don't just paint; we shield your facade against moisture.",
-        "climax": "The final touch is where the magic happens: we apply two coats of high-build paint with UV resistance. The result is a vibrant, deep color designed to withstand the Orlando sun.",
-        "footer": "When finished, the only thing you'll notice is a property that looks brand new. The transformation stays with you."
-      }
+        "Pro Pressure Washing",
+        "Soffits and vents",
+        "Moisture sealing",
+        "UV Protection"
+      ]
     },
     "interior": {
       "title": "Interior Transformation",
-      "description": "From nursery rooms to dream kitchens. We focus on perfect finishes on baseboards and ceilings.",
-      "price": "Competitive Pricing",
       "features": [
-        "Walls and Ceilings",
-        "Baseboards and fine moldings",
-        "Custom color accents",
-        "Multi-color experts"
-      ],
-      "experience": {
-        "intro": "We understand that your home is your sanctuary. That's why our absolute priority is total protection: we move your furniture with care and cover every inch of your floors with high-density blankets.",
-        "process": "True quality is felt to the touch. We restore your walls by patching every drywall hole and repairing stress cracks until the surface is smooth as glass.",
-        "climax": "Our master painters execute high-precision manual cuts on ceilings and baseboards, achieving lines so straight they look laser-drawn.",
-        "footer": "After an elite cleanup, we return every piece of furniture to its place. We deliver a renovated and spotless home."
-      }
+        "Walls and ceilings",
+        "Baseboards and moldings",
+        "Multi-color experts",
+        "Drywall Repair"
+      ]
     },
     "pressure": {
       "title": "Pro Pressure Washing",
-      "description": "We remove years of dirt and mold in minutes. Specialists in modern roofs (2024-2025) and recreation areas.",
-      "price": "From $2000",
       "features": [
-        "Driveways and concrete areas",
-        "Metal and modern roofs",
-        "Pool decks and enclosures",
-        "Deep cleaning without damage"
-      ],
-      "experience": {
-        "intro": "Orlando's weather is relentless. Our solution begins with a biodegradable chemical pre-treatment that eliminates algae and moss from the root, protecting your infrastructure's health.",
-        "process": "We don't believe in brute force, but in technique. We adjust our equipment to alternate between deep cleaning on concrete and a 'soft wash' for delicate areas.",
-        "climax": "We tackle even the toughest oil and rust stains with industrial-grade chemicals. Finally, we perform a meticulous rinse of the entire property.",
-        "footer": "Visible results in hours that instantly increase your property's curb appeal."
-      }
+        "Driveways and concrete",
+        "Modern roofs",
+        "Delicate soft wash",
+        "Mildew removal"
+      ]
     },
     "repair": {
       "title": "Surface Repair",
-      "description": "Removed a TV or have damaged wood? We leave your surfaces smooth and ready for paint.",
-      "price": "Technical Evaluation",
       "features": [
-        "Plaster, sanding, and pro sealing",
-        "TV mount hole repair",
-        "Wood/synthetic restoration",
-        "We disappear previous damage"
-      ],
-      "experience": {
-        "intro": "Your cabinets and walls are the details that define your home's luxury. Our process begins with a deep technical cleaning to ensure any repair integrates invisibly with the original structure.",
-        "process": "True quality is felt to the touch. We use dust extraction systems for clean mechanical sanding, eliminating imperfections and creating the perfect grip profile for a silk-smooth finish.",
-        "climax": "Using fine-finish spray technology, we apply industrial-grade coatings that are completely free of brush marks. We restore factory aesthetics to every damaged surface.",
-        "footer": "We conclude with precision reassembly. We reinstall every piece of hardware with expert alignment, delivering details that look like they just left the showroom."
-      }
+        "Pro plastering & sanding",
+        "TV Mount repair",
+        "Wood restoration",
+        "Invisible finishes"
+      ]
+    }
+  },
+  "servicesdetails": {
+    "premium": "Premium service experience",
+    "execution": "Execution process",
+    "buttons1": "Request free estimate",
+    "exterior": {
+      "title": "Professional Exterior Painting",
+      "titleHighlight": "Your Home's Armor",
+      "description": "We don't just change the color of your facade; we renew the protection of your heritage. In an area where intense sun and afternoon humidity are unforgiving, our exterior paint acts as a high-tech shield. We restore your property's market value and the pride of coming home, with finishes that stand the test of time and enhance every architectural detail under the Orlando sun.",
+      "steps": [
+        {
+          "title": "Professional Pressure Washing Preparation",
+          "desc": "We don't paint over dirt. We use high-power pressure washers to strip away mildew, pollution, and old paint. It's the only way to guarantee the new coat fuses with the wall forever."
+        },
+        {
+          "title": "Moisture Sealing & UV Protection",
+          "desc": "We identify every crack where water could seep in. We seal critical points, take care of Soffits (ventilation grilles), and apply primers that block ultraviolet rays, preventing the color from fading over the years."
+        },
+        {
+          "title": "Detail & Multi-color Aesthetics",
+          "desc": "We apply paint with surgical precision. From main walls to window and door frames, we manage color combinations that highlight your home's personality with absolute visual cleanliness."
+        }
+      ]
     },
-    "commercial": {
-      "title": "Commercial Painting",
-      "description": "Efficient solutions for Central Florida businesses with flexible schedules to avoid stopping your operation.",
-      "price": "Pro Quote",
-      "features": [
-        "High-resistance finishes",
-        "Record-breaking deadlines",
-        "Minimal business interruption",
-        "Commercial quality guarantee"
+    "interior": {
+      "title": "Interior Transformation",
+      "titleHighlight": "The Art of Living Well",
+      "description": "The interior of your home is where life happens. That's why our interior painting service is an experience of extreme care and detail. We understand we are working in your private space; we move with respect, work with cleanliness, and deliver walls so perfect they feel like silk. It's not about covering walls; it's about creating the perfect atmosphere for your family.",
+      "steps": [
+        {
+          "title": "Invisible Restoration (Drywall & Plaster)",
+          "desc": "Before the paint comes perfection. We repair TV mount holes, settlement cracks, or molding damage. We apply plaster and professional sanding that leaves the surface completely flat and ready for color."
+        },
+        {
+          "title": "Protection & Work Ethics",
+          "desc": "Your floors, furniture, and art are sacred. We cover every inch with plastic and precision tape. We paint swiftly but without rushing, ensuring the only trace left behind is impeccable color."
+        },
+        {
+          "title": "Luxury Finishes on Walls, Ceilings & Baseboards",
+          "desc": "We are experts in clean cuts. We paint ceilings in pure white and baseboards with high-resistance enamels. If you're looking for a custom multi-color design, we execute the transition with professional precision."
+        }
+      ]
+    },
+    "pressure": {
+      "title": "Pro Pressure Washing",
+      "titleHighlight": "Reviving Your Surfaces",
+      "description": "Mildew and accumulated dirt don't just look bad—they also damage your materials. Our Pressure Washing service is a revitalizing treatment for exterior areas. From concrete to modern roofs, we bring back the original shine to your investment and instantly improve your property's curb appeal in Central Florida.",
+      "steps": [
+        {
+          "title": "Driveways & High-Traffic Concrete",
+          "desc": "We remove oil stains, tire marks, and mildew from the concrete, leaving your entrance completely clean and ready for guests."
+        },
+        {
+          "title": "Soft Wash for Modern Roofs",
+          "desc": "We use biodegradable chemicals and low pressure to eliminate fungus at the root without damaging metal or delicate roofs."
+        },
+        {
+          "title": "Pool & Recreation Areas",
+          "desc": "We deep clean pool decks and walkways, creating a hygienic and safe environment to enjoy the outdoors."
+        }
+      ]
+    },
+    "repair": {
+      "title": "Surface Repair",
+      "titleHighlight": "The Foundation of Excellence",
+      "description": "Nothing ruins a paint job like a poorly prepared base. We specialize in restoring damaged surfaces. Whether it's rotted wood, deteriorated plaster, or weather-beaten walls, we restore structural solidity before applying any finish.",
+      "steps": [
+        {
+          "title": "Diagnosis & Replacement",
+          "desc": "We detect damaged wood or compromised drywall. If it's rotted, we replace it; if it's loose, we secure it with structural solidity."
+        },
+        {
+          "title": "Professional Sanding & Buffing",
+          "desc": "We use advanced tools to achieve completely smooth surfaces. The goal is an invisible finish that leaves no trace of the repair."
+        },
+        {
+          "title": "Preparation Sealing",
+          "desc": "We seal every repair to ensure uniform paint absorption, avoiding patches or differences in sheen in the final result."
+        }
       ]
     }
   },
   "gallery": {
     "badge": "Portfolio of Excellence",
-    "title": "Results by",
-    "titleHighlight": "Luisbety Impeccable",
-    "subtitle": "We don't just paint walls; we bring life back to your spaces. Explore our most recent transformations in the Orlando area.",
+    "title": "Real projects:",
+    "titleHighlight": "excellence in every detail",
+    "subtitle": "We don't just paint walls; we breathe life back into your spaces. Explore our most recent transformations in the Orlando area.",
     "filters": {
       "all": "All",
       "interior": "Interiors",
@@ -143,113 +159,101 @@
       "deck": "Decks",
       "pressure": "Pro Wash"
     },
-    "before": "BEFORE",
-    "after": "AFTER",
-    "dragSlider": "Drag to compare",
-    "clickToActivate": "Click to activate control. Then drag to compare.",
     "viewAll": "View All",
-    "fullGallery": "Gallery",
-    "completedProjects": "projects",
-    "clickDetails": "Tap to enlarge",
-    "preparation": "Preparation",
-    "premiumPaint": "Premium Paint",
-    "guaranteed": "Guaranteed",
-    "cta": "Transform Your Space!",
-    "projectLike": "Get a Project Like This One",
     "projects": {
       "1": {
-        "title": "Exterior Stucco Repainting",
+        "title": "Stucco Exterior Repainting",
         "location": "Orlando",
         "service": "exterior",
         "description": "Crack repair and application of UV and moisture-resistant acrylic paint."
       },
       "2": {
-        "title": "Interior and Baseboard Renovation",
+        "title": "Interior & Baseboard Renovation",
         "location": "Winter Park",
         "service": "interior",
-        "description": "Painting of walls, ceilings, and moldings with a washable matte finish ideal for families."
+        "description": "Painting walls, ceilings, and moldings with a washable matte finish ideal for families."
       },
       "3": {
-        "title": "Deck Restoration and Sealing",
+        "title": "Deck Restoration & Sealing",
         "location": "Lake Nona",
         "service": "deck",
-        "description": "Deep washing, exterior wood sanding, and application of semi-transparent protective stain."
+        "description": "Deep cleaning, exterior wood sanding, and application of semi-transparent protective stain."
       },
       "4": {
         "title": "Commercial Facade Repainting",
         "location": "Kissimmee",
         "service": "commercial",
-        "description": "Application of high-traffic elastomeric paint. Work performed after-hours to avoid business impact."
+        "description": "Application of high-traffic elastomeric paint. Work performed after hours to avoid business disruption."
       },
       "5": {
         "title": "Kitchen Cabinet Transformation",
         "location": "Windermere",
         "service": "cabinet",
-        "description": "Intensive preparation and cabinet painting with polyurethane enamel for a factory-smooth finish."
+        "description": "Intensive preparation and cabinet painting with polyurethane enamel for a smooth, factory-like finish."
       },
       "6": {
-        "title": "HOA Approved Exterior Painting",
+        "title": "HOA-Approved Exterior Painting",
         "location": "Dr. Phillips",
         "service": "exterior",
         "description": "Color palette update complying with HOA standards, including doors and garage."
       },
       "7": {
-        "title": "Popcorn Ceiling Removal & Paint",
+        "title": "Popcorn Removal & Painting",
         "location": "Altamonte Springs",
         "service": "interior",
-        "description": "Elimination of old popcorn texture, full smoothing, and application of fresh paint."
+        "description": "Removal of old ceiling texture (popcorn), full smoothing, and application of fresh paint."
       },
       "8": {
         "title": "Driveway Pressure Washing",
         "location": "Hunters Creek",
         "service": "pressure",
-        "description": "Deep removal of mold, oil, and embedded dirt on concrete sidewalks and driveways."
+        "description": "Deep removal of mildew, oil, and embedded dirt on concrete walkways and driveways."
       }
     }
   },
+  "reviews": {
+    "badge": "100% Success Rate",
+    "title": "Our reputation",
+    "titleHighlight": "built by satisfied customers",
+    "subtitle": "Discover why hundreds of families in Central Florida trust our commitment to cleanliness, punctuality, and high-end finishes.",
+    "basedOn": "Real rating on",
+    "reviews": "verified reviews",
+    "viewGoogle": "View Google Business Profile",
+    "verified": "Verified Customer",
+    "viewAll": "View more on Google",
+    "readMore": "Read more",
+    "readLess": "Read less",
+    "timeAgo": {
+      "twoWeeks": "2 weeks ago",
+      "oneMonth": "1 month ago",
+      "twoMonths": "2 months ago",
+      "threeMonths": "3 months ago",
+      "fourMonths": "4 months ago",
+      "fiveMonths": "5 months ago",
+      "sixMonths": "6 months ago"
+    }
+  },
   "whyChoose": {
-    "section_id": "why-choose-us",
-    "meta_strategy": {
-      "target_objective": "Eliminate price and time objections",
-      "seo_focus": "Professional Painters Orlando - High Value / Low Cost",
-      "tone": "Direct, honest, competitive, and professional"
-    },
-    "business_identity": {
-      "legal_name": "LUISBETY INC.",
-      "location": {
-        "street": "2381 Westwood dr",
-        "city": "Longwood",
-        "state": "FL",
-        "zip": "32779",
-        "primary_service_area": "Orlando & Central Florida",
-        "extended_coverage": "Florida State-wide"
-      },
-      "market_authority": {
-        "years_experience": 3,
-        "satisfaction_rate": "100% verified",
-        "hours_of_operation": "9AM - 5PM"
-      }
-    },
     "core_value_proposition": {
       "hook": "Same quality as 'Top' companies, at a fraction of the price and time.",
       "the_difference": [
         {
           "id": "price_disruption",
           "label": "Disruptive Pricing",
-          "argument": "Costs absurdly below corporate competition in Florida without sacrificing standards.",
+          "argument": "Costs significantly below corporate competition in Florida without sacrificing standards.",
           "benefit": "Smart investment: $10,000 results for a real average of $6,000."
         },
         {
           "id": "time_efficiency",
           "label": "Agile Execution",
-          "argument": "Same or better verified quality with shorter turnaround times than local competitors.",
-          "benefit": "Minimal interruption: We enter, transform your property, and leave in record time."
+          "argument": "Same or better verified quality with faster turnaround times than local competitors.",
+          "benefit": "Minimal disruption: We enter, transform your property, and exit in record time."
         },
         {
           "id": "payment_flexibility",
           "label": "Payment Flexibility",
-          "argument": "Flexible upfront payment system to secure your slot and mutual commitment.",
-          "benefit": "Priority guarantee: Your project becomes our #1 priority on the calendar."
+          "argument": "Flexible upfront payment system to secure your spot and mutual commitment.",
+          "benefit": "Priority Guarantee: Your project becomes our #1 priority on the calendar."
         }
       ]
     },
@@ -278,7 +282,7 @@
     },
     "marketing_narrative": {
       "problem": "The Florida painting market is inflated by bureaucracy and unnecessary overhead.",
-      "solution": "LuisBety Inc offers a direct, agile, and high-end model for the owner seeking real value over inflated marketing.",
+      "solution": "LuisBety Inc offers a direct, agile, and high-end model for homeowners seeking real value over inflated marketing.",
       "seo_keywords": [
         "affordable painters orlando",
         "best price painting florida",
@@ -295,117 +299,93 @@
       "phone": "(786) 350-6367"
     }
   },
-  "reviews": {
-    "badge": "100% Success Stories",
-    "title": "Excellence in",
-    "titleHighlight": "every brushstroke",
-    "subtitle": "Discover why hundreds of families in Central Florida trust our commitment to cleanliness, punctuality, and high-end finishes.",
-    "basedOn": "Real rating on",
-    "reviews": "verified reviews",
-    "viewGoogle": "View Google Business Profile",
-    "verified": "Verified Customer",
-    "helpful": "Helpful",
-    "viewAll": "View all experiences",
-    "showLess": "Hide additional reviews",
-    "readMore": "Read more",
-    "readLess": "Read less",
-    "timeAgo": {
-      "twoWeeks": "2 weeks ago",
-      "oneMonth": "1 month ago",
-      "twoMonths": "2 months ago",
-      "threeMonths": "3 months ago",
-      "fourMonths": "4 months ago",
-      "fiveMonths": "5 months ago",
-      "sixMonths": "6 months ago"
-    }
-  },
   "contact": {
-    "badge": "CONTACT",
-    "title": "Free",
-    "titleHighlight": "Estimate",
-    "subtitle": "Response within 24 hours",
-    "info": {
-      "title": "Contact Info",
-      "phone": "Phone",
-      "email": "Email",
-      "address": "Address",
-      "hours": "Hours",
-      "hoursText": "Mon-Fri: 9AM - 5PM"
+    "header": {
+      "title": "Fast-track your project and receive a precise estimate.",
+      "subtitle": "PRIORITY ACCESS",
+      "description": "We collect these details so our specialists arrive at your Orlando property with a ready-to-go solution, reducing negotiation time and accelerating the start of your project."
     },
-    "benefits": {
-      "title": "Why Choose Us?",
-      "items": [
-        "Free",
-        "Fast",
-        "Flexible",
-        "Professional"
-      ]
+    "stepper": {
+      "step_1": "Contact",
+      "step_2": "Project",
+      "step_3": "Diagnosis",
+      "step_4": "Closing"
     },
-    "form": {
-      "name": "Full Name",
-      "namePlaceholder": "John Doe",
-      "email": "Email",
-      "emailPlaceholder": "john@email.com",
-      "phone": "Phone",
-      "phonePlaceholder": "(555) 555-5555",
-      "address": "Project Address",
-      "addressPlaceholder": "123 Main St, City, ST 12345",
-      "serviceType": "Service Type",
-      "selectService": "Select a service",
-      "services": {
-        "interior": "Interior Painting",
-        "exterior": "Exterior Painting",
-        "commercial": "Commercial Painting",
-        "cabinet": "Cabinet Refinishing",
-        "deck": "Deck/Patio Painting",
-        "other": "Other"
+    "steps": {
+      "step_1": {
+        "title": "Contact Details & Location",
+        "fields": {
+          "name": "Full Name",
+          "phone": "Contact Phone",
+          "address": "Property Address",
+          "date": "Desired Visit Date"
+        }
       },
-      "projectSize": "Project Size",
-      "select": "Select",
-      "size": {
-        "small": "Small (1-2 rooms)",
-        "medium": "Medium (3-5 rooms)",
-        "large": "Large (Full house)",
-        "commercial": "Commercial"
+      "step_2": {
+        "title": "Project Definition",
+        "fields": {
+          "service_type": "Service Type",
+          "specifics": "Specific Services",
+          "colors": "Number of Colors",
+          "paint_type": "Specific Paint Type"
+        },
+        "options": {
+          "service_type": {
+            "interior": "Interior",
+            "exterior": "Exterior",
+            "both": "Both"
+          },
+          "specifics": {
+            "exterior": ["Pressure Washing", "Soffits", "Sealing"],
+            "interior": ["Walls", "Ceilings", "Baseboards"],
+            "pro": ["Driveways", "Metal Roofs", "Pool Decks"]
+          },
+          "colors": ["1", "2", "3+"]
+        }
       },
-      "budget": "Estimated Budget",
-      "budgetRange": {
-        "under1k": "Under $1,000",
-        "1k3k": "$1,000 - $3,000",
-        "3k5k": "$3,000 - $5,000",
-        "5k10k": "$5,000 - $10,000",
-        "over10k": "Over $10,000"
+      "step_3": {
+        "title": "Diagnosis & Evidence",
+        "fields": {
+          "status": "Surface Condition",
+          "upload": "Visual Evidence Upload",
+          "special": "Do you have a special project or something not listed?"
+        },
+        "placeholders": {
+          "status": "E.g., TV mount holes, mildew on facade, rotted wood...",
+          "special": "E.g., Paint only kitchen cabinets, restore a wooden fence, etc."
+        }
       },
-      "preferredDate": "Preferred Start Date",
-      "timeframe": "Project Urgency",
-      "urgency": {
-        "urgent": "Urgent (1-2 weeks)",
-        "soon": "Soon (3-4 weeks)",
-        "flexible": "Flexible (1-3 months)",
-        "planning": "Just researching"
-      },
-      "message": "Details",
-      "messagePlaceholder": "Tell us about your project...",
-      "submit": "Request Estimate",
-      "submitting": "Sending...",
-      "success": "Thank you! We will contact you soon.",
-      "error": "Error. Please try again.",
-      "disclaimer": "You agree to be contacted regarding your project."
-    }
-  },
-  "cta": {
-    "title": "Ready to Start?",
-    "subtitle": "Free estimate with no commitment.",
-    "btnQuote": "Free Estimate",
-    "btnCall": "Call",
-    "stats": {
-      "experience": "Years Experience",
-      "projects": "Projects",
-      "satisfaction": "Guarantee"
+      "step_4": {
+        "title": "Closing & Budget",
+        "fields": {
+          "budget": "Estimated Investment Range",
+          "comments": "Additional Description",
+          "vip_label": "Fast-Track Priority Mode",
+          "vip_text": "I am ready to start. I don't need negotiation; I want to schedule the visit to confirm details and start painting directly."
+        },
+        "ranges": {
+          "low": "$2,000 - $4,000",
+          "mid": "$4,000 - $6,000",
+          "high": "$6,000 - $10,000+"
+        }
+      }
+    },
+    "success": {
+      "title": "Request Received Successfully!",
+      "message": "Thank you for trusting our company. Your request is being evaluated by our technical team. You will shortly receive an email confirming if your project has been approved or if we require more details.",
+      "call_btn": "Call Directly",
+      "close": "Back to Home"
+    },
+    "buttons": {
+      "next": "Next Step",
+      "prev": "Previous",
+      "submit": "Request Painting Priority",
+      "submit_btn": "Book my priority",
+      "close": "Close Form"
     }
   },
   "footer": {
-    "description": "Professional painters in Florida - Licensed and insured.",
+    "description": "Professional painters in Florida - Licensed and Insured.",
     "services": {
       "title": "Services",
       "interior": "Interior Painting",

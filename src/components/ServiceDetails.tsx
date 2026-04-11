@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import { X, Construction } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import React, { useEffect, useRef } from "react";
+import { X, Phone, Send, CheckCircle2 } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ServiceDetailProps {
   isOpen: boolean;
@@ -10,84 +11,189 @@ interface ServiceDetailProps {
   serviceData: any;
 }
 
-const ServiceDetail: React.FC<ServiceDetailProps> = ({ isOpen, onClose, serviceData }) => {
+const ServiceDetail: React.FC<ServiceDetailProps> = ({
+  isOpen,
+  onClose,
+  serviceData,
+}) => {
   const pathname = usePathname();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
-  // 1. CIERRE TOTAL: Si el modal está abierto y el usuario hace clic 
-  // en CUALQUIER enlace (como los del Header), cerramos el modal.
+  // Scroll lock
+  useEffect(() => {
+    if (isOpen && scrollRef.current) {
+      scrollRef.current.scrollTo(0, 0);
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  // Close on link click (kept as original behavior)
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Si el clic fue en un enlace (<a>) o dentro de uno, cerramos.
-      if (isOpen && target.closest('a')) {
+
+      if (isOpen && target.closest("a")) {
         onClose();
       }
     };
 
-    const handleCloseOverlays = () => {
-      if (isOpen) onClose();
-    };
-
     if (isOpen) {
-      window.addEventListener('click', handleGlobalClick);
-      window.addEventListener('app:close-overlays', handleCloseOverlays as EventListener);
+      window.addEventListener("click", handleGlobalClick);
     }
 
-    return () => {
-      window.removeEventListener('click', handleGlobalClick);
-      window.removeEventListener('app:close-overlays', handleCloseOverlays as EventListener);
-    };
+    return () => window.removeEventListener("click", handleGlobalClick);
   }, [isOpen, onClose]);
 
-  useEffect(() => {
-    window.dispatchEvent(new CustomEvent('app:overlay-state', { detail: { open: isOpen } }));
-
-    return () => {
-      window.dispatchEvent(new CustomEvent('app:overlay-state', { detail: { open: false } }));
-    };
-  }, [isOpen]);
-
-  // 2. Respaldo por si cambia la ruta (Next.js Navigation)
-  useEffect(() => {
-    if (isOpen) onClose();
-  }, [pathname]);
-
-  if (!isOpen) return null;
+  if (!isOpen || !serviceData) return null;
 
   return (
-    /* Z-40 para que el Header (50) siempre esté por encima y reciba los clics */
-    <div className="fixed inset-0 z-[40] bg-white overflow-y-auto antialiased">
-      
-      {/* Padding superior para que el Header flote sobre el blanco */}
-      <div className="pt-32 md:pt-40"> 
+    <div
+      ref={scrollRef}
+      className="fixed inset-0 z-[40] bg-white overflow-y-auto antialiased"
+    >
+      <div className="pt-32 md:pt-44 pb-28 max-w-[1440px] mx-auto px-6 lg:px-16">
 
-        <div className="max-w-[1440px] mx-auto px-6 md:px-16 flex flex-col items-center justify-center min-h-[60vh] text-center">
-          
-          <div className="w-24 h-24 bg-slate-50 rounded-[2rem] flex items-center justify-center mb-10 shadow-sm border border-slate-100">
-            <Construction className="w-10 h-10 text-primary-600 animate-bounce" />
+        {/* HEADER */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start max-w-6xl">
+
+          {/* LEFT TEXT */}
+          <div>
+            <div className="text-[10px] font-black uppercase tracking-[0.5em] text-primary-600 mb-6">
+              {t("servicesdetails.premium")}
+            </div>
+
+            <h1 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tight text-slate-950 leading-[0.9]">
+              {t("servicesdetails.exterior.title")}
+            </h1>
+
+            <h2 className="font-serif text-2xl md:text-4xl italic text-primary-600 font-normal mt-2">
+              {t("servicesdetails.exterior.titleHighlight")}
+            </h2>
+
+            <div className="h-[3px] w-24 bg-primary-600 mt-8 mb-8" />
+
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+              {t("servicesdetails.exterior.description")}
+            </p>
           </div>
 
-          <h1 className="font-display text-4xl md:text-7xl font-black uppercase tracking-tightest text-slate-950 mb-4">
-             {serviceData?.title || "Service Details"}
-          </h1>
-          
-          <div className="h-1 w-20 bg-primary-600 mb-8" />
+          {/* RIGHT IMAGE (DESKTOP ONLY) */}
+          <div className="hidden md:flex justify-end md:translate-x-20 md:mt-12">
+            <div className="relative group flex justify-end">
 
-          <p className="font-sans text-slate-400 font-black uppercase tracking-[0.5em] text-[10px]">
-            Trabajando en esta sección...
-          </p>
+              <div className="absolute -inset-6 bg-primary-600/10 blur-3xl rounded-[2.5rem]" />
 
-          <button 
+              <div className="relative w-full max-w-2xl rounded-[2.5rem] p-3 bg-white border border-slate-200 shadow-2xl overflow-hidden scale-105 md:scale-110">
+
+                <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3]">
+
+                  <img
+                    src={serviceData.img || "/images/placeholder.jpg"}
+                    alt={serviceData.title}
+                    className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-700"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* PROCESS SECTION (COMPACT MOBILE) */}
+        <div className="mt-20 md:mt-32 max-w-6xl mx-auto">
+
+          <div className="mb-10 md:mb-20 flex items-center gap-6">
+            <div className="shrink-0">
+              <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-900">
+                {t("servicesdetails.execution")}
+              </h3>
+              <div className="h-[3px] w-12 bg-primary-600 mt-3" />
+            </div>
+            <div className="h-px w-full bg-slate-100" />
+          </div>
+
+          <div className="grid gap-16 md:gap-24 relative">
+
+            <div className="absolute left-[35px] top-0 bottom-0 w-px bg-slate-100 hidden md:block" />
+
+            {[0, 1, 2].map((i) => (
+              <div
+                key={i}
+                className="relative group flex flex-col md:flex-row items-start gap-5 md:gap-16"
+              >
+
+                <div className="relative z-10 shrink-0 hidden md:block">
+                  <div className="w-[70px] h-[70px] rounded-full bg-white border-2 border-slate-100 flex items-center justify-center group-hover:border-primary-600 group-hover:bg-primary-600 transition-all duration-500 shadow-sm">
+                    <span className="font-display text-xl font-black text-slate-950 group-hover:text-white">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex-1 pt-1 md:pt-2">
+
+                  <div className="flex items-center gap-4 mb-4">
+                    <h4 className="text-xl md:text-2xl font-display font-black uppercase text-slate-950 tracking-tighter">
+                      {t(`servicesdetails.exterior.steps.${i}.title`)}
+                    </h4>
+
+                    <div className="h-px flex-1 bg-slate-50 group-hover:bg-primary-100 transition-colors" />
+
+                    <CheckCircle2
+                      size={24}
+                      className="text-primary-600 opacity-0 group-hover:opacity-100 transition-all duration-500"
+                    />
+                  </div>
+
+                  <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium max-w-3xl">
+                    {t(`servicesdetails.exterior.steps.${i}.desc`)}
+                  </p>
+
+                </div>
+
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA (COMPACT MOBILE) */}
+        <div className="mt-16 md:mt-28 border-t pt-10 md:pt-14 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
+
+          <button
             onClick={onClose}
-            className="mt-16 group flex items-center gap-4 px-10 py-5 rounded-2xl bg-slate-950 text-white font-sans font-black uppercase tracking-widest text-[9px] hover:bg-primary-600 transition-all shadow-xl active:scale-95"
+            className="relative group px-10 py-5 bg-slate-950 text-white font-black uppercase text-[11px] tracking-[0.2em] rounded-xl overflow-hidden shadow-lg"
           >
-            <X size={14} />
-            Cerrar Ficha Técnica
+            <div className="absolute inset-0 bg-primary-600 scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-500 z-0" />
+
+            <div className="relative z-10 flex items-center gap-3">
+              <Send size={15} />
+              <span>{t("servicesdetails.buttons1")}</span>
+            </div>
           </button>
+
+          <a
+          
+            href="tel:+17863506367"
+            className="group h-[60px] px-20 flex items-center gap-4 text-slate-950 border border-slate-200 hover:border-primary-600 rounded-xl transition-all duration-300 font-black uppercase text-[11px] tracking-[0.2em]"
+          >
+            <div className="p-2.5 bg-slate-100 group-hover:bg-primary-600 group-hover:text-white rounded-lg transition-all">
+              <Phone size={15} />
+            </div>
+            <span>(786) 350-6367</span>
+          </a>
+
         </div>
 
       </div>
-    </div> 
+    </div>
   );
 };
 

@@ -73,8 +73,94 @@
 },
 
 
+"servicesdetails": {
+  "premium": "Experiencia de servicio premium",
+  "execution": "Proceso de ejecución",
+  "buttons1": "Solicitar estimado gratis",
+  "exterior": {
+    "title": "Pintura Exterior Profesional",
+    "titleHighlight": "La Armadura de tu Hogar",
+    "description": "No solo cambiamos el color de tu fachada; renovamos la protección de tu patrimonio. En una zona donde el sol intenso y la humedad de la tarde no perdonan, nuestra pintura exterior actúa como un escudo de alta tecnología. Devolvemos el valor de mercado a tu propiedad y el orgullo de llegar a casa, con acabados que resisten el paso del tiempo y realzan cada detalle arquitectónico bajo el sol de Orlando.",
+    "steps": [
+      {
+        "title": "Preparación con Pressure Washing Profesional",
+        "desc": "No pintamos sobre suciedad. Usamos hidrolavadoras de alta potencia para arrancar el moho, la polución y la pintura vieja. Es la única forma de garantizar que la nueva capa se fusione con la pared para siempre."
+      },
+      {
+        "title": "Sellado Antihumedad y Protección UV",
+        "desc": "Identificamos cada grieta por donde el agua pueda filtrarse. Sellamos puntos críticos, cuidamos los Soffits (rejillas de ventilación) y aplicamos bases que bloquean los rayos ultravioleta, evitando que el color pierda vida con los años."
+      },
+      {
+        "title": "Detalle y Estética Multi-color",
+        "desc": "Aplicamos la pintura con precisión quirúrgica. Desde las paredes principales hasta los marcos de ventanas y puertas, gestionamos combinaciones de colores que resaltan la personalidad de tu hogar con una limpieza visual absoluta."
+      }
+    ]
+  },
+
+  "interior": {
+    "title": "Transformación de Interiores",
+    "titleHighlight": "El Arte de Vivir Bien",
+    "description": "El interior de tu casa es donde ocurre la vida. Por eso, nuestro servicio de pintura interior es una experiencia de cuidado y detalle extremo. Entendemos que estamos trabajando en tu espacio privado; nos movemos con respeto, trabajamos con limpieza y entregamos paredes tan perfectas que parecen seda. No se trata de cubrir paredes, se trata de crear la atmósfera perfecta para tu familia.",
+    "steps": [
+      {
+        "title": "Restauración Invisible (Drywall & Plaster)",
+        "desc": "Antes de la pintura, viene la perfección. Reparamos huellas de TV Mounts, grietas de asentamiento o daños en molduras. Aplicamos plaster y un lijado profesional que deja la superficie totalmente plana y lista para el color."
+      },
+      {
+        "title": "Protección y Ética de Trabajo",
+        "desc": "Tus suelos, muebles y arte son sagrados. Cubrimos cada centímetro con plástico y cinta de precisión. Pintamos con rapidez pero sin prisas, asegurando que el único rastro sea un color impecable."
+      },
+      {
+        "title": "Acabados de Lujo en Paredes, Techos y Baseboards",
+        "desc": "Somos expertos en cortes limpios. Pintamos techos con blanco puro y rodapiés con esmaltes de alta resistencia. Si buscas un diseño multi-color personalizado, ejecutamos la transición con precisión profesional."
+      }
+    ]
+  },
+
+  "pressure": {
+    "title": "Lavado a Presión Pro",
+    "titleHighlight": "El Renacer de tus Superficies",
+    "description": "El moho y la suciedad acumulada no solo se ven mal, también dañan tus materiales. Nuestro servicio de Pressure Washing es un tratamiento revitalizante para las áreas exteriores. Desde el concreto hasta los techos modernos, devolvemos el brillo original a tu inversión y mejoramos instantáneamente el curb appeal de tu propiedad en Florida Central.",
+    "steps": [
+      {
+        "title": "Driveways y Concreto de Alto Tráfico",
+        "desc": "Eliminamos manchas de aceite, marcas de neumáticos y moho del concreto, dejando tu entrada completamente limpia y lista para recibir visitas."
+      },
+      {
+        "title": "Soft Wash para Techos Modernos",
+        "desc": "Usamos químicos biodegradables y baja presión para eliminar el hongo de raíz sin dañar techos metálicos o delicados."
+      },
+      {
+        "title": "Áreas de Piscina y Recreación",
+        "desc": "Limpiamos profundamente los alrededores de piscinas y aceras, creando un entorno higiénico y seguro para disfrutar del exterior."
+      }
+    ]
+  },
+
+  "repair": {
+    "title": "Reparación de Superficies",
+    "titleHighlight": "La Base de la Excelencia",
+    "description": "Nada arruina más un trabajo de pintura que una base mal preparada. Somos especialistas en restauración de superficies dañadas. Ya sea madera podrida, yeso deteriorado o paredes castigadas por el tiempo, devolvemos la solidez estructural antes de aplicar cualquier acabado.",
+    "steps": [
+      {
+        "title": "Diagnóstico y Sustitución",
+        "desc": "Detectamos madera dañada o drywall comprometido. Si está podrido, lo reemplazamos; si está suelto, lo fijamos con solidez estructural."
+      },
+      {
+        "title": "Lijado y Pulido Profesional",
+        "desc": "Usamos herramientas avanzadas para lograr superficies totalmente lisas. El objetivo es un acabado invisible que no deje rastro de reparación."
+      },
+      {
+        "title": "Sellado de Preparación",
+        "desc": "Sellamos cada reparación para asegurar absorción uniforme de pintura, evitando manchas o diferencias de brillo en el resultado final."
+      }
+    ]
+  }
+},
 
   "gallery": {
+    "after": "Antes",
+    "before": "Después",
     "badge": "Portafolio de Excelencia",
     "title": "Proyectos reales:",
     "titleHighlight": "la excelencia en cada detalle",
@@ -88,19 +174,9 @@
       "deck": "Decks",
       "pressure": "Lavado Pro"
     },
-    "before": "ANTES",
-    "after": "DESPUÉS",
-    "dragSlider": "Arrastra para comparar",
-    "clickToActivate": "Haz clic para activar el control. Luego arrastra para comparar.",
+  
     "viewAll": "Ver Todas",
-    "fullGallery": "Galería",
-    "completedProjects": "proyectos",
-    "clickDetails": "Toca para ampliar",
-    "preparation": "Preparación",
-    "premiumPaint": "Pintura Premium",
-    "guaranteed": "Garantizado",
-    "cta": "¡Transforma Tu Espacio!",
-    "projectLike": "Obtén un Proyecto Así",
+
     "projects": {
       "1": {
         "title": "Repintado Exterior de Estuco",
@@ -154,6 +230,28 @@
     }
   },
 
+  "reviews": {
+  "badge": "100% Casos de Éxito",
+  "title": "Nuestra reputación",
+  "titleHighlight": "construida por clientes satisfechos",
+  "subtitle": "Descubre por qué cientos de familias en Florida Central confían en nuestro compromiso con la limpieza, la puntualidad y los acabados de alta gama.",
+  "basedOn": "Calificación real en",
+  "reviews": "opiniones verificadas",
+  "viewGoogle": "Ver perfil en Google Business",
+  "verified": "Cliente Verificado",
+  "viewAll": "Ver más en google",
+  "readMore": "Leer más",
+  "readLess": "Ver menos",
+  "timeAgo": {
+    "twoWeeks": "Hace 2 semanas",
+    "oneMonth": "Hace 1 mes",
+    "twoMonths": "Hace 2 meses",
+    "threeMonths": "Hace 3 meses",
+    "fourMonths": "Hace 4 meses",
+    "fiveMonths": "Hace 5 meses",
+    "sixMonths": "Hace 6 meses"
+  }
+  },
 
 
  "whyChoose": {
@@ -224,30 +322,6 @@
   }
 },
 
-
-
- "reviews": {
-  "badge": "100% Casos de Éxito",
-  "title": "Nuestra reputación",
-  "titleHighlight": "construida por clientes satisfechos",
-  "subtitle": "Descubre por qué cientos de familias en Florida Central confían en nuestro compromiso con la limpieza, la puntualidad y los acabados de alta gama.",
-  "basedOn": "Calificación real en",
-  "reviews": "opiniones verificadas",
-  "viewGoogle": "Ver perfil en Google Business",
-  "verified": "Cliente Verificado",
-  "viewAll": "Ver más en google",
-  "readMore": "Leer más",
-  "readLess": "Ver menos",
-  "timeAgo": {
-    "twoWeeks": "Hace 2 semanas",
-    "oneMonth": "Hace 1 mes",
-    "twoMonths": "Hace 2 meses",
-    "threeMonths": "Hace 3 meses",
-    "fourMonths": "Hace 4 meses",
-    "fiveMonths": "Hace 5 meses",
-    "sixMonths": "Hace 6 meses"
-  }
-  },
 
   "contact": {
     "header": {
@@ -334,6 +408,7 @@
       "close": "Cerrar Formulario"
     }
   },
+
 
   "footer": {
     "description": "Pintores profesionales en Florida - Licenciados y asegurados.",
