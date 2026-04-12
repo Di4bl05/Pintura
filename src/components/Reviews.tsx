@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useMemo } from "react";
-import { Star, MapPin, Quote, Sparkles, ExternalLink } from "lucide-react";
+import { Star, MapPin, Quote, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Review {
@@ -14,20 +14,8 @@ interface Review {
   color: string;
 }
 
-const reviewsData: Review[] = [
-  { id: 1, author: "María González", rating: 5, text: "Excellent work! They painted my entire house and it looks flawless. The team was professional, detailed, and left everything spotless. 100% recommended.", avatar: "MG", location: "Orlando, FL", color: "bg-primary-100 text-primary-600" },
-  { id: 2, author: "Carlos Rodríguez", rating: 5, text: "Very detailed and clean. They met the agreed times and the initial budget. The service was unbeatable from day one.", avatar: "CR", location: "Kissimmee, FL", color: "bg-slate-100 text-slate-600" },
-  { id: 3, author: "Ana Martínez", rating: 5, text: "They transformed my office. Impeccable finish and punctuality. The materials they use are top quality and it shows.", avatar: "AM", location: "Windermere, FL", color: "bg-primary-50 text-primary-700" },
-  { id: 4, author: "Roberto Silva", rating: 5, text: "They painted the exterior and it looks like new. It's hard to find serious contractors, but they exceeded my expectations.", avatar: "RS", location: "Winter Park, FL", color: "bg-slate-200 text-slate-800" },
-  { id: 5, author: "David Wilson", rating: 5, text: "The best painting service in Central Florida. Professional communication and the results speak for themselves.", avatar: "DW", location: "Lake Nona, FL", color: "bg-primary-100 text-primary-800" },
-];
-
 const GoogleIcon = ({ className = "w-3 h-3" }: { className?: string }) => (
-  <svg 
-    className={className} 
-    viewBox="0 0 48 48" 
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg className={className} viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
     <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
     <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
     <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
@@ -39,6 +27,12 @@ export default function Reviews() {
   const { t } = useLanguage();
   const [rating, setRating] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Obtener las reviews directamente del JSON
+  const reviewsData = useMemo(() => {
+    const items = t("reviews.items", { returnObjects: true });
+    return Array.isArray(items) ? (items as Review[]) : [];
+  }, [t]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -58,39 +52,34 @@ export default function Reviews() {
     return () => observer.disconnect();
   }, []);
 
-  const displayedReviews = useMemo(() => reviewsData.slice(0, 5), []);
-
   return (
     <section id="reviews" ref={sectionRef} className="relative py-24 lg:py-40 bg-white overflow-visible antialiased selection:bg-primary-100">
       
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 lg:px-16 text-left">
-        
         <div className="grid lg:grid-cols-[1fr_320px] gap-12 lg:gap-20 items-start">
           
           <div className="space-y-16 lg:space-y-24">
-            
             <div className="max-w-4xl">
-              
               <h2 className="flex flex-col gap-1 mb-10">
                 <span className="font-display text-4xl md:text-6xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.95]">
-                  {t("reviews.title") || "TRUSTED BY"}
+                  {t("reviews.title")}
                 </span>
                 <span className="font-serif text-3xl md:text-6xl italic font-normal text-primary-600 leading-none">
-                  {t("reviews.titleHighlight") || "the community"}
+                  {t("reviews.titleHighlight")}
                 </span>
               </h2>
 
               <div className="flex gap-6 items-stretch">
                 <div className="w-[2px] bg-primary-600 rounded-full flex-shrink-0" />
                 <p className="font-sans text-lg text-slate-500 font-medium leading-relaxed max-w-xl opacity-90">
-                  {t("reviews.subtitle") || "Discover why hundreds of families and businesses trust our commitment to perfection."}
+                  {t("reviews.subtitle")}
                 </p>
               </div>
             </div>
 
             <div className="space-y-10">
               <div className="grid grid-cols-1 gap-10">
-                {displayedReviews.map((review) => (
+                {reviewsData.map((review) => (
                   <div key={review.id} className="relative bg-slate-50/50 p-8 md:p-12 rounded-[2.5rem] border border-slate-100 select-none">
                     <Quote className="absolute top-8 right-10 w-12 h-12 text-primary-600/5" />
                     
@@ -105,7 +94,7 @@ export default function Reviews() {
                             {review.author}
                           </h4>
                           <span className="font-sans flex items-center gap-2 text-[8px] font-black text-primary-600 bg-white px-3 py-1 rounded-full uppercase tracking-widest border border-primary-50 shadow-sm">
-                            <GoogleIcon className="w-3.5 h-3.5" /> VERIFIED
+                            <GoogleIcon className="w-3.5 h-3.5" /> {t("reviews.googleBadge.label")}
                           </span>
                         </div>
                         <div className="flex items-center gap-4">
@@ -119,7 +108,7 @@ export default function Reviews() {
                       </div>
                     </div>
 
-                    <p className="font-serif text-xl md:text-2xl text-slate-600 leading-relaxed italic opacity-90">
+                    <p className="font-sans text-base md:text-lg text-slate-950 font-medium leading-relaxed">
                       "{review.text}"
                     </p>
                   </div>
@@ -135,7 +124,7 @@ export default function Reviews() {
                 <div className="absolute inset-0 bg-primary-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
                 <GoogleIcon className="relative z-10 w-4 h-4" />
                 <span className="relative z-10 font-sans font-black text-[10px] uppercase tracking-[0.3em]">
-                  View All Reviews on Google
+                  {t("reviews.googleBadge.viewAll")}
                 </span>
                 <ExternalLink size={16} className="relative z-10 group-hover:translate-x-1 transition-transform opacity-70" />
               </a>
@@ -151,7 +140,7 @@ export default function Reviews() {
                     <GoogleIcon className="w-6 h-6" />
                   </div>
                   <span className="font-sans text-[8px] font-black text-primary-600 uppercase tracking-[0.4em] block">
-                    Verified Status
+                    {t("reviews.googleBadge.status")}
                   </span>
                 </div>
 
@@ -168,20 +157,19 @@ export default function Reviews() {
 
                 <div className="pt-6 border-t border-slate-200/60">
                   <p className="font-sans text-[9px] font-bold text-slate-400 uppercase tracking-[0.15em] leading-tight mb-5">
-                    Based on <span className="text-slate-950 font-black">150+ reviews</span>
+                    {t("reviews.googleBadge.basedOn")} <span className="text-slate-950 font-black">{t("reviews.googleBadge.count")}</span>
                   </p>
                   
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-100 rounded-full shadow-sm">
                     <MapPin size={9} className="text-primary-600" />
                     <span className="font-sans text-[7px] font-black text-slate-950 uppercase tracking-widest">
-                      Central Florida
+                      {t("reviews.googleBadge.location")}
                     </span>
                   </div>
                 </div>
               </div>
             </div>
           </aside>
-
         </div>
       </div>
 
@@ -190,7 +178,7 @@ export default function Reviews() {
           <div className="h-[2px] flex-grow bg-slate-200" />
           <div className="flex items-center gap-4 bg-white px-8 py-3 rounded-full border border-slate-200 flex-shrink-0 shadow-md">
             <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
-            <span className="font-sans text-[10px] font-black text-slate-600 uppercase tracking-[0.5em]">Section Reviews</span>
+            <span className="font-sans text-[10px] font-black text-slate-600 uppercase tracking-[0.5em]">{t("reviews.sectionLabel")}</span>
             <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
           </div>
           <div className="h-[2px] flex-grow bg-slate-200" />

@@ -25,10 +25,9 @@
 
   
  "services": {
-  "badge": "Servicios con Ética Profesional",
   "title": "Pintura profesional",
   "titleHighlight": "de lujo con acabados de alta gama",
-  "subtitle": "Transformamos tu propiedad con un proceso riguroso: desde el lavado a presión profundo hasta el acabado final de alta gama.",
+  "subtitle": "Desde la protección profunda de fachadas contra el clima de Florida hasta la renovación estética de sus espacios internos. Ofrecemos soluciones integrales de pintura y mantenimiento diseñadas para elevar el valor de su propiedad con acabados de alta resistencia y precisión técnica.",
   "moreInfo": "Leer más", 
 
   "exterior": {
@@ -160,11 +159,10 @@
 
   "gallery": {
     "after": "Antes",
-    "before": "Después",
-    "badge": "Portafolio de Excelencia",
+    "before": "Después",  
     "title": "Proyectos reales:",
     "titleHighlight": "la excelencia en cada detalle",
-    "subtitle": "No solo pintamos paredes, devolvemos la vida a sus espacios. Explore nuestras transformaciones más recientes en el área de Orlando.",
+    "subtitle": "Explore nuestra selección de transformaciones recientes. Cada proyecto es un testimonio de nuestra atención al detalle, mostrando cómo una aplicación técnica correcta puede revitalizar por completo la arquitectura de una residencia o local comercial en Orlando y sus alrededores.",
     "filters": {
       "all": "Todos",
       "interior": "Interiores",
@@ -231,33 +229,71 @@
   },
 
   "reviews": {
-  "badge": "100% Casos de Éxito",
-  "title": "Nuestra reputación",
-  "titleHighlight": "construida por clientes satisfechos",
-  "subtitle": "Descubre por qué cientos de familias en Florida Central confían en nuestro compromiso con la limpieza, la puntualidad y los acabados de alta gama.",
-  "basedOn": "Calificación real en",
-  "reviews": "opiniones verificadas",
-  "viewGoogle": "Ver perfil en Google Business",
-  "verified": "Cliente Verificado",
-  "viewAll": "Ver más en google",
-  "readMore": "Leer más",
-  "readLess": "Ver menos",
-  "timeAgo": {
-    "twoWeeks": "Hace 2 semanas",
-    "oneMonth": "Hace 1 mes",
-    "twoMonths": "Hace 2 meses",
-    "threeMonths": "Hace 3 meses",
-    "fourMonths": "Hace 4 meses",
-    "fiveMonths": "Hace 5 meses",
-    "sixMonths": "Hace 6 meses"
-  }
+    "title": "Nuestra reputación",
+    "titleHighlight": "construida por clientes satisfechos",
+    "subtitle": "La satisfacción de quienes ya confiaron en nosotros es nuestro mayor activo. Descubra las experiencias reales de propietarios que han transformado sus hogares con nuestra ayuda y comprenda por qué somos la opción preferida por calidad de servicio y atención personalizada.",
+    "googleBadge": {
+      "status": "Estado Verificado",
+      "label": "VERIFICADO",
+      "basedOn": "Basado en",
+      "count": "150+ reseñas",
+      "location": "Florida Central",
+      "viewAll": "Ver todas las reseñas en Google"
+    },
+    "sectionLabel": "Section Reviews",
+    "items": [
+      {
+        "id": 1,
+        "author": "María González",
+        "rating": 5,
+        "text": "Excellent work! They painted my entire house and it looks flawless. The team was professional, detailed, and left everything spotless. 100% recommended.",
+        "avatar": "MG",
+        "location": "Orlando, FL",
+        "color": "bg-primary-100 text-primary-600"
+      },
+      {
+        "id": 2,
+        "author": "Carlos Rodríguez",
+        "rating": 5,
+        "text": "Very detailed and clean. They met the agreed times and the initial budget. The service was unbeatable from day one.",
+        "avatar": "CR",
+        "location": "Kissimmee, FL",
+        "color": "bg-slate-100 text-slate-600"
+      },
+      {
+        "id": 3,
+        "author": "Ana Martínez",
+        "rating": 5,
+        "text": "They transformed my office. Impeccable finish and punctuality. The materials they use are top quality and it shows.",
+        "avatar": "AM",
+        "location": "Windermere, FL",
+        "color": "bg-primary-50 text-primary-700"
+      },
+      {
+        "id": 4,
+        "author": "Roberto Silva",
+        "rating": 5,
+        "text": "They painted the exterior and it looks like new. It's hard to find serious contractors, but they exceeded my expectations.",
+        "avatar": "RS",
+        "location": "Winter Park, FL",
+        "color": "bg-slate-200 text-slate-800"
+      },
+      {
+        "id": 5,
+        "author": "David Wilson",
+        "rating": 5,
+        "text": "The best painting service in Central Florida. Professional communication and the results speak for themselves.",
+        "avatar": "DW",
+        "location": "Lake Nona, FL",
+        "color": "bg-primary-100 text-primary-800"
+      }
+    ]
   },
-
 
 "whyChoose": {
   "core_value_proposition": {
     "hook": "La Calidad que su Hogar Merece, a un precio que hace sentido.",
-    "experience_badge": "Más de 3 años transformando propiedades en Florida",
+    "description": "Con más de 3 años transformando propiedades en Florida no solo aplicamos color; garantizamos durabilidad a través de una metodología rigurosa y el uso exclusivo de materiales premium. Nuestra trayectoria en el mercado local se basa en la puntualidad, la limpieza absoluta y un estándar de calidad que supera las expectativas de los propietarios más exigentes.",
     "the_difference": [
       {
         "id": "price_disruption",
@@ -397,7 +433,7 @@
         "title": "Diagnóstico y Evidencia",
         "fields": {
           "status": "Estado de las Superficies",
-          "upload": "Carga de Evidencia Visual",
+          "upload": "Carga de Evidencia Visual (Opcional)",
           "special": "¿Tienes un proyecto especial o algo que no ves en la lista? (Opcional)"
         },
         "placeholders": {
@@ -435,30 +471,37 @@
     }
   },
 
-
   "footer": {
-    "description": "Pintores profesionales en Florida - Licenciados y asegurados.",
+    "description": "Luisbety Inc. - Pintores profesionales en Florida Central. Especialistas en acabados residenciales y comerciales de alta gama. Licenciados y asegurados para su total tranquilidad.",
     "services": {
-      "title": "Servicios",
-      "interior": "Pintura Interior",
-      "exterior": "Pintura Exterior",
-      "commercial": "Pintura Comercial",
-      "deck": "Tinción de Deck",
-      "pressure": "Lavado a Presión"
+      "title": "Servicios Especializados",
+      "items": [
+        { "name": "Pintura Interior", "desc": "Acabados perfectos en paredes, techos y molduras.", "href": "/services/interior" },
+        { "name": "Pintura Exterior", "desc": "Protección duradera contra el clima de Florida.", "href": "/services/exterior" },
+        { "name": "Pintura Comercial", "desc": "Eficiencia y calidad para su negocio u oficina.", "href": "/services/commercial" },
+        { "name": "Lavado a Presión", "desc": "Limpieza profunda de fachadas, driveways y decks.", "href": "/services/pressure-washing" }
+      ]
     },
     "areas": {
       "title": "Áreas de Servicio",
-      "longwood": "Pintores en Longwood",
-      "orlando": "Pintura en Orlando",
-      "central": "Florida Central",
-      "all": "Sirviendo todo Florida"
+      "items": [
+        "Pintores en Longwood",
+        "Pintura en Orlando",
+        "Winter Park",
+        "Windermere",
+        "Kissimmee",
+        "Lake Nona"
+      ],
+      "all": "Sirviendo a toda Florida Central"
     },
     "contact": {
       "title": "Contáctanos",
-      "hours": "Lun-Vie: 9AM - 5PM"
+      "hours": "Lun-Vie: 9AM - 5PM | Sáb: 9AM - 2PM"
     },
     "copyright": "Todos los derechos reservados.",
     "privacy": "Política de Privacidad",
-    "terms": "Términos de Servicio"
+    "terms": "Términos de Servicio",
+    "licenseInfo": "Licensed & Insured"
   }
+
 }

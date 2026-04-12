@@ -11,35 +11,38 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    scroll-behavior: smooth !important;
   }
   
   body {
     @apply bg-white text-gray-900;
   }
+
+  [id] {
+    scroll-margin-top: 50px;
+  }
+
+  @media (min-width: 768px) {
+    [id] {
+      scroll-margin-top: 0px;
+    }
+  }
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Focus styles for accessibility */
 *:focus-visible {
   @apply outline-2 outline-offset-2 outline-primary-500;
 }
 
-/* Hide scrollbar for mobile carousel */
 .hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   scroll-behavior: smooth;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
+  display: none;
 }
 
-/* Gallery Filter Animations */
 @keyframes pulse-subtle {
   0%, 100% {
     transform: scale(1.05);

@@ -64,6 +64,10 @@ export default function WhyChooseClean() {
               </span>
             )}
           </h2>
+          {/* Descripción con Raya Azul Vertical (El "Margen" Izquierdo) */}
+         <p className="font-sans text-base md:text-lg text-slate-500 font-medium leading-relaxed max-w-xl border-l-2 border-primary-600 pl-8">
+        {t("whyChoose.core_value_proposition.description")}
+         </p>
         </div>
 
         {/* CONTENEDOR DE DOS COLUMNAS */}

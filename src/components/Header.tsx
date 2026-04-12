@@ -45,22 +45,22 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
     window.dispatchEvent(new CustomEvent("app:close-overlays"));
 
-    window.setTimeout(() => {
-      const headerHeight = document.querySelector("header")?.getBoundingClientRect().height ?? 0;
-      const extraOffset = 8;
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
 
-      if (href === "#") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        return;
-      }
+    const targetId = href.replace("#", "");
+    const target = document.getElementById(targetId);
 
-      const targetId = href.replace("#", "");
-      const target = document.getElementById(targetId);
-      if (!target) return;
+    if (target) {
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
 
-      const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - extraOffset;
-      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
-    }, 80);
+      window.history.pushState(null, "", href);
+    }
   };
 
   const isSolid = scrolled || hasOverlayOpen || forceSolid;
@@ -77,14 +77,13 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
         <div className="flex items-center">
 
-          {/* LOGO + BRAND (FIX MOBILE VISIBILITY) */}
           <Link
             href="/"
             className="flex items-center flex-shrink-0 gap-3 md:gap-4 transition-transform group active:scale-95"
           >
             <div className="relative">
               <img
-                src="/images/logo/logo-original.png"
+                src="/images/logo/logo-original.webp"
                 alt="LUISBETY INC"
                 className={`transition-all duration-500 object-contain ${
                   isSolid
@@ -96,7 +95,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
               <div className="absolute transition-opacity rounded-full opacity-0 -inset-2 bg-primary-500/20 blur-2xl group-hover:opacity-100" />
             </div>
 
-            {/* BRAND TEXT (NOW ALWAYS VISIBLE) */}
             <div className="flex flex-col pl-2 sm:pl-3 md:pl-4 leading-none text-left border-l border-white/10">
 
               <span
@@ -125,7 +123,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             </div>
           </Link>
 
-          {/* DESKTOP NAV */}
           <div
             className={`hidden lg:flex items-center space-x-10 ml-auto transition-all duration-500 ${
               isSolid ? "mr-6" : "mr-8 xl:mr-10"
@@ -144,7 +141,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             ))}
           </div>
 
-          {/* ACTIONS */}
           <div
             className={`hidden md:flex items-center gap-3 transition-all duration-500 ${
               isSolid
@@ -169,7 +165,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             </a>
           </div>
 
-          {/* MOBILE BUTTON */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="flex items-center justify-center w-10 h-10 ml-auto text-white transition-all duration-500 border lg:hidden rounded-xl bg-white/5 border-white/10 backdrop-blur-md"
@@ -179,7 +174,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
         </div>
 
-        {/* MOBILE MENU */}
         <div
           className={`lg:hidden absolute left-4 right-4 top-[calc(100%+16px)] rounded-[2rem] border border-white/10 bg-slate-950/95 backdrop-blur-2xl text-white shadow-2xl transition-all duration-500 overflow-hidden ${
             isMenuOpen

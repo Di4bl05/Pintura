@@ -8,9 +8,7 @@ import ContactForm from "./ContactForm";
 
 const HeroContent = memo(({ t, onOpenContact, current, isAnimate, heroContent }: any) => (
   <div className="relative z-20 max-w-[1440px] mx-auto px-6 lg:px-16 w-full">
-
     <div className="max-w-4xl mt-6 sm:mt-0">
-
       <span className="font-serif block text-primary-400 text-base sm:text-lg md:text-xl lg:text-2xl mb-4 italic">
         {t("hero.title1")}
       </span>
@@ -38,23 +36,21 @@ const HeroContent = memo(({ t, onOpenContact, current, isAnimate, heroContent }:
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4">
-
         <button
           onClick={onOpenContact}
-          className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-primary-600 text-white font-black rounded-xl uppercase text-[10px] tracking-[0.3em] flex items-center justify-center gap-3"
+          className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-blue-600 text-white font-black rounded-xl uppercase text-[10px] tracking-[0.3em] flex items-center justify-center gap-3 transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
         >
           <span>{t("hero.ctaFree")}</span>
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </button>
 
         <a
           href="tel:+17863506367"
-          className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white/5 border border-white/10 text-white font-black rounded-xl flex items-center justify-center gap-3 text-[10px] tracking-[0.3em]"
+          className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white/5 border border-white/10 text-white font-black rounded-xl flex items-center justify-center gap-3 text-[10px] tracking-[0.3em] transition-all duration-300 hover:bg-white hover:text-slate-950 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 group"
         >
-          <Phone className="w-4 h-4 text-primary-500" />
+          <Phone className="w-4 h-4 text-primary-500 transition-all duration-300 group-hover:text-blue-600 group-hover:scale-110" />
           <span>(786) 350-6367</span>
         </a>
-
       </div>
     </div>
   </div>
@@ -69,7 +65,6 @@ export default function Hero() {
   const [isAnimate, setIsAnimate] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
-  // MOBILE DETECTION
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
@@ -77,12 +72,11 @@ export default function Hero() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // ✅ SAFE IMAGES (NO BREAKING ROUTES)
   const heroContent = useMemo(() => [
     {
       title: t("hero.carousel.0"),
       imgDesktop: "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
-      imgMobile: "/images/gallery/pintura-interiores-casas-orlando-fl.webp", // fallback seguro
+      imgMobile: "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
     },
     {
       title: t("hero.carousel.1"),
@@ -113,35 +107,29 @@ export default function Hero() {
 
   return (
     <>
-      <section className="relative h-[100svh] min-h-[650px] flex items-center bg-slate-950 overflow-hidden">
-
-        {/* BACKGROUND IMAGE */}
+      <section className="relative h-[100svh] min-h-[700px] flex items-center pt-0 md:pt-5 bg-slate-950 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src={
-              isMobile
-                ? heroContent[current].imgMobile
-                : heroContent[current].imgDesktop
-            }
+            src={isMobile ? heroContent[current].imgMobile : heroContent[current].imgDesktop}
             alt="Hero background"
             fill
             priority
             sizes="100vw"
             className="object-cover brightness-[0.3] scale-105"
           />
-
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent" />
         </div>
 
-        <HeroContent
-          t={t}
-          onOpenContact={handleOpenContact}
-          current={current}
-          isAnimate={isAnimate}
-          heroContent={heroContent}
-        />
+        <div className="relative z-20 w-full mt-12 md:mt-24">
+            <HeroContent
+              t={t}
+              onOpenContact={handleOpenContact}
+              current={current}
+              isAnimate={isAnimate}
+              heroContent={heroContent}
+            />
+        </div>
 
-        {/* PROGRESS BAR */}
         <div className="absolute bottom-0 left-0 h-1 w-full bg-white/5">
           <div
             className="h-full bg-primary-600 transition-all"
@@ -151,13 +139,9 @@ export default function Hero() {
             }}
           />
         </div>
-
       </section>
 
-      <ContactForm
-        isOpen={isContactOpen}
-        onClose={handleCloseContact}
-      />
+      <ContactForm isOpen={isContactOpen} onClose={handleCloseContact} />
     </>
   );
 }

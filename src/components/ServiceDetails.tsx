@@ -25,7 +25,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
       scrollRef.current.scrollTo(0, 0);
       document.body.style.overflow = "hidden";
     }
-
     return () => {
       document.body.style.overflow = "unset";
     };
@@ -34,16 +33,10 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-
-      if (isOpen && target.closest("a")) {
-        onClose();
-      }
+      if (isOpen && target.closest("a")) onClose();
     };
 
-    if (isOpen) {
-      window.addEventListener("click", handleGlobalClick);
-    }
-
+    if (isOpen) window.addEventListener("click", handleGlobalClick);
     return () => window.removeEventListener("click", handleGlobalClick);
   }, [isOpen, onClose]);
 
@@ -55,26 +48,26 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
       className="fixed inset-0 z-[40] bg-white overflow-y-auto antialiased"
     >
       <div className="pt-32 md:pt-44 pb-28 max-w-[1440px] mx-auto px-6 lg:px-16">
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start max-w-6xl">
-          
+
           <div>
             <div className="text-[10px] font-black uppercase tracking-[0.5em] text-primary-600 mb-6">
               {t("servicesdetails.premium")}
             </div>
 
             <h1 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tight text-slate-950 leading-[0.9]">
-              {t("servicesdetails.exterior.title")}
+              {serviceData.title}
             </h1>
 
             <h2 className="font-serif text-2xl md:text-4xl italic text-primary-600 font-normal mt-2">
-              {t("servicesdetails.exterior.titleHighlight")}
+              {serviceData.titleHighlight}
             </h2>
 
             <div className="h-[3px] w-24 bg-primary-600 mt-8 mb-8" />
 
             <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-              {t("servicesdetails.exterior.description")}
+              {serviceData.description}
             </p>
           </div>
 
@@ -84,7 +77,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
               <div className="relative w-full max-w-2xl rounded-[2.5rem] p-3 bg-white border border-slate-200 shadow-2xl overflow-hidden scale-105 md:scale-110">
                 <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3]">
                   <img
-                    src={serviceData.img || "/images/placeholder.jpg"}
+                    src={serviceData.img}
                     alt={serviceData.title}
                     className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-700"
                   />
@@ -109,7 +102,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
           <div className="grid gap-16 md:gap-24 relative">
             <div className="absolute left-[35px] top-0 bottom-0 w-px bg-slate-100 hidden md:block" />
 
-            {[0, 1, 2].map((i) => (
+            {serviceData.steps?.map((step: any, i: number) => (
               <div
                 key={i}
                 className="relative group flex flex-col md:flex-row items-start gap-5 md:gap-16"
@@ -125,7 +118,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
                 <div className="flex-1 pt-1 md:pt-2">
                   <div className="flex items-center gap-4 mb-4">
                     <h4 className="text-xl md:text-2xl font-display font-black uppercase text-slate-950 tracking-tighter">
-                      {t(`servicesdetails.exterior.steps.${i}.title`)}
+                      {step.title}
                     </h4>
                     <div className="h-px flex-1 bg-slate-50 group-hover:bg-primary-100 transition-colors" />
                     <CheckCircle2
@@ -134,11 +127,12 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
                     />
                   </div>
                   <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium max-w-3xl">
-                    {t(`servicesdetails.exterior.steps.${i}.desc`)}
+                    {step.desc}
                   </p>
                 </div>
               </div>
             ))}
+
           </div>
         </div>
 
@@ -154,16 +148,17 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
             </div>
           </button>
 
-          <a
-            href="tel:+17863506367"
-            className="group h-[60px] px-20 flex items-center gap-4 text-slate-950 border border-slate-200 hover:border-primary-600 rounded-xl transition-all duration-300 font-black uppercase text-[11px] tracking-[0.2em]"
-          >
-            <div className="p-2.5 bg-slate-100 group-hover:bg-primary-600 group-hover:text-white rounded-lg transition-all">
-              <Phone size={15} />
-            </div>
-            <span>(786) 350-6367</span>
-          </a>
+         <a
+           href="tel:+17863506367"
+            className="group h-[60px] px-20 flex items-center gap-4 text-slate-950 border border-slate-200 hover:border-blue-600 hover:bg-blue-600 hover:text-white rounded-xl transition-all duration-300 font-black uppercase text-[11px] tracking-[0.2em] hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] active:scale-95"
+              >
+            <div className="p-2.5 bg-slate-100 group-hover:bg-blue-500 group-hover:text-white rounded-lg transition-all">
+            <Phone size={15} />
+          </div>
+         <span>(786) 350-6367</span>
+        </a>
         </div>
+
       </div>
     </div>
   );
