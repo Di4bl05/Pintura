@@ -6,10 +6,20 @@ import enTranslations from '@/translations/en.json';
 
 type Language = 'es' | 'en';
 
+type TranslateOptions<T = unknown> = {
+  returnObjects?: boolean;
+  defaultValue?: T;
+};
+
+type TranslateFn = {
+  (key: string): string;
+  <T = unknown>(key: string, options: TranslateOptions<T>): T | string;
+};
+
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: TranslateFn;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -43,7 +53,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const t = (key: string): string => {
+  const t: TranslateFn = (key: string, options?: TranslateOptions) => {
     const keys = key.split('.');
     let value: any = allTranslations[language];
     
@@ -51,7 +61,15 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       value = value?.[k];
     }
     
-    return value || key;
+    if (value === undefined || value === null) {
+      return options?.defaultValue !== undefined ? options.defaultValue : key;
+    }
+
+    if (options?.returnObjects) {
+      return value;
+    }
+
+    return typeof value === 'string' ? value : (options?.defaultValue ?? key);
   };
 
   return (
