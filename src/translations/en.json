@@ -233,6 +233,8 @@
       "sixMonths": "6 months ago"
     }
   },
+
+
   "whyChoose": {
     "core_value_proposition": {
       "hook": "Same quality as 'Top' companies, at a fraction of the price and time.",
@@ -257,6 +259,8 @@
         }
       ]
     },
+
+    
     "service_portfolio": [
       "Exterior Painting",
       "Interior Painting",

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Playfair_Display, Instrument_Serif } from "next/font/google";
-import { LanguageProvider } from "@/contexts/LanguageContext"; // <--- Verifica esta ruta
+import { LanguageProvider } from "@/contexts/LanguageContext"; 
 import "./globals.css";
 
-// Configuración de tus 3 fuentes premium
 const sans = Plus_Jakarta_Sans({ 
   subsets: ["latin"], 
   variable: "--font-sans",
@@ -36,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sans.variable} ${display.variable} ${serif.variable}`}>
       <body className="font-sans antialiased bg-white text-slate-900 min-h-screen">
-        {/* EL PROVIDER DEBE ENVOLVER A LOS CHILDREN */}
+     
         <LanguageProvider>
           {children}
         </LanguageProvider>

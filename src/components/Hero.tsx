@@ -15,7 +15,7 @@ const HeroContent = memo(({ t, onOpenContact, current, isAnimate, heroContent }:
         {t("hero.title1")}
       </span>
 
-      <h1 className="font-display text-5xl md:text-7xl lg:text-8xl xl:text-[7rem] font-black text-white leading-[0.92] uppercase mb-7 drop-shadow-2xl">
+      <h1 className="font-display text-5xl md:text-4xl lg:text-7xl xl:text-[7rem] font-black text-white leading-[0.92] uppercase mb-7 drop-shadow-2xl">
         {t("hero.title2")}
       </h1>
 

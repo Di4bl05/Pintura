@@ -70,12 +70,6 @@ export default function Reviews() {
           <div className="space-y-16 lg:space-y-24">
             
             <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary-600 mb-8 shadow-xl shadow-primary-100 w-fit">
-                <Sparkles className="w-3.5 h-3.5 text-white" />
-                <span className="font-sans text-[10px] font-bold text-white uppercase tracking-[0.3em]">
-                  {t("reviews.badge") || "SOCIAL PROOF"}
-                </span>
-              </div>
               
               <h2 className="flex flex-col gap-1 mb-10">
                 <span className="font-display text-4xl md:text-6xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.95]">

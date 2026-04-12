@@ -43,19 +43,19 @@ export default function Services() {
   const services = [
     {
       key: "exterior",
-      img: "/images/gallery/pintores-exteriores-residenciales-orlando.webp",
+      img: "/images/gallery/3_despues-1600.webp",
     },
     {
       key: "interior",
-      img: "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
+      img: "/images/gallery/15_antes-1600.webp",
     },
     {
       key: "pressure",
-      img: "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
+      img: "/images/gallery/Lavado_Presión_Pro.webp",
     },
     {
       key: "repair",
-      img: "/images/gallery/lacado-gabinetes-cocina-profesional-florida.webp",
+      img: "/images/gallery/9_despues-1600.webp",
     },
   ];
 
@@ -81,13 +81,6 @@ export default function Services() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 md:gap-12 mb-10 md:mb-24">
 
           <div className="max-w-4xl">
-
-            <div className="inline-flex items-center gap-2 md:gap-3 px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-primary-600 mb-4 md:mb-6">
-              <Sparkles className="w-3 h-3 text-white" />
-              <span className="font-sans text-[8px] md:text-[9px] font-black text-white uppercase tracking-[0.2em] md:tracking-[0.3em]">
-                {t("services.badge")}
-              </span>
-            </div>
 
             {/* TITLE MOBILE FIX */}
             <h2 className="flex flex-col gap-1 mb-6 md:mb-8">
@@ -209,13 +202,16 @@ export default function Services() {
                     </ul>
 
                     <button
-                      onClick={() => handleOpenDetails(service)}
-                      className="relative overflow-hidden flex items-center justify-center gap-2 w-full bg-slate-950 text-white py-4 md:py-5 rounded-xl font-black text-[9px] uppercase tracking-[0.2em]"
-                    >
-                      <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-300 group-hover:translate-y-0" />
-                      <span className="relative z-10">{t("services.moreInfo")}</span>
-                      <ArrowRight className="relative z-10 w-3 h-3" />
-                    </button>
+  onClick={() => handleOpenDetails(service)}
+  className="group/btn relative overflow-hidden flex items-center justify-center gap-2 w-full bg-slate-950 text-white py-4 md:py-5 rounded-xl font-black text-[9px] uppercase tracking-[0.2em]"
+>
+  {/* Capa de llenado: de abajo hacia arriba */}
+  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 ease-out group-hover/btn:translate-y-0" />
+  
+  {/* Contenido sobre la capa */}
+  <span className="relative z-10">{t("services.moreInfo")}</span>
+  <ArrowRight className="relative z-10 w-3 h-3 transition-transform group-hover/btn:translate-x-1" />
+</button>
 
                   </div>
                 </div>
