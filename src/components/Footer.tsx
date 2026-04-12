@@ -8,8 +8,24 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export default function Footer() {
   const { t } = useLanguage();
 
-  const services = t("footer.services.items", { returnObjects: true }) as any[] || [];
-  const areaItems = t("footer.areas.items", { returnObjects: true }) as string[] || [];
+  type FooterServiceItem = { name: string; href: string };
+
+  const servicesValue = t("footer.services.items") as unknown;
+  const areaItemsValue = t("footer.areas.items") as unknown;
+
+  const services: FooterServiceItem[] = Array.isArray(servicesValue)
+    ? servicesValue.filter(
+        (item): item is FooterServiceItem =>
+          typeof item === "object" &&
+          item !== null &&
+          typeof (item as { name?: unknown }).name === "string" &&
+          typeof (item as { href?: unknown }).href === "string"
+      )
+    : [];
+
+  const areaItems: string[] = Array.isArray(areaItemsValue)
+    ? areaItemsValue.filter((item): item is string => typeof item === "string")
+    : [];
 
   return (
     <footer className="bg-slate-950 text-slate-400 font-sans selection:bg-primary-500/30">
