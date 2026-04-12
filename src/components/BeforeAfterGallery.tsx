@@ -51,8 +51,7 @@ const LOCATION_SEQUENCE = [
 ];
 
 const getImageSrc = (id: number, side: "antes" | "despues", size: "600" | "1600") => {
-  const normalizedSide = id === 6 && side === "despues" ? "despuess" : side;
-  return `/images/gallery/${id}_${normalizedSide}-${size}.webp`;
+  return `/images/gallery/${id}_${side}-${size}.webp`;
 };
 
 const getServiceCopy = (service: GalleryService, language: "es" | "en") => {
