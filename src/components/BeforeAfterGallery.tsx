@@ -90,9 +90,11 @@ function ResponsiveGalleryImage({
   sizes?: string;
 }) {
   const [mode, setMode] = useState<"desktop" | "mobile" | "fallback">("desktop");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setMode("desktop");
+    setIsLoaded(false);
   }, [desktopSrc, mobileSrc]);
 
   const src = mode === "mobile" ? mobileSrc : mode === "fallback" ? FALLBACK_IMAGE : desktopSrc;
@@ -106,12 +108,17 @@ function ResponsiveGalleryImage({
       alt={alt}
       loading={priority ? "eager" : "lazy"}
       decoding="async"
-      className={className}
+      className={`${className} transition-[opacity,transform,filter] duration-700 ease-out ${
+        isLoaded ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-[1.02] blur-sm"
+      }`}
+      onLoad={() => setIsLoaded(true)}
       onError={() => {
         if (mode === "desktop") {
+          setIsLoaded(false);
           setMode("mobile");
           return;
         }
+        setIsLoaded(false);
         setMode("fallback");
       }}
     />
@@ -289,7 +296,11 @@ export default function BeforeAfterGallery() {
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => !isManualControl && setIsPaused(false)}
             >
-              <div ref={sliderRef} className="relative w-full h-full select-none touch-none cursor-ew-resize">
+              <div
+                key={activeId}
+                ref={sliderRef}
+                className="relative w-full h-full select-none touch-none cursor-ew-resize animate-gallery-swap"
+              >
                 <div className="absolute inset-0 z-0">
                   <ResponsiveGalleryImage
                     desktopSrc={activeItem.beforeImageDesktop}
