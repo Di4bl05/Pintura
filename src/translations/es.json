@@ -21,9 +21,6 @@
       "Limpieza Detallada Post-Trabajo"
     ]
   },
-
-
-  
  "services": {
   "title": "Pintura profesional",
   "titleHighlight": "de lujo con acabados de alta gama",
@@ -70,8 +67,6 @@
     ]
   }
 },
-
-
 "servicesdetails": {
   "premium": "Experiencia de servicio premium",
   "execution": "Proceso de ejecución",
@@ -382,8 +377,6 @@
     "phone": "(786) 350-6367"
   }
 },
-
-
   "contact": {
     "header": {
       "title": "Adelanta tu proyecto y recibe un estimado preciso.",
@@ -414,17 +407,17 @@
           "colors": "Cantidad de Colores",
           "paint_type": "Tipo de Pintura Específico (Opcional)"
         },
-        "options": {
-          "service_type": {
-            "interior": "Interior",
-            "exterior": "Exterior", 
-            "pressure": "Lavado a preseión",
-            "repair": "Reparación de superficies"
-          },
+      "options": {
+        "services": [
+          { "id": "interior", "label": "Interior" },
+          { "id": "exterior", "label": "Exterior" }, 
+          { "id": "pressure", "label": "Lavado a presión" },
+          { "id": "repair", "label": "Reparación de superficies" }
+        ],
           "specifics": {
-            "exterior": ["Pressure Washer", "Soffits", "Sellado"],
-            "interior": ["Paredes", "Techos", "Baseboards"],
-            "pro": ["Driveways", "Techos de metal", "Piscinas"]
+            "exterior": ["Lavado a presión pro", "Soffits y Rejillas", "Sellado Anti-Humedad"], 
+            "interior": ["Protección UV", "Techos", "Baseboards y Molduras"],  
+            "pro": ["Driveways Concreto", "Limpieza de moho", "Reparación de TV Mounts"]
           },
           "colors": ["1", "2", "3+"]
         }

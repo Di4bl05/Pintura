@@ -309,7 +309,7 @@ export default function BeforeAfterGallery() {
                     className="absolute inset-0 object-cover w-full h-full"
                   />
                   <div className="font-sans absolute right-8 top-8 z-20 rounded-full border border-white/10 bg-slate-950/80 px-5 py-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">
-                    {t("gallery.before") || (language === "es" ? "ANTES" : "BEFORE")}
+                    {t("gallery.after") || (language === "es" ? "ANTES" : "AFTER")}
                   </div>
                 </div>
 
@@ -326,7 +326,7 @@ export default function BeforeAfterGallery() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-90" />
                   <div className="font-sans absolute left-8 top-8 z-20 rounded-full bg-primary-600 px-5 py-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white shadow-xl">
-                    {t("gallery.after") || (language === "es" ? "DESPUES" : "AFTER")}
+                    {t("gallery.before") || (language === "es" ? "DESPUÉS" : "BEFORE")}
                   </div>
 
                   <div className="absolute items-end justify-between hidden bottom-12 left-12 right-12 lg:flex">

@@ -286,118 +286,137 @@ return (
     <div className="w-full max-w-[580px] flex flex-col items-center">
       
       {/* TÍTULO */}
-      <div className="text-center mb-10">
+      <div className="text-center mb-3">
         <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
           {t("contact.steps.step_2.title")}
         </h2>
         <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 w-full">
+      <div className="grid grid-cols-1 gap-y-4 w-full">
         
-        {/* SELECTS PERSONALIZADOS: TIPO DE SERVICIO Y COLORES */}
-        {["service_type", "colors"].map((field) => (
-          <div key={field} className="w-full space-y-1.5 relative">
-            <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
-              {t(`contact.steps.step_2.fields.${field}`)}
-            </label>
-            
-            {/* Campo "Fake Input" con flechita */}
-            <div 
-              onClick={() => setOpenSelect(openSelect === field ? null : field)}
-              className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 flex items-center justify-between cursor-pointer group transition-all duration-300 hover:border-primary-600"
-            >
-              <span className={`font-sans font-medium text-sm transition-colors ${contactData[field] ? "text-slate-900" : "text-slate-400"}`}>
-                {contactData[field] || "Seleccionar..."}
-              </span>
-              <ChevronDown 
-                size={14} 
-                className={`text-slate-400 transition-transform duration-500 ease-out ${openSelect === field ? "rotate-180 text-primary-600" : "rotate-0"}`} 
-              />
-            </div>
-
-            {/* Menú Minimalista con Animación */}
-            {openSelect === field && (
-              <div className="absolute top-[110%] left-0 w-full bg-white border border-slate-100 rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] z-[100] py-2 animate-in fade-in zoom-in-95 duration-200">
-                <div className="max-h-[200px] overflow-y-auto custom-scrollbar">
-                  {field === "service_type" 
-                    ? Object.entries(t("contact.steps.step_2.options.service_type")).map(([key, label]) => (
-                        <div 
-                          key={key}
-                          onClick={() => {
-                            setContactData((prev: any) => ({ ...prev, [field]: label }));
-                            setOpenSelect(null);
-                          }}
-                          className="px-4 py-2.5 font-sans text-[11px] font-bold uppercase tracking-tight text-slate-500 hover:text-primary-600 hover:bg-slate-50 transition-all cursor-pointer"
-                        >
-                          {label as string}
-                        </div>
-                      ))
-                    : colorOptions.map((color) => (
-                        <div 
-                          key={color}
-                          onClick={() => {
-                            setContactData((prev: any) => ({ ...prev, [field]: color }));
-                            setOpenSelect(null);
-                          }}
-                          className="px-4 py-2.5 font-sans text-[11px] font-bold uppercase tracking-tight text-slate-500 hover:text-primary-600 hover:bg-slate-50 transition-all cursor-pointer"
-                        >
-                          {color}
-                        </div>
-                      ))
-                  }
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
-
-        {/* MENÚ DE OPCIONES DE SERVICIOS (Checkboxes) */}
-        <div className="md:col-span-2 space-y-3 mt-4">
+        {/* 1. SELECTOR DE COLORES (CON FLECHITA) */}
+        <div className="w-full space-y-1.5 relative">
           <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
-            {t("contact.steps.step_2.fields.specifics")}
+            {t("contact.steps.step_2.fields.colors")}
           </label>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {[
-              t("contact.steps.step_2.options.specifics.exterior"),
-              t("contact.steps.step_2.options.specifics.interior"),
-              t("contact.steps.step_2.options.specifics.pro"),
-            ].map((service: string) => (
-              <label key={service} className="flex items-center gap-2 cursor-pointer group">
+          
+          <div 
+            onClick={() => setOpenSelect(openSelect === "colors" ? null : "colors")}
+            className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 flex items-center justify-between cursor-pointer group transition-all duration-300 hover:border-primary-600"
+          >
+            <span className={`font-sans font-medium text-sm transition-colors ${contactData.colors ? "text-slate-900" : "text-slate-400"}`}>
+              {contactData.colors || "Seleccionar..."}
+            </span>
+            <ChevronDown 
+              size={14} 
+              className={`text-slate-400 transition-transform duration-500 ease-out ${openSelect === "colors" ? "rotate-180 text-primary-600" : "rotate-0"}`} 
+            />
+          </div>
+
+          {openSelect === "colors" && (
+            <div className="absolute top-[110%] left-0 w-full bg-white border border-slate-100 rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] z-[100] py-2 animate-in fade-in zoom-in-95 duration-200">
+              <div className="max-h-[200px] overflow-y-auto custom-scrollbar">
+                {(colorOptions || []).map((color) => (
+                  <div 
+                    key={color}
+                    onClick={() => {
+                      setContactData((prev: any) => ({ ...prev, colors: color }));
+                      setOpenSelect(null);
+                    }}
+                    className="px-4 py-2.5 font-sans text-[11px] font-bold uppercase tracking-tight text-slate-500 hover:text-primary-600 hover:bg-slate-50 transition-all cursor-pointer"
+                  >
+                    {color}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* 2. SERVICIOS PRINCIPALES (CARGADOS DESDE EL ARRAY DEL JSON) */}
+        <div className="w-full space-y-3">
+          <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+            {t("contact.steps.step_2.fields.service_type")}
+          </label>
+          <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-4 bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+            {/* Cargamos el array 'services' directamente */}
+            {(t("contact.steps.step_2.options.services", { returnObjects: true }) as any[] || []).map((service) => (
+              <label key={service.id} className="flex items-center gap-2 cursor-pointer group">
                 <input
                   type="checkbox"
-                  checked={(contactData.specifics || []).includes(service)}
+                  checked={(contactData.main_services || []).includes(service.id)}
                   onChange={(e) => {
                     const checked = e.target.checked;
                     setContactData((prev: any) => {
-                      const current = prev.specifics || [];
-                      return { ...prev, specifics: checked ? [...current, service] : current.filter((v: string) => v !== service) };
+                      const current = prev.main_services || [];
+                      return { 
+                        ...prev, 
+                        main_services: checked 
+                          ? [...current, service.id] 
+                          : current.filter((id: string) => id !== service.id) 
+                      };
                     });
                   }}
-                  className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600 focus:ring-0"
+                  className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600 focus:ring-0 cursor-pointer"
                 />
-                <span className="font-sans font-bold text-slate-400 text-[10px] group-hover:text-primary-600 transition-colors uppercase tracking-tight">
-                  {service}
+                <span className="font-sans font-black text-[9px] text-slate-400 group-hover:text-slate-950 transition-colors uppercase tracking-widest whitespace-nowrap">
+                  {service.label}
                 </span>
               </label>
             ))}
           </div>
         </div>
 
-        {/* TIPO DE PINTURA */}
-        <div className="md:col-span-2 w-full space-y-1.5 mt-2">
+        {/* 3. SERVICIOS ESPECÍFICOS (CUADRÍCULA) */}
+        <div className="w-full space-y-3">
           <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
-            {t("contact.steps.step_2.fields.paint_type")}
+            {t("contact.steps.step_2.fields.specifics")}
           </label>
-          <input
-            type="text"
-            name="paint_type"
-            value={contactData.paint_type || ""}
-            onChange={(e) => setContactData((prev: any) => ({ ...prev, paint_type: e.target.value }))}
-            placeholder="Ej: Mate, Satinado, Sherwin-Williams..."
-            className="w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-sm placeholder:text-slate-400 transition-all duration-500 outline-none focus:border-primary-600 shadow-none"
-          />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {Object.values(t("contact.steps.step_2.options.specifics", { returnObjects: true }) || {})
+              .flat()
+              .map((service: any) => (
+                <label key={service} className="flex items-center gap-2 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={(contactData.specifics || []).includes(service)}
+                    onChange={(e) => {
+                      const checked = e.target.checked;
+                      setContactData((prev: any) => {
+                        const current = prev.specifics || [];
+                        return { 
+                          ...prev, 
+                          specifics: checked 
+                            ? [...current, service] 
+                            : current.filter((v: string) => v !== service) 
+                        };
+                      });
+                    }}
+                    className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600 focus:ring-0"
+                  />
+                  <span className="font-sans font-bold text-slate-400 text-[10px] group-hover:text-primary-600 transition-colors uppercase tracking-tight">
+                    {service}
+                  </span>
+                </label>
+              ))}
+          </div>
         </div>
+
+        {/* TIPO DE PINTURA */}
+<div className="w-full space-y-1">
+  <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+    {t("contact.steps.step_2.fields.paint_type")}
+  </label>
+  <input
+    type="text"
+    name="paint_type"
+    value={contactData.paint_type || ""}
+    onChange={(e) => setContactData((prev: any) => ({ ...prev, paint_type: e.target.value }))}
+    placeholder="Ej: Mate, Satinado, Sherwin-Williams..."
+    className="w-full p-2 bg-transparent border-t-0 border-x-0 border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-sm placeholder:text-slate-400 transition-all duration-300 outline-none focus:outline-none focus:ring-0 focus:border-primary-600 shadow-none"
+  />
+</div>
       </div>
 
       {/* NAVEGACIÓN */}
