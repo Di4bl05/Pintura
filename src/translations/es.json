@@ -378,6 +378,20 @@
   }
 },
   "contact": {
+    "errors": {
+      "name": "El nombre es muy corto",
+      "phone": "Número de teléfono no válido",
+      "address": "Por favor, escribe la dirección completa",
+      "date": "La fecha no puede ser en el pasado",
+      "required": "Este campo es obligatorio",
+      "name_special": "El nombre no puede contener caracteres especiales",
+      "phone_numbers": "El teléfono solo debe contener números",
+      "colors_required": "Selecciona la cantidad de colores",
+      "services_required": "Selecciona al menos un servicio principal",
+      "status_required": "Por favor, describe el estado de las superficies",
+      "status_too_short": "La descripción es muy corta (mínimo 10 caracteres)",
+      "only_images": "Solo se permiten imágenes (JPG, PNG, WEBP)"
+    },
     "header": {
       "title": "Adelanta tu proyecto y recibe un estimado preciso.",
       "subtitle": "ACCESO PRIORITARIO",
@@ -443,10 +457,16 @@
           "vip_text": "Estoy listo para empezar. No necesito negociación, quiero agendar la visita para confirmar detalles y comenzar a pintar directamente."
         },
         "ranges": {
-          "low": "$2,000 - $4,000",
-          "mid": "$4,000 - $6,000",
-          "high": "$6,000 - $10,000+"
-        }
+          "low": {
+            "label": "$2,000 - $4,000"
+                 },
+          "mid": {
+            "label": "$4,000 - $6,000"
+                 },
+          "high": {
+            "label": "$6,000 - $10,000+"
+                 }
+      }
       }
     },
     "success": {
