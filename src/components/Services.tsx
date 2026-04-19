@@ -58,7 +58,7 @@ export default function Services() {
     },
     {
       key: "pressure",
-      img: "/images/gallery/Lavado_Presión_Pro.webp",
+      img: "/images/gallery/8_despues-1600.webp",
     },
     {
       key: "repair",
