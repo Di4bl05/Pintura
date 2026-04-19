@@ -10,6 +10,7 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
 import ContactForm from "@/components/ContactForm";
+import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
 export default function WhyChooseClean() {
   const { t } = useLanguage();
@@ -45,7 +46,7 @@ export default function WhyChooseClean() {
     {/* Imagen Circular */}
     <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white">
       <Image 
-        src="/images/gallery/luis-y-bety.webp"
+        src={getStaticGalleryImageUrl("luisBety")}
         alt="Luis y Bety"
         fill
         className="object-cover transition-transform duration-700 group-hover:scale-105"

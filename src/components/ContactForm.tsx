@@ -6,6 +6,7 @@ import { ChevronRight, Star, Plus, Check, ChevronDown, X } from 'lucide-react';
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
+import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
 
 interface ContactFormProps {
@@ -149,7 +150,7 @@ const handleSubmit = async () => {
   }
 };
 
-  const currentImage = "/images/gallery/exterior-despues.webp";
+  const currentImage = getStaticGalleryImageUrl("exteriorAfter");
     const [openSelect, setOpenSelect] = useState<string | null>(null);
 
   const colorOptions = React.useMemo(() => {

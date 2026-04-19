@@ -5,6 +5,7 @@ import { Phone, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect, useCallback, useMemo, memo } from "react";
 import ContactForm from "./ContactForm";
+import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
 const HeroContent = memo(({ t, onOpenContact, current, isAnimate, heroContent }: any) => (
   <div className="relative z-20 max-w-[1440px] mx-auto px-6 lg:px-16 w-full">
@@ -75,18 +76,18 @@ export default function Hero() {
   const heroContent = useMemo(() => [
     {
       title: t("hero.carousel.0"),
-      imgDesktop: "/images/gallery/exterior-antes.webp",
-      imgMobile: "/images/gallery/exterior-antes.webp",
+      imgDesktop: getStaticGalleryImageUrl("exteriorBefore"),
+      imgMobile: getStaticGalleryImageUrl("exteriorBefore"),
     },
     {
       title: t("hero.carousel.1"),
-      imgDesktop: "/images/gallery/exterior-despues.webp",
-      imgMobile: "/images/gallery/exterior-despues.webp",
+      imgDesktop: getStaticGalleryImageUrl("exteriorAfter"),
+      imgMobile: getStaticGalleryImageUrl("exteriorAfter"),
     },
     {
       title: t("hero.carousel.2"),
-      imgDesktop: "/images/gallery/luis-y-bety.webp",
-      imgMobile: "/images/gallery/luis-y-bety.webp",
+      imgDesktop: getStaticGalleryImageUrl("luisBety"),
+      imgMobile: getStaticGalleryImageUrl("luisBety"),
     }
   ], [t]);
 

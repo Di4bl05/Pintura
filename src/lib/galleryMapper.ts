@@ -27,10 +27,31 @@ type DbImageRow = {
   caption_en: string | null;
 };
 
+const SUPABASE_PUBLIC_GALLERY_BASE = process.env.NEXT_PUBLIC_SUPABASE_URL
+  ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/gallery/`
+  : "";
+
+function resolveImageUrl(image: DbImageRow): string {
+  if (image.public_url && /^https?:\/\//i.test(image.public_url)) {
+    return image.public_url;
+  }
+
+  const rawPath = image.path?.trim() ?? "";
+  if (!rawPath) {
+    return "";
+  }
+
+  if (/^(https?:)?\/\//i.test(rawPath) || rawPath.startsWith("/")) {
+    return rawPath;
+  }
+
+  return SUPABASE_PUBLIC_GALLERY_BASE ? `${SUPABASE_PUBLIC_GALLERY_BASE}${rawPath}` : rawPath;
+}
+
 function toImageMeta(image: DbImageRow): GalleryImageMeta {
   return {
     kind: image.kind,
-    url: image.public_url || image.path,
+    url: resolveImageUrl(image),
     alt_es: image.alt_es ?? "",
     alt_en: image.alt_en ?? "",
     caption_es: image.caption_es ?? "",

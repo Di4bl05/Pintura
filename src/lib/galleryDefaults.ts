@@ -1,4 +1,5 @@
 import { GalleryProject, GalleryService } from "@/types/gallery";
+import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
 const SERVICE_SEQUENCE: GalleryService[] = ["interior", "exterior", "cabinet", "commercial"];
 
@@ -46,18 +47,18 @@ const serviceCopy = {
 
 const getImageSrc = (id: number, side: "antes" | "despues", size: "600" | "1600") => {
   if (side === "antes") {
-    return "/images/gallery/exterior-antes.webp";
+    return getStaticGalleryImageUrl("exteriorBefore");
   }
 
   if (size === "600") {
-    return "/images/gallery/lavado-presion-pro.webp";
+    return getStaticGalleryImageUrl("pressureWash");
   }
 
   if (id % 3 === 0) {
-    return "/images/gallery/luis-y-bety.webp";
+    return getStaticGalleryImageUrl("luisBety");
   }
 
-  return id % 2 === 0 ? "/images/gallery/exterior2-despues.webp" : "/images/gallery/exterior-despues.webp";
+  return id % 2 === 0 ? getStaticGalleryImageUrl("exterior2After") : getStaticGalleryImageUrl("exteriorAfter");
 };
 
 export function getFallbackGalleryProjects(): GalleryProject[] {

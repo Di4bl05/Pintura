@@ -1,5 +1,6 @@
 import esTranslations from "@/translations/es.json";
 import enTranslations from "@/translations/en.json";
+import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
 export const SERVICE_SLUGS = ["exterior", "interior", "pressure", "repair"] as const;
 
@@ -7,10 +8,10 @@ export type ServiceSlug = (typeof SERVICE_SLUGS)[number];
 export type ServiceLocale = "es" | "en";
 
 const SERVICE_IMAGES: Record<ServiceSlug, string> = {
-  exterior: "/images/gallery/exterior-despues.webp",
-  interior: "/images/gallery/exterior-antes.webp",
-  pressure: "/images/gallery/lavado-presion-pro.webp",
-  repair: "/images/gallery/exterior2-despues.webp",
+  exterior: getStaticGalleryImageUrl("exteriorAfter"),
+  interior: getStaticGalleryImageUrl("exteriorBefore"),
+  pressure: getStaticGalleryImageUrl("pressureWash"),
+  repair: getStaticGalleryImageUrl("exterior2After"),
 };
 
 const SERVICE_FAQS_ES: Record<ServiceSlug, { question: string; answer: string }[]> = {
