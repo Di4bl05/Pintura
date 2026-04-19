@@ -6,7 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect, useCallback, useMemo, memo } from "react";
 import ContactForm from "./ContactForm";
 import { useSmartLink } from "@/hooks/useSmartLink"; 
-
+import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
 const HeroContent = memo(({ t, onOpenContact, onPhoneClick, current, isAnimate, heroContent }: any) => {
   const phone = "+17863506367"; 
@@ -82,18 +82,18 @@ export default function Hero() {
   const heroContent = useMemo(() => [
     {
       title: t("hero.carousel.0"),
-      imgDesktop: "/images/gallery/4_despues-1600.webp",
-      imgMobile: "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
+      imgDesktop: getStaticGalleryImageUrl("exteriorBefore"),
+      imgMobile: getStaticGalleryImageUrl("exteriorBefore"),
     },
     {
       title: t("hero.carousel.1"),
-      imgDesktop: "/images/gallery/6_despues-1600.webp",
-      imgMobile: "/images/gallery/pintores-exteriores-residenciales-orlando.webp",
+      imgDesktop: getStaticGalleryImageUrl("exteriorAfter"),
+      imgMobile: getStaticGalleryImageUrl("exteriorAfter"),
     },
     {
       title: t("hero.carousel.2"),
-      imgDesktop: "/images/gallery/20_despues-1600.webp",
-      imgMobile: "/images/gallery/lacado-gabinetes-cocina-profesional-florida.webp",
+      imgDesktop: getStaticGalleryImageUrl("luisBety"),
+      imgMobile: getStaticGalleryImageUrl("luisBety"),
     }
   ], [t]);
 

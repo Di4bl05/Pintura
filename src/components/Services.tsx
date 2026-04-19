@@ -11,6 +11,7 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRef, useState } from "react";
 import ServiceDetail from "./ServiceDetails";
+import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
 export default function Services() {
   const { t } = useLanguage();
@@ -50,19 +51,19 @@ export default function Services() {
   const services = [
     {
       key: "exterior",
-      img: "/images/gallery/3_despues-1600.webp",
+      img: getStaticGalleryImageUrl("exteriorAfter"),
     },
     {
       key: "interior",
-      img: "/images/gallery/15_antes-1600.webp",
+      img: getStaticGalleryImageUrl("exteriorBefore"),
     },
     {
       key: "pressure",
-      img: "/images/gallery/Lavado_Presión_Pro.webp",
+      img: getStaticGalleryImageUrl("pressureWash"),
     },
     {
       key: "repair",
-      img: "/images/gallery/9_despues-1600.webp",
+      img: getStaticGalleryImageUrl("exterior2After"),
     },
   ];
 

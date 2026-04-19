@@ -1,0 +1,28 @@
+const LOCAL_GALLERY_BASE = "/images/gallery";
+
+const SUPABASE_GALLERY_BASE = process.env.NEXT_PUBLIC_SUPABASE_URL
+  ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/gallery`
+  : "";
+
+const STATIC_GALLERY_FILENAMES = {
+  exteriorBefore: "exterior-antes.webp",
+  exteriorAfter: "exterior-despues.webp",
+  exterior2After: "exterior2-despues.webp",
+  pressureWash: "lavado-presion-pro.webp",
+  luisBety: "luis-y-bety.webp",
+} as const;
+
+export type StaticGalleryImageKey = keyof typeof STATIC_GALLERY_FILENAMES;
+
+function toLocalPath(fileName: string): string {
+  return `${LOCAL_GALLERY_BASE}/${fileName}`;
+}
+
+export function getStaticGalleryImageUrl(key: StaticGalleryImageKey): string {
+  const fileName = STATIC_GALLERY_FILENAMES[key];
+  if (!SUPABASE_GALLERY_BASE) {
+    return toLocalPath(fileName);
+  }
+
+  return `${SUPABASE_GALLERY_BASE}/shared/${fileName}`;
+}

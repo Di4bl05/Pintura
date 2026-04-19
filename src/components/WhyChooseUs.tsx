@@ -11,6 +11,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
 import ContactForm from "@/components/ContactForm";
 import { useSmartLink } from "@/hooks/useSmartLink"; // 1. Importamos el hook
+import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
 export default function WhyChooseClean() {
   const { t } = useLanguage();
@@ -43,28 +44,34 @@ export default function WhyChooseClean() {
       <div className="mx-auto px-6 lg:px-16 z-10 max-w-[1440px] relative">
         
         {/* --- BURBUJA POSICIONADA ABSOLUTA (ZONA ROJA) --- */}
-        <div className="hidden md:block absolute top-0 right-30 lg:right-40 z-20 group">
-          <div className="relative w-80 h-80 lg:w-[450px] lg:h-[450px] rounded-full p-2 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100">
-            <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white">
-              <Image 
-                src="/images/gallery/LUIS Y BETY.webp"
-                alt="Luis y Bety"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            <div className="absolute bottom-10 -right-4 bg-white py-3 px-6 rounded-2xl shadow-[0_15_30px_rgba(0,0,0,0.12)] border border-slate-50 transition-all duration-500 group-hover:-translate-y-2">
-              <div className="flex flex-col gap-0.5">
-                <p className="font-sans font-black text-[8px] tracking-[0.3em] text-primary-600 uppercase">
-                  Painting Experts
-                </p>
-                <p className="font-sans font-black text-[10px] tracking-[0.1em] text-slate-950 uppercase">
-                  Luis & Bety • Orlando, FL
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Se oculta en móvil para no tapar el texto y aparece en md/lg */}
+       <div className="hidden md:block absolute top-0 right-30 lg:right-40 z-20 group">
+  <div className="relative w-80 h-80 lg:w-[450px] lg:h-[450px] rounded-full p-2 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100">
+    
+    {/* Imagen Circular */}
+    <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white">
+      <Image 
+        src={getStaticGalleryImageUrl("luisBety")}
+        alt="Luis y Bety"
+        fill
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
+      />
+    </div>
+
+    {/* LABEL DECORATIVO (Ubicación / Equipo) */}
+    <div className="absolute bottom-10 -right-4 bg-white py-3 px-6 rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.12)] border border-slate-50 transition-all duration-500 group-hover:-translate-y-2">
+      <div className="flex flex-col gap-0.5">
+        <p className="font-sans font-black text-[8px] tracking-[0.3em] text-primary-600 uppercase">
+          Painting Experts
+        </p>
+        <p className="font-sans font-black text-[10px] tracking-[0.1em] text-slate-950 uppercase">
+          Luis & Bety • Orlando, FL
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
 
         {/* ENCABEZADO */}
         <div className="flex flex-col items-start text-left mb-14 space-y-6">
