@@ -1,119 +1,189 @@
-# Panel de Administración - LUISBETY INC
+# Guia Completa: Supabase + Panel Admin de Galeria
 
-## Acceso al Panel
+Esta guia cubre todo el flujo para operar la galeria con backend real, traduccion doble por imagen y edicion intuitiva por el dueno.
 
-**URL:** `https://pintura-five.vercel.app/admin` (o en desarrollo: `http://localhost:3000/admin`)
+## 1. Que se implemento en el proyecto
 
-### Credenciales de Acceso
+Se implemento todo dentro de la misma app Next.js (App Router):
 
-- **Usuario:** `admin`
-- **Contraseña:** `12345678`
+- Panel admin en `src/app/admin`.
+- API publica de galeria en `src/app/api/gallery/route.ts`.
+- APIs admin protegidas:
+  - `src/app/api/admin/projects/route.ts`
+  - `src/app/api/admin/projects/[id]/route.ts`
+  - `src/app/api/admin/projects/[id]/images/route.ts`
+- Integracion Supabase:
+  - `src/lib/supabase/client.ts`
+  - `src/lib/supabase/admin.ts`
+  - `src/lib/supabase/auth.ts`
+- Galeria publica conectada a backend:
+  - `src/components/BeforeAfterGallery.tsx`
+- Esquema SQL listo:
+  - `supabase/schema.sql`
 
-## Características
+## 2. Requisito clave pedido: doble traduccion por imagen
 
-### 🔐 Sistema de Autenticación
-- Login seguro con validación de credenciales
-- Sesión persistente con localStorage
-- Redirección automática al dashboard tras login exitoso
-- Protección de rutas administrativas
+Cada imagen tiene campos bilingues editables por el dueno desde el panel:
 
-### 📝 Editor de Contenido
-El panel permite editar contenido de las siguientes secciones:
+- `alt_es`
+- `alt_en`
+- `caption_es`
+- `caption_en`
 
-1. **Hero / Inicio**
-   - Títulos principales
-   - Descripciones
-   - Textos de botones CTA
-   - Textos del carrusel
+Adicionalmente, cada proyecto tiene introduccion bilingue del dueno:
 
-2. **Servicios** (próximamente)
-   - Títulos de servicios
-   - Descripciones
-   - Precios
-   - Características
+- `intro_es`
+- `intro_en`
 
-3. **Galería** (próximamente)
-   - Títulos de proyectos
-   - Descripciones
-   - Ubicaciones
-   - URLs de imágenes
+## 3. Estructura de datos (DB)
 
-4. **Por Qué Nosotros** (próximamente)
-   - Lista de beneficios
-   - Descripción de la sección
+Tablas:
 
-5. **Contacto** (próximamente)
-   - Información de contacto
-   - Textos del formulario
+- `gallery_projects`
+  - metadata del proyecto + textos bilingues + estado + orden
+- `gallery_images`
+  - 4 variantes por proyecto (`before/after`, `desktop/mobile`) + textos bilingues por imagen
+- `admin_profiles`
+  - define quien es admin
 
-### 🌐 Soporte Multiidioma
-- Edición simultánea de contenido en Español (🇪🇸) e Inglés (🇺🇸)
-- Los cambios se reflejan en ambos idiomas del sitio
+Tipos enum:
 
-### 💾 Almacenamiento
-- Los cambios se guardan localmente en localStorage
-- Para persistencia completa, se requiere implementar un backend con base de datos
+- `gallery_service`
+- `gallery_image_kind`
 
-## Uso del Panel
+Todo esto ya viene en `supabase/schema.sql`.
 
-1. **Acceder al panel:**
-   - Navega a `/admin`
-   - Ingresa las credenciales
-   - Serás redirigido al dashboard
+## 4. Configuracion Supabase (paso a paso)
 
-2. **Editar contenido:**
-   - Selecciona una sección en el menú lateral
-   - Haz clic en el botón "Editar" (icono de lápiz) del elemento que deseas modificar
-   - Actualiza los textos en español e inglés
-   - Haz clic en "Guardar"
+1. Crear proyecto en Supabase.
+2. En `Storage`, crear bucket: `gallery`.
+3. En `SQL Editor`, ejecutar completo `supabase/schema.sql`.
+4. Crear usuario del dueno en `Authentication > Users`.
+5. Asignarlo como admin en SQL:
 
-3. **Ver el sitio:**
-   - Clic en "Ver Sitio" en el header para abrir el sitio web en nueva pestaña
-
-4. **Cerrar sesión:**
-   - Clic en "Cerrar Sesión" en el header
-
-## Estructura de Archivos
-
-```
-src/
-├── app/
-│   ├── admin/
-│   │   ├── page.tsx              # Página de login
-│   │   └── dashboard/
-│   │       └── page.tsx          # Panel principal de administración
-│   └── layout.tsx                # Layout principal con AuthProvider
-├── contexts/
-│   └── AuthContext.tsx           # Contexto de autenticación
-└── translations/
-    ├── es.json                   # Traducciones en español
-    └── en.json                   # Traducciones en inglés
+```sql
+insert into public.admin_profiles (id, role)
+values ('UUID_DEL_USUARIO', 'admin')
+on conflict (id) do nothing;
 ```
 
-## Próximas Mejoras
+## 5. Variables de entorno
 
-- [ ] Backend con API REST para persistencia de datos
-- [ ] Base de datos para almacenamiento permanente
-- [ ] Editor visual de imágenes
-- [ ] Gestor de galería con upload de imágenes
-- [ ] Historial de cambios (versionado)
-- [ ] Múltiples usuarios administradores
-- [ ] Roles y permisos
-- [ ] Preview en tiempo real
-- [ ] Editor WYSIWYG para textos largos
+Crear `.env.local` en la raiz:
 
-## Seguridad
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://TU_PROYECTO.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=TU_ANON_KEY
+SUPABASE_SERVICE_ROLE_KEY=TU_SERVICE_ROLE_KEY
+```
 
-⚠️ **IMPORTANTE:** 
-- Las credenciales actuales son de desarrollo
-- En producción, implementar:
-  - Autenticación con backend seguro
-  - Hash de contraseñas
-  - Tokens JWT
-  - HTTPS obligatorio
-  - Rate limiting en login
-  - Two-factor authentication (2FA)
+Reglas:
 
-## Soporte
+- `SUPABASE_SERVICE_ROLE_KEY` solo servidor.
+- Nunca exponer service role en cliente.
 
-Para cualquier consulta o problema con el panel de administración, contacta al equipo de desarrollo.
+## 6. Instalar dependencias
+
+Ya se agrego en `package.json`:
+
+- `@supabase/supabase-js`
+
+Instalar:
+
+```bash
+pnpm install
+```
+
+## 7. Correr en local
+
+```bash
+pnpm dev
+```
+
+Accesos:
+
+- Sitio publico: `http://localhost:3000`
+- Panel admin: `http://localhost:3000/admin/login`
+
+## 8. Flujo de uso del dueno (intuitivo)
+
+1. Entrar a `/admin/login` con su email/password de Supabase.
+2. Ir a `Nuevo proyecto`.
+3. Completar:
+   - slug
+   - servicio
+   - ubicacion
+   - titulo ES/EN
+   - descripcion ES/EN
+   - introduccion del dueno ES/EN
+   - estado activo
+   - orden
+4. Guardar proyecto.
+5. Subir 4 imagenes por proyecto:
+   - Antes Desktop
+   - Antes Mobile
+   - Despues Desktop
+   - Despues Mobile
+6. En cada imagen llenar obligatoriamente:
+   - Alt ES
+   - Alt EN
+   - Caption ES
+   - Caption EN
+7. Verificar cambios en la web publica.
+
+## 9. Reglas de archivos para imagenes
+
+En upload admin se validan:
+
+- tipos: `image/webp`, `image/png`, `image/jpeg`
+- limite: 4MB
+
+Rutas internas en bucket:
+
+- `projects/{project_id}/before-desktop.ext`
+- `projects/{project_id}/before-mobile.ext`
+- `projects/{project_id}/after-desktop.ext`
+- `projects/{project_id}/after-mobile.ext`
+
+## 10. Seguridad implementada
+
+- APIs admin requieren token de sesion valido.
+- Se valida perfil admin en `admin_profiles`.
+- RLS activo en tablas.
+- Storage con policy de escritura solo admin.
+- Lectura publica solo de proyectos activos.
+
+## 11. Comportamiento de fallback
+
+Si Supabase no esta configurado o falla temporalmente:
+
+- `/api/gallery` devuelve fallback local.
+- La galeria publica sigue funcionando con imagenes de `public/images/gallery`.
+
+Esto permite migracion gradual sin romper el sitio.
+
+## 12. QA recomendado antes de produccion
+
+Checklist:
+
+- Login admin funciona.
+- Crear/editar/eliminar proyecto funciona.
+- Activar/desactivar proyecto se refleja en web.
+- Reordenar por `display_order` funciona.
+- Upload de las 4 imagenes funciona.
+- Alt/caption bilingue por imagen se guarda.
+- Intro bilingue del dueno se muestra.
+- Filtros en galeria siguen operativos.
+
+## 13. Despliegue en Vercel
+
+1. Agregar env vars en Vercel.
+2. Deploy en `dev` para probar.
+3. Validar QA.
+4. Merge a `main`.
+
+## 14. Notas finales
+
+- El panel admin esta dentro de la misma app en `src/app/admin`, como recomendaste.
+- Es la forma mas simple de mantener una sola codebase.
+- `robots.ts` ya bloquea `/admin` de indexacion.

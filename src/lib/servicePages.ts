@@ -7,10 +7,10 @@ export type ServiceSlug = (typeof SERVICE_SLUGS)[number];
 export type ServiceLocale = "es" | "en";
 
 const SERVICE_IMAGES: Record<ServiceSlug, string> = {
-  exterior: "/images/gallery/pintores-exteriores-residenciales-orlando.webp",
-  interior: "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
-  pressure: "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
-  repair: "/images/gallery/lacado-gabinetes-cocina-profesional-florida.webp",
+  exterior: "/images/gallery/exterior-despues.webp",
+  interior: "/images/gallery/exterior-antes.webp",
+  pressure: "/images/gallery/lavado-presion-pro.webp",
+  repair: "/images/gallery/exterior2-despues.webp",
 };
 
 const SERVICE_FAQS_ES: Record<ServiceSlug, { question: string; answer: string }[]> = {

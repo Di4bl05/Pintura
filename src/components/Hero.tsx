@@ -75,18 +75,18 @@ export default function Hero() {
   const heroContent = useMemo(() => [
     {
       title: t("hero.carousel.0"),
-      imgDesktop: "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
-      imgMobile: "/images/gallery/pintura-interiores-casas-orlando-fl.webp",
+      imgDesktop: "/images/gallery/exterior-antes.webp",
+      imgMobile: "/images/gallery/exterior-antes.webp",
     },
     {
       title: t("hero.carousel.1"),
-      imgDesktop: "/images/gallery/pintores-exteriores-residenciales-orlando.webp",
-      imgMobile: "/images/gallery/pintores-exteriores-residenciales-orlando.webp",
+      imgDesktop: "/images/gallery/exterior-despues.webp",
+      imgMobile: "/images/gallery/exterior-despues.webp",
     },
     {
       title: t("hero.carousel.2"),
-      imgDesktop: "/images/gallery/lacado-gabinetes-cocina-profesional-florida.webp",
-      imgMobile: "/images/gallery/lacado-gabinetes-cocina-profesional-florida.webp",
+      imgDesktop: "/images/gallery/luis-y-bety.webp",
+      imgMobile: "/images/gallery/luis-y-bety.webp",
     }
   ], [t]);
 

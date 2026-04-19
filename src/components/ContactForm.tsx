@@ -149,7 +149,7 @@ const handleSubmit = async () => {
   }
 };
 
-  const currentImage = "/images/gallery/pintores-exteriores-residenciales-orlando.webp";
+  const currentImage = "/images/gallery/exterior-despues.webp";
     const [openSelect, setOpenSelect] = useState<string | null>(null);
 
   const colorOptions = React.useMemo(() => {
@@ -301,7 +301,7 @@ return (
         
         <div className="relative h-full w-full rounded-[2.5rem] overflow-hidden border-[12px] border-white shadow-[0_35px_80px_-15px_rgba(0,0,0,0.15)] ring-1 ring-slate-100">
           <Image 
-            src="/images/gallery/Exterior2 Despues.webp" 
+            src={currentImage}
             alt="Luisbety Exterior Portfolio" 
             fill 
             className="object-cover transition-transform duration-[8s] ease-out group-hover:scale-105"
