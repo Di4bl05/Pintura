@@ -75,18 +75,18 @@ export default function Hero() {
   const heroContent = useMemo(() => [
     {
       title: t("hero.carousel.0"),
-      imgDesktop: "/images/gallery/1_antes-1600.webp",
-      imgMobile: "/images/gallery/1_antes-1600.webp",
+      imgDesktop: "/images/gallery/exterior-antes.webp",
+      imgMobile: "/images/gallery/exterior-antes.webp",
     },
     {
       title: t("hero.carousel.1"),
-      imgDesktop: "/images/gallery/6_despues-1600.webp",
-      imgMobile: "/images/gallery/6_despues-1600.webp",
+      imgDesktop: "/images/gallery/exterior-despues.webp",
+      imgMobile: "/images/gallery/exterior-despues.webp",
     },
     {
       title: t("hero.carousel.2"),
-      imgDesktop: "/images/gallery/5_despues-1600.webp",
-      imgMobile: "/images/gallery/5_despues-1600.webp",
+      imgDesktop: "/images/gallery/luis-y-bety.webp",
+      imgMobile: "/images/gallery/luis-y-bety.webp",
     }
   ], [t]);
 

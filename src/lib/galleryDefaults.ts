@@ -45,7 +45,19 @@ const serviceCopy = {
 } as const;
 
 const getImageSrc = (id: number, side: "antes" | "despues", size: "600" | "1600") => {
-  return `/images/gallery/${id}_${side}-${size}.webp`;
+  if (side === "antes") {
+    return "/images/gallery/exterior-antes.webp";
+  }
+
+  if (size === "600") {
+    return "/images/gallery/lavado-presion-pro.webp";
+  }
+
+  if (id % 3 === 0) {
+    return "/images/gallery/luis-y-bety.webp";
+  }
+
+  return id % 2 === 0 ? "/images/gallery/exterior2-despues.webp" : "/images/gallery/exterior-despues.webp";
 };
 
 export function getFallbackGalleryProjects(): GalleryProject[] {

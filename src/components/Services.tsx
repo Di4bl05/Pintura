@@ -50,19 +50,19 @@ export default function Services() {
   const services = [
     {
       key: "exterior",
-      img: "/images/gallery/3_despues-1600.webp",
+      img: "/images/gallery/exterior-despues.webp",
     },
     {
       key: "interior",
-      img: "/images/gallery/15_antes-1600.webp",
+      img: "/images/gallery/exterior-antes.webp",
     },
     {
       key: "pressure",
-      img: "/images/gallery/8_despues-1600.webp",
+      img: "/images/gallery/lavado-presion-pro.webp",
     },
     {
       key: "repair",
-      img: "/images/gallery/9_despues-1600.webp",
+      img: "/images/gallery/exterior2-despues.webp",
     },
   ];
 
