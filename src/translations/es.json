@@ -470,22 +470,23 @@
       }
     },
     "success": {
-      "title": "¡Solicitud Recibida con Éxito!",
-      "message": "Gracias por confiar en nuestra compañía. Tu solicitud está siendo evaluada por nuestro equipo técnico. En breve recibirás un correo electrónico confirmando si tu proyecto ha sido aprobado o si requerimos más detalles.",
-      "call_btn": "Llamar Directamente",
-      "close": "Volver al inicio"
+      "title": "¡Solicitud recibida!",
+      "message": "Tu proyecto ha sido enviado directamente a nuestro equipo técnico. Nos pondremos en contacto contigo en menos de 24 horas.",
+      "call_btn": "Llamar ahora",
+      "close": "Finalizar"
     },
     "buttons": {
-      "next": "Siguiente Paso",
+      "next": "Siguiente paso",
       "prev": "Anterior",
-      "submit": "Solicitar Prioridad de Pintura",
+      "sending": "Enviando......",
+      "submit": "Finalizar estimado",
       "submit_btn": "Reservar mi prioridad",
-      "close": "Cerrar Formulario"
+      "close": "Cerrar formulario"
     }
   },
 
   "footer": {
-    "description": "Luisbety Inc. - Pintores profesionales en Florida Central. Especialistas en acabados residenciales y comerciales de alta gama. Licenciados y asegurados para su total tranquilidad.",
+    "description": "Luisbety Inc. - Pintores profesionales en Florida Central. Especialistas en acabados de alta gama. Licenciados y asegurados para su total tranquilidad.",
     "services": {
       "title": "Servicios Especializados",
       "items": [

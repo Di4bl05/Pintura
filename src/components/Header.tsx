@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Phone, Menu, X, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useSmartLink } from "@/hooks/useSmartLink";
 
 interface HeaderProps {
   forceSolid?: boolean;
@@ -14,6 +15,9 @@ export default function Header({ forceSolid = false }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [hasOverlayOpen, setHasOverlayOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+
+  const { handlePhoneClick } = useSmartLink();
+  const phone = "+17863506367";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -42,7 +46,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsMenuOpen(false);
-
     window.dispatchEvent(new CustomEvent("app:close-overlays"));
 
     if (href === "#") {
@@ -54,11 +57,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
     const target = document.getElementById(targetId);
 
     if (target) {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
       window.history.pushState(null, "", href);
     }
   };
@@ -74,9 +73,8 @@ export default function Header({ forceSolid = false }: HeaderProps) {
       }`}
     >
       <nav className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:pl-10 lg:pr-20">
-
         <div className="flex items-center">
-
+          {/* LOGO */}
           <Link
             href="/"
             className="flex items-center flex-shrink-0 gap-3 md:gap-4 transition-transform group active:scale-95"
@@ -86,9 +84,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                 src="/images/logo/logo-original.webp"
                 alt="LUISBETY INC"
                 className={`transition-all duration-500 object-contain ${
-                  isSolid
-                    ? "h-8 sm:h-10"
-                    : "h-10 sm:h-12 md:h-16"
+                  isSolid ? "h-8 sm:h-10" : "h-10 sm:h-12 md:h-16"
                 } w-auto`}
                 style={{ filter: "brightness(0) invert(1)" }}
               />
@@ -96,38 +92,25 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             </div>
 
             <div className="flex flex-col pl-2 sm:pl-3 md:pl-4 leading-none text-left border-l border-white/10">
-
               <span
                 className={`font-display font-black tracking-tightest text-white transition-all duration-500 ${
-                  isSolid
-                    ? "text-sm sm:text-lg md:text-xl"
-                    : "text-base sm:text-xl md:text-3xl"
+                  isSolid ? "text-sm sm:text-lg md:text-xl" : "text-base sm:text-xl md:text-3xl"
                 }`}
               >
-                LUISBETY{" "}
-                <span className="font-serif italic font-normal text-primary-500">
-                  Inc.
-                </span>
+                LUISBETY <span className="font-serif italic font-normal text-primary-500">inc.</span>
               </span>
-
               <span
                 className={`font-sans font-bold uppercase text-primary-200/50 transition-all duration-500 ${
-                  isSolid
-                    ? "text-[7px] mt-1"
-                    : "text-[8px] sm:text-[9px] md:text-[10px] mt-1 md:mt-2"
+                  isSolid ? "text-[7px] mt-1" : "text-[8px] sm:text-[9px] md:text-[10px] mt-1 md:mt-2"
                 } tracking-[0.25em] sm:tracking-[0.35em]`}
               >
                 Painting and Remodeling
               </span>
-
             </div>
           </Link>
 
-          <div
-            className={`hidden lg:flex items-center space-x-10 ml-auto transition-all duration-500 ${
-              isSolid ? "mr-6" : "mr-8 xl:mr-10"
-            }`}
-          >
+          {/* DESKTOP NAV */}
+          <div className={`hidden lg:flex items-center space-x-10 ml-auto transition-all duration-500 ${isSolid ? "mr-6" : "mr-8 xl:mr-10"}`}>
             {navigation.map((item) => (
               <a
                 key={item.name}
@@ -141,13 +124,8 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             ))}
           </div>
 
-          <div
-            className={`hidden md:flex items-center gap-3 transition-all duration-500 ${
-              isSolid
-                ? "lg:ml-0 lg:translate-x-10"
-                : "lg:ml-4 xl:ml-6 lg:-translate-x-2 xl:-translate-x-10"
-            }`}
-          >
+          {/* BOTONES DE ACCIÓN (Idioma y Teléfono) */}
+          <div className={`hidden md:flex items-center gap-3 transition-all duration-500 ${isSolid ? "lg:ml-0 lg:translate-x-10" : "lg:ml-4 xl:ml-6 lg:-translate-x-2 xl:-translate-x-10"}`}>
             <button
               onClick={() => setLanguage(language === "es" ? "en" : "es")}
               className="font-sans flex items-center gap-2 font-bold uppercase text-[10px] tracking-[0.3em] text-white/40 hover:text-primary-400 transition-all"
@@ -156,29 +134,30 @@ export default function Header({ forceSolid = false }: HeaderProps) {
               <span>{language}</span>
             </button>
 
+            {/* BOTÓN INTELIGENTE DE TELÉFONO */}
             <a
-              href="tel:+17863506367"
-              className="font-sans group flex items-center gap-3 rounded-2xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-primary-600 hover:text-white active:scale-95 uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4"
+              href={`tel:${phone}`}
+              onClick={handlePhoneClick(phone)} // <--- Aquí inyectamos la magia
+              className="font-sans group flex items-center gap-3 rounded-2xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-primary-600 hover:text-white active:scale-95 uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4 shadow-sm"
             >
               <Phone className="w-3 h-3" />
               <span>(786) 350-6367</span>
             </a>
           </div>
 
+          {/* MENÚ MÓVIL (Toggle) */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="flex items-center justify-center w-10 h-10 ml-auto text-white transition-all duration-500 border lg:hidden rounded-xl bg-white/5 border-white/10 backdrop-blur-md"
           >
             {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
-
         </div>
 
+        {/* PANEL MÓVIL */}
         <div
           className={`lg:hidden absolute left-4 right-4 top-[calc(100%+16px)] rounded-[2rem] border border-white/10 bg-slate-950/95 backdrop-blur-2xl text-white shadow-2xl transition-all duration-500 overflow-hidden ${
-            isMenuOpen
-              ? "max-h-[80vh] opacity-100 translate-y-0"
-              : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
+            isMenuOpen ? "max-h-[80vh] opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
           }`}
         >
           <div className="flex flex-col gap-4 px-6 py-8">
@@ -195,7 +174,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             ))}
           </div>
         </div>
-
       </nav>
     </header>
   );

@@ -105,7 +105,7 @@ export default function Services() {
                   <span className="relative h-2 w-2 rounded-full bg-emerald-500"></span>
                 </div>
 
-                <span className="font-sans text-[8px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.25em] md:tracking-[0.3em]">
+                <span className="font-sans text-[8px] md:text-[11px] font-black text-slate-600 uppercase tracking-[0.25em] md:tracking-[0.3em]">
                   Active Service Zones
                 </span>
               </div>

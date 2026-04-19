@@ -5,60 +5,82 @@ const resend = new Resend(process.env.RESEND_API_KEY!);
 
 export async function POST(req: Request) {
   try {
-    const data = await req.json();
+    const formData = await req.formData();
+    
+    // Extracción usando los nombres EXACTOS de tu contactData
+    const name = formData.get("name") as string;
+    const phone = formData.get("phone") as string;
+    const address = formData.get("address") as string;
+    const date = formData.get("date") as string;
+    const colors = formData.get("colors") as string;
+    const serviceTypeRaw = formData.get("service_type") as string;
+    const paint_type = formData.get("paint_type") as string;
+    const status = formData.get("status") as string;
+    const special = formData.get("special") as string;
+    const budget = formData.get("budget") as string;
+    const comments = formData.get("comments") as string;
+    const vip = formData.get("vip") === "true";
+    
+    const specifics = JSON.parse(formData.get("specifics") as string || "[]");
+    const service_type = JSON.parse(serviceTypeRaw || "[]");
 
-    const safeArray = (v: any) => (Array.isArray(v) ? v : []);
+    const files = formData.getAll("upload") as File[];
+    const attachments = await Promise.all(
+      files.map(async (file) => ({
+        filename: file.name,
+        content: Buffer.from(await file.arrayBuffer()),
+      }))
+    );
 
     const emailContent = `
-========================
-NEW PAINTING PROJECT
-========================
+${vip ? "🚨 [MODO FAST-TRACK PRIORITARIO ACTIVADO] 🚨" : ""}
 
-CLIENT INFO
-------------------------
-Name: ${data.name || ""}
-Phone: ${data.phone || ""}
-Address: ${data.address || ""}
-Date: ${data.date || ""}
+NUEVA SOLICITUD DE PROYECTO - LUISBETY PROTOCOL
+==============================================
 
-PROJECT INFO
-------------------------
-Colors: ${data.colors || ""}
-Main Services: ${safeArray(data.main_services).join(", ")}
-Specifics: ${safeArray(data.specifics).join(", ")}
-Paint Type: ${data.paint_type || ""}
+INFORMACIÓN DEL CLIENTE
+----------------------------------------------
+Nombre:    ${name}
+Teléfono:  ${phone}
+Dirección: ${address}
+Fecha:     ${date}
 
-SURFACE ANALYSIS
-------------------------
-Surface Status: ${data.status || ""}
-Visual Load (Carga visual): ${data.visual_load || "N/A"}
-Special Notes: ${data.special || ""}
+PRESUPUESTO ESTIMADO 
+----------------------------------------------
+Rango:     ${budget || "No definido"}
 
-BUDGET
-------------------------
-Range: ${data.budget || ""}
+DETALLES DEL TRABAJO
+----------------------------------------------
+Servicios: ${service_type.join(", ")}
+Específicos: ${specifics.join(", ")}
+Colores:   ${colors}
+Pintura:   ${paint_type || "No especificado"}
 
-ADDITIONAL INFO
-------------------------
-Comments: ${data.comments || ""}
-VIP: ${data.vip ? "YES" : "NO"}
+DIAGNÓSTICO Y NOTAS
+----------------------------------------------
+Estado:    ${status}
+Especial:  ${special || "N/A"}
 
-UPLOAD:
-${data.upload ? "File received (check storage/handling needed)" : "No upload"}
+COMENTARIOS ADICIONALES
+----------------------------------------------
+${comments || "Sin comentarios adicionales"}
+
+----------------------------------------------
+Evidencia Visual: ${files.length} fotos adjuntas.
+==============================================
 `;
 
     const result = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>",
+      from: "LuisBety Protocol <onboarding@resend.dev>",
       to: "perezcorralesismael@gmail.com",
-      subject: "New Painting Request",
+      subject: `${vip ? "🔥 VIP -" : ""} Nuevo Proyecto: ${name}`,
       text: emailContent,
+      attachments: attachments,
     });
 
-    return NextResponse.json({ ok: true, result });
+    return NextResponse.json({ ok: true });
   } catch (error) {
-    return NextResponse.json(
-      { ok: false, error: String(error) },
-      { status: 500 }
-    );
+    console.error("Error:", error);
+    return NextResponse.json({ ok: false }, { status: 500 });
   }
 }

@@ -2,7 +2,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import { ChevronRight, Star, Plus, Check, ChevronDown, X } from 'lucide-react';
+import { ChevronRight, Star, Plus, Check, ChevronDown, X, Phone, Send, Loader2} from 'lucide-react';
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
@@ -19,6 +19,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
   const { t } = useLanguage();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   const [contactData, setContactData] = useState<any>({
     name: "",
@@ -108,44 +109,51 @@ const validateStepFor = () => {
   return Object.keys(newErrors).length === 0;
 };
 
- const submitForm = async () => {
-  try {
-    setLoading(true);
+const handleSubmit = async () => {
+  setIsSending(true);
+  const formData = new FormData();
 
-    const res = await fetch("/api/contact", {
+  // 1. CAMPOS DE TEXTO SIMPLE
+  formData.append("name", contactData.name);
+  formData.append("phone", contactData.phone);
+  formData.append("address", contactData.address);
+  formData.append("date", contactData.date);
+  formData.append("colors", contactData.colors);
+  formData.append("paint_type", contactData.paint_type);
+  formData.append("status", contactData.status);
+  formData.append("special", contactData.special);
+  formData.append("budget", contactData.budget);
+  formData.append("comments", contactData.comments);
+  
+  formData.append("vip", String(contactData.vip));
+
+  formData.append("service_type", JSON.stringify(contactData.service_type || []));
+  formData.append("specifics", JSON.stringify(contactData.specifics || []));
+
+  if (contactData.upload && contactData.upload.length > 0) {
+    contactData.upload.forEach((file: File) => {
+      formData.append("upload", file); 
+    });
+  }
+
+  try {
+    const res = await fetch("/api/send", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(contactData),
+      body: formData,
     });
 
-    const data = await res.json();
-
-    if (!res.ok || !data.ok) {
-      throw new Error(data.error || "Error sending form");
+    if (res.ok) {
+      setStep(6); 
+    } else {
+      const errorData = await res.json();
+      console.error("Error del servidor:", errorData);
+      alert("Error al enviar el formulario.");
     }
-
-    return true; 
-  } catch (error) {
-    console.error(error);
-
-    setErrors((prev) => ({
-      ...prev,
-      submit: "Error enviando el formulario",
-    }));
-
-    return false; 
+  } catch (err) {
+    console.error("Error de red:", err);
+    alert("Hubo un fallo en la conexión.");
   } finally {
-    setLoading(false);
-  }
-};
-
-const handleSubmit = async () => {
-  const success = await submitForm();
-
-  if (success) {
-    setStep(6); 
+    setIsSending(false);
   }
 };
 
@@ -190,12 +198,10 @@ const handleSubmit = async () => {
 
   if (!isOpen) return null;
 
-  
-
 return (
   <div className="fixed inset-0 z-[40] bg-white overflow-hidden antialiased flex flex-col">
     
-    <div className="absolute top-28 left-0 w-full flex justify-center z-50 pointer-events-none">
+  <div className="absolute top-28 left-0 w-full flex justify-center z-50 pointer-events-none">
       <div className="flex items-center">
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <React.Fragment key={i}>
@@ -241,8 +247,8 @@ return (
           </React.Fragment>
         ))}
       </div>
-    </div>
-
+   </div>
+    
   <div className="flex h-full w-full pt-32 bg-white justify-center items-center overflow-y-auto">
    <div className="w-full flex flex-col items-center">
      <div className="w-full animate-in slide-in-from-left-6 duration-700 flex flex-col justify-center items-center">
@@ -846,14 +852,27 @@ return (
     {/* NAV */}
     <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
       <button
-        type="button"
-        onClick={() => setStep(6)}
-        className="group relative w-full md:flex-[1.5] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white"
-      >
-        <span className="relative z-10 font-sans font-black text-[10px] uppercase">
-          Finalizar estimado
-        </span>
-      </button>
+  type="button"
+  disabled={isSending} // Evita que se envíe varias veces si hacen clic rápido
+  onClick={handleSubmit} // <--- CAMBIO CLAVE: Llama a la función que conecta con Resend
+  className={`group relative w-full md:flex-[1.5] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg ${
+    isSending ? "opacity-70 cursor-not-allowed" : ""
+  }`}
+>
+  {/* Fondo animado al hacer hover */}
+  <div className={`absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 ${!isSending && "group-hover:translate-y-0"}`} />
+  
+  <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.2em] uppercase pl-2">
+    {isSending ? t("contact.buttons.sending") : t("contact.buttons.submit")}
+  </span>
+
+  {/* Icono dinámico: Carga o Envío */}
+  {isSending ? (
+    <Loader2 size={18} className="relative z-10 animate-spin" />
+  ) : (
+    <Send size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+  )}
+</button>
 
       <button
         type="button"
@@ -868,10 +887,9 @@ return (
 </div>
 )}
 
-   {step === 6 && (
+  {step === 6 && (
   <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in zoom-in-95 duration-700 overflow-hidden text-center">
     <div className="w-full max-w-[550px] flex flex-col items-center">
-
 
       {/* BLOQUE DE TEXTO */}
       <div className="space-y-6 mb-14">
@@ -881,7 +899,6 @@ return (
         
         <div className="h-[2px] w-10 bg-primary-600 mx-auto rounded-full" />
         
-        {/* DESCRIPCIÓN ESTIRADA */}
         <p className="font-sans text-[13px] sm:text-sm font-medium text-slate-500 leading-[1.8] max-w-[460px] mx-auto uppercase tracking-wide pt-2">
           {t("contact.success.message")}
         </p>
@@ -889,7 +906,7 @@ return (
 
       {/* ACCIONES FINALIZAR */}
       <div className="flex flex-col sm:flex-row gap-4 w-full max-w-[460px]">
-        {/* VOLVER AL INICIO */}
+        {/* BOTÓN FINALIZAR */}
         <button 
           onClick={onClose} 
           className="group relative flex-[1.5] overflow-hidden flex items-center justify-center p-5 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg shadow-slate-200"
@@ -900,18 +917,19 @@ return (
           </span>
         </button>
 
-        {/* LLAMAR DIRECTAMENTE */}
+        {/* BOTÓN LLAMAR (Usando variable de entorno) */}
         <a 
-          href="tel:+14070000000" 
-          className="flex-1 p-5 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-950 transition-all text-center flex items-center justify-center"
+          href={`tel:${process.env.NEXT_PUBLIC_PHONE}`} 
+          className="flex-1 p-5 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-950 transition-all text-center flex items-center justify-center gap-2 group"
         >
+          <Phone size={12} className="group-hover:text-primary-600 transition-colors" />
           {t("contact.success.call_btn")}
         </a>
       </div>
       
     </div>
   </div>
-)} 
+)}
           </div>
         </div>
       </div>

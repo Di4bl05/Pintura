@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { X, Phone, Send, CheckCircle2 } from "lucide-react";
+import { X, Phone, Send, CheckCircle2 } from "lucide-react"; // Nota: Asegúrate que sea 'lucide-react'
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useSmartLink } from "@/hooks/useSmartLink";
 
 interface ServiceDetailProps {
   isOpen: boolean;
@@ -19,6 +20,10 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
   const pathname = usePathname();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
+  
+  // --- SMART LINK LOGIC ---
+  const { handlePhoneClick } = useSmartLink();
+  const phone = "+17863506367";
 
   useEffect(() => {
     if (isOpen && scrollRef.current) {
@@ -33,7 +38,10 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (isOpen && target.closest("a")) onClose();
+      // No cerrar el modal si el clic es en el enlace de teléfono
+      if (isOpen && target.closest("a") && !target.closest('a[href^="tel:"]')) {
+        onClose();
+      }
     };
 
     if (isOpen) window.addEventListener("click", handleGlobalClick);
@@ -49,8 +57,8 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
     >
       <div className="pt-32 md:pt-44 pb-28 max-w-[1440px] mx-auto px-6 lg:px-16">
 
+        {/* --- SECCIÓN PRINCIPAL: TÍTULOS E IMAGEN --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start max-w-6xl">
-
           <div>
             <div className="text-[10px] font-black uppercase tracking-[0.5em] text-primary-600 mb-6">
               {t("servicesdetails.premium")}
@@ -88,6 +96,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
           </div>
         </div>
 
+        {/* --- SECCIÓN DE PASOS: EXECUTION --- */}
         <div className="mt-20 md:mt-32 max-w-6xl mx-auto">
           <div className="mb-10 md:mb-20 flex items-center gap-6">
             <div className="shrink-0">
@@ -132,10 +141,10 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
                 </div>
               </div>
             ))}
-
           </div>
         </div>
 
+        {/* --- BOTONES DE ACCIÓN INFERIORES --- */}
         <div className="mt-16 md:mt-28 border-t pt-10 md:pt-14 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
           <button
             onClick={onClose}
@@ -148,15 +157,16 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
             </div>
           </button>
 
-         <a
-           href="tel:+17863506367"
-            className="group h-[60px] px-20 flex items-center gap-4 text-slate-950 border border-slate-200 hover:border-blue-600 hover:bg-blue-600 hover:text-white rounded-xl transition-all duration-300 font-black uppercase text-[11px] tracking-[0.2em] hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] active:scale-95"
-              >
+          <a
+            href={`tel:${phone}`}
+            onClick={handlePhoneClick(phone)}
+            className="group h-[60px] px-10 md:px-20 flex items-center gap-4 text-slate-950 border border-slate-200 hover:border-blue-600 hover:bg-blue-600 hover:text-white rounded-xl transition-all duration-300 font-black uppercase text-[11px] tracking-[0.2em] hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] active:scale-95"
+          >
             <div className="p-2.5 bg-slate-100 group-hover:bg-blue-500 group-hover:text-white rounded-lg transition-all">
-            <Phone size={15} />
-          </div>
-         <span>(786) 350-6367</span>
-        </a>
+              <Phone size={15} />
+            </div>
+            <span>(786) 350-6367</span>
+          </a>
         </div>
 
       </div>

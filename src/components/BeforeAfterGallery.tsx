@@ -340,7 +340,7 @@ export default function BeforeAfterGallery() {
                       <h3 className="mb-4 text-5xl font-bold leading-none tracking-tighter text-white uppercase font-display">
                         {activeItem.title}
                       </h3>
-                      <p className="max-w-lg font-sans text-base italic font-light leading-relaxed text-slate-100 opacity-90 line-clamp-2">
+                      <p className="max-w-lg font-sans text-base font-light leading-relaxed text-slate-100 opacity-90 line-clamp-2">
                         {activeItem.description}
                       </p>
                     </div>
