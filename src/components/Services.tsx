@@ -32,17 +32,12 @@ export default function Services() {
   };
 
   const handleOpenDetails = (service: { key: string; img: string }) => {
-    const data = (t as any)(`servicesdetails.${service.key}`, {
-      returnObjects: true,
-      defaultValue: {},
-    });
-
-    const premium = t("servicesdetails.premium");
-
+    // IMPORTANTE: Pasamos el ID para que el modal traduzca dinámicamente
     setSelectedServiceData({
-      ...data,
+      id: service.key,
       img: service.img,
-      premium,
+      // Mantenemos un array para que el modal sepa cuántos pasos renderizar
+      steps: [{}, {}, {}], 
     });
 
     setIsDetailsOpen(true);

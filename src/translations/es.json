@@ -67,6 +67,7 @@
     ]
   }
 },
+
 "servicesdetails": {
   "premium": "Experiencia de servicio premium",
   "execution": "Proceso de ejecución",
@@ -287,7 +288,8 @@
 
 "whyChoose": {
   "core_value_proposition": {
-    "hook": "La Calidad que su Hogar Merece, a un precio que hace sentido.",
+    "hookMain": "La Calidad que su Hogar Merece",
+    "hookItalic": "a un precio que hace sentido", 
     "description": "Con más de 3 años transformando propiedades en Florida no solo aplicamos color; garantizamos durabilidad a través de una metodología rigurosa y el uso exclusivo de materiales premium. Nuestra trayectoria en el mercado local se basa en la puntualidad, la limpieza absoluta y un estándar de calidad que supera las expectativas de los propietarios más exigentes.",
     "the_difference": [
       {

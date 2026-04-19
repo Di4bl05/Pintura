@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { X, Phone, Send, CheckCircle2 } from "lucide-react"; // Nota: Asegúrate que sea 'lucide-react'
+import { X, Phone, Send, CheckCircle2 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSmartLink } from "@/hooks/useSmartLink";
@@ -20,8 +20,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
   const pathname = usePathname();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
-  
-  // --- SMART LINK LOGIC ---
+ 
   const { handlePhoneClick } = useSmartLink();
   const phone = "+17863506367";
 
@@ -38,7 +37,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // No cerrar el modal si el clic es en el enlace de teléfono
+      
       if (isOpen && target.closest("a") && !target.closest('a[href^="tel:"]')) {
         onClose();
       }
@@ -47,6 +46,8 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
     if (isOpen) window.addEventListener("click", handleGlobalClick);
     return () => window.removeEventListener("click", handleGlobalClick);
   }, [isOpen, onClose]);
+
+  const sId = serviceData?.id;
 
   if (!isOpen || !serviceData) return null;
 
@@ -57,7 +58,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
     >
       <div className="pt-32 md:pt-44 pb-28 max-w-[1440px] mx-auto px-6 lg:px-16">
 
-        {/* --- SECCIÓN PRINCIPAL: TÍTULOS E IMAGEN --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start max-w-6xl">
           <div>
             <div className="text-[10px] font-black uppercase tracking-[0.5em] text-primary-600 mb-6">
@@ -65,17 +65,17 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
             </div>
 
             <h1 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tight text-slate-950 leading-[0.9]">
-              {serviceData.title}
+              {t(`servicesdetails.${sId}.title`)}
             </h1>
 
             <h2 className="font-serif text-2xl md:text-4xl italic text-primary-600 font-normal mt-2">
-              {serviceData.titleHighlight}
+              {t(`servicesdetails.${sId}.titleHighlight`)}
             </h2>
 
             <div className="h-[3px] w-24 bg-primary-600 mt-8 mb-8" />
 
             <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-              {serviceData.description}
+              {t(`servicesdetails.${sId}.description`)}
             </p>
           </div>
 
@@ -96,7 +96,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
           </div>
         </div>
 
-        {/* --- SECCIÓN DE PASOS: EXECUTION --- */}
         <div className="mt-20 md:mt-32 max-w-6xl mx-auto">
           <div className="mb-10 md:mb-20 flex items-center gap-6">
             <div className="shrink-0">
@@ -127,7 +126,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
                 <div className="flex-1 pt-1 md:pt-2">
                   <div className="flex items-center gap-4 mb-4">
                     <h4 className="text-xl md:text-2xl font-display font-black uppercase text-slate-950 tracking-tighter">
-                      {step.title}
+                      {t(`servicesdetails.${sId}.steps.${i}.title`)}
                     </h4>
                     <div className="h-px flex-1 bg-slate-50 group-hover:bg-primary-100 transition-colors" />
                     <CheckCircle2
@@ -136,7 +135,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
                     />
                   </div>
                   <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium max-w-3xl">
-                    {step.desc}
+                    {t(`servicesdetails.${sId}.steps.${i}.desc`)}
                   </p>
                 </div>
               </div>
@@ -144,7 +143,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
           </div>
         </div>
 
-        {/* --- BOTONES DE ACCIÓN INFERIORES --- */}
         <div className="mt-16 md:mt-28 border-t pt-10 md:pt-14 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
           <button
             onClick={onClose}
