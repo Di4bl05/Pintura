@@ -145,7 +145,11 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
 
         <div className="mt-16 md:mt-28 border-t pt-10 md:pt-14 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
           <button
-            onClick={onClose}
+           type="button"
+              onClick={(e) => {
+             e.preventDefault(); // Evita comportamientos raros del navegador
+            window.dispatchEvent(new CustomEvent("app:open-contact"));
+            }}
             className="relative group px-10 py-5 bg-slate-950 text-white font-black uppercase text-[11px] tracking-[0.2em] rounded-xl overflow-hidden shadow-lg"
           >
             <div className="absolute inset-0 bg-primary-600 scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-500 z-0" />

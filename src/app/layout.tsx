@@ -5,12 +5,14 @@ import "./globals.css";
 
 const sans = Plus_Jakarta_Sans({ 
   subsets: ["latin"], 
+  weight: ["400", "500", "700"], 
   variable: "--font-sans",
   display: "swap" 
 });
 
 const display = Playfair_Display({ 
   subsets: ["latin"], 
+  weight: ["900"], 
   variable: "--font-display",
   display: "swap" 
 });
@@ -18,6 +20,7 @@ const display = Playfair_Display({
 const serif = Instrument_Serif({ 
   subsets: ["latin"], 
   weight: "400", 
+  style: ["normal", "italic"], 
   variable: "--font-serif",
   display: "swap" 
 });

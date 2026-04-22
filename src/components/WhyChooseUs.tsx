@@ -1,21 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { 
-  Phone, 
-  ArrowRight, 
-  ShieldCheck,
-  Sparkles 
-} from "lucide-react";
+import { Phone, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
-import ContactForm from "@/components/ContactForm";
+// 1. QUITAMOS useState y ContactForm de aquí
 import { useSmartLink } from "@/hooks/useSmartLink"; 
 import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
 export default function WhyChooseClean() {
   const { t } = useLanguage();
-  const [isContactOpen, setIsContactOpen] = useState(false);
+  // 2. BORRAMOS EL ESTADO LOCAL (Ya no se usa aquí)
   
   const { handlePhoneClick } = useSmartLink();
   const phoneNumber = t("combined_conversion_section.cta_box.phone") || "(786) 350-6367";
@@ -31,18 +25,14 @@ export default function WhyChooseClean() {
   };
 
   const differences = ((t as any)("whyChoose.core_value_proposition.the_difference", { returnObjects: true }) as any[]) || [];
-
   const leftCol = differences.slice(0, 4);
   const rightCol = differences.slice(4);
-
-  const hookText = t("whyChoose.core_value_proposition.hook") || "Resultados de Élite, Precios de Realidad";
-  const [hookMain, hookItalic] = hookText.includes(',') ? hookText.split(',') : [hookText, ""];
 
   return (
     <section id="why-choose-us" className="relative py-16 md:py-20 lg:py-28 overflow-hidden antialiased bg-white">
       <div className="mx-auto px-4 sm:px-6 lg:px-16 z-10 max-w-[1440px] relative">
         
-        {/* IMAGEN FLOTANTE (Solo Desktop) */}
+        {/* Contenido de Imagen Luis y Bety */}
         <div className="hidden md:block absolute top-0 right-30 lg:right-40 z-20 group">
           <div className="relative w-80 h-80 lg:w-[450px] lg:h-[450px] rounded-full p-2 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100">
             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white">
@@ -66,7 +56,7 @@ export default function WhyChooseClean() {
           </div>
         </div>
 
-        {/* ENCABEZADO RESPONSIVE */}
+        {/* Títulos */}
         <div className="flex flex-col items-start text-left mb-10 md:mb-14 space-y-5 md:space-y-6">
           <h2 className="flex flex-col max-w-2xl text-left">
             <span className="font-display text-4xl md:text-5xl font-bold text-slate-950 uppercase tracking-tighter leading-[0.9]">
@@ -81,24 +71,28 @@ export default function WhyChooseClean() {
           </p>
         </div>
 
-        {/* CONTENEDOR DE DOS COLUMNAS RESPONSIVE */}
+        {/* Grid de Diferencias */}
         <div className="flex flex-col md:flex-row gap-5 md:gap-6 lg:gap-8 items-end">
           <div className="flex-1 flex flex-col gap-5 md:gap-6 lg:gap-8 w-full">
-            {leftCol.map((item) => (
+            {leftCol.map((item: any) => (
               <Card item={item} config={iconConfigs[item.id]} key={item.id} />
             ))}
           </div>
           <div className="flex-1 flex flex-col gap-5 md:gap-6 lg:gap-8 w-full h-full justify-end">
-            {rightCol.map((item) => (
+            {rightCol.map((item: any) => (
               <Card item={item} config={iconConfigs[item.id]} key={item.id} />
             ))}
           </div>
         </div>
 
-        {/* BOTONES DE ACCIÓN (CTAS) RESPONSIVE */}
         <div className="mt-12 md:mt-20 flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6">
           <button
-            onClick={() => setIsContactOpen(true)}
+            type="button"
+              onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            window.dispatchEvent(new CustomEvent("app:open-contact"));
+         }}
             className="group relative overflow-hidden flex items-center justify-center gap-4 bg-slate-950 text-white px-8 py-5 md:px-12 rounded-[2rem] transition-all duration-500 font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-slate-200 w-full sm:w-auto active:scale-95"
           >
             <span className="absolute inset-0 w-0 bg-primary-600 transition-all duration-500 ease-out group-hover:w-full" />
@@ -118,8 +112,6 @@ export default function WhyChooseClean() {
           </a>
         </div>
       </div>
-
-      <ContactForm isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </section>
   );
 }
@@ -127,17 +119,13 @@ export default function WhyChooseClean() {
 function Card({ item, config }: { item: any; config: any }) {
   return (
     <div className="flex flex-col md:flex-row gap-4 md:gap-6 p-5 md:p-7 rounded-[1.5rem] md:rounded-[2.5rem] bg-slate-50/50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300">
-      
-      {/* AQUÍ ESTÁ LA MAGIA: hidden md:block oculta el icono en móvil pero lo mantiene en desktop */}
       <div className="hidden md:block relative flex-shrink-0 w-14 h-14">
         <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${config?.grad} shadow-md`} />
         <div className="relative w-full h-full flex items-center justify-center text-white text-2xl font-bold">
           {config?.sym}
         </div>
       </div>
-
-      <div className="space-y-2 md:space-y-3 flex-1 text-left">
-        {/* Título un poco más pequeño en móvil (text-lg) para que quepa mejor */}
+      <div className="space-y-2 md:space-y-6 flex-1 text-left">
         <h3 className="text-lg md:text-xl font-black tracking-tight uppercase font-display text-slate-950 leading-tight">
           {item.label}
         </h3>

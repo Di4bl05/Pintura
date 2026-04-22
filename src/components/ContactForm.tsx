@@ -1,19 +1,17 @@
 "use client";
 
-
 import React, { useEffect, useState } from "react";
-import { ChevronRight, Star, Plus, Check, ChevronDown, X, Phone, Send, Loader2} from 'lucide-react';
+import { ChevronRight, Star, Plus, Check, ChevronDown, X, Phone, Send, Loader2 } from 'lucide-react';
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
 import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
-
+import { useSmartLink } from "@/hooks/useSmartLink"; 
 
 interface ContactFormProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
 
 const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
   const pathname = usePathname();
@@ -21,6 +19,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const { handlePhoneClick } = useSmartLink();
 
   const [contactData, setContactData] = useState<any>({
     name: "",
@@ -28,7 +27,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
     address: "",
     date: "",
     colors: "",
-    service_type: "",
+    service_type: [],
     specifics: [],
     paint_type: "",
     status: "",
@@ -40,18 +39,17 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
   });
 
   type Errors = {
-  submit?: string;
-  [key: string]: string | undefined;
-};
+    submit?: string;
+    [key: string]: string | undefined;
+  };
 
   const [errors, setErrors] = useState<Errors>({});
-
+  const currentImage = getStaticGalleryImageUrl("exteriorAfter");
+  
   const validateStepTwo = () => {
     let newErrors: any = {};
     const today = new Date().toISOString().split('T')[0];
-       
     const nameRegex = /^[a-zA-ZÀ-ÿ\s]+$/;
- 
     const phoneRegex = /^[0-9\s\+\-\(\)]+$/;
 
     if (!contactData.name?.trim()) {
@@ -83,120 +81,90 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
   };
 
   const validateStepThree = () => {
-  let newErrors: any = {};
-
-  if (!contactData.colors) {
-    newErrors.colors = t("contact.errors.colors_required");
-  }
-
-  if (!contactData.main_services || contactData.main_services.length === 0) {
-    newErrors.main_services = t("contact.errors.services_required");
-  }
-
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0;
-};
-
-const validateStepFor = () => {
-  let newErrors: any = {};
-
-  if (!contactData.status?.trim()) {
-    newErrors.status = t("contact.errors.status_required");
-  } else if (contactData.status.trim().length < 10) {
-    newErrors.status = t("contact.errors.status_too_short");
-  }
-
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0;
-};
-
-const handleSubmit = async () => {
-  setIsSending(true);
-  const formData = new FormData();
-
-  // 1. CAMPOS DE TEXTO SIMPLE
-  formData.append("name", contactData.name);
-  formData.append("phone", contactData.phone);
-  formData.append("address", contactData.address);
-  formData.append("date", contactData.date);
-  formData.append("colors", contactData.colors);
-  formData.append("paint_type", contactData.paint_type);
-  formData.append("status", contactData.status);
-  formData.append("special", contactData.special);
-  formData.append("budget", contactData.budget);
-  formData.append("comments", contactData.comments);
-  
-  formData.append("vip", String(contactData.vip));
-
-  formData.append("service_type", JSON.stringify(contactData.service_type || []));
-  formData.append("specifics", JSON.stringify(contactData.specifics || []));
-
-  if (contactData.upload && contactData.upload.length > 0) {
-    contactData.upload.forEach((file: File) => {
-      formData.append("upload", file); 
-    });
-  }
-
-  try {
-    const res = await fetch("/api/send", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (res.ok) {
-      setStep(6); 
-    } else {
-      const errorData = await res.json();
-      console.error("Error del servidor:", errorData);
-      alert("Error al enviar el formulario.");
+    let newErrors: any = {};
+    if (!contactData.colors) newErrors.colors = t("contact.errors.colors_required");
+    if (!contactData.service_type || contactData.service_type.length === 0) {
+      newErrors.service_type = t("contact.errors.services_required");
     }
-  } catch (err) {
-    console.error("Error de red:", err);
-    alert("Hubo un fallo en la conexión.");
-  } finally {
-    setIsSending(false);
-  }
-};
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-  const currentImage = getStaticGalleryImageUrl("exteriorAfter");
-    const [openSelect, setOpenSelect] = useState<string | null>(null);
+  const validateStepFor = () => {
+    let newErrors: any = {};
+    if (!contactData.status?.trim()) {
+      newErrors.status = t("contact.errors.status_required");
+    } else if (contactData.status.trim().length < 10) {
+      newErrors.status = t("contact.errors.status_too_short");
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+
+  const handleSubmit = async () => {
+    setIsSending(true);
+    const formData = new FormData();
+    formData.append("name", contactData.name);
+    formData.append("phone", contactData.phone);
+    formData.append("address", contactData.address);
+    formData.append("date", contactData.date);
+    formData.append("colors", contactData.colors);
+    formData.append("paint_type", contactData.paint_type);
+    formData.append("status", contactData.status);
+    formData.append("special", contactData.special);
+    formData.append("budget", contactData.budget);
+    formData.append("comments", contactData.comments);
+    formData.append("vip", String(contactData.vip));
+    formData.append("service_type", JSON.stringify(contactData.service_type || []));
+    formData.append("specifics", JSON.stringify(contactData.specifics || []));
+
+    if (contactData.upload && contactData.upload.length > 0) {
+      contactData.upload.forEach((file: File) => {
+        formData.append("upload", file); 
+      });
+    }
+
+    try {
+      const res = await fetch("/api/send", { method: "POST", body: formData });
+      if (res.ok) {
+        setStep(6); 
+      } else {
+        const errorData = await res.json();
+        console.error("Error del servidor:", errorData);
+        alert("Error al enviar el formulario.");
+      }
+    } catch (err) {
+      console.error("Error de red:", err);
+      alert("Hubo un fallo en la conexión.");
+    } finally {
+      setIsSending(false);
+    }
+  };
+
+  const [openSelect, setOpenSelect] = useState<string | null>(null);
 
   const colorOptions = React.useMemo(() => {
     const value = t("contact.steps.step_2.options.colors");
-    if (Array.isArray(value)) {
-      return value.map((option) => String(option));
-    }
+    if (Array.isArray(value)) return value.map((option) => String(option));
     return ["1", "2", "3+"];
   }, [t]);
 
   useEffect(() => {
-    const handleGlobalClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (isOpen && target.closest("a")) onClose();
-    };
-    const handleCloseOverlays = () => { if (isOpen) onClose(); };
     if (isOpen) {
-      window.addEventListener("click", handleGlobalClick);
-      window.addEventListener("app:close-overlays", handleCloseOverlays as EventListener);
       document.body.style.overflow = "hidden";
-    }
-  
-    return () => {
-      window.removeEventListener("click", handleGlobalClick);
-      window.removeEventListener("app:close-overlays", handleCloseOverlays as EventListener);
+    } else {
       document.body.style.overflow = "unset";
-    };
-  }, [isOpen, onClose]);
 
-  useEffect(() => {
-    window.dispatchEvent(new CustomEvent("app:overlay-state", { detail: { open: isOpen } }));
-    return () => {
-      window.dispatchEvent(new CustomEvent("app:overlay-state", { detail: { open: false } }));
-    };
+      setTimeout(() => setStep(1), 300);
+    }
+    return () => { document.body.style.overflow = "unset"; };
   }, [isOpen]);
 
-  useEffect(() => { if (isOpen) onClose(); }, [pathname, onClose]);
-
+  useEffect(() => {
+    if (isOpen) onClose();
+  }, [pathname]);
+  
   if (!isOpen) return null;
 
 return (
@@ -454,7 +422,6 @@ return (
                     onClick={() => {
                       setContactData((prev: any) => ({ ...prev, colors: color }));
                       setOpenSelect(null);
-                    
                       if (errors.colors) setErrors((prev: any) => {
                         const newErrs = {...prev};
                         delete newErrs.colors;
@@ -476,29 +443,29 @@ return (
             {t("contact.steps.step_2.fields.service_type")}
           </label>
           <div className={`flex flex-wrap md:flex-nowrap items-center justify-between gap-4 p-4 rounded-2xl border transition-all duration-300 ${
-            errors.main_services ? "border-red-500 bg-red-50/10" : "bg-slate-50/50 border-slate-100"
+            errors.service_type ? "border-red-500 bg-red-50/10" : "bg-slate-50/50 border-slate-100"
           }`}>
             {(t("contact.steps.step_2.options.services", { returnObjects: true }) as any[] || []).map((service) => (
               <label key={service.id} className="flex items-center gap-2 cursor-pointer group">
                 <input
                   type="checkbox"
-                  checked={(contactData.main_services || []).includes(service.id)}
+                  checked={(contactData.service_type || []).includes(service.id)}
                   onChange={(e) => {
                     const checked = e.target.checked;
                     setContactData((prev: any) => {
-                      const current = prev.main_services || [];
+                      const current = prev.service_type || [];
                       const updated = checked 
                         ? [...current, service.id] 
                         : current.filter((id: string) => id !== service.id);
- 
-                      if (updated.length > 0 && errors.main_services) {
+
+                      if (updated.length > 0 && errors.service_type) {
                         setErrors((prevErr: any) => {
                           const newErrs = {...prevErr};
-                          delete newErrs.main_services;
+                          delete newErrs.service_type;
                           return newErrs;
                         });
                       }
-                      return { ...prev, main_services: updated };
+                      return { ...prev, service_type: updated };
                     });
                   }}
                   className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600 focus:ring-0 cursor-pointer"
@@ -509,10 +476,10 @@ return (
               </label>
             ))}
           </div>
-         
-          {errors.main_services && (
+          
+          {errors.service_type && (
             <p className="text-[10px] text-red-500 font-black uppercase pl-1 animate-in fade-in duration-300">
-              {errors.main_services}
+              {errors.service_type}
             </p>
           )}
         </div>
@@ -570,7 +537,6 @@ return (
         <button
           type="button"
           onClick={() => {
-            
             if (validateStepThree()) setStep(4);
           }}
           className="group relative w-full md:flex-[1.5] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg"
@@ -888,46 +854,43 @@ return (
 </div>
 )}
 
-  {step === 6 && (
-  <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in zoom-in-95 duration-700 overflow-hidden text-center">
-    <div className="w-full max-w-[550px] flex flex-col items-center">
-
-      {/* BLOQUE DE TEXTO */}
-      <div className="space-y-6 mb-14">
-        <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
-          {t("contact.success.title")}
-        </h2>
-        
-        <div className="h-[2px] w-10 bg-primary-600 mx-auto rounded-full" />
-        
-        <p className="font-sans text-[13px] sm:text-sm font-medium text-slate-500 leading-[1.8] max-w-[460px] mx-auto uppercase tracking-wide pt-2">
-          {t("contact.success.message")}
-        </p>
-      </div>
-
-      {/* ACCIONES FINALIZAR */}
-      <div className="flex flex-col sm:flex-row gap-4 w-full max-w-[460px]">
-        {/* BOTÓN FINALIZAR */}
-        <button 
-          onClick={onClose} 
-          className="group relative flex-[1.5] overflow-hidden flex items-center justify-center p-5 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg shadow-slate-200"
-        >
-          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
-          <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.25em] uppercase">
-            {t("contact.success.close")}
-          </span>
-        </button>
-
-        {/* BOTÓN LLAMAR (Usando variable de entorno) */}
-        <a 
-          href={`tel:${process.env.NEXT_PUBLIC_PHONE}`} 
-          className="flex-1 p-5 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-950 transition-all text-center flex items-center justify-center gap-2 group"
-        >
-          <Phone size={12} className="group-hover:text-primary-600 transition-colors" />
-          {t("contact.success.call_btn")}
-        </a>
+ {step === 6 && (
+  <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in zoom-in-95 duration-700">
+    <div className="w-full max-w-[500px] text-center flex flex-col items-center">
+      
+      <div className="mb-8 flex justify-center">
+        <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center">
+          <Check size={40} className="text-green-600" />
+        </div>
       </div>
       
+      <h2 className="font-display font-black text-4xl uppercase tracking-tighter text-slate-950 mb-4">
+        {t("contact.success.title")}
+      </h2>
+      
+      <p className="font-sans text-slate-500 mb-10 leading-relaxed text-sm max-w-sm">
+        {t("contact.success.message")}
+      </p>
+
+      <div className="flex flex-col gap-4 w-full items-center">
+       
+        <a
+          href="tel:+17863506367"
+          onClick={handlePhoneClick("+17863506367")} 
+          className="w-full max-w-[320px] px-8 py-5 bg-slate-950 text-white font-black rounded-xl flex items-center justify-center gap-3 text-[10px] tracking-[0.3em] uppercase transition-all duration-300 hover:bg-blue-600 hover:shadow-[0_15px_30px_-10px_rgba(37,99,235,0.3)] group cursor-pointer"
+        >
+          <Phone className="w-4 h-4 text-primary-400 group-hover:text-white transition-colors" />
+          <span>(786) 350-6367</span>
+        </a>
+
+        <button
+          type="button"
+          onClick={onClose}
+          className="w-full max-w-[320px] p-5 rounded-xl border border-slate-100 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-950 transition-all duration-300"
+        >
+          {t("contact.buttons.close")}
+        </button>
+      </div>
     </div>
   </div>
 )}

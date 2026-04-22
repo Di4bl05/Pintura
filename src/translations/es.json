@@ -455,12 +455,12 @@
         "fields": {
           "budget": "Rango de Inversión Estimado",
           "comments": "Descripción Adicional (Opcional)",
-          "vip_label": "Modo Fast-Track Prioritario",
+          "vip_label": "Modo Vía-Rápida prioritario",
           "vip_text": "Estoy listo para empezar. No necesito negociación, quiero agendar la visita para confirmar detalles y comenzar a pintar directamente."
         },
         "ranges": {
           "low": {
-            "label": "$2,000 - $4,000"
+          "label": "$2,000 - $4,000"
                  },
           "mid": {
             "label": "$4,000 - $6,000"

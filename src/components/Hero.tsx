@@ -66,7 +66,7 @@ HeroContent.displayName = "HeroContent";
 
 export default function Hero() {
   const { t } = useLanguage();
-  const { handlePhoneClick } = useSmartLink(); // 3. Inicializamos el hook aquí
+  const { handlePhoneClick } = useSmartLink(); 
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [current, setCurrent] = useState(0);
   const [isAnimate, setIsAnimate] = useState(true);
@@ -131,7 +131,7 @@ export default function Hero() {
             <HeroContent
               t={t}
               onOpenContact={handleOpenContact}
-              onPhoneClick={handlePhoneClick} // 4. Pasamos la función al componente memoizado
+              onPhoneClick={handlePhoneClick} 
               current={current}
               isAnimate={isAnimate}
               heroContent={heroContent}

@@ -7,6 +7,8 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import Services from "@/components/Services";
 import Reviews from "@/components/Reviews";
 import Footer from "@/components/Footer";
+import ContactForm from "@/components/ContactForm";
+import React, { useState, useEffect } from "react";
 
 const BeforeAfterGallery = dynamic(() => import("@/components/BeforeAfterGallery"), {
   ssr: false,
@@ -22,6 +24,21 @@ const BeforeAfterGallery = dynamic(() => import("@/components/BeforeAfterGallery
 });
 
 export default function Home() {
+
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
+  
+  useEffect(() => {
+  const handleOpen = (e: Event) => {
+    e.stopImmediatePropagation(); 
+    setIsContactOpen(true);
+  };
+  window.addEventListener("app:open-contact", handleOpen, true);
+  return () => {
+    window.removeEventListener("app:open-contact", handleOpen, true);
+  };
+}, []);
+
   return (
     <main className="min-h-screen">
       <Header />
@@ -31,6 +48,10 @@ export default function Home() {
       <Reviews />
       <WhyChooseUs />
       <Footer />
+      <ContactForm 
+        isOpen={isContactOpen} 
+        onClose={() => setIsContactOpen(false)} 
+      />
     </main>
   );
 }
