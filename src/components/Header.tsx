@@ -19,15 +19,18 @@ export default function Header({ forceSolid = false }: HeaderProps) {
   const { handlePhoneClick } = useSmartLink();
   const phone = "+17863506367";
 
+  // 1. Manejo de Scroll para poner el Header sólido al bajar
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // 2. Manejo de Evento Global para poner el Header sólido cuando se abre el Formulario
   useEffect(() => {
     const handleOverlayState = (event: Event) => {
       const customEvent = event as CustomEvent<{ open?: boolean }>;
+      // Si detail.open es true, forzamos el fondo sólido
       setHasOverlayOpen(Boolean(customEvent.detail?.open));
     };
 
@@ -62,11 +65,13 @@ export default function Header({ forceSolid = false }: HeaderProps) {
     }
   };
 
+  // DETERMINACIÓN DEL ESTADO SÓLIDO
+  // Se pone sólido si: hay scroll O el formulario está abierto O se fuerza por prop
   const isSolid = scrolled || hasOverlayOpen || forceSolid;
 
   return (
     <header
-      className={`fixed top-0 z-[50] w-full transition-all duration-700 ${
+      className={`fixed top-0 z-[11000] w-full transition-all duration-700 ${
         isSolid
           ? "bg-slate-950/95 backdrop-blur-xl py-3 md:py-4 shadow-[0_10px_40px_rgba(0,0,0,0.3)] border-b border-white/5"
           : "bg-transparent py-5 md:py-8 border-b border-transparent"
@@ -137,7 +142,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             {/* BOTÓN INTELIGENTE DE TELÉFONO */}
             <a
               href={`tel:${phone}`}
-              onClick={handlePhoneClick(phone)} // <--- Aquí inyectamos la magia
+              onClick={handlePhoneClick(phone)}
               className="font-sans group flex items-center gap-3 rounded-2xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-primary-600 hover:text-white active:scale-95 uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4 shadow-sm"
             >
               <Phone className="w-3 h-3" />

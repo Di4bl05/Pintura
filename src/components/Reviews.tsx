@@ -58,26 +58,25 @@ export default function Reviews() {
         <div className="grid lg:grid-cols-[1fr_320px] gap-12 lg:gap-20 items-start">
           
           <div className="space-y-12 md:space-y-16 lg:space-y-24">
-            {/* ENCABEZADO RESPONSIVE */}
+
             <div className="max-w-4xl">
               <h2 className="flex flex-col gap-1 mb-8 md:mb-10">
-                <span className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase tracking-tighter leading-[0.95]">
+                <span className="font-display text-3xl md:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase tracking-tighter leading-[0.95]">
                   {t("reviews.title")}
                 </span>
-                <span className="font-serif text-3xl md:text-5xl lg:text-6xl italic font-normal text-primary-600 leading-none">
+                <span className="font-serif text-2xl md:text-3xl md:text-5xl lg:text-6xl italic font-normal text-primary-600 leading-none">
                   {t("reviews.titleHighlight")}
                 </span>
               </h2>
 
-              <div className="flex gap-4 md:gap-6 items-stretch">
-                <div className="w-[2px] bg-primary-600 rounded-full flex-shrink-0" />
-                <p className="font-sans text-base md:text-lg text-slate-500 font-medium leading-relaxed max-w-xl opacity-90">
-                  {t("reviews.subtitle")}
-                </p>
+            <div className="flex items-stretch gap-5 md:gap-8 mb-8 md:mb-12">
+              <div className="w-[1px] sm:w-[2px] flex-shrink-0 rounded-full bg-primary-600" />
+              <p className="max-w-xl font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90">
+                {t("reviews.subtitle")}
+                 </p>
+                 </div>
               </div>
-            </div>
 
-            {/* LISTA DE REVIEWS */}
             <div className="space-y-8 md:space-y-10">
               <div className="grid grid-cols-1 gap-6 md:gap-10">
                 {reviewsData.map((review) => (
@@ -85,7 +84,7 @@ export default function Reviews() {
                     <Quote className="absolute top-6 right-8 md:top-8 md:right-10 w-8 h-8 md:w-12 md:h-12 text-primary-600/5" />
                     
                     <div className="flex flex-col md:flex-row gap-6 mb-6 md:mb-8">
-                      {/* AVATAR: Oculto en móvil con hidden md:flex */}
+
                       <div className={`hidden md:flex w-14 h-14 rounded-2xl ${review.color} flex-shrink-0 items-center justify-center font-display font-bold text-xl shadow-sm`}>
                         {review.avatar}
                       </div>
@@ -117,7 +116,6 @@ export default function Reviews() {
                 ))}
               </div>
 
-              {/* BOTÓN VER TODAS */}
               <a 
                 href="#" 
                 target="_blank"
@@ -134,7 +132,6 @@ export default function Reviews() {
             </div>
           </div>
 
-          {/* SIDEBAR ASIDE: Oculto en móvil con hidden lg:block */}
           <aside className="hidden lg:sticky lg:top-32 self-start order-1 lg:order-2 lg:block">
             <div className="relative p-1 bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden">
               <div className="bg-slate-50/50 rounded-[1.8rem] p-7 text-center space-y-6">
@@ -177,7 +174,6 @@ export default function Reviews() {
         </div>
       </div>
 
-      {/* DECORACIÓN INFERIOR RESPONSIVA */}
       <div className="absolute bottom-6 left-0 w-full translate-y-1/2 z-30 pointer-events-none">
         <div className="flex items-center gap-4 md:gap-6 w-full max-w-[1440px] px-6 lg:px-16 mx-auto">
           <div className="h-[1px] md:h-[2px] flex-grow bg-slate-200" />

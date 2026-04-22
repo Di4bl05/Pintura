@@ -62,22 +62,23 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
           <div>
             <div className="text-[10px] font-black uppercase tracking-[0.5em] text-primary-600 mb-6">
               {t("servicesdetails.premium")}
-            </div>
-
-            <h1 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tight text-slate-950 leading-[0.9]">
+              </div>
+             <div className="flex flex-col gap-0 md:gap-1 mb-8 md:mb-12">
+            <h1 className="font-display text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-black text-slate-950 uppercase leading-[0.95] tracking-tight">
               {t(`servicesdetails.${sId}.title`)}
-            </h1>
+               </h1>
+               <h2 className="font-serif text-2xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-5xl italic font-normal text-primary-600 leading-[1] md:leading-none">
+                {t(`servicesdetails.${sId}.titleHighlight`)}
+                </h2>
+                </div> 
 
-            <h2 className="font-serif text-2xl md:text-4xl italic text-primary-600 font-normal mt-2">
-              {t(`servicesdetails.${sId}.titleHighlight`)}
-            </h2>
-
-            <div className="h-[3px] w-24 bg-primary-600 mt-8 mb-8" />
-
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-              {t(`servicesdetails.${sId}.description`)}
-            </p>
-          </div>
+            <div className="flex items-stretch gap-5 md:gap-8 mb-12">
+              <div className="w-[2px] sm:w-[3px] flex-shrink-0 rounded-full bg-primary-600" />
+              <p className="max-w-2xl font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90">
+                {t(`servicesdetails.${sId}.description`)}
+                </p>
+                </div>
+                </div>
 
           <div className="hidden md:flex justify-end md:translate-x-20 md:mt-12">
             <div className="relative group flex justify-end">
@@ -147,7 +148,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
           <button
            type="button"
               onClick={(e) => {
-             e.preventDefault(); // Evita comportamientos raros del navegador
+             e.preventDefault(); 
             window.dispatchEvent(new CustomEvent("app:open-contact"));
             }}
             className="relative group px-10 py-5 bg-slate-950 text-white font-black uppercase text-[11px] tracking-[0.2em] rounded-xl overflow-hidden shadow-lg"

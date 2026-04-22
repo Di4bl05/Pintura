@@ -32,11 +32,11 @@ export default function Services() {
   };
 
   const handleOpenDetails = (service: { key: string; img: string }) => {
-    // IMPORTANTE: Pasamos el ID para que el modal traduzca dinámicamente
+    
     setSelectedServiceData({
       id: service.key,
       img: service.img,
-      // Mantenemos un array para que el modal sepa cuántos pasos renderizar
+      
       steps: [{}, {}, {}], 
     });
 
@@ -81,16 +81,16 @@ export default function Services() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 md:gap-12 mb-10 md:mb-24">
           <div className="max-w-4xl">
             <h2 className="flex flex-col gap-1 mb-6 md:mb-8">
-              <span className="font-display text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase leading-[0.95]">
+              <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase leading-[0.95]">
                 {t("services.title")}
               </span>
 
-              <span className="font-serif text-xl sm:text-2xl md:text-5xl lg:text-6xl italic text-primary-600 leading-none">
+              <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl italic text-primary-600 leading-none">
                 {t("services.titleHighlight")}
               </span>
             </h2>
 
-            <p className="font-sans text-sm md:text-base lg:text-lg text-slate-500 font-medium leading-relaxed max-w-xl border-l-2 border-primary-600 pl-4 md:pl-8 mb-6 md:mb-10">
+            <p className="font-sans text-sm lg:text-lg text-slate-500 font-medium leading-relaxed max-w-xl border-l-2 border-primary-600 pl-5 md:pl-8 mb-8 md:mb-12">
               {t("services.subtitle")}
             </p>
 
@@ -101,7 +101,7 @@ export default function Services() {
                   <span className="relative h-2 w-2 rounded-full bg-emerald-500"></span>
                 </div>
 
-                <span className="font-sans text-[8px] md:text-[11px] font-black text-slate-600 uppercase tracking-[0.25em] md:tracking-[0.3em]">
+                <span className="font-sans text-[9px] md:text-[11px] font-black text-slate-600 uppercase tracking-[0.25em] md:tracking-[0.3em]">
                   Active Service Zones
                 </span>
               </div>

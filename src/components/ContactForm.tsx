@@ -162,6 +162,17 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
   }, [isOpen]);
 
   useEffect(() => {
+  if (isOpen) {
+    document.body.style.overflow = "hidden";
+    // ESTO ES LO QUE EL HEADER ESTARÁ ESCUCHANDO
+    window.dispatchEvent(new CustomEvent("app:overlay-state", { detail: { open: true } }));
+  } else {
+    document.body.style.overflow = "unset";
+    window.dispatchEvent(new CustomEvent("app:overlay-state", { detail: { open: false } }));
+  }
+}, [isOpen]);
+
+  useEffect(() => {
     if (isOpen) onClose();
   }, [pathname]);
   
@@ -227,13 +238,6 @@ return (
     
     <div className="w-full lg:w-1/2 flex flex-col justify-center">
       <div className="max-w-[500px]"> 
-        
-        <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-100 mb-6">
-          <Star className="text-primary-600 fill-primary-600" size={8} />
-          <span className="font-sans font-black text-[8px] tracking-[0.15em] text-slate-900 uppercase">
-            {t("contact.header.subtitle")}
-          </span>
-        </div>
         
         <h1 className="font-display font-black text-4xl lg:text-5xl text-slate-950 leading-[0.95] uppercase tracking-tighter mb-6">
           {t("contact.header.title").split("preciso")[0]}

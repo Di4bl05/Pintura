@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Phone, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect, useCallback, useMemo, memo } from "react";
-import ContactForm from "./ContactForm";
 import { useSmartLink } from "@/hooks/useSmartLink"; 
 import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
@@ -42,12 +41,14 @@ const HeroContent = memo(({ t, onOpenContact, onPhoneClick, current, isAnimate, 
 
         <div className="flex flex-col sm:flex-row gap-4">
           <button
-            onClick={onOpenContact}
+            type="button"
+            onClick={onOpenContact} 
             className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-blue-600 text-white font-black rounded-xl uppercase text-[10px] tracking-[0.3em] flex items-center justify-center gap-3 transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
           >
             <span>{t("hero.ctaFree")}</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
+          
           <a
             href={`tel:${phone}`}
             onClick={onPhoneClick(phone)} 
@@ -67,7 +68,7 @@ HeroContent.displayName = "HeroContent";
 export default function Hero() {
   const { t } = useLanguage();
   const { handlePhoneClick } = useSmartLink(); 
-  const [isContactOpen, setIsContactOpen] = useState(false);
+  
   const [current, setCurrent] = useState(0);
   const [isAnimate, setIsAnimate] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -97,8 +98,9 @@ export default function Hero() {
     }
   ], [t]);
 
-  const handleOpenContact = useCallback(() => setIsContactOpen(true), []);
-  const handleCloseContact = useCallback(() => setIsContactOpen(false), []);
+  const handleOpenContact = useCallback(() => {
+    window.dispatchEvent(new CustomEvent("app:open-contact"));
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -113,44 +115,39 @@ export default function Hero() {
   }, [heroContent.length]);
 
   return (
-    <>
-      <section className="relative h-[100svh] min-h-[700px] flex items-center pt-0 md:pt-5 bg-slate-950 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={isMobile ? heroContent[current].imgMobile : heroContent[current].imgDesktop}
-            alt="Hero background"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover brightness-[0.3] scale-105"
+    <section className="relative h-[100svh] min-h-[700px] flex items-center pt-0 md:pt-5 bg-slate-950 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={isMobile ? heroContent[current].imgMobile : heroContent[current].imgDesktop}
+          alt="Hero background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover brightness-[0.3] scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent" />
+      </div>
+
+      <div className="relative z-20 w-full mt-12 md:mt-24">
+          <HeroContent
+            t={t}
+            onOpenContact={handleOpenContact}
+            onPhoneClick={handlePhoneClick} 
+            current={current}
+            isAnimate={isAnimate}
+            heroContent={heroContent}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent" />
-        </div>
-
-        <div className="relative z-20 w-full mt-12 md:mt-24">
-            <HeroContent
-              t={t}
-              onOpenContact={handleOpenContact}
-              onPhoneClick={handlePhoneClick} 
-              current={current}
-              isAnimate={isAnimate}
-              heroContent={heroContent}
-            />
-        </div>
-
-        {/* Barra de progreso inferior */}
-        <div className="absolute bottom-0 left-0 h-1 w-full bg-white/5">
-          <div
-            className="h-full bg-primary-600 transition-all"
-            style={{
-              width: isAnimate ? "100%" : "0%",
-              transitionDuration: isAnimate ? "5000ms" : "0ms",
-            }}
-          />
-        </div>
-      </section>
-
-      <ContactForm isOpen={isContactOpen} onClose={handleCloseContact} />
-    </>
+      </div>
+      
+      <div className="absolute bottom-0 left-0 h-1 w-full bg-white/5">
+        <div
+          className="h-full bg-primary-600 transition-all"
+          style={{
+            width: isAnimate ? "100%" : "0%",
+            transitionDuration: isAnimate ? "5000ms" : "0ms",
+          }}
+        />
+      </div>
+    </section>
   );
 }

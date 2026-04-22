@@ -32,7 +32,6 @@ export default function WhyChooseClean() {
     <section id="why-choose-us" className="relative py-16 md:py-20 lg:py-28 overflow-hidden antialiased bg-white">
       <div className="mx-auto px-4 sm:px-6 lg:px-16 z-10 max-w-[1440px] relative">
         
-        {/* Contenido de Imagen Luis y Bety */}
         <div className="hidden md:block absolute top-0 right-30 lg:right-40 z-20 group">
           <div className="relative w-80 h-80 lg:w-[450px] lg:h-[450px] rounded-full p-2 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100">
             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white">
@@ -56,22 +55,24 @@ export default function WhyChooseClean() {
           </div>
         </div>
 
-        {/* Títulos */}
         <div className="flex flex-col items-start text-left mb-10 md:mb-14 space-y-5 md:space-y-6">
-          <h2 className="flex flex-col max-w-2xl text-left">
-            <span className="font-display text-4xl md:text-5xl font-bold text-slate-950 uppercase tracking-tighter leading-[0.9]">
-              {t("whyChoose.core_value_proposition.hookMain")}
+       <h2 className="flex flex-col gap-1 mb-8 md:mb-10 text-left max-w-2xl">
+         <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase tracking-tighter leading-[0.95]">
+          {t("whyChoose.core_value_proposition.hookMain")}
+          </span>
+          <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl italic font-normal text-primary-600 leading-none">
+            {t("whyChoose.core_value_proposition.hookItalic")}
             </span>
-            <span className="font-serif text-3xl md:text-5xl italic font-normal text-primary-600 mt-1 md:mt-2">
-              {t("whyChoose.core_value_proposition.hookItalic")}
-            </span>
-          </h2>
-          <p className="font-sans text-base md:text-lg text-slate-500 font-medium leading-relaxed max-w-xl border-l-2 border-primary-600 pl-6 md:pl-8">
+            </h2>
+
+         <div className="flex items-stretch gap-5 md:gap-8 mb-8 md:mb-12">
+          <div className="w-[2px] sm:w-[3px] flex-shrink-0 rounded-full bg-primary-600" />
+          <p className="max-w-xl font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90">
             {t("whyChoose.core_value_proposition.description")}
-          </p>
+            </p>
+            </div>
         </div>
 
-        {/* Grid de Diferencias */}
         <div className="flex flex-col md:flex-row gap-5 md:gap-6 lg:gap-8 items-end">
           <div className="flex-1 flex flex-col gap-5 md:gap-6 lg:gap-8 w-full">
             {leftCol.map((item: any) => (
