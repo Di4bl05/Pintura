@@ -13,14 +13,13 @@ const HeroContent = memo(({ t, onOpenContact, onPhoneClick, current, isAnimate, 
   return (
     <div className="relative z-20 max-w-[1440px] mx-auto px-6 lg:px-16 w-full">
       <div className="max-w-4xl mt-6 sm:mt-0">
-        <span className="font-serif block text-primary-400 text-base sm:text-lg md:text-xl lg:text-2xl mb-4 italic">
+        <span className="font-serif block text-primary-400 text-2xl sm:text-lg md:text-xl lg:text-2xl mb-4 italic">
           {t("hero.title1")}
         </span>
 
         <h1 className="font-display text-5xl md:text-4xl lg:text-7xl xl:text-[7rem] font-black text-white leading-[0.92] uppercase mb-7 drop-shadow-2xl">
           {t("hero.title2")}
         </h1>
-
         <div className="h-10 overflow-hidden mb-10 border-l-2 border-primary-600/30 pl-4">
           <p
             className={`font-sans text-sm md:text-lg font-bold text-primary-100/60 uppercase tracking-[0.35em] transition-all duration-700

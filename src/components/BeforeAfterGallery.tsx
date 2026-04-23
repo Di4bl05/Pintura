@@ -261,7 +261,7 @@ export default function BeforeAfterGallery() {
         </span>
         </h2>
           <div className="mb-12 flex items-stretch gap-6">
-          <div className="w-[2px] flex-shrink-0 rounded-full bg-primary-600" />
+          <div className="w-[1px] sm:w-[2px] flex-shrink-0 rounded-full bg-primary-600" />
           <p className="max-w-xl font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90 mb-1 md:mb-2">
           {t("gallery.subtitle")}
           </p>

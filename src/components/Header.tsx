@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Phone, Menu, X, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext"; 
 import { useSmartLink } from "@/hooks/useSmartLink";
 
 interface HeaderProps {
@@ -19,18 +19,16 @@ export default function Header({ forceSolid = false }: HeaderProps) {
   const { handlePhoneClick } = useSmartLink();
   const phone = "+17863506367";
 
-  // 1. Manejo de Scroll para poner el Header sólido al bajar
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 2. Manejo de Evento Global para poner el Header sólido cuando se abre el Formulario
   useEffect(() => {
     const handleOverlayState = (event: Event) => {
       const customEvent = event as CustomEvent<{ open?: boolean }>;
-      // Si detail.open es true, forzamos el fondo sólido
+      
       setHasOverlayOpen(Boolean(customEvent.detail?.open));
     };
 
@@ -65,8 +63,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
     }
   };
 
-  // DETERMINACIÓN DEL ESTADO SÓLIDO
-  // Se pone sólido si: hay scroll O el formulario está abierto O se fuerza por prop
   const isSolid = scrolled || hasOverlayOpen || forceSolid;
 
   return (
@@ -79,7 +75,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
     >
       <nav className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:pl-10 lg:pr-20">
         <div className="flex items-center">
-          {/* LOGO */}
+         
           <Link
             href="/"
             className="flex items-center flex-shrink-0 gap-3 md:gap-4 transition-transform group active:scale-95"
@@ -99,14 +95,14 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             <div className="flex flex-col pl-2 sm:pl-3 md:pl-4 leading-none text-left border-l border-white/10">
               <span
                 className={`font-display font-black tracking-tightest text-white transition-all duration-500 ${
-                  isSolid ? "text-sm sm:text-lg md:text-xl" : "text-base sm:text-xl md:text-3xl"
+                  isSolid ? "text-base sm:text-lg md:text-xl" : "text-lg sm:text-xl md:text-3xl"
                 }`}
               >
                 LUISBETY <span className="font-serif italic font-normal text-primary-500">inc.</span>
               </span>
               <span
                 className={`font-sans font-bold uppercase text-primary-200/50 transition-all duration-500 ${
-                  isSolid ? "text-[7px] mt-1" : "text-[8px] sm:text-[9px] md:text-[10px] mt-1 md:mt-2"
+                  isSolid ? "text-[8px] mt-1" : "text-[9px] sm:text-[9px] md:text-[10px] mt-1 md:mt-2"
                 } tracking-[0.25em] sm:tracking-[0.35em]`}
               >
                 Painting and Remodeling
@@ -114,7 +110,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             </div>
           </Link>
 
-          {/* DESKTOP NAV */}
           <div className={`hidden lg:flex items-center space-x-10 ml-auto transition-all duration-500 ${isSolid ? "mr-6" : "mr-8 xl:mr-10"}`}>
             {navigation.map((item) => (
               <a
@@ -129,7 +124,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             ))}
           </div>
 
-          {/* BOTONES DE ACCIÓN (Idioma y Teléfono) */}
           <div className={`hidden md:flex items-center gap-3 transition-all duration-500 ${isSolid ? "lg:ml-0 lg:translate-x-10" : "lg:ml-4 xl:ml-6 lg:-translate-x-2 xl:-translate-x-10"}`}>
             <button
               onClick={() => setLanguage(language === "es" ? "en" : "es")}
@@ -138,8 +132,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
               <Globe className="w-3.5 h-3.5" />
               <span>{language}</span>
             </button>
-
-            {/* BOTÓN INTELIGENTE DE TELÉFONO */}
             <a
               href={`tel:${phone}`}
               onClick={handlePhoneClick(phone)}
@@ -150,7 +142,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             </a>
           </div>
 
-          {/* MENÚ MÓVIL (Toggle) */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="flex items-center justify-center w-10 h-10 ml-auto text-white transition-all duration-500 border lg:hidden rounded-xl bg-white/5 border-white/10 backdrop-blur-md"
@@ -159,7 +150,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
           </button>
         </div>
 
-        {/* PANEL MÓVIL */}
         <div
           className={`lg:hidden absolute left-4 right-4 top-[calc(100%+16px)] rounded-[2rem] border border-white/10 bg-slate-950/95 backdrop-blur-2xl text-white shadow-2xl transition-all duration-500 overflow-hidden ${
             isMenuOpen ? "max-h-[80vh] opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
@@ -177,6 +167,15 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                 <span className="text-primary-500">→</span>
               </a>
             ))}
+            <button
+            onClick={() => setLanguage(language === "es" ? "en" : "es")}
+            className="flex items-center justify-center gap-3 px-4 py-3 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all mt-2 w-full"
+            >
+              <Globe size={18} className="text-primary-500" />
+              <span className="text-[13px] font-black uppercase tracking-[0.3em] text-white">
+                {language === "es" ? "EN" : "ES"}
+                </span>
+                </button> 
           </div>
         </div>
       </nav>

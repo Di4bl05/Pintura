@@ -3,13 +3,12 @@
 import Image from "next/image";
 import { Phone, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-// 1. QUITAMOS useState y ContactForm de aquí
 import { useSmartLink } from "@/hooks/useSmartLink"; 
 import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
 export default function WhyChooseClean() {
   const { t } = useLanguage();
-  // 2. BORRAMOS EL ESTADO LOCAL (Ya no se usa aquí)
+  
   
   const { handlePhoneClick } = useSmartLink();
   const phoneNumber = t("combined_conversion_section.cta_box.phone") || "(786) 350-6367";
@@ -66,7 +65,7 @@ export default function WhyChooseClean() {
             </h2>
 
          <div className="flex items-stretch gap-5 md:gap-8 mb-8 md:mb-12">
-          <div className="w-[2px] sm:w-[3px] flex-shrink-0 rounded-full bg-primary-600" />
+          <div className="w-[1px] sm:w-[2px] flex-shrink-0 rounded-full bg-primary-600" />
           <p className="max-w-xl font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90">
             {t("whyChoose.core_value_proposition.description")}
             </p>

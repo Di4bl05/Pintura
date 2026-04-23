@@ -13,7 +13,6 @@
     "description": "Pintura residencial profesional en Orlando, FL. Especialistas en reparación de drywall, enlacado de gabinetes y lavado a presión.",
     "descriptionBold": "Licenciados, Asegurados y Limpieza Detallada Incluida.",
     "ctaFree": "PRESUPUESTO GRATIS",
-    "ctaCall": "Llamar Ahora",
     "carousel": [
       "Pintura de Gabinetes de Cocina",
       "Reparación Profesional de Paredes",
@@ -21,7 +20,10 @@
       "Limpieza Detallada Post-Trabajo"
     ]
   },
+  
  "services": {
+  "include": "Incluye: ",
+  "zone": "ZONAS ACTIVAS DE SERVICIOS",
   "title": "Pintura profesional",
   "titleHighlight": "de lujo con acabados de alta gama",
   "subtitle": "Desde la protección profunda de fachadas contra el clima de Florida hasta la renovación estética de sus espacios internos. Ofrecemos soluciones integrales de pintura y mantenimiento diseñadas para elevar el valor de su propiedad con acabados de alta resistencia y precisión técnica.",
@@ -236,7 +238,6 @@
       "location": "Florida Central",
       "viewAll": "Ver todas las reseñas en Google"
     },
-    "sectionLabel": "Section Reviews",
     "items": [
       {
         "id": 1,

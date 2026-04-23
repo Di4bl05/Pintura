@@ -71,145 +71,124 @@ export default function Services() {
   ];
 
   return (
-    <section
-      id="services"
-      className="relative py-12 sm:py-16 md:py-24 lg:py-32 overflow-hidden bg-white"
-    >
-      <div className="absolute top-0 left-[-10%] w-[20rem] sm:w-[30rem] md:w-[60rem] h-[20rem] sm:h-[30rem] md:h-[60rem] bg-slate-50/50 rounded-full blur-[60px] md:blur-[140px] pointer-events-none -z-10" />
+  <section
+  id="services"
+className="relative py-24 sm:py-32 md:py-48 overflow-hidden bg-[#F5F5F7]"
+>
+  {/* 1. BLOQUE DE TEXTO: Alineado a la izquierda del logo */}
+  <div className="relative z-10 w-full">
+    <div className="pl-6 md:pl-16 lg:pl-24 flex flex-col gap-12"> 
+      <div className="max-w-5xl"> 
+        <h2 className="flex flex-col gap-0 mb-8 md:mb-10">
+          <span className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-slate-950 uppercase leading-[1.1] tracking-tight">
+            {t("services.title")}
+          </span>
+          <span className="font-serif text-2xl sm:text-3xl md:text-5xl italic text-primary-600 leading-tight">
+            {t("services.titleHighlight")}
+          </span>
+        </h2>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 md:px-6 lg:px-16">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 md:gap-12 mb-10 md:mb-24">
-          <div className="max-w-4xl">
-            <h2 className="flex flex-col gap-1 mb-6 md:mb-8">
-              <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase leading-[0.95]">
-                {t("services.title")}
-              </span>
+        <p className="font-sans text-sm lg:text-lg text-slate-500 font-medium leading-relaxed max-w-2xl mb-12">
+          {t("services.subtitle")}
+        </p>
 
-              <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl italic text-primary-600 leading-none">
-                {t("services.titleHighlight")}
-              </span>
-            </h2>
-
-            <p className="font-sans text-sm lg:text-lg text-slate-500 font-medium leading-relaxed max-w-xl border-l-2 border-primary-600 pl-5 md:pl-8 mb-8 md:mb-12">
-              {t("services.subtitle")}
-            </p>
-
-            <div className="space-y-3 md:space-y-5">
-              <div className="flex items-center gap-2 md:gap-3">
-                <div className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative h-2 w-2 rounded-full bg-emerald-500"></span>
-                </div>
-
-                <span className="font-sans text-[9px] md:text-[11px] font-black text-slate-600 uppercase tracking-[0.25em] md:tracking-[0.3em]">
-                  Active Service Zones
+        {/* ZONAS */}
+        <div className="flex flex-col gap-6">
+          <div className="flex items-center gap-3">
+            <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <span className="font-sans text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.3em]">
+              {t("services.zone")}
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-x-10 gap-y-3">
+            {serviceAreas.map((city) => (
+              <div key={city} className="flex items-center gap-2">
+                <MapPin className="w-3 h-3 text-primary-600/40" />
+                <span className="font-sans text-[10px] md:text-[11px] font-black text-slate-600 uppercase tracking-widest">
+                  {city}
                 </span>
               </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
 
-              <div className="flex flex-wrap gap-x-3 md:gap-x-8 gap-y-2 md:gap-y-3">
-                {serviceAreas.map((city) => (
-                  <div
-                    key={city}
-                    className="group flex items-center gap-1 md:gap-2 py-1"
-                  >
-                    <MapPin className="w-3 h-3 text-primary-600" />
-                    <span className="font-sans text-[8px] sm:text-[9px] md:text-[11px] font-black text-slate-900 uppercase tracking-[0.15em] md:tracking-[0.2em]">
-                      {city}
-                    </span>
-                  </div>
-                ))}
-              </div>
+{/* 1. CONTENEDOR MAESTRO: Rompe cualquier límite y ocupa el 100% de la pantalla del monitor */}
+<div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+  
+  <div
+    ref={scrollRef}
+    /* 2. EL TRACK DEL CARRUSEL: 
+       - CERO PADDING IZQUIERDO. Empieza pegado al borde del monitor.
+       - pr-[20vw] para dejar aire al final.
+    */
+    className="flex gap-6 md:gap-8 pb-16 overflow-x-auto snap-x snap-mandatory scrollbar-hide pr-[20vw]"
+  >
+    
+    {/* =========================================
+        EL TRUCO DE TESLA: EL ESPACIADOR INVISIBLE
+        Este div vacío es el que empuja la primera foto para que se alinee con tu logo.
+        Al hacer scroll, las fotos se mueven hacia la izquierda ocupando este espacio hasta tocar el borde.
+        *Nota: El 720px asume que tu max-w es 1440px (720 es la mitad). Si usas max-w-7xl (1280px), pon 640px.
+        ========================================= */}
+    <div className="shrink-0 w-[1.5rem] md:w-[calc(50vw-720px+1.5rem)] snap-start" />
+
+
+    {services.map((service, index) => (
+      <div
+        key={index}
+        /* Mantenemos tu ancho para que la foto no se deforme */
+        className="shrink-0 w-[85%] md:w-[70%] lg:w-[60%] snap-start"
+      >
+        <div className="group/item flex flex-col">
+          
+          {/* CONTENEDOR DE LA IMAGEN */}
+          <div className="relative w-full h-[50vh] md:h-[70vh] overflow-hidden rounded-xl md:rounded-2xl mb-6 shadow-lg">
+            <Image
+              src={service.img}
+              alt={t(`services.${service.key}.title`)}
+              fill
+              className="object-cover group-hover/item:scale-[1.02] transition-transform duration-[2s] ease-out"
+            />
+            
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+
+            {/* TÍTULO ELEGANTE */}
+            <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
+              <h3 className="font-display text-2xl md:text-4xl lg:text-3xl font-bold text-white uppercase tracking-tighter leading-[0.9]">
+                {t(`services.${service.key}.title`)}
+              </h3>
             </div>
           </div>
-        </div>
 
-        <div className="relative group/carousel">
-          <button
-            onClick={() => scroll("left")}
-            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-40 w-12 h-12 bg-white text-slate-950 border border-slate-200 rounded-full items-center justify-center hover:bg-primary-600 hover:text-white transition-all opacity-0 group-hover/carousel:opacity-100"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
+          {/* INFO DEBAJO */}
+          <div className="flex flex-col gap-4 px-1">
+            <div className="max-w-2xl">
+              <p className="font-sans text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-2">
+                {t("services.include")}:
+              </p>
+              <p className="font-sans text-xs md:text-sm font-bold text-slate-600 uppercase tracking-widest leading-relaxed">
+                {[0, 1, 2, 3]
+                  .map((i) => t(`services.${service.key}.features.${i}`))
+                  .join(", ")}
+              </p>
+            </div>
 
-          <button
-            onClick={() => scroll("right")}
-            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-40 w-12 h-12 bg-white text-slate-950 border border-slate-200 rounded-full items-center justify-center hover:bg-primary-600 hover:text-white transition-all opacity-0 group-hover/carousel:opacity-100"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-
-          <div
-            ref={scrollRef}
-            className="flex gap-4 md:gap-6 lg:gap-8 pb-6 md:pb-12 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-1"
-          >
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="flex-[0_0_85%] sm:flex-[0_0_60%] lg:flex-[0_0_31%] snap-start"
-              >
-                <div className="group/card relative bg-white rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-slate-100 h-full flex flex-col hover:shadow-xl transition-all">
-                  <div className="relative h-52 sm:h-60 md:h-64 lg:h-80 overflow-hidden">
-                    <Image
-                      src={service.img}
-                      alt={t(`services.${service.key}.title`)}
-                      fill
-                      className="object-cover group-hover/card:scale-105 transition-transform duration-1000"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-
-                    <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8">
-                      <h3 className="font-display text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white uppercase leading-tight">
-                        {t(`services.${service.key}.title`)}
-                      </h3>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col flex-grow p-5 sm:p-6 md:p-8 lg:p-10">
-                    <ul className="flex-grow mb-5 md:mb-8 space-y-2 md:space-y-4">
-                      {[0, 1, 2, 3].map((i) => (
-                        <li key={i} className="flex items-start gap-2 md:gap-3">
-                          <Check className="w-3 h-3 text-primary-600 mt-0.5" />
-                          <span className="font-sans text-[9px] sm:text-[10px] md:text-[11px] font-bold text-slate-600 uppercase leading-tight">
-                            {t(`services.${service.key}.features.${i}`)}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <button
-                      onClick={() => handleOpenDetails(service)}
-                      className="group/btn relative overflow-hidden flex items-center justify-center gap-2 w-full bg-slate-950 text-white py-4 md:py-5 rounded-xl font-black text-[9px] uppercase tracking-[0.2em]"
-                    >
-                      <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 ease-out group-hover/btn:translate-y-0" />
-                      <span className="relative z-10">
-                        {t("services.moreInfo")}
-                      </span>
-                      <ArrowRight className="relative z-10 w-3 h-3 transition-transform group-hover/btn:translate-x-1" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <button
+              onClick={() => handleOpenDetails(service)}
+              className="group/btn flex items-center gap-2 text-slate-950 font-black text-[10px] md:text-[11px] uppercase tracking-[0.2em] border-b border-slate-950 w-fit pb-1 hover:text-primary-600 transition-all"
+            >
+              <span>{t("services.moreInfo")}</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
+            </button>
           </div>
         </div>
       </div>
-
-      <div className="absolute bottom-10 left-0 w-full translate-y-1/2 pointer-events-none">
-        <div className="flex items-center gap-4 w-full max-w-[1440px] mx-auto px-4 md:px-6 lg:px-16">
-          <div className="h-[1px] flex-grow bg-slate-200" />
-
-          <div className="flex items-center gap-3 bg-white px-4 py-2 md:px-8 md:py-3 rounded-full border border-slate-200">
-            <div className="w-1.5 h-1.5 bg-primary-600 animate-pulse rounded-full" />
-            <span className="font-sans text-[8px] md:text-[10px] font-black text-slate-600 uppercase tracking-[0.4em]">
-              Section Service
-            </span>
-            <div className="w-1.5 h-1.5 bg-primary-600 animate-pulse rounded-full" />
-          </div>
-
-          <div className="h-[1px] flex-grow bg-slate-200" />
-        </div>
-      </div>
+    ))}
+  </div>
+</div>
+</div>
 
       <ServiceDetail
         isOpen={isDetailsOpen}

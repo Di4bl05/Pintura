@@ -61,10 +61,10 @@ export default function Reviews() {
 
             <div className="max-w-4xl">
               <h2 className="flex flex-col gap-1 mb-8 md:mb-10">
-                <span className="font-display text-3xl md:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase tracking-tighter leading-[0.95]">
+                <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase tracking-tighter leading-[0.95]">
                   {t("reviews.title")}
                 </span>
-                <span className="font-serif text-2xl md:text-3xl md:text-5xl lg:text-6xl italic font-normal text-primary-600 leading-none">
+                <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl italic font-normal text-primary-600 leading-none">
                   {t("reviews.titleHighlight")}
                 </span>
               </h2>
@@ -171,20 +171,6 @@ export default function Reviews() {
               </div>
             </div>
           </aside>
-        </div>
-      </div>
-
-      <div className="absolute bottom-6 left-0 w-full translate-y-1/2 z-30 pointer-events-none">
-        <div className="flex items-center gap-4 md:gap-6 w-full max-w-[1440px] px-6 lg:px-16 mx-auto">
-          <div className="h-[1px] md:h-[2px] flex-grow bg-slate-200" />
-          <div className="flex items-center gap-3 md:gap-4 bg-white px-4 py-2 md:px-8 md:py-3 rounded-full border border-slate-200 flex-shrink-0 shadow-md">
-            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary-600 animate-pulse" />
-            <span className="font-sans text-[8px] md:text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] md:tracking-[0.5em]">
-              {t("reviews.sectionLabel")}
-            </span>
-            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary-600 animate-pulse" />
-          </div>
-          <div className="h-[1px] md:h-[2px] flex-grow bg-slate-200" />
         </div>
       </div>
     </section>
