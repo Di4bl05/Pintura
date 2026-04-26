@@ -109,7 +109,7 @@ export default function Reviews() {
                     </div>
 
                     <p className="font-sans text-base md:text-lg text-slate-950 font-medium leading-relaxed">
-                      "{review.text}"
+                      &ldquo;{review.text}&rdquo;
                     </p>
                   </div>
                 ))}
