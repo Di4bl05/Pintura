@@ -40,3 +40,20 @@ export interface GalleryProjectPayload {
   is_active: boolean;
   display_order: number;
 }
+
+export type SiteImageKey =
+  | "logoOriginal"
+  | "logoPng"
+  | "exteriorBefore"
+  | "exteriorAfter"
+  | "exterior2After"
+  | "pressureWash"
+  | "luisBety";
+
+export interface AdminSiteImage {
+  key: SiteImageKey;
+  label: string;
+  url: string;
+  localUrl: string;
+  storagePath: string;
+}
