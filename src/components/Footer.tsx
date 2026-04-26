@@ -4,9 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getSiteImageUrl } from "@/lib/siteImageSources";
 
 export default function Footer() {
   const { t } = useLanguage();
+  const logoUrl = getSiteImageUrl("logoOriginal");
 
   type FooterServiceItem = { name: string; href: string };
 
@@ -39,7 +41,7 @@ export default function Footer() {
               {/* Imagen en Blanco y Negro (Filtros CSS) */}
               <div className="relative w-[50px] h-[50px] shrink-0">
                 <Image 
-                  src="/images/logo/logo-original.webp" 
+                  src={logoUrl}
                   alt="Logo" 
                   fill
                   className="object-contain grayscale brightness-0 invert opacity-90 transition-opacity group-hover:opacity-100" 

@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createSupabaseBrowserClient, hasSupabaseClientConfig } from "@/lib/supabase/client";
 import { adminFetch } from "@/lib/adminClientApi";
-import { GalleryImageKind, GalleryProject, GalleryProjectPayload, GalleryService } from "@/types/gallery";
+import { AdminSiteImage, GalleryImageKind, GalleryProject, GalleryProjectPayload, GalleryService, SiteImageKey } from "@/types/gallery";
 
 const serviceOptions: GalleryService[] = ["interior", "exterior", "cabinet", "commercial", "deck", "pressure"];
 const imageKinds: GalleryImageKind[] = ["before_desktop", "before_mobile", "after_desktop", "after_mobile"];
@@ -29,6 +29,11 @@ type UploadState = {
   alt_en: string;
   caption_es: string;
   caption_en: string;
+  busy: boolean;
+};
+
+type SiteUploadState = {
+  file: File | null;
   busy: boolean;
 };
 
@@ -61,6 +66,8 @@ export default function AdminDashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState<GalleryProjectPayload>(emptyPayload);
   const [uploads, setUploads] = useState<Record<GalleryImageKind, UploadState>>(initialUploadState);
+  const [siteImages, setSiteImages] = useState<AdminSiteImage[]>([]);
+  const [siteUploads, setSiteUploads] = useState<Record<SiteImageKey, SiteUploadState>>({} as Record<SiteImageKey, SiteUploadState>);
 
   const selectedProject = useMemo(() => projects.find((project) => project.id === selectedId) ?? null, [projects, selectedId]);
 
@@ -123,6 +130,27 @@ export default function AdminDashboardPage() {
     }
   };
 
+  const loadSiteImages = async () => {
+    try {
+      const payload = await adminFetch("/api/admin/site-images");
+      const list = (payload.images ?? []) as AdminSiteImage[];
+      setSiteImages(list);
+
+      setSiteUploads((prev) => {
+        const next: Partial<Record<SiteImageKey, SiteUploadState>> = {};
+        for (const image of list) {
+          next[image.key] = {
+            file: null,
+            busy: prev[image.key]?.busy ?? false,
+          };
+        }
+        return next as Record<SiteImageKey, SiteUploadState>;
+      });
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "No se pudieron cargar imagenes del sitio");
+    }
+  };
+
   useEffect(() => {
     if (!hasSupabaseClientConfig) {
       setLoading(false);
@@ -137,7 +165,7 @@ export default function AdminDashboardPage() {
         router.push("/admin/login");
         return;
       }
-      await loadProjects();
+      await Promise.all([loadProjects(), loadSiteImages()]);
     };
 
     run();
@@ -252,6 +280,13 @@ export default function AdminDashboardPage() {
     }));
   };
 
+  const updateSiteUpload = (key: SiteImageKey, value: SiteUploadState) => {
+    setSiteUploads((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
   const uploadImage = async (kind: GalleryImageKind) => {
     if (!selectedId) {
       setError("Primero crea el proyecto y guardalo para subir imagenes.");
@@ -291,6 +326,36 @@ export default function AdminDashboardPage() {
     }
   };
 
+  const uploadSiteImage = async (key: SiteImageKey) => {
+    const state = siteUploads[key];
+    if (!state?.file) {
+      setError("Selecciona un archivo antes de subir.");
+      return;
+    }
+
+    updateSiteUpload(key, { ...state, busy: true });
+    setError(null);
+    setMessage(null);
+
+    try {
+      const body = new FormData();
+      body.append("key", key);
+      body.append("file", state.file);
+
+      await adminFetch("/api/admin/site-images", {
+        method: "POST",
+        body,
+      });
+
+      setMessage("Imagen del sitio actualizada.");
+      await loadSiteImages();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "No se pudo subir la imagen del sitio");
+    } finally {
+      updateSiteUpload(key, { file: null, busy: false });
+    }
+  };
+
   const logout = async () => {
     const supabase = createSupabaseBrowserClient();
     await supabase.auth.signOut();
@@ -303,8 +368,8 @@ export default function AdminDashboardPage() {
         <header className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm md:p-5">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">Admin de Galeria</h1>
-              <p className="text-sm text-slate-600">Gestion intuitiva: proyectos, intro del dueno, descripciones e imagenes ES/EN.</p>
+              <h1 className="text-2xl font-bold text-slate-900">Admin de Contenido Visual</h1>
+              <p className="text-sm text-slate-600">Gestion intuitiva: proyectos, intro del dueno, descripciones, galeria y fotos fijas del sitio.</p>
             </div>
             <div className="flex gap-2">
               <button
@@ -508,6 +573,64 @@ export default function AdminDashboardPage() {
                   </div>
                 );
               })}
+            </div>
+
+            <div className="mt-8 space-y-4 border-t border-slate-200 pt-6">
+              <h3 className="text-lg font-semibold text-slate-900">Imagenes globales del sitio</h3>
+              <p className="text-sm text-slate-600">Aqui editas fotos usadas en Header, Footer, Hero y secciones de apoyo, sin tocar codigo.</p>
+
+              <div className="grid gap-3 md:grid-cols-2">
+                {siteImages.map((image) => {
+                  const state = siteUploads[image.key] ?? { file: null, busy: false };
+
+                  return (
+                    <div key={image.key} className="rounded-2xl border border-slate-200 p-4">
+                      <h4 className="text-sm font-semibold text-slate-800">{image.label}</h4>
+                      <p className="mt-1 text-xs text-slate-500">Clave: {image.key}</p>
+
+                      <div className="mt-3 overflow-hidden rounded-xl border border-slate-200 bg-slate-50 p-2">
+                        <img src={image.url} alt={image.label} className="h-24 w-full rounded-lg object-contain" />
+                      </div>
+
+                      <div className="mt-3 flex items-center gap-2 text-xs">
+                        <a href={image.url} target="_blank" rel="noreferrer" className="font-medium text-primary-700 hover:underline">
+                          Ver actual
+                        </a>
+                        <span className="text-slate-300">|</span>
+                        <a href={image.localUrl} target="_blank" rel="noreferrer" className="font-medium text-slate-600 hover:underline">
+                          Ver fallback local
+                        </a>
+                      </div>
+
+                      <label className="mt-3 block">
+                        <span className="mb-1 block text-xs font-medium text-slate-600">Nuevo archivo</span>
+                        <input
+                          type="file"
+                          accept="image/webp,image/png,image/jpeg"
+                          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                            updateSiteUpload(image.key, {
+                              file: e.target.files?.[0] ?? null,
+                              busy: state.busy,
+                            });
+                          }}
+                          className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm"
+                        />
+                      </label>
+
+                      <div className="mt-3">
+                        <button
+                          type="button"
+                          disabled={state.busy}
+                          onClick={() => uploadSiteImage(image.key)}
+                          className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-60"
+                        >
+                          {state.busy ? "Subiendo..." : "Subir imagen"}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </section>
         </div>

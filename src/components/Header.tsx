@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Phone, Menu, X, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getSiteImageUrl } from "@/lib/siteImageSources";
 
 interface HeaderProps {
   forceSolid?: boolean;
@@ -64,6 +65,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
   };
 
   const isSolid = scrolled || hasOverlayOpen || forceSolid;
+  const logoUrl = getSiteImageUrl("logoOriginal");
 
   return (
     <header
@@ -83,7 +85,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
           >
             <div className="relative">
               <img
-                src="/images/logo/logo-original.webp"
+                src={logoUrl}
                 alt="LUISBETY INC"
                 className={`transition-all duration-500 object-contain ${
                   isSolid
