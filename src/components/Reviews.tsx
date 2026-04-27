@@ -60,20 +60,19 @@ export default function Reviews() {
           
           <div className="space-y-16 lg:space-y-24">
             <div className="max-w-4xl">
-              <h2 className="flex flex-col gap-1 mb-10">
-                <span className="font-display text-4xl md:text-6xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.95]">
-                  {t("reviews.title")}
-                </span>
-                <span className="font-serif text-3xl md:text-6xl italic font-normal text-primary-600 leading-none">
-                  {t("reviews.titleHighlight")}
-                </span>
-              </h2>
+              <h2 className="flex flex-col gap-1 mb-6 md:mb-8">
+  <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase leading-[0.95] tracking-tight">
+    {t("reviews.title")}
+  </span>
+  <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-5xl italic text-primary-600 leading-none">
+    {t("reviews.titleHighlight")}
+  </span>
+</h2>
 
               <div className="flex gap-6 items-stretch">
-                <div className="w-[2px] bg-primary-600 rounded-full flex-shrink-0" />
-                <p className="font-sans text-lg text-slate-500 font-medium leading-relaxed max-w-xl opacity-90">
-                  {t("reviews.subtitle")}
-                </p>
+               <p className="font-sans text-sm lg:text-lg text-slate-500 font-medium leading-relaxed max-w-full opacity-90">
+  {t("reviews.subtitle")}
+</p>
               </div>
             </div>
 
@@ -170,18 +169,6 @@ export default function Reviews() {
               </div>
             </div>
           </aside>
-        </div>
-      </div>
-
-      <div className="absolute bottom-6 left-0 w-full translate-y-1/2 z-30 pointer-events-none">
-        <div className="flex items-center gap-6 w-full max-w-[1440px] px-6 lg:px-16 mx-auto">
-          <div className="h-[2px] flex-grow bg-slate-200" />
-          <div className="flex items-center gap-4 bg-white px-8 py-3 rounded-full border border-slate-200 flex-shrink-0 shadow-md">
-            <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
-            <span className="font-sans text-[10px] font-black text-slate-600 uppercase tracking-[0.5em]">{t("reviews.sectionLabel")}</span>
-            <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
-          </div>
-          <div className="h-[2px] flex-grow bg-slate-200" />
         </div>
       </div>
     </section>

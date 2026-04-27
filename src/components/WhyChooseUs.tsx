@@ -35,7 +35,7 @@ export default function WhyChooseClean() {
   const [hookMain, hookItalic] = hookText.includes(',') ? hookText.split(',') : [hookText, ""];
 
   return (
-    <section id="why-choose-us" className="relative py-24 sm:py-32 md:py-48 lg:py-64overflow-hidden antialiased bg-[#F5F5F7]">
+    <section id="why-choose-us" className="relative py-24 sm:py-32 md:py-48 lg:py-64 overflow-hidden antialiased bg-[#F5F5F7]">
       <div className="mx-auto px-4 sm:px-6 lg:px-16 z-10 max-w-[1440px] relative">
         
         {/* --- BURBUJA POSICIONADA ABSOLUTA (ZONA ROJA) --- */}
@@ -71,17 +71,17 @@ export default function WhyChooseClean() {
         {/* ENCABEZADO */}
         <div className="flex flex-col items-start text-left mb-14 space-y-6">
           <h2 className="flex flex-col max-w-2xl text-left">
-            <span className="font-display text-4xl md:text-5xl font-bold text-slate-950 uppercase tracking-tighter leading-[0.9]">
+            <span className="font-display text-3xl md:text-6xl font-bold text-slate-950 uppercase tracking-tighter leading-[0.9]">
               {hookMain}
             </span>
             {hookItalic && (
-              <span className="font-serif text-3xl md:text-5xl italic font-normal text-primary-600 mt-1">
+              <span className="font-serif text-2xl md:text-5xl italic font-normal text-primary-600 mt-1">
                 {hookItalic}
               </span>
             )}
           </h2>
           {/* Descripción con Raya Azul Vertical (El "Margen" Izquierdo) */}
-         <p className="font-sans text-base md:text-lg text-slate-500 font-medium leading-relaxed max-w-xl border-l-2 border-primary-600 pl-8">
+         <p className="font-sans text-sm md:text-lg text-slate-500 font-medium leading-relaxed max-w-xl">
         {t("whyChoose.core_value_proposition.description")}
          </p>
         </div>

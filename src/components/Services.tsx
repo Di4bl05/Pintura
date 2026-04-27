@@ -67,11 +67,11 @@ export default function Services() {
               <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase leading-[0.95]">
                 {t("services.title")}
               </span>
-              <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl italic text-primary-600 leading-none">
+              <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-5xl italic text-primary-600 leading-none">
                 {t("services.titleHighlight")}
               </span>
             </h2>
-            <p className="font-sans text-sm lg:text-lg text-slate-500 font-medium leading-relaxed max-w-full border-l border-primary-600 md:border-l-2 pl-5 md:pl-8">
+            <p className="font-sans text-sm lg:text-lg text-slate-500 font-medium leading-relaxed max-w-full">
               {t("services.subtitle")}
             </p>
           </div>
@@ -118,7 +118,7 @@ export default function Services() {
                     {t(`services.${service.key}.title`)}
                   </h3>
                   
-                  <button className="flex items-center gap-4 text-white font-sans text-[10px] md:text-[12px] font-black uppercase tracking-[0.2em] group/btn w-fit transform transition-transform duration-700 group-hover/card:-translate-y-1">
+                  <button className="flex items-center gap-4 text-white font-sans text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] group/btn w-fit transform transition-transform duration-700 group-hover/card:-translate-y-1">
                     <span className="border-b-2 border-white/20 group-hover/btn:border-white pb-1 transition-colors">
                       {t("services.moreInfo")}
                     </span>

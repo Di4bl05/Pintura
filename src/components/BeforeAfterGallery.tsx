@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useMemo, useCallback } from "react";
-import { X, MapPin, MoveHorizontal, ChevronRight, Construction } from "lucide-react";
+import { X, MapPin, MoveHorizontal, ChevronRight, Construction, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import { GalleryProject, GalleryService } from "@/types/gallery";
@@ -250,24 +250,22 @@ export default function BeforeAfterGallery() {
     <section id="gallery" className="relative py-24 sm:py-32 md:py-48 lg:py-64 overflow-hidden bg-[#F5F5F7] antialiased selection:bg-primary-100">
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 text-left lg:px-16">
         <div className="mb-16 max-w-5xl md:mb-24">
-          <h2 className="mb-10 flex flex-col gap-1">
-            <span className="font-display text-4xl font-bold uppercase leading-[0.95] tracking-tightest text-slate-950 md:text-6xl">
-              {t("gallery.title") || (language === "es" ? "Resultados" : "Results")}
-            </span>
-            <span className="font-serif text-3xl italic font-normal leading-none text-primary-600 md:text-6xl">
-              {t("gallery.titleHighlight") || (language === "es" ? "impecables" : "impeccable")}
-            </span>
-          </h2>
+         <h2 className="flex flex-col gap-1 mb-6 md:mb-8">
+  <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase leading-[0.95] tracking-tight">
+    {t("gallery.title") || (language === "es" ? "Resultados" : "Results")}
+  </span>
+  <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-5xl italic text-primary-600 leading-none">
+    {t("gallery.titleHighlight") || (language === "es" ? "impecables" : "impeccable")}
+  </span>
+</h2>
 
-          <div className="mb-12 flex items-stretch gap-6">
-            <div className="w-[2px] flex-shrink-0 rounded-full bg-primary-600" />
-            <p className="max-w-xl font-sans text-lg font-medium leading-relaxed text-slate-500 opacity-90">
-              {t("gallery.subtitle") ||
-                (language === "es"
-                  ? "Explora nuestras transformaciones recientes con imagenes optimizadas para movil y escritorio."
-                  : "Explore our recent transformations with optimized images for mobile and desktop.")}
-            </p>
-          </div>
+          <div className="flex items-stretch gap-6">
+          </div><p className="font-sans text-sm lg:text-lg text-slate-500 font-medium leading-relaxed max-w-full opacity-90">
+  {t("gallery.subtitle") ||
+    (language === "es"
+      ? "Explora nuestras transformaciones recientes con imagenes optimizadas para movil y escritorio."
+      : "Explore our recent transformations with optimized images for mobile and desktop.")}
+</p>
         </div>
 
         {loading && <p className="mb-10 text-sm text-slate-500">{language === "es" ? "Cargando galeria..." : "Loading gallery..."}</p>}
@@ -338,7 +336,7 @@ export default function BeforeAfterGallery() {
   style={{ left: `${comparePosition}%`, transform: "translateX(-50%)" }}
 >
   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-    {/* La Bolita con desenfoque */}
+
     <div
       className="flex h-7 w-7 cursor-ew-resize items-center justify-center 
                  rounded-full 
@@ -357,7 +355,6 @@ export default function BeforeAfterGallery() {
         setIsPaused(true);
       }}
     >
-      {/* Icono de flechas */}
       <MoveHorizontal className="h-3 w-3 text-white drop-shadow-md lg:h-4 lg:w-4" />
                     </div>
                   </div>
@@ -368,6 +365,9 @@ export default function BeforeAfterGallery() {
         )}
 
         <div className="flex flex-col gap-6 border-t border-slate-100 pt-10 md:flex-row md:items-stretch">
+        
+        {/*Carrusel*/}
+
           <div ref={carouselRef} className="no-scrollbar scrollbar-hide snap-x flex flex-1 gap-4 overflow-x-auto pb-4">
             {filteredGallery.map((item) => (
               <button
@@ -377,7 +377,14 @@ export default function BeforeAfterGallery() {
                   setComparePosition(50);
                   scrollToViewer();
                 }}
-                className={`relative aspect-video flex-[0_0_160px] snap-start overflow-hidden rounded-2xl border-2 transition-all duration-500 md:flex-[0_0_260px] ${
+                className={`relative snap-start overflow-hidden rounded-xl transition-all duration-500 flex-shrink-0
+    w-[140px]  /* Ancho en móvil */
+    h-[100px]  /* Alto en móvil */
+    
+    /* PC (MD) */
+    md:w-[260px] /* Ancho en PC */
+    md:h-[200px] /* Alto en PC */
+     ${
                   activeId === item.id ? "scale-95 border-primary-600 shadow-xl" : "border-transparent"
                 }`}
               >
@@ -394,20 +401,30 @@ export default function BeforeAfterGallery() {
               </button>
             ))}
           </div>
-
           <button
-            onClick={() => setShowAllPhotos(true)}
-            className="group relative flex w-full flex-col items-center justify-center overflow-hidden rounded-[2rem] bg-slate-950 py-10 text-white shadow-xl transition-all duration-500 md:w-52 md:py-0"
-          >
-            <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 ease-out group-hover:translate-y-0" />
-            <div className="relative z-10 flex flex-col items-center gap-3">
-              <ChevronRight className="h-6 w-6 transition-transform group-hover:translate-x-1" />
-              <span className="font-sans text-[10px] font-black uppercase tracking-[0.2em]">
-                {t("gallery.viewAll") || (language === "es" ? "Ver todas" : "Full gallery")}
-              </span>
-            </div>
-          </button>
-        </div>
+  onClick={() => setShowAllPhotos(true)}
+  className="
+    /* --- DIMENSIONES CLONADAS DEL EJEMPLO --- */
+    w-full sm:w-auto px-6 sm:px-10 py-4 md:h-[200px] rounded-xl
+    
+    /* --- ESTILO Y COMPORTAMIENTO --- */
+    group relative overflow-hidden flex items-center justify-center gap-3
+    bg-slate-950 text-white transition-all duration-300 active:scale-95
+    font-black uppercase text-[9px] md:text-[10px] tracking-[0.3em]
+  "
+>
+  {/* Capa de color al hacer hover (Efecto de llenado) */}
+  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 ease-out group-hover:translate-y-0" />
+
+  {/* Contenido: Texto y luego Icono */}
+  <div className="relative z-10 flex items-center gap-3">
+    <span>
+      {t("gallery.viewAll") || (language === "es" ? "Ver todas" : "Full gallery")}
+    </span>
+    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+  </div>
+</button>
+          </div>
 
         <div className="mt-16 flex flex-wrap justify-center gap-3">
           {(["all", "interior", "exterior", "cabinet", "commercial", "deck", "pressure"] as const).map((f) => (
@@ -417,7 +434,7 @@ export default function BeforeAfterGallery() {
                 setFilter(f);
                 setComparePosition(50);
               }}
-              className={`group relative overflow-hidden rounded-xl border px-8 py-4 text-[10px] font-bold uppercase tracking-widest transition-all duration-500 ${
+              className={`group relative overflow-hidden rounded-xl border px-4 py-3 md:px-8 md:py-4 text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all duration-500 ${
                 filter === f
                   ? "border-primary-600 bg-primary-600 text-white shadow-xl"
                   : "border-slate-100 bg-white text-slate-500 hover:text-white"
@@ -431,83 +448,111 @@ export default function BeforeAfterGallery() {
       </div>
 
       {showAllPhotos && (
-        <div className="animate-in fade-in fixed inset-0 z-[40] overflow-y-auto bg-white duration-500">
-          <Header forceSolid />
-          <div className="px-6 pb-20 pt-32 md:pt-48 lg:px-16">
-            <div className="mx-auto max-w-[1440px]">
-              <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <h2 className="font-display text-4xl font-black uppercase tracking-tightest text-slate-950 md:text-6xl">
-                    {language === "es" ? "Portafolio de proyectos" : "Project portfolio"}
-                  </h2>
+  <div className="animate-in fade-in fixed inset-0 z-[100] overflow-y-auto bg-[#FAF9F6] duration-500">
+    <Header forceSolid />
+    
+    <div className="px-6 pb-20 pt-28 md:pt-36 lg:px-16">
+      <div className="mx-auto max-w-[1440px] relative">
+        
+       {/* --- BOTÓN CERRAR (STICKY DEBAJO DEL HEADER) --- */}
+<div className="
+  sticky 
+  /* Ajusta estos valores según la altura real de tu Header */
+  top-[85px] md:top-[110px] 
+  /* Un z-index menor al del Header (que suele ser 50 o 100) */
+  z-[45] 
+  flex justify-end mb-4 pointer-events-none
+">
+  <button
+    onClick={() => setShowAllPhotos(false)}
+    className="
+      group pointer-events-auto flex h-10 w-10 md:h-12 md:w-12 
+      items-center justify-center rounded-full bg-slate-950/90 
+      text-white shadow-2xl backdrop-blur-md transition-all 
+      duration-300 hover:bg-primary-600 active:scale-90
+      /* Margen a la derecha para que no pegue al borde de la pantalla */
+      mr-2 md:mr-0
+    "
+  >
+    <X 
+      size={18} 
+      className="transition-transform duration-500 ease-in-out group-hover:rotate-90 md:size-20" 
+    />
+  </button>
+</div>
+
+        {/* --- GRID DE TARJETAS --- */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredGallery.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => {
+                setActiveId(item.id);
+                setComparePosition(50);
+                setShowAllPhotos(false);
+                window.setTimeout(() => scrollToViewer(), 120);
+              }}
+              className="group overflow-hidden rounded-[2rem] border border-slate-100 bg-white text-left shadow-md transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl
+        
+        /* --- DIMENSIONES DE LA TARJETA COMPLETA --- */
+        w-[340px]           /* Ancho en móvil */
+        md:w-[450px]        /* Ancho en PC */
+        min-h-[450px]       /* Altura mínima para que todas sean iguales */"
+            >
+              <div className="grid grid-cols-2 overflow-hidden bg-slate-100
+        
+        /* --- ALTO DE LA IMAGEN --- */
+        h-[300px]           /* Alto de la foto en móvil */
+        md:h-[450px]        /* Alto de la foto en PC */">
+                <div className="relative">
+                  <ResponsiveGalleryImage
+                    desktopSrc={item.beforeImageDesktop}
+                    mobileSrc={item.beforeImageMobile}
+                    alt={`${item.title} before`}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="relative border-l border-white/10">
+                  <ResponsiveGalleryImage
+                    desktopSrc={item.afterImageDesktop}
+                    mobileSrc={item.afterImageMobile}
+                    alt={`${item.title} after`}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
+                </div>
+              </div>
+
+              {/* INFO CON TAMAÑOS DE FUENTE SOLICITADOS */}
+              <div className="p-6">
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  {/* Filtro: 9px móvil / 10px PC */}
+                  <span className="rounded-full bg-primary-700 px-2 py-0.5 font-sans uppercase tracking-widest text-primary-50 text-[9px] md:text-[10px]">
+                    {item.service}
+                  </span>
+                  {/* Ubicación: 9px móvil / 10px PC */}
+                  <span className="font-sans uppercase tracking-widest text-slate-600 text-[9px] md:text-[10px]">
+                    {item.location}
+                  </span>
                 </div>
 
-                <button
-                  onClick={() => setShowAllPhotos(false)}
-                  className="group inline-flex self-start rounded-2xl bg-slate-950 px-8 py-4 text-white shadow-2xl transition-all hover:bg-primary-600 active:scale-95"
-                >
-                  <X size={16} />
-                  <span className="ml-3 font-sans text-[10px] font-black uppercase tracking-widest">
-                    {language === "es" ? "Cerrar portafolio" : "Close portfolio"}
-                  </span>
-                </button>
-              </div>
+                <h3 className="font-display text-[20px] font-bold uppercase tracking-tight text-slate-950 mb-2">
+                  {item.title}
+                </h3>
 
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {filteredGallery.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      setActiveId(item.id);
-                      setComparePosition(50);
-                      setShowAllPhotos(false);
-                      window.setTimeout(() => scrollToViewer(), 120);
-                    }}
-                    className="group overflow-hidden rounded-[2rem] border border-slate-100 bg-white text-left shadow-lg transition-transform hover:-translate-y-1 hover:shadow-2xl"
-                  >
-                    <div className="grid aspect-[4/5] grid-cols-2 overflow-hidden bg-slate-100">
-                      <div className="relative">
-                        <ResponsiveGalleryImage
-                          desktopSrc={item.beforeImageDesktop}
-                          mobileSrc={item.beforeImageMobile}
-                          alt={`${item.title} before`}
-                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          sizes="50vw"
-                        />
-                        <div className="absolute left-4 top-4 rounded-full bg-slate-950/85 px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-white backdrop-blur-md">
-                          {item.beforeCaption}
-                        </div>
-                      </div>
-                      <div className="relative">
-                        <ResponsiveGalleryImage
-                          desktopSrc={item.afterImageDesktop}
-                          mobileSrc={item.afterImageMobile}
-                          alt={`${item.title} after`}
-                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          sizes="50vw"
-                        />
-                        <div className="absolute left-4 top-4 rounded-full bg-primary-600 px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-white shadow-lg">
-                          {item.afterCaption}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-3 p-6">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-full bg-primary-50 px-3 py-1 text-[9px] font-black uppercase tracking-[0.25em] text-primary-700">{item.service}</span>
-                        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">{item.location}</span>
-                      </div>
-                      <h3 className="font-display text-xl font-bold uppercase tracking-tight text-slate-950">{item.title}</h3>
-                      <p className="line-clamp-3 font-sans text-sm leading-relaxed text-slate-500">{item.description}</p>
-                      <p className="line-clamp-2 font-sans text-xs leading-relaxed text-slate-600">{item.intro}</p>
-                    </div>
-                  </button>
-                ))}
+                {/* Descripción: 9px móvil / 10px PC */}
+                <p className="line-clamp-2 font-sans leading-relaxed text-slate-500 text-[14px] md:text-[16px]">
+                  {item.description}
+                </p>
               </div>
-            </div>
-          </div>
+            </button>
+          ))}
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
 
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar {

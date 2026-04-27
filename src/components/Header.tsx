@@ -160,7 +160,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
             <a
               href="tel:+17863506367"
-              className="font-sans group flex items-center gap-3 rounded-2xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-primary-600 hover:text-white active:scale-95 uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4"
+              className="font-sans group flex items-center gap-3 rounded-3xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-primary-600 hover:text-white active:scale-95 uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4"
             >
               <Phone className="w-3 h-3" />
               <span>(786) 350-6367</span>
