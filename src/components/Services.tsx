@@ -78,82 +78,81 @@ export default function Services() {
         </div>
 
         <div className="relative group/carousel mb-16 md:mb-24">
-         <button
-  onClick={() => scroll("left")}
-  className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-40 w-14 h-14 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all shadow-xl"
->
-  <ChevronLeft className="w-8 h-8" />
-</button>
+  {/* Botones de Navegación (PC) */}
+  <button
+    onClick={() => scroll("left")}
+    className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-40 w-14 h-14 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all shadow-xl active:scale-90"
+  >
+    <ChevronLeft className="w-8 h-8" />
+  </button>
 
-<button
-  onClick={() => scroll("right")}
-  className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-40 w-14 h-14 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all shadow-xl"
->
-  <ChevronRight className="w-8 h-8" />
-</button>
+  <button
+    onClick={() => scroll("right")}
+    className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-40 w-14 h-14 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all shadow-xl active:scale-90"
+  >
+    <ChevronRight className="w-8 h-8" />
+  </button>
 
-         <div
-          ref={scrollRef}
-          className="flex gap-4 md:gap-6 lg:gap-8 pb-6 md:pb-12 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-1"
+  {/* Contenedor del Carrusel */}
+  <div
+    ref={scrollRef}
+    className="
+      flex gap-4 md:gap-6 lg:gap-8 pb-6 md:pb-12 
+      overflow-x-auto overflow-y-hidden
+      /* Activa el frenado suave y el alineado magnético */
+      snap-x snap-mandatory 
+      /* ESTO ES CRÍTICO: Permite scroll vertical fluido en móvil */
+      touch-action-pan-y 
+      /* Suavidad en el scroll programático (flechas) */
+      scroll-smooth 
+      scrollbar-hide px-4 md:px-1
+    "
+    style={{ WebkitOverflowScrolling: 'touch' }} // Mejora la inercia en iOS
+  >
+    {services.map((service, index) => (
+      <div 
+        key={index} 
+        className="flex-none snap-center md:snap-start"
+      >
+        <div 
+          onClick={() => handleOpenDetails(service)}
+          className="
+            group/card relative flex-shrink-0 
+            w-[80vw] aspect-[3/4] /* Ajustado para que se vea un poco de la siguiente ficha */
+            md:w-[400px] md:h-[600px] 
+            overflow-hidden rounded-[2rem] md:rounded-[3rem] 
+            cursor-pointer shadow-2xl transition-all duration-700
+            /* Previene que el drag accidental active el click en algunos navegadores */
+            select-none
+          "
         >
-          {services.map((service, index) => (
-            <div 
-              key={index} 
-              className="flex-none snap-start"
-            >
-              <div 
-                onClick={() => handleOpenDetails(service)}
-                className="group/card relative flex-shrink-0 w-[85vw] aspect-[2/3] md:w-[400px] md:h-[600px] md:aspect-auto overflow-hidden rounded-[2rem] md:rounded-[3rem] cursor-pointer shadow-2xl transition-all duration-700"
-              >
-                <Image
-                  src={service.img}
-                  alt={t(`services.${service.key}.title`)}
-                  fill
-                  className="object-cover group-hover/card:scale-105 transition-transform duration-1000"
-                />
-                
-                {/* Overlay de información */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 md:p-14 flex flex-col justify-end">
-                  <h3 className="font-display text-xl md:text-2xl lg:text-2xl font-bold text-white uppercase tracking-tighter leading-[0.85] mb-3 md:mb-7 transform transition-transform duration-700 group-hover/card:-translate-y-2">
-                    {t(`services.${service.key}.title`)}
-                  </h3>
-                  
-                  <button className="flex items-center gap-4 text-white font-sans text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] group/btn w-fit transform transition-transform duration-700 group-hover/card:-translate-y-1">
-                    <span className="border-b-2 border-white/20 group-hover/btn:border-white pb-1 transition-colors">
-                      {t("services.moreInfo")}
-                    </span>
-                    <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-2" />
-                  </button>
-                </div>
-              </div>
+          <Image
+            src={service.img}
+            alt={t(`services.${service.key}.title`)}
+            fill
+            className="object-cover group-hover/card:scale-110 transition-transform duration-1000 ease-out"
+            draggable={false}
+          />
+          
+          {/* Overlay de información */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 md:p-14 flex flex-col justify-end">
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-white uppercase tracking-tighter leading-[0.85] mb-3 md:mb-7 transform transition-transform duration-700 group-hover/card:-translate-y-2">
+              {t(`services.${service.key}.title`)}
+            </h3>
+            
+            <div className="flex items-center gap-4 text-white font-sans text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] group/btn w-fit transform transition-transform duration-700 group-hover/card:-translate-y-1">
+              <span className="border-b-2 border-white/20 group-hover/btn:border-white pb-1 transition-colors">
+                {t("services.moreInfo")}
+              </span>
+              <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-2" />
             </div>
-          ))}
-        </div>
-      </div>
-
-        <div className="flex flex-col items-center justify-center space-y-6 md:space-y-8">
-          <div className="flex items-center gap-3">
-            <div className="relative flex h-2 w-2">
-              <span className="animate-ping absolute h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative h-2 w-2 rounded-full bg-emerald-500"></span>
-            </div>
-            <span className="font-sans text-[9px] sm:text-[9px] md:text-[10px] font-black text-slate-600 uppercase tracking-[0.3em]">
-              {t("services.zone")}
-            </span>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-12 gap-y-4">
-            {serviceAreas.map((city) => (
-              <div key={city} className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-primary-600" />
-                <span className="font-sans text-[9px] sm:text-[9px] md:text-[10px] font-black text-slate-600 uppercase tracking-[0.2em]">
-                  {city}
-                </span>
-              </div>
-            ))}
           </div>
         </div>
       </div>
-
+    ))}
+  </div>
+</div>
+</div>
       <ServiceDetail
         isOpen={isDetailsOpen}
         onClose={() => setIsDetailsOpen(false)}

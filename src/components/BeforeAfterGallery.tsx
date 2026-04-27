@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useMemo, useCallback } from "react";
-import { X, MapPin, MoveHorizontal, ChevronRight, Construction, ArrowRight } from "lucide-react";
+import { X, MapPin, MoveHorizontal, ChevronRight, Construction, ArrowRight, Maximize2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import { GalleryProject, GalleryService } from "@/types/gallery";
@@ -117,6 +117,7 @@ export default function BeforeAfterGallery() {
   const { t, language } = useLanguage();
   const carouselRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const [projects, setProjects] = useState<GalleryProject[]>([]);
   const [loading, setLoading] = useState(true);
@@ -278,91 +279,123 @@ export default function BeforeAfterGallery() {
           </p>
         )}
 
-        {activeItem && (
-          <div id="main-viewer" className="relative mb-16 scroll-mt-28">
-            <div
-        
-              className="relative aspect-[2/3] overflow-hidden rounded-xl border border-slate-100 bg-slate-100 shadow-2xl transform-gpu md:aspect-[16/10] lg:aspect-[21/10]"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => !isManualControl && setIsPaused(false)}
-            >
-              <div key={activeId} ref={sliderRef} className="relative h-full w-full touch-none select-none cursor-ew-resize animate-gallery-swap">
-                <div className="absolute inset-0 z-0">
-                  <ResponsiveGalleryImage
-                    desktopSrc={activeItem.beforeImageDesktop}
-                    mobileSrc={activeItem.beforeImageMobile}
-                    alt={`${activeItem.title} before`}
-                    priority
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                  <div className="font-sans absolute right-4 top-4 md:right-8 md:top-8 z-20 rounded-full border border-white/10 bg-slate-950/80 px-3 py-1.5 md:px-5 md:py-2 text-[7px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">
-                    {activeItem.beforeCaption}
-                  </div>
-                </div>
-
-                <div
-                  className="pointer-events-none absolute inset-0 z-10 transform-gpu"
-                  style={{ clipPath: `inset(0 ${100 - comparePosition}% 0 0)` }}
-                >
-                  <ResponsiveGalleryImage
-                    desktopSrc={activeItem.afterImageDesktop}
-                    mobileSrc={activeItem.afterImageMobile}
-                    alt={`${activeItem.title} after`}
-                    priority
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-90" />
-                  <div className="font-sans absolute left-4 top-4 md:left-8 md:top-8 z-20 rounded-full bg-primary-600 px-3 py-1.5 md:px-5 md:py-2 text-[7px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-white shadow-xl">
-                    {activeItem.afterCaption}
-                  </div>
-
-                  <div className="absolute bottom-12 left-12 right-12 hidden items-end justify-between lg:flex">
-                    <div className="max-w-2xl">
-                      <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 backdrop-blur-xl">
-                        <MapPin className="h-3 w-3 text-primary-400" />
-                        <span className="font-sans text-[9px] font-bold uppercase tracking-widest text-white">{activeItem.location}</span>
-                      </div>
-                      <h3 className="font-display mb-3 text-5xl font-bold uppercase leading-none tracking-tighter text-white">{activeItem.title}</h3>
-                      <p className="max-w-lg font-sans text-base italic font-light leading-relaxed text-slate-100 opacity-90 line-clamp-2">
-                        {activeItem.description}
-                      </p>
-                      <p className="mt-2 max-w-xl font-sans text-sm leading-relaxed text-white/85 line-clamp-2">{activeItem.intro}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-  className="pointer-events-auto absolute inset-y-0 z-40 w-[1.5px] transform-gpu bg-white/30 backdrop-blur-2xl"
-  style={{ left: `${comparePosition}%`, transform: "translateX(-50%)" }}
->
-  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-
+    {activeItem && (
+  <div id="main-viewer" className="relative mb-16 scroll-mt-28">
+    {/* Asegúrate de que el ref esté DENTRO de la etiqueta div */}
     <div
-      className="flex h-7 w-7 cursor-ew-resize items-center justify-center 
-                 rounded-full 
-                 border border-white/40 
-                 bg-white/10 backdrop-blur-xl 
-                 shadow-[0_0_20px_rgba(0,0,0,0.2)] 
-                 transition-all duration-300
-                 hover:scale-110 active:scale-95 
-                 lg:h-10 lg:w-10"
-      onMouseDown={() => {
-        setIsManualControl(true);
-        setIsPaused(true);
-      }}
-      onTouchStart={() => {
-        setIsManualControl(true);
-        setIsPaused(true);
-      }}
+      ref={containerRef} 
+      className="relative aspect-[9/16] overflow-hidden rounded-xl border border-slate-100 bg-slate-100 shadow-2xl transform-gpu md:aspect-[16/10] lg:aspect-[21/10] touch-action-pan-y"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => !isManualControl && setIsPaused(false)}
     >
-      <MoveHorizontal className="h-3 w-3 text-white drop-shadow-md lg:h-4 lg:w-4" />
-                    </div>
-                  </div>
-                </div>
+      <div key={activeId} ref={sliderRef} className="relative h-full w-full touch-none select-none cursor-ew-resize overflow-hidden">
+        
+        {/* BOTÓN PARA AGRANDAR / DESAGRANDAR */}
+        <button 
+          onClick={() => {
+            if (!document.fullscreenElement) {
+              containerRef.current?.requestFullscreen();
+            } else {
+              document.exitFullscreen();
+            }
+          }}
+          className="absolute bottom-4 right-4 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/50 text-white backdrop-blur-xl border border-white/20 transition-all hover:bg-primary-600 active:scale-95 shadow-2xl md:h-12 md:w-12"
+        >
+          <Maximize2 size={18} />
+        </button>
+
+        {/* Imagen ANTES */}
+        <div className="absolute inset-0 z-0">
+          <ResponsiveGalleryImage
+            desktopSrc={activeItem.beforeImageDesktop}
+            mobileSrc={activeItem.beforeImageMobile}
+            alt={`${activeItem.title} before`}
+            priority
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="font-sans absolute right-4 top-4 md:right-8 md:top-8 z-20 rounded-full border border-white/10 bg-slate-950/80 px-3 py-1.5 md:px-5 md:py-2 text-[7px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">
+            {activeItem.beforeCaption}
+          </div>
+        </div>
+
+        {/* Imagen DESPUÉS */}
+        <div
+          className="pointer-events-none absolute inset-0 z-10 transform-gpu will-change-[clip-path]"
+          style={{ 
+            clipPath: `inset(0 ${100 - comparePosition}% 0 0)`,
+            transition: isManualControl ? "none" : "clip-path 0.4s cubic-bezier(0.4, 0, 0.2, 1)" 
+          }}
+        >
+          <ResponsiveGalleryImage
+            desktopSrc={activeItem.afterImageDesktop}
+            mobileSrc={activeItem.afterImageMobile}
+            alt={`${activeItem.title} after`}
+            priority
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          
+          {/* --- INFO SOLO PARA PC --- */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 lg:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 hidden lg:flex items-end p-12">
+            <div className="max-w-2xl">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 backdrop-blur-xl">
+                <MapPin className="h-3 w-3 text-primary-400" />
+                <span className="font-sans text-[9px] font-bold uppercase tracking-widest text-white">{activeItem.location}</span>
               </div>
+              <h3 className="font-display mb-3 text-4xl font-bold uppercase leading-none tracking-tighter text-white">{activeItem.title}</h3>
+              <p className="max-w-lg font-sans text-[17px] text-slate-100 opacity-90 line-clamp-2">
+                {activeItem.description}
+              </p>
             </div>
           </div>
-        )}
+
+          <div className="font-sans absolute left-4 top-4 md:left-8 md:top-8 z-20 rounded-full bg-primary-600 px-3 py-1.5 md:px-5 md:py-2 text-[7px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-white shadow-xl">
+            {activeItem.afterCaption}
+          </div>
+        </div>
+
+        {/* MANEJADOR (Slider mejorado) */}
+        <div 
+          className="pointer-events-auto absolute inset-y-0 z-40 w-[2px] transform-gpu bg-white/30 backdrop-blur-2xl will-change-[left]" 
+          style={{ 
+            left: `${comparePosition}%`, 
+            transform: "translateX(-50%)",
+            transition: isManualControl ? "none" : "left 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+          }}
+        >
+          <div 
+            onMouseDown={() => setIsManualControl(true)}
+            onTouchStart={() => setIsManualControl(true)}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize"
+          >
+            <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/40 bg-slate-950/90 text-white shadow-xl backdrop-blur-xl transition-transform active:scale-125 lg:h-10 lg:w-10">
+              <MoveHorizontal className="h-4 w-4 lg:h-5 lg:w-5" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* --- INFO SOLO PARA MÓVIL --- */}
+    <div className="mt-6 space-y-3 lg:hidden">
+      <div className="flex items-center gap-2">
+        <span className="rounded-full bg-primary-700 px-3 py-1 text-[9px] font-sans uppercase tracking-widest text-primary-50">
+          {activeItem.service}
+        </span>
+        <div className="flex items-center gap-1.5 text-slate-500">
+          <MapPin size={12} />
+          <span className="font-sans text-[9px] uppercase tracking-widest">{activeItem.location}</span>
+        </div>
+      </div>
+      <h3 className="font-display text-[25px] font-bold uppercase tracking-tighter text-slate-950">
+        {activeItem.title}
+      </h3>
+      <p className="font-sans text-sm leading-relaxed text-slate-500">
+        {activeItem.description}
+      </p>
+    </div>
+  </div>
+)}
 
         <div className="flex flex-col gap-6 border-t border-slate-100 pt-10 md:flex-row md:items-stretch">
         
@@ -410,7 +443,7 @@ export default function BeforeAfterGallery() {
     /* --- ESTILO Y COMPORTAMIENTO --- */
     group relative overflow-hidden flex items-center justify-center gap-3
     bg-slate-950 text-white transition-all duration-300 active:scale-95
-    font-black uppercase text-[9px] md:text-[10px] tracking-[0.3em]
+    font-black uppercase text-[8px] md:text-[10px] tracking-[0.3em]
   "
 >
   {/* Capa de color al hacer hover (Efecto de llenado) */}
