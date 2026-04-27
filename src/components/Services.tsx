@@ -32,163 +32,120 @@ export default function Services() {
   };
 
   const handleOpenDetails = (service: { key: string; img: string }) => {
-    
     setSelectedServiceData({
       id: service.key,
       img: service.img,
-      
-      steps: [{}, {}, {}], 
+      steps: [{}, {}, {}],
     });
-
     setIsDetailsOpen(true);
   };
 
   const services = [
-    {
-      key: "exterior",
-      img: getStaticGalleryImageUrl("exteriorAfter"),
-    },
-    {
-      key: "interior",
-      img: getStaticGalleryImageUrl("exteriorBefore"),
-    },
-    {
-      key: "pressure",
-      img: getStaticGalleryImageUrl("pressureWash"),
-    },
-    {
-      key: "repair",
-      img: getStaticGalleryImageUrl("exterior2After"),
-    },
+    { key: "exterior", img: getStaticGalleryImageUrl("exteriorAfter") },
+    { key: "interior", img: getStaticGalleryImageUrl("exteriorBefore") },
+    { key: "pressure", img: getStaticGalleryImageUrl("pressureWash") },
+    { key: "repair", img: getStaticGalleryImageUrl("exterior2After") },
   ];
 
-  const serviceAreas = [
-    "Orlando",
-    "Kissimmee",
-    "Windermere",
-    "Winter Park",
-    "Lake Nona",
-  ];
+  const serviceAreas = ["Orlando", "Kissimmee", "Windermere", "Winter Park", "Lake Nona"];
 
   return (
-  <section
-  id="services"
-className="relative py-24 sm:py-32 md:py-48 overflow-hidden bg-[#F5F5F7]"
+    <section id="services" className="relative py-24 sm:py-32 md:py-48 lg:py-64 overflow-hidden bg-white">
+      <div className="absolute top-0 left-[-10%] w-[30rem] md:w-[70rem] h-[30rem] md:h-[70rem] bg-white rounded-full blur-[100px] md:blur-[160px] pointer-events-none -z-10" />
+
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 md:px-16 lg:px-24">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-12 md:mb-20">
+          <div className="max-w-4xl">
+            <h2 className="flex flex-col gap-1 mb-6 md:mb-8">
+              <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase leading-[0.95]">
+                {t("services.title")}
+              </span>
+              <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl italic text-primary-600 leading-none">
+                {t("services.titleHighlight")}
+              </span>
+            </h2>
+            <p className="font-sans text-sm lg:text-lg text-slate-500 font-medium leading-relaxed max-w-full border-l border-primary-600 md:border-l-2 pl-5 md:pl-8">
+              {t("services.subtitle")}
+            </p>
+          </div>
+        </div>
+
+        <div className="relative group/carousel mb-16 md:mb-24">
+         <button
+  onClick={() => scroll("left")}
+  className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-40 w-14 h-14 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all shadow-xl"
 >
-  {/* 1. BLOQUE DE TEXTO: Alineado a la izquierda del logo */}
-  <div className="relative z-10 w-full">
-    <div className="pl-6 md:pl-16 lg:pl-24 flex flex-col gap-12"> 
-      <div className="max-w-5xl"> 
-        <h2 className="flex flex-col gap-0 mb-8 md:mb-10">
-          <span className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-slate-950 uppercase leading-[1.1] tracking-tight">
-            {t("services.title")}
-          </span>
-          <span className="font-serif text-2xl sm:text-3xl md:text-5xl italic text-primary-600 leading-tight">
-            {t("services.titleHighlight")}
-          </span>
-        </h2>
+  <ChevronLeft className="w-8 h-8" />
+</button>
 
-        <p className="font-sans text-sm lg:text-lg text-slate-500 font-medium leading-relaxed max-w-2xl mb-12">
-          {t("services.subtitle")}
-        </p>
+<button
+  onClick={() => scroll("right")}
+  className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-40 w-14 h-14 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all shadow-xl"
+>
+  <ChevronRight className="w-8 h-8" />
+</button>
 
-        {/* ZONAS */}
-        <div className="flex flex-col gap-6">
+         <div
+          ref={scrollRef}
+          className="flex gap-4 md:gap-6 lg:gap-8 pb-6 md:pb-12 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-1"
+        >
+          {services.map((service, index) => (
+            <div 
+              key={index} 
+              className="flex-none snap-start"
+            >
+              <div 
+                onClick={() => handleOpenDetails(service)}
+                className="group/card relative flex-shrink-0 w-[85vw] aspect-[2/3] md:w-[400px] md:h-[600px] md:aspect-auto overflow-hidden rounded-[2rem] md:rounded-[3rem] cursor-pointer shadow-2xl transition-all duration-700"
+              >
+                <Image
+                  src={service.img}
+                  alt={t(`services.${service.key}.title`)}
+                  fill
+                  className="object-cover group-hover/card:scale-105 transition-transform duration-1000"
+                />
+                
+                {/* Overlay de información */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 md:p-14 flex flex-col justify-end">
+                  <h3 className="font-display text-xl md:text-2xl lg:text-2xl font-bold text-white uppercase tracking-tighter leading-[0.85] mb-3 md:mb-7 transform transition-transform duration-700 group-hover/card:-translate-y-2">
+                    {t(`services.${service.key}.title`)}
+                  </h3>
+                  
+                  <button className="flex items-center gap-4 text-white font-sans text-[10px] md:text-[12px] font-black uppercase tracking-[0.2em] group/btn w-fit transform transition-transform duration-700 group-hover/card:-translate-y-1">
+                    <span className="border-b-2 border-white/20 group-hover/btn:border-white pb-1 transition-colors">
+                      {t("services.moreInfo")}
+                    </span>
+                    <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-2" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+        <div className="flex flex-col items-center justify-center space-y-6 md:space-y-8">
           <div className="flex items-center gap-3">
-            <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            <span className="font-sans text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.3em]">
+            <div className="relative flex h-2 w-2">
+              <span className="animate-ping absolute h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative h-2 w-2 rounded-full bg-emerald-500"></span>
+            </div>
+            <span className="font-sans text-[9px] sm:text-[9px] md:text-[10px] font-black text-slate-600 uppercase tracking-[0.3em]">
               {t("services.zone")}
             </span>
           </div>
-          <div className="flex flex-wrap gap-x-10 gap-y-3">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-12 gap-y-4">
             {serviceAreas.map((city) => (
               <div key={city} className="flex items-center gap-2">
-                <MapPin className="w-3 h-3 text-primary-600/40" />
-                <span className="font-sans text-[10px] md:text-[11px] font-black text-slate-600 uppercase tracking-widest">
+                <MapPin className="w-4 h-4 text-primary-600" />
+                <span className="font-sans text-[9px] sm:text-[9px] md:text-[10px] font-black text-slate-600 uppercase tracking-[0.2em]">
                   {city}
                 </span>
               </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</div>
-
-{/* 1. CONTENEDOR MAESTRO: Rompe cualquier límite y ocupa el 100% de la pantalla del monitor */}
-<div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
-  
-  <div
-    ref={scrollRef}
-    /* 2. EL TRACK DEL CARRUSEL: 
-       - CERO PADDING IZQUIERDO. Empieza pegado al borde del monitor.
-       - pr-[20vw] para dejar aire al final.
-    */
-    className="flex gap-6 md:gap-8 pb-16 overflow-x-auto snap-x snap-mandatory scrollbar-hide pr-[20vw]"
-  >
-    
-    {/* =========================================
-        EL TRUCO DE TESLA: EL ESPACIADOR INVISIBLE
-        Este div vacío es el que empuja la primera foto para que se alinee con tu logo.
-        Al hacer scroll, las fotos se mueven hacia la izquierda ocupando este espacio hasta tocar el borde.
-        *Nota: El 720px asume que tu max-w es 1440px (720 es la mitad). Si usas max-w-7xl (1280px), pon 640px.
-        ========================================= */}
-    <div className="shrink-0 w-[1.5rem] md:w-[calc(50vw-720px+1.5rem)] snap-start" />
-
-
-    {services.map((service, index) => (
-      <div
-        key={index}
-        /* Mantenemos tu ancho para que la foto no se deforme */
-        className="shrink-0 w-[85%] md:w-[70%] lg:w-[60%] snap-start"
-      >
-        <div className="group/item flex flex-col">
-          
-          {/* CONTENEDOR DE LA IMAGEN */}
-          <div className="relative w-full h-[50vh] md:h-[70vh] overflow-hidden rounded-xl md:rounded-2xl mb-6 shadow-lg">
-            <Image
-              src={service.img}
-              alt={t(`services.${service.key}.title`)}
-              fill
-              className="object-cover group-hover/item:scale-[1.02] transition-transform duration-[2s] ease-out"
-            />
-            
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-
-            {/* TÍTULO ELEGANTE */}
-            <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
-              <h3 className="font-display text-2xl md:text-4xl lg:text-3xl font-bold text-white uppercase tracking-tighter leading-[0.9]">
-                {t(`services.${service.key}.title`)}
-              </h3>
-            </div>
-          </div>
-
-          {/* INFO DEBAJO */}
-          <div className="flex flex-col gap-4 px-1">
-            <div className="max-w-2xl">
-              <p className="font-sans text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-2">
-                {t("services.include")}:
-              </p>
-              <p className="font-sans text-xs md:text-sm font-bold text-slate-600 uppercase tracking-widest leading-relaxed">
-                {[0, 1, 2, 3]
-                  .map((i) => t(`services.${service.key}.features.${i}`))
-                  .join(", ")}
-              </p>
-            </div>
-
-            <button
-              onClick={() => handleOpenDetails(service)}
-              className="group/btn flex items-center gap-2 text-slate-950 font-black text-[10px] md:text-[11px] uppercase tracking-[0.2em] border-b border-slate-950 w-fit pb-1 hover:text-primary-600 transition-all"
-            >
-              <span>{t("services.moreInfo")}</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
-            </button>
+            ))}
           </div>
         </div>
       </div>
-    ))}
-  </div>
-</div>
-</div>
 
       <ServiceDetail
         isOpen={isDetailsOpen}
@@ -197,13 +154,8 @@ className="relative py-24 sm:py-32 md:py-48 overflow-hidden bg-[#F5F5F7]"
       />
 
       <style jsx global>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
     </section>
   );

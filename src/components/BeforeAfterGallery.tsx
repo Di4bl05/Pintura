@@ -247,7 +247,7 @@ export default function BeforeAfterGallery() {
   }, [isManualControl, updateComparePosition, handleDragEnd]);
 
   return (
-    <section id="gallery" className="relative overflow-hidden bg-white py-20 antialiased selection:bg-primary-100 lg:py-32">
+    <section id="gallery" className="relative py-24 sm:py-32 md:py-48 lg:py-64 overflow-hidden bg-[#F5F5F7] antialiased selection:bg-primary-100">
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 text-left lg:px-16">
         <div className="mb-16 max-w-5xl md:mb-24">
           <h2 className="flex flex-col gap-0 md:gap-1 mb-8 md:mb-12">
@@ -262,7 +262,7 @@ export default function BeforeAfterGallery() {
         </h2>
           <div className="mb-12 flex items-stretch gap-6">
           <div className="w-[1px] sm:w-[2px] flex-shrink-0 rounded-full bg-primary-600" />
-          <p className="max-w-xl font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90 mb-1 md:mb-2">
+          <p className="max-w-full font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90 mb-1 md:mb-2">
           {t("gallery.subtitle")}
           </p>
           </div>
@@ -281,7 +281,8 @@ export default function BeforeAfterGallery() {
         {activeItem && (
           <div id="main-viewer" className="relative mb-16 scroll-mt-28">
             <div
-              className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] border border-slate-100 bg-slate-100 shadow-2xl transform-gpu md:aspect-[16/10] lg:aspect-[21/10]"
+        
+              className="relative aspect-[2/3] overflow-hidden rounded-xl border border-slate-100 bg-slate-100 shadow-2xl transform-gpu md:aspect-[16/10] lg:aspect-[21/10]"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => !isManualControl && setIsPaused(false)}
             >
@@ -294,7 +295,7 @@ export default function BeforeAfterGallery() {
                     priority
                     className="absolute inset-0 h-full w-full object-cover"
                   />
-                  <div className="font-sans absolute right-8 top-8 z-20 rounded-full border border-white/10 bg-slate-950/80 px-5 py-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">
+                  <div className="font-sans absolute right-4 top-4 md:right-8 md:top-8 z-20 rounded-full border border-white/10 bg-slate-950/80 px-3 py-1.5 md:px-5 md:py-2 text-[7px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">
                     {activeItem.beforeCaption}
                   </div>
                 </div>
@@ -311,7 +312,7 @@ export default function BeforeAfterGallery() {
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-90" />
-                  <div className="font-sans absolute left-8 top-8 z-20 rounded-full bg-primary-600 px-5 py-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white shadow-xl">
+                  <div className="font-sans absolute left-4 top-4 md:left-8 md:top-8 z-20 rounded-full bg-primary-600 px-3 py-1.5 md:px-5 md:py-2 text-[7px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-white shadow-xl">
                     {activeItem.afterCaption}
                   </div>
 
@@ -331,22 +332,31 @@ export default function BeforeAfterGallery() {
                 </div>
 
                 <div
-                  className="pointer-events-auto absolute inset-y-0 z-40 w-1 transform-gpu bg-white/50 backdrop-blur-sm"
-                  style={{ left: `${comparePosition}%`, transform: "translateX(-50%)" }}
-                >
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div
-                      className="flex h-14 w-14 cursor-ew-resize items-center justify-center rounded-full border-[6px] border-white/30 bg-white shadow-2xl transition-transform hover:scale-110 active:scale-95 lg:h-20 lg:w-20"
-                      onMouseDown={() => {
-                        setIsManualControl(true);
-                        setIsPaused(true);
-                      }}
-                      onTouchStart={() => {
-                        setIsManualControl(true);
-                        setIsPaused(true);
-                      }}
-                    >
-                      <MoveHorizontal className="h-6 w-6 text-primary-600 lg:h-8 lg:w-8" />
+  className="pointer-events-auto absolute inset-y-0 z-40 w-[1.5px] transform-gpu bg-white/30 backdrop-blur-2xl"
+  style={{ left: `${comparePosition}%`, transform: "translateX(-50%)" }}
+>
+  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+    {/* La Bolita con desenfoque */}
+    <div
+      className="flex h-7 w-7 cursor-ew-resize items-center justify-center 
+                 rounded-full 
+                 border border-white/40 
+                 bg-white/10 backdrop-blur-xl 
+                 shadow-[0_0_20px_rgba(0,0,0,0.2)] 
+                 transition-all duration-300
+                 hover:scale-110 active:scale-95 
+                 lg:h-10 lg:w-10"
+      onMouseDown={() => {
+        setIsManualControl(true);
+        setIsPaused(true);
+      }}
+      onTouchStart={() => {
+        setIsManualControl(true);
+        setIsPaused(true);
+      }}
+    >
+      {/* Icono de flechas */}
+      <MoveHorizontal className="h-3 w-3 text-white drop-shadow-md lg:h-4 lg:w-4" />
                     </div>
                   </div>
                 </div>
@@ -365,7 +375,7 @@ export default function BeforeAfterGallery() {
                   setComparePosition(50);
                   scrollToViewer();
                 }}
-                className={`relative aspect-video flex-[0_0_160px] snap-start overflow-hidden rounded-[2rem] border-2 transition-all duration-500 md:flex-[0_0_260px] ${
+                className={`relative aspect-video flex-[0_0_160px] snap-start overflow-hidden rounded-2xl border-2 transition-all duration-500 md:flex-[0_0_260px] ${
                   activeId === item.id ? "scale-95 border-primary-600 shadow-xl" : "border-transparent"
                 }`}
               >
@@ -425,12 +435,6 @@ export default function BeforeAfterGallery() {
             <div className="mx-auto max-w-[1440px]">
               <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <div>
-                  <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-2 text-white shadow-xl">
-                    <Construction className="h-3.5 w-3.5 text-primary-400" />
-                    <span className="font-sans text-[10px] font-bold uppercase tracking-[0.3em]">
-                      {t("gallery.fullGallery") || (language === "es" ? "Galeria completa" : "Full gallery")}
-                    </span>
-                  </div>
                   <h2 className="font-display text-4xl font-black uppercase tracking-tightest text-slate-950 md:text-6xl">
                     {language === "es" ? "Portafolio de proyectos" : "Project portfolio"}
                   </h2>

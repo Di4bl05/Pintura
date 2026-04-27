@@ -52,7 +52,7 @@ export default function Reviews() {
   }, []);
 
   return (
-    <section id="reviews" ref={sectionRef} className="relative py-16 md:py-24 lg:py-40 bg-white overflow-visible antialiased selection:bg-primary-100">
+    <section id="reviews" ref={sectionRef} className="relative py-24 sm:py-32 md:py-48 lg:py-64 bg-white overflow-visible antialiased selection:bg-primary-100">
       
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 lg:px-16 text-left">
         <div className="grid lg:grid-cols-[1fr_320px] gap-12 lg:gap-20 items-start">
@@ -71,7 +71,7 @@ export default function Reviews() {
 
             <div className="flex items-stretch gap-5 md:gap-8 mb-8 md:mb-12">
               <div className="w-[1px] sm:w-[2px] flex-shrink-0 rounded-full bg-primary-600" />
-              <p className="max-w-xl font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90">
+              <p className="max-w-full font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90">
                 {t("reviews.subtitle")}
                  </p>
                  </div>

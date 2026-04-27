@@ -28,7 +28,7 @@ export default function WhyChooseClean() {
   const rightCol = differences.slice(4);
 
   return (
-    <section id="why-choose-us" className="relative py-16 md:py-20 lg:py-28 overflow-hidden antialiased bg-white">
+    <section id="why-choose-us" className="relative py-24 sm:py-32 md:py-48 lg:py-64overflow-hidden antialiased bg-[#F5F5F7]">
       <div className="mx-auto px-4 sm:px-6 lg:px-16 z-10 max-w-[1440px] relative">
         
         <div className="hidden md:block absolute top-0 right-30 lg:right-40 z-20 group">
