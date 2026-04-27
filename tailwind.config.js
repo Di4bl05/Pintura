@@ -8,8 +8,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        // FUENTE 1: Títulos H1/H2 de alto impacto (Autoridad)
         display: ['var(--font-display)', 'serif'],
+        // FUENTE 2: Texto de lectura, botones y UI (Limpieza y Modernidad)
         sans: ['var(--font-sans)', 'sans-serif'],
+        // FUENTE 3: Subtítulos luxury e itálicas (Elegancia Editorial)
         serif: ['var(--font-serif)', 'serif'],
       },
       colors: {
@@ -26,10 +29,10 @@ module.exports = {
           500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d',
         },
       },
-
+      // Ajustes de espaciado para marketing de alta gama
       letterSpacing: {
-        tightest: '-.06em', 
-        widest: '.25em',    
+        tightest: '-.06em', // Para H1 masivos
+        widest: '.25em',    // Para etiquetas pequeñas sobre los títulos
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

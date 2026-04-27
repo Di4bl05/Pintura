@@ -250,21 +250,23 @@ export default function BeforeAfterGallery() {
     <section id="gallery" className="relative py-24 sm:py-32 md:py-48 lg:py-64 overflow-hidden bg-[#F5F5F7] antialiased selection:bg-primary-100">
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 text-left lg:px-16">
         <div className="mb-16 max-w-5xl md:mb-24">
-          <h2 className="flex flex-col gap-0 md:gap-1 mb-8 md:mb-12">
-  
-          <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase leading-[0.95] tracking-tight">
-            {t("gallery.title") || (language === "es" ? "Resultados" : "Results")}
-          </span>
+          <h2 className="mb-10 flex flex-col gap-1">
+            <span className="font-display text-4xl font-bold uppercase leading-[0.95] tracking-tightest text-slate-950 md:text-6xl">
+              {t("gallery.title") || (language === "es" ? "Resultados" : "Results")}
+            </span>
+            <span className="font-serif text-3xl italic font-normal leading-none text-primary-600 md:text-6xl">
+              {t("gallery.titleHighlight") || (language === "es" ? "impecables" : "impeccable")}
+            </span>
+          </h2>
 
-         <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl italic text-primary-600 leading-[1] md:leading-none">
-            {t("gallery.titleHighlight") || (language === "es" ? "impecables" : "impeccable")}
-        </span>
-        </h2>
           <div className="mb-12 flex items-stretch gap-6">
-          <div className="w-[1px] sm:w-[2px] flex-shrink-0 rounded-full bg-primary-600" />
-          <p className="max-w-full font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90 mb-1 md:mb-2">
-          {t("gallery.subtitle")}
-          </p>
+            <div className="w-[2px] flex-shrink-0 rounded-full bg-primary-600" />
+            <p className="max-w-xl font-sans text-lg font-medium leading-relaxed text-slate-500 opacity-90">
+              {t("gallery.subtitle") ||
+                (language === "es"
+                  ? "Explora nuestras transformaciones recientes con imagenes optimizadas para movil y escritorio."
+                  : "Explore our recent transformations with optimized images for mobile and desktop.")}
+            </p>
           </div>
         </div>
 

@@ -28,6 +28,7 @@ export default function Reviews() {
   const [rating, setRating] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  // Obtener las reviews directamente del JSON
   const reviewsData = useMemo(() => {
     const items = t("reviews.items", { returnObjects: true });
     return Array.isArray(items) ? (items as Review[]) : [];
@@ -57,41 +58,39 @@ export default function Reviews() {
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 lg:px-16 text-left">
         <div className="grid lg:grid-cols-[1fr_320px] gap-12 lg:gap-20 items-start">
           
-          <div className="space-y-12 md:space-y-16 lg:space-y-24">
-
+          <div className="space-y-16 lg:space-y-24">
             <div className="max-w-4xl">
-              <h2 className="flex flex-col gap-1 mb-8 md:mb-10">
-                <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase tracking-tighter leading-[0.95]">
+              <h2 className="flex flex-col gap-1 mb-10">
+                <span className="font-display text-4xl md:text-6xl font-bold text-slate-950 uppercase tracking-tightest leading-[0.95]">
                   {t("reviews.title")}
                 </span>
-                <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl italic font-normal text-primary-600 leading-none">
+                <span className="font-serif text-3xl md:text-6xl italic font-normal text-primary-600 leading-none">
                   {t("reviews.titleHighlight")}
                 </span>
               </h2>
 
-            <div className="flex items-stretch gap-5 md:gap-8 mb-8 md:mb-12">
-              <div className="w-[1px] sm:w-[2px] flex-shrink-0 rounded-full bg-primary-600" />
-              <p className="max-w-full font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90">
-                {t("reviews.subtitle")}
-                 </p>
-                 </div>
+              <div className="flex gap-6 items-stretch">
+                <div className="w-[2px] bg-primary-600 rounded-full flex-shrink-0" />
+                <p className="font-sans text-lg text-slate-500 font-medium leading-relaxed max-w-xl opacity-90">
+                  {t("reviews.subtitle")}
+                </p>
               </div>
+            </div>
 
-            <div className="space-y-8 md:space-y-10">
-              <div className="grid grid-cols-1 gap-6 md:gap-10">
+            <div className="space-y-10">
+              <div className="grid grid-cols-1 gap-10">
                 {reviewsData.map((review) => (
-                  <div key={review.id} className="relative bg-slate-50/50 p-6 md:p-12 rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-100 select-none">
-                    <Quote className="absolute top-6 right-8 md:top-8 md:right-10 w-8 h-8 md:w-12 md:h-12 text-primary-600/5" />
+                  <div key={review.id} className="relative bg-slate-50/50 p-8 md:p-12 rounded-[2.5rem] border border-slate-100 select-none">
+                    <Quote className="absolute top-8 right-10 w-12 h-12 text-primary-600/5" />
                     
-                    <div className="flex flex-col md:flex-row gap-6 mb-6 md:mb-8">
-
-                      <div className={`hidden md:flex w-14 h-14 rounded-2xl ${review.color} flex-shrink-0 items-center justify-center font-display font-bold text-xl shadow-sm`}>
+                    <div className="flex flex-col md:flex-row gap-6 mb-8">
+                      <div className={`w-14 h-14 rounded-2xl ${review.color} flex-shrink-0 flex items-center justify-center font-display font-bold text-xl shadow-sm`}>
                         {review.avatar}
                       </div>
                       
                       <div className="flex-1">
                         <div className="flex flex-wrap items-center gap-3 mb-2">
-                          <h4 className="font-display font-bold text-slate-950 text-lg md:text-xl tracking-tight leading-none uppercase">
+                          <h4 className="font-display font-bold text-slate-950 text-xl tracking-tight leading-none uppercase">
                             {review.author}
                           </h4>
                           <span className="font-sans flex items-center gap-2 text-[8px] font-black text-primary-600 bg-white px-3 py-1 rounded-full uppercase tracking-widest border border-primary-50 shadow-sm">
@@ -100,7 +99,7 @@ export default function Reviews() {
                         </div>
                         <div className="flex items-center gap-4">
                           <div className="flex gap-0.5 text-yellow-400">
-                            {[...Array(5)].map((_, i) => <Star key={i} size={12} className="fill-current" stroke="none" />)}
+                            {[...Array(5)].map((_, i) => <Star key={i} size={14} className="fill-current" stroke="none" />)}
                           </div>
                           <div className="font-sans flex items-center gap-2 text-[9px] text-slate-400 font-bold uppercase tracking-widest">
                             <MapPin size={10} className="text-primary-500" /> {review.location}
@@ -109,8 +108,8 @@ export default function Reviews() {
                       </div>
                     </div>
 
-                    <p className="font-sans text-sm md:text-lg text-slate-600 font-medium leading-relaxed">
-                      "{review.text}"
+                    <p className="font-sans text-base md:text-lg text-slate-950 font-medium leading-relaxed">
+                      &ldquo;{review.text}&rdquo;
                     </p>
                   </div>
                 ))}
@@ -120,11 +119,11 @@ export default function Reviews() {
                 href="#" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex items-center justify-center gap-4 w-full md:w-fit px-10 py-5 md:px-12 md:py-6 bg-slate-950 text-white rounded-[2rem] overflow-hidden transition-all duration-500 shadow-xl active:scale-95"
+                className="group relative flex items-center justify-center gap-4 w-full md:w-fit px-12 py-6 bg-slate-950 text-white rounded-[2rem] overflow-hidden transition-all duration-500 shadow-xl"
               >
                 <div className="absolute inset-0 bg-primary-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
                 <GoogleIcon className="relative z-10 w-4 h-4" />
-                <span className="relative z-10 font-sans font-black text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em]">
+                <span className="relative z-10 font-sans font-black text-[10px] uppercase tracking-[0.3em]">
                   {t("reviews.googleBadge.viewAll")}
                 </span>
                 <ExternalLink size={16} className="relative z-10 group-hover:translate-x-1 transition-transform opacity-70" />
@@ -132,7 +131,7 @@ export default function Reviews() {
             </div>
           </div>
 
-          <aside className="hidden lg:sticky lg:top-32 self-start order-1 lg:order-2 lg:block">
+          <aside className="lg:sticky lg:top-32 self-start order-1 lg:order-2">
             <div className="relative p-1 bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden">
               <div className="bg-slate-50/50 rounded-[1.8rem] p-7 text-center space-y-6">
                 
@@ -171,6 +170,18 @@ export default function Reviews() {
               </div>
             </div>
           </aside>
+        </div>
+      </div>
+
+      <div className="absolute bottom-6 left-0 w-full translate-y-1/2 z-30 pointer-events-none">
+        <div className="flex items-center gap-6 w-full max-w-[1440px] px-6 lg:px-16 mx-auto">
+          <div className="h-[2px] flex-grow bg-slate-200" />
+          <div className="flex items-center gap-4 bg-white px-8 py-3 rounded-full border border-slate-200 flex-shrink-0 shadow-md">
+            <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
+            <span className="font-sans text-[10px] font-black text-slate-600 uppercase tracking-[0.5em]">{t("reviews.sectionLabel")}</span>
+            <div className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
+          </div>
+          <div className="h-[2px] flex-grow bg-slate-200" />
         </div>
       </div>
     </section>

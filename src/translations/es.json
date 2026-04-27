@@ -13,6 +13,7 @@
     "description": "Pintura residencial profesional en Orlando, FL. Especialistas en reparación de drywall, enlacado de gabinetes y lavado a presión.",
     "descriptionBold": "Licenciados, Asegurados y Limpieza Detallada Incluida.",
     "ctaFree": "PRESUPUESTO GRATIS",
+    "ctaCall": "Llamar Ahora",
     "carousel": [
       "Pintura de Gabinetes de Cocina",
       "Reparación Profesional de Paredes",
@@ -20,10 +21,7 @@
       "Limpieza Detallada Post-Trabajo"
     ]
   },
-  
  "services": {
-  "include": "Incluye: ",
-  "zone": "ZONAS ACTIVAS DE SERVICIOS",
   "title": "Pintura profesional",
   "titleHighlight": "de lujo con acabados de alta gama",
   "subtitle": "Desde la protección profunda de fachadas contra el clima de Florida hasta la renovación estética de sus espacios internos. Ofrecemos soluciones integrales de pintura y mantenimiento diseñadas para elevar el valor de su propiedad con acabados de alta resistencia y precisión técnica.",
@@ -69,7 +67,6 @@
     ]
   }
 },
-
 "servicesdetails": {
   "premium": "Experiencia de servicio premium",
   "execution": "Proceso de ejecución",
@@ -238,6 +235,7 @@
       "location": "Florida Central",
       "viewAll": "Ver todas las reseñas en Google"
     },
+    "sectionLabel": "Section Reviews",
     "items": [
       {
         "id": 1,
@@ -289,8 +287,7 @@
 
 "whyChoose": {
   "core_value_proposition": {
-    "hookMain": "La Calidad que su Hogar Merece",
-    "hookItalic": "a un precio que hace sentido", 
+    "hook": "La Calidad que su Hogar Merece, a un precio que hace sentido.",
     "description": "Con más de 3 años transformando propiedades en Florida no solo aplicamos color; garantizamos durabilidad a través de una metodología rigurosa y el uso exclusivo de materiales premium. Nuestra trayectoria en el mercado local se basa en la puntualidad, la limpieza absoluta y un estándar de calidad que supera las expectativas de los propietarios más exigentes.",
     "the_difference": [
       {
@@ -456,12 +453,12 @@
         "fields": {
           "budget": "Rango de Inversión Estimado",
           "comments": "Descripción Adicional (Opcional)",
-          "vip_label": "Modo Vía-Rápida prioritario",
+          "vip_label": "Modo Fast-Track Prioritario",
           "vip_text": "Estoy listo para empezar. No necesito negociación, quiero agendar la visita para confirmar detalles y comenzar a pintar directamente."
         },
         "ranges": {
           "low": {
-          "label": "$2,000 - $4,000"
+            "label": "$2,000 - $4,000"
                  },
           "mid": {
             "label": "$4,000 - $6,000"
@@ -473,23 +470,22 @@
       }
     },
     "success": {
-      "title": "¡Solicitud recibida!",
-      "message": "Tu proyecto ha sido enviado directamente a nuestro equipo técnico. Nos pondremos en contacto contigo en menos de 24 horas.",
-      "call_btn": "Llamar ahora",
-      "close": "Finalizar"
+      "title": "¡Solicitud Recibida con Éxito!",
+      "message": "Gracias por confiar en nuestra compañía. Tu solicitud está siendo evaluada por nuestro equipo técnico. En breve recibirás un correo electrónico confirmando si tu proyecto ha sido aprobado o si requerimos más detalles.",
+      "call_btn": "Llamar Directamente",
+      "close": "Volver al inicio"
     },
     "buttons": {
-      "next": "Siguiente paso",
+      "next": "Siguiente Paso",
       "prev": "Anterior",
-      "sending": "Enviando......",
-      "submit": "Finalizar estimado",
+      "submit": "Solicitar Prioridad de Pintura",
       "submit_btn": "Reservar mi prioridad",
-      "close": "Cerrar formulario"
+      "close": "Cerrar Formulario"
     }
   },
 
   "footer": {
-    "description": "Luisbety Inc. - Pintores profesionales en Florida Central. Especialistas en acabados de alta gama. Licenciados y asegurados para su total tranquilidad.",
+    "description": "Luisbety Inc. - Pintores profesionales en Florida Central. Especialistas en acabados residenciales y comerciales de alta gama. Licenciados y asegurados para su total tranquilidad.",
     "services": {
       "title": "Servicios Especializados",
       "items": [

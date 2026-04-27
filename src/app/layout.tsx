@@ -1,29 +1,12 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Playfair_Display, Instrument_Serif } from "next/font/google";
 import { LanguageProvider } from "@/contexts/LanguageContext"; 
 import "./globals.css";
 
-const sans = Plus_Jakarta_Sans({ 
-  subsets: ["latin"], 
-  weight: ["400", "500", "700"], 
-  variable: "--font-sans",
-  display: "swap" 
-});
-
-const display = Playfair_Display({ 
-  subsets: ["latin"], 
-  weight: ["900"], 
-  variable: "--font-display",
-  display: "swap" 
-});
-
-const serif = Instrument_Serif({ 
-  subsets: ["latin"], 
-  weight: "400", 
-  style: ["normal", "italic"], 
-  variable: "--font-serif",
-  display: "swap" 
-});
+const fontVars = {
+  "--font-sans": '"Arial", "Helvetica Neue", Helvetica, sans-serif',
+  "--font-display": 'Georgia, "Times New Roman", Times, serif',
+  "--font-serif": 'Georgia, "Times New Roman", Times, serif',
+} as React.CSSProperties;
 
 export const metadata: Metadata = {
   title: "Luisbety Protocol | High-Performance Coating",
@@ -36,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable} ${serif.variable}`}>
+    <html lang="en" style={fontVars}>
       <body className="font-sans antialiased bg-white text-slate-900 min-h-screen">
      
         <LanguageProvider>

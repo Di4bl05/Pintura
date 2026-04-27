@@ -32,10 +32,17 @@ export default function Services() {
   };
 
   const handleOpenDetails = (service: { key: string; img: string }) => {
+    const data = (t as any)(`servicesdetails.${service.key}`, {
+      returnObjects: true,
+      defaultValue: {},
+    });
+
+    const premium = t("servicesdetails.premium");
+
     setSelectedServiceData({
-      id: service.key,
+      ...data,
       img: service.img,
-      steps: [{}, {}, {}],
+      premium,
     });
     setIsDetailsOpen(true);
   };

@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from "react";
 import { X, Phone, Send, CheckCircle2 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useSmartLink } from "@/hooks/useSmartLink";
 
 interface ServiceDetailProps {
   isOpen: boolean;
@@ -20,9 +19,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
   const pathname = usePathname();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
- 
-  const { handlePhoneClick } = useSmartLink();
-  const phone = "+17863506367";
 
   useEffect(() => {
     if (isOpen && scrollRef.current) {
@@ -37,17 +33,12 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      
-      if (isOpen && target.closest("a") && !target.closest('a[href^="tel:"]')) {
-        onClose();
-      }
+      if (isOpen && target.closest("a")) onClose();
     };
 
     if (isOpen) window.addEventListener("click", handleGlobalClick);
     return () => window.removeEventListener("click", handleGlobalClick);
   }, [isOpen, onClose]);
-
-  const sId = serviceData?.id;
 
   if (!isOpen || !serviceData) return null;
 
@@ -59,26 +50,26 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
       <div className="pt-32 md:pt-44 pb-28 max-w-[1440px] mx-auto px-6 lg:px-16">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start max-w-6xl">
+
           <div>
             <div className="text-[10px] font-black uppercase tracking-[0.5em] text-primary-600 mb-6">
               {t("servicesdetails.premium")}
-              </div>
-             <div className="flex flex-col gap-0 md:gap-1 mb-8 md:mb-12">
-            <h1 className="font-display text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-black text-slate-950 uppercase leading-[0.95] tracking-tight">
-              {t(`servicesdetails.${sId}.title`)}
-               </h1>
-               <h2 className="font-serif text-2xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-5xl italic font-normal text-primary-600 leading-[1] md:leading-none">
-                {t(`servicesdetails.${sId}.titleHighlight`)}
-                </h2>
-                </div> 
+            </div>
 
-            <div className="flex items-stretch gap-5 md:gap-8 mb-12">
-              <div className="w-[2px] sm:w-[3px] flex-shrink-0 rounded-full bg-primary-600" />
-              <p className="max-w-2xl font-sans text-sm lg:text-lg font-medium leading-relaxed text-slate-500 opacity-90">
-                {t(`servicesdetails.${sId}.description`)}
-                </p>
-                </div>
-                </div>
+            <h1 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tight text-slate-950 leading-[0.9]">
+              {serviceData.title}
+            </h1>
+
+            <h2 className="font-serif text-2xl md:text-4xl italic text-primary-600 font-normal mt-2">
+              {serviceData.titleHighlight}
+            </h2>
+
+            <div className="h-[3px] w-24 bg-primary-600 mt-8 mb-8" />
+
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+              {serviceData.description}
+            </p>
+          </div>
 
           <div className="hidden md:flex justify-end md:translate-x-20 md:mt-12">
             <div className="relative group flex justify-end">
@@ -127,7 +118,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
                 <div className="flex-1 pt-1 md:pt-2">
                   <div className="flex items-center gap-4 mb-4">
                     <h4 className="text-xl md:text-2xl font-display font-black uppercase text-slate-950 tracking-tighter">
-                      {t(`servicesdetails.${sId}.steps.${i}.title`)}
+                      {step.title}
                     </h4>
                     <div className="h-px flex-1 bg-slate-50 group-hover:bg-primary-100 transition-colors" />
                     <CheckCircle2
@@ -136,21 +127,18 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
                     />
                   </div>
                   <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium max-w-3xl">
-                    {t(`servicesdetails.${sId}.steps.${i}.desc`)}
+                    {step.desc}
                   </p>
                 </div>
               </div>
             ))}
+
           </div>
         </div>
 
         <div className="mt-16 md:mt-28 border-t pt-10 md:pt-14 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
           <button
-           type="button"
-              onClick={(e) => {
-             e.preventDefault(); 
-            window.dispatchEvent(new CustomEvent("app:open-contact"));
-            }}
+            onClick={onClose}
             className="relative group px-10 py-5 bg-slate-950 text-white font-black uppercase text-[11px] tracking-[0.2em] rounded-xl overflow-hidden shadow-lg"
           >
             <div className="absolute inset-0 bg-primary-600 scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-500 z-0" />
@@ -160,16 +148,15 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
             </div>
           </button>
 
-          <a
-            href={`tel:${phone}`}
-            onClick={handlePhoneClick(phone)}
-            className="group h-[60px] px-10 md:px-20 flex items-center gap-4 text-slate-950 border border-slate-200 hover:border-blue-600 hover:bg-blue-600 hover:text-white rounded-xl transition-all duration-300 font-black uppercase text-[11px] tracking-[0.2em] hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] active:scale-95"
-          >
+         <a
+           href="tel:+17863506367"
+            className="group h-[60px] px-20 flex items-center gap-4 text-slate-950 border border-slate-200 hover:border-blue-600 hover:bg-blue-600 hover:text-white rounded-xl transition-all duration-300 font-black uppercase text-[11px] tracking-[0.2em] hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] active:scale-95"
+              >
             <div className="p-2.5 bg-slate-100 group-hover:bg-blue-500 group-hover:text-white rounded-lg transition-all">
-              <Phone size={15} />
-            </div>
-            <span>(786) 350-6367</span>
-          </a>
+            <Phone size={15} />
+          </div>
+         <span>(786) 350-6367</span>
+        </a>
         </div>
 
       </div>
