@@ -76,9 +76,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
       }`}
     >
       <nav className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:pl-10 lg:pr-20">
-
         <div className="flex items-center">
-
           <Link
             href="/"
             className="flex items-center flex-shrink-0 gap-3 md:gap-4 transition-transform group active:scale-95"
@@ -88,9 +86,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                 src={logoUrl}
                 alt="LUISBETY INC"
                 className={`transition-all duration-500 object-contain ${
-                  isSolid
-                    ? "h-8 sm:h-10"
-                    : "h-10 sm:h-12 md:h-16"
+                  isSolid ? "h-8 sm:h-10" : "h-10 sm:h-12 md:h-16"
                 } w-auto`}
                 style={{ filter: "brightness(0) invert(1)" }}
               />
@@ -98,12 +94,9 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             </div>
 
             <div className="flex flex-col pl-2 sm:pl-3 md:pl-4 leading-none text-left border-l border-white/10">
-
               <span
                 className={`font-display font-black tracking-tightest text-white transition-all duration-500 ${
-                  isSolid
-                    ? "text-sm sm:text-lg md:text-xl"
-                    : "text-base sm:text-xl md:text-3xl"
+                  isSolid ? "text-sm sm:text-lg md:text-xl" : "text-base sm:text-xl md:text-3xl"
                 }`}
               >
                 LUISBETY{" "}
@@ -111,7 +104,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                   Inc.
                 </span>
               </span>
-
               <span
                 className={`font-sans font-bold uppercase text-primary-200/50 transition-all duration-500 ${
                   isSolid
@@ -121,7 +113,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
               >
                 Painting and Remodeling
               </span>
-
             </div>
           </Link>
 
@@ -173,7 +164,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
           >
             {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
-
         </div>
 
         <div
@@ -197,7 +187,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             ))}
           </div>
         </div>
-
       </nav>
     </header>
   );

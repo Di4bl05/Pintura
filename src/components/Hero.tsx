@@ -102,7 +102,6 @@ export default function Hero() {
         setIsAnimate(true);
       }, 600);
     }, 5000);
-
     return () => clearInterval(timer);
   }, [heroContent.length]);
 
@@ -122,13 +121,13 @@ export default function Hero() {
         </div>
 
         <div className="relative z-20 w-full mt-12 md:mt-24">
-            <HeroContent
-              t={t}
-              onOpenContact={handleOpenContact}
-              current={current}
-              isAnimate={isAnimate}
-              heroContent={heroContent}
-            />
+          <HeroContent
+            t={t}
+            onOpenContact={handleOpenContact}
+            current={current}
+            isAnimate={isAnimate}
+            heroContent={heroContent}
+          />
         </div>
 
         <div className="absolute bottom-0 left-0 h-1 w-full bg-white/5">

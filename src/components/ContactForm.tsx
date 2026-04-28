@@ -268,7 +268,7 @@ return (
           </span>
         </h1>
         
-        <p className="font-sans text-sm lg:text-base font-medium text-slate-500 leading-relaxed mb-10 max-w-[450px] border-l-2 border-primary-600 pl-6">
+        <p className="font-sans text-sm lg:text-base font-medium text-slate-600 leading-relaxed mb-10 max-w-[450px] border-l-2 border-primary-600 pl-6">
           {t("contact.header.description")}
         </p>
 
