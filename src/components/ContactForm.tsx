@@ -196,13 +196,13 @@ const handleSubmit = async () => {
 return (
   <div className="fixed inset-0 z-[40] bg-white overflow-hidden antialiased flex flex-col">
     
-    <div className="absolute top-28 left-0 w-full flex justify-center z-50 pointer-events-none">
-      <div className="flex items-center">
+    <div className="absolute top-24 left-0 w-full flex justify-center z-50 pointer-events-none px-8">
+      <div className="flex items-center w-full max-w-xl justify-between">
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <React.Fragment key={i}>
             <div className="flex flex-col items-center">
               <div
-                className={`w-9 h-9 rounded-full border transition-all duration-700 ease-in-out relative flex items-center justify-center overflow-hidden pointer-events-auto ${
+                className={`w-7 h-7 md:w-9 md:h-9 rounded-full border transition-all duration-700 ease-in-out relative flex items-center justify-center overflow-hidden pointer-events-auto ${
                   step > i 
                     ? "bg-slate-950 border-slate-950 shadow-lg shadow-slate-200" 
                     : step === i
@@ -231,7 +231,7 @@ return (
             </div>
 
             {i < 6 && (
-              <div className="w-10 lg:w-20 h-[1px] bg-slate-100 relative mx-1">
+              <div className="flex-grow h-[1px] bg-slate-100 relative mx-2">
                 <div
                   className={`absolute inset-0 bg-slate-950 transition-all duration-1000 ease-in-out ${
                     step > i ? "scale-x-100 origin-left" : "scale-x-0 origin-left"
@@ -249,46 +249,56 @@ return (
      <div className="w-full animate-in slide-in-from-left-6 duration-700 flex flex-col justify-center items-center">
 
 {step === 1 && (
-  <div className="flex w-full h-full items-center justify-between px-8 lg:px-20 animate-in fade-in duration-700">
+  /* Bloqueamos el scroll del contenedor principal con fixed y h-screen */
+  <div className="fixed inset-0 w-full h-screen lg:relative lg:h-full flex items-center justify-between px-8 lg:px-20 animate-in fade-in duration-700 overflow-hidden bg-white">
     
-    <div className="w-full lg:w-1/2 flex flex-col justify-center">
-      <div className="max-w-[500px]"> 
+    {/* Mantenemos tus medidas exactas: pt-32, pb-12, px-1 */}
+    <div className="w-full lg:w-1/2 flex flex-col h-full pt-44 lg:pt-28 pb-12 px-1 lg:px-6 transition-all">
+  
+      <div className="max-w-[550px] mx-auto lg:mx-0 w-full">   
         
-        <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-100 mb-6">
-          <Star className="text-primary-600 fill-primary-600" size={8} />
-          <span className="font-sans font-black text-[8px] tracking-[0.15em] text-slate-900 uppercase">
-            {t("contact.header.subtitle")}
-          </span>
-        </div>
-        
-        <h1 className="font-display font-black text-4xl lg:text-5xl text-slate-950 leading-[0.95] uppercase tracking-tighter mb-6">
+        <h1 className="font-display font-black text-4xl sm:text-4xl lg:text-5xl text-slate-950 leading-[0.95] uppercase tracking-tighter mb-9">
           {t("contact.header.title").split("preciso")[0]}
           <span className="text-primary-600 block">
             preciso.
           </span>
         </h1>
         
-        <p className="font-sans text-sm lg:text-base font-medium text-slate-600 leading-relaxed mb-10 max-w-[450px] border-l-2 border-primary-600 pl-6">
+        <p className="font-sans text-sm lg:text-lg font-medium text-slate-600 leading-relaxed mb-8 md:mb-10">
           {t("contact.header.description")}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 mt-4">
+        <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full">
           <button
             type="button"
             onClick={() => setStep(2)}
-            className="group relative flex-[1.2] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg shadow-slate-100"
+            className="
+              group relative overflow-hidden inline-flex items-center justify-center gap-3 
+              bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] 
+              shadow-xl shadow-slate-200 active:scale-95
+              w-full sm:flex-[1.2] 
+              h-[48px] px-6 text-[9px] rounded-2xl
+              md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]
+            "
           >
             <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
-            <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.15em] uppercase text-left">
-              {t("contact.buttons.submit_btn")}
-            </span>
-            <ChevronRight className="relative z-10 group-hover:translate-x-1 transition-transform" size={18} />
+            <span className="relative z-10">{t("contact.buttons.submit_btn")}</span>
+            <ChevronRight className="relative z-10 transition-transform group-hover:translate-x-1" size={16} />
           </button>
 
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 p-4 rounded-xl border border-slate-200 bg-white text-slate-400 font-sans font-black text-[9px] tracking-[0.2em] uppercase hover:text-slate-950 hover:border-slate-300 transition-all"
+            className="
+              inline-flex items-center justify-center
+              bg-white border-2 border-slate-100 text-slate-400
+              transition-all duration-300 font-black uppercase tracking-[0.2em] 
+              active:scale-95
+              w-full sm:flex-1
+              h-[48px] px-6 text-[9px] rounded-2xl
+              md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem]
+              hover:text-slate-950 hover:border-slate-300
+            "
           >
             {t("contact.buttons.close")}
           </button>
@@ -296,10 +306,9 @@ return (
       </div>
     </div>
 
+    {/* Sección PC: Intacta */}
     <div className="hidden lg:flex w-1/2 h-full items-center justify-center p-8">
-
       <div className="relative w-full max-w-[700px] aspect-[16/10] group">
-        
         <div className="relative h-full w-full rounded-[2.5rem] overflow-hidden border-[12px] border-white shadow-[0_35px_80px_-15px_rgba(0,0,0,0.15)] ring-1 ring-slate-100">
           <Image 
             src={currentImage}
@@ -308,14 +317,7 @@ return (
             className="object-cover transition-transform duration-[8s] ease-out group-hover:scale-105"
             priority
           />
-          
           <div className="absolute inset-0 bg-slate-950/5" />
-        </div>
-
-        <div className="absolute -bottom-4 right-8 bg-white py-2 px-5 rounded-xl shadow-xl border border-slate-50 transition-transform group-hover:-translate-y-1">
-          <p className="font-sans font-black text-[7px] tracking-[0.3em] text-slate-950 uppercase">
-            Exterior Service • FL
-          </p>
         </div>
       </div>
     </div>
@@ -324,87 +326,86 @@ return (
 )}
 
 {step === 2 && (
-            <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700">
-              <div className="w-full max-w-[580px] flex flex-col items-center">
-                <div className="text-center mb-10">
-                  <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
-                    {t("contact.steps.step_1.title")}
-                  </h2>
-                  <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
-                </div>
+  <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700">
+    <div className="w-full max-w-[580px] flex flex-col items-center">
+      
+      {/* Título: oculto en móvil (hidden) y visible en PC (lg:block) */}
+      <div className="text-center mb-10 hidden lg:block">
+        <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+          {t("contact.steps.step_1.title")}
+        </h2>
+        <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
+      </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 w-full">
-                  {["name", "phone", "address", "date"].map((field) => (
-                    <div key={field} className={`w-full space-y-1.5 ${field === "address" || field === "date" ? "md:col-span-2" : ""}`}>
-                      <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
-                        {t(`contact.steps.step_1.fields.${field}`)}
-                      </label>
-                      <input
-                        type={field === "date" ? "date" : "text"}
-                        name={field}
-                        value={contactData[field]}
-                        onChange={(e) => {
-                          const { value } = e.target;
-                          
-                          const cleanValue = field === "phone" ? value.replace(/[a-zA-Z]/g, "") : value;
-                          setContactData((prev: any) => ({ ...prev, [field]: cleanValue }));
-                          
-                          if (errors[field]) setErrors((prev: any) => {
-                            const newErrs = {...prev};
-                            delete newErrs[field];
-                            return newErrs;
-                          });
-                        }}
-                        placeholder={
-                          field === "name" ? "Ej: Juan Pérez" :
-                          field === "phone" ? "Ej: +1 555 123 4567" :
-                          field === "address" ? "Ej: 123 Main St, Orlando" : ""
-                        }
-                        className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-sm placeholder:text-slate-400 transition-all duration-500 ease-in-out appearance-none outline-none ring-0 focus:outline-none focus:shadow-none ${
-                          errors[field] ? "border-red-500" : "border-slate-100 focus:border-primary-600"
-                        }`}
-                        style={{ boxShadow: 'none' }}
-                      />
-                      {errors[field] && (
-                        <p className="text-[10px] text-red-500 font-black uppercase tracking-wider pt-1 pl-1 animate-in fade-in slide-in-from-top-1 duration-300">
-                          {errors[field]}
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 w-full">
+        {["name", "phone", "address", "date"].map((field) => (
+          <div key={field} className={`w-full space-y-1.5 ${field === "address" || field === "date" ? "md:col-span-2" : ""}`}>
+            <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+              {t(`contact.steps.step_1.fields.${field}`)}
+            </label>
+            <input
+              type={field === "date" ? "date" : "text"}
+              name={field}
+              value={contactData[field]}
+              onChange={(e) => {
+                const { value } = e.target;
+                const cleanValue = field === "phone" ? value.replace(/[a-zA-Z]/g, "") : value;
+                setContactData((prev: any) => ({ ...prev, [field]: cleanValue }));
+                if (errors[field]) setErrors((prev: any) => {
+                  const newErrs = {...prev};
+                  delete newErrs[field];
+                  return newErrs;
+                });
+              }}
+              placeholder={
+                field === "name" ? "Ej: Juan Pérez" :
+                field === "phone" ? "Ej: +1 555 123 4567" :
+                field === "address" ? "Ej: 123 Main St, Orlando" : ""
+              }
+              className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-[12px] lg:text-[15px] placeholder:text-slate-400 transition-all duration-500 ease-in-out appearance-none outline-none ring-0 focus:outline-none focus:shadow-none ${
+                errors[field] ? "border-red-500" : "border-slate-100 focus:border-primary-600"
+              }`}
+              style={{ boxShadow: 'none' }}
+            />
+            {errors[field] && (
+              <p className="text-[10px] text-red-500 font-black uppercase tracking-wider pt-1 pl-1 animate-in fade-in slide-in-from-top-1 duration-300">
+                {errors[field]}
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
 
-                <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (validateStepTwo()) setStep(3);
-                    }}
-                    className="group relative w-full md:flex-[1.5] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg"
-                  >
-                    <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
-                    <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.2em] uppercase pl-2">
-                      {t("contact.buttons.next")}
-                    </span>
-                    <ChevronRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setStep(1)}
-                    className="w-full md:flex-1 p-4 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-950 transition-all"
-                  >
-                    {t("contact.buttons.prev")}
-                  </button>
-                </div>
-              </div>
-            </div>
- )}
+      <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
+        <button
+          type="button"
+          onClick={() => {
+            if (validateStepTwo()) setStep(3);
+          }}
+          className="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl shadow-slate-200 active:scale-95 w-full h-[40px] lg:h-[48px] px-6 text-[9px] rounded-2xl md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]"
+        >
+          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+          <span className="relative z-10">{t("contact.buttons.next")}</span>
+          <ChevronRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setStep(1)}
+          className="inline-flex items-center justify-center bg-white border-2 border-slate-100 text-slate-400 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[40px] lg:h-[48px] px-6 text-[9px] rounded-2xl md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem] hover:text-slate-950 hover:border-slate-300"
+        >
+          {t("contact.buttons.prev")}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
 {step === 3 && (
   <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700 overflow-hidden">
     <div className="w-full max-w-[580px] flex flex-col items-center">
   
-      <div className="text-center mb-3">
+      <div className="text-center mb-3 hidden lg:block">
         <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
           {t("contact.steps.step_2.title")}
         </h2>
@@ -562,27 +563,53 @@ return (
 
       <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
         <button
-          type="button"
-          onClick={() => {
-            
-            if (validateStepThree()) setStep(4);
-          }}
-          className="group relative w-full md:flex-[1.5] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg"
-        >
-          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
-          <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.2em] uppercase pl-2">
-            {t("contact.buttons.next")}
-          </span>
-          <ChevronRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-        </button>
+  type="button"
+  onClick={() => {
+    if (validateStepThree()) setStep(4);
+  }}
+  className="
+    group relative overflow-hidden inline-flex items-center justify-center gap-3 
+    bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] 
+    shadow-xl shadow-slate-200 active:scale-95
+    
+    /* --- DIMENSIONES MÓVIL --- */
+    w-full h-[48px] px-6 text-[9px] rounded-2xl
+    
+    /* --- DIMENSIONES PC --- */
+    md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]
+  "
+>
+  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+  <span className="relative z-10">
+    {t("contact.buttons.next")}
+  </span>
+  <ChevronRight 
+    size={16} 
+    className="relative z-10 group-hover:translate-x-1 transition-transform" 
+  />
+</button>
 
-        <button
-          type="button"
-          onClick={() => setStep(2)}
-          className="w-full md:flex-1 p-4 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-950 transition-all"
-        >
-          {t("contact.buttons.prev")}
-        </button>
+       <button
+  type="button"
+  onClick={() => setStep(2)}
+  className="
+    inline-flex items-center justify-center
+    bg-white border-2 border-slate-100 text-slate-400
+    transition-all duration-300 font-black uppercase tracking-[0.2em] 
+    active:scale-95
+
+    /* --- DIMENSIONES MÓVIL --- */
+    w-full h-[48px] px-6 text-[9px] rounded-2xl
+
+    /* --- DIMENSIONES PC --- */
+    md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem]
+
+    /* Hover */
+    hover:text-slate-950 hover:border-slate-300
+  "
+>
+  {t("contact.buttons.prev")}
+</button>
       </div>
     </div>
   </div>
@@ -592,7 +619,7 @@ return (
   <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700 overflow-hidden">
     <div className="w-full max-w-[580px] flex flex-col items-center">
       
-      <div className="text-center mb-10">
+      <div className="text-center mb-10 hidden lg:block">
         <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
           {t("contact.steps.step_3.title")}
         </h2>
@@ -702,26 +729,53 @@ return (
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
-        <button 
-          type="button" 
-          onClick={() => {
-            if (validateStepFor()) setStep(5);
-          }} 
-          className="group relative w-full md:flex-[1.5] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg"
-        >
-          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
-          <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.2em] uppercase pl-2">
-            {t("contact.buttons.next")}
-          </span>
-          <ChevronRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-        </button>
-        <button 
-          type="button" 
-          onClick={() => setStep(3)} 
-          className="w-full md:flex-1 p-4 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-400 transition-all"
-        >
-          {t("contact.buttons.prev")}
-        </button>
+       <button
+  type="button"
+  onClick={() => {
+    if (validateStepFor()) setStep(5);
+  }}
+  className="
+    group relative overflow-hidden inline-flex items-center justify-center gap-3 
+    bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] 
+    shadow-xl shadow-slate-200 active:scale-95
+    
+    /* --- DIMENSIONES MÓVIL --- */
+    w-full h-[48px] px-6 text-[9px] rounded-2xl
+    
+    /* --- DIMENSIONES PC --- */
+    md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]
+  "
+>
+  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+  <span className="relative z-10">
+    {t("contact.buttons.next")}
+  </span>
+  <ChevronRight 
+    size={16} 
+    className="relative z-10 group-hover:translate-x-1 transition-transform" 
+  />
+</button>
+        <button
+  type="button"
+  onClick={() => setStep(3)}
+  className="
+    inline-flex items-center justify-center
+    bg-white border-2 border-slate-100 text-slate-400
+    transition-all duration-300 font-black uppercase tracking-[0.2em] 
+    active:scale-95
+
+    /* --- DIMENSIONES MÓVIL --- */
+    w-full h-[48px] px-6 text-[9px] rounded-2xl
+
+    /* --- DIMENSIONES PC --- */
+    md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem]
+
+    /* Hover */
+    hover:text-slate-950 hover:border-slate-300
+  "
+>
+  {t("contact.buttons.prev")}
+</button>
       </div>
     </div>
   </div>
@@ -732,7 +786,7 @@ return (
   <div className="w-full max-w-[580px] flex flex-col items-center">
 
     {/* TÍTULO */}
-    <div className="text-center mb-10">
+    <div className="text-center mb-10 hidden lg:block">
       <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
         {t("contact.steps.step_4.title")}
       </h2>
@@ -846,30 +900,55 @@ return (
 
     {/* NAV */}
     <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
-      <button
-        type="button"
-        onClick={() => setStep(6)}
-        className="group relative w-full md:flex-[1.5] overflow-hidden flex items-center justify-between p-4 rounded-xl bg-slate-950 text-white"
-      >
-        <span className="relative z-10 font-sans font-black text-[10px] uppercase">
-          Finalizar estimado
-        </span>
-      </button>
+     <button
+  type="button"
+  onClick={() => setStep(6)}
+  className="
+    group relative overflow-hidden inline-flex items-center justify-center gap-3 
+    bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] 
+    shadow-xl shadow-slate-200 active:scale-95
+    
+    /* --- DIMENSIONES MÓVIL --- */
+    w-full h-[48px] px-6 text-[9px] rounded-2xl
+    
+    /* --- DIMENSIONES PC --- */
+    md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]
+  "
+>
+  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+  <span className="relative z-10">
+    Finalizar estimado
+  </span>
+</button>
 
       <button
-        type="button"
-        onClick={() => setStep(4)}
-        className="w-full md:flex-1 p-4 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase text-slate-400"
-      >
-        {t("contact.buttons.prev")}
-      </button>
+  type="button"
+  onClick={() => setStep(4)}
+  className="
+    inline-flex items-center justify-center
+    bg-white border-2 border-slate-100 text-slate-400
+    transition-all duration-300 font-black uppercase tracking-[0.2em] 
+    active:scale-95
+
+    /* --- DIMENSIONES MÓVIL --- */
+    w-full h-[48px] px-6 text-[9px] rounded-2xl
+
+    /* --- DIMENSIONES PC --- */
+    md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem]
+
+    /* Hover */
+    hover:text-slate-950 hover:border-slate-300
+  "
+>
+  {t("contact.buttons.prev")}
+</button>
     </div>
 
   </div>
 </div>
 )}
 
-   {step === 6 && (
+{step === 6 && (
   <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in zoom-in-95 duration-700 overflow-hidden text-center">
     <div className="w-full max-w-[550px] flex flex-col items-center">
 
@@ -891,23 +970,48 @@ return (
       {/* ACCIONES FINALIZAR */}
       <div className="flex flex-col sm:flex-row gap-4 w-full max-w-[460px]">
         {/* VOLVER AL INICIO */}
-        <button 
-          onClick={onClose} 
-          className="group relative flex-[1.5] overflow-hidden flex items-center justify-center p-5 rounded-xl bg-slate-950 text-white transition-all duration-500 shadow-lg shadow-slate-200"
-        >
-          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
-          <span className="relative z-10 font-sans font-black text-[10px] tracking-[0.25em] uppercase">
-            {t("contact.success.close")}
-          </span>
-        </button>
+       <button 
+  type="button" 
+  onClick={onClose} 
+  className="
+    group relative overflow-hidden inline-flex items-center justify-center gap-3 
+    bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] 
+    shadow-xl shadow-slate-200 active:scale-95
+    
+    /* --- DIMENSIONES MÓVIL --- */
+    w-full h-[48px] px-6 text-[9px] rounded-2xl
+    
+    /* --- DIMENSIONES PC --- */
+    md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]
+  "
+>
+  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+  <span className="relative z-10">
+    {t("contact.success.close")}
+  </span>
+</button>
 
-        {/* LLAMAR DIRECTAMENTE */}
-        <a 
-          href="tel:+14070000000" 
-          className="flex-1 p-5 rounded-xl border border-slate-200 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-950 hover:border-slate-950 transition-all text-center flex items-center justify-center"
-        >
-          {t("contact.success.call_btn")}
-        </a>
+{/* LLAMAR DIRECTAMENTE */}
+<a 
+  href="tel:+14070000000" 
+  className="
+    inline-flex items-center justify-center
+    bg-white border-2 border-slate-100 text-slate-400
+    transition-all duration-300 font-black uppercase tracking-[0.2em] 
+    active:scale-95 text-center
+
+    /* --- DIMENSIONES MÓVIL --- */
+    w-full h-[48px] px-6 text-[9px] rounded-2xl
+
+    /* --- DIMENSIONES PC --- */
+    md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem]
+
+    /* Hover */
+    hover:text-slate-950 hover:border-slate-300
+  "
+>
+  {t("contact.success.call_btn")}
+</a>
       </div>
       
     </div>
