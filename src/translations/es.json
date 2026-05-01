@@ -484,15 +484,16 @@
     }
   },
 
+  
   "footer": {
-    "description": "Luisbety Inc. - Pintores profesionales en Florida Central. Especialistas en acabados residenciales y comerciales de alta gama. Licenciados y asegurados para su total tranquilidad.",
+    "description": "Pintores profesionales en Florida Central. Especialistas en acabados residenciales y comerciales de alta gama. Licenciados y asegurados para su total tranquilidad.",
     "services": {
-      "title": "Servicios Especializados",
+      "title": "Servicios Principales",
       "items": [
-        { "name": "Pintura Interior", "desc": "Acabados perfectos en paredes, techos y molduras.", "href": "/services/interior" },
-        { "name": "Pintura Exterior", "desc": "Protección duradera contra el clima de Florida.", "href": "/services/exterior" },
-        { "name": "Pintura Comercial", "desc": "Eficiencia y calidad para su negocio u oficina.", "href": "/services/commercial" },
-        { "name": "Lavado a Presión", "desc": "Limpieza profunda de fachadas, driveways y decks.", "href": "/services/pressure-washing" }
+        { "name": "Pintura Interior", "href": "/services/interior" },
+        { "name": "Pintura Exterior", "href": "/services/exterior" },
+        { "name": "Reparación de Superficies", "href": "/services/surfaces" },
+        { "name": "Lavado a Presión", "href": "/services/pressure-washing" }
       ]
     },
     "areas": {
@@ -509,12 +510,19 @@
     },
     "contact": {
       "title": "Contáctanos",
+      "phone": "(786) 350-6367",
+      "phone_href": "tel:+17863506367",
+      "email": "contact@luisbety.com",
+      "address": "2381 Westwood Dr, Longwood, FL 32779",
+      "hours_label": "Horarios de atención",
       "hours": "Lun-Vie: 9AM - 5PM | Sáb: 9AM - 2PM"
+    },
+    "socials": {
+      "tiktok": "https://www.tiktok.com/@luisenriquecardenas86"
     },
     "copyright": "Todos los derechos reservados.",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
     "licenseInfo": "Licensed & Insured"
   }
-
 }

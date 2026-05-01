@@ -68,7 +68,7 @@ export default function Services() {
                 {t("services.titleHighlight")}
               </span>
             </h2>
-            <p className="font-sans text-sm lg:text-lg text-slate-600 font-medium leading-relaxed max-w-2xl">
+            <p className="font-sans text-sm lg:text-lg text-slate-600 font-medium leading-relaxed max-w-full">
               {t("services.subtitle")}
             </p>
           </div>

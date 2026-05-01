@@ -357,16 +357,23 @@ return (
                   return newErrs;
                 });
               }}
-              placeholder={
-                field === "name" ? "Ej: Juan Pérez" :
-                field === "phone" ? "Ej: +1 555 123 4567" :
-                field === "address" ? "Ej: 123 Main St, Orlando" : ""
-              }
-              className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-[12px] lg:text-[15px] placeholder:text-slate-400 transition-all duration-500 ease-in-out appearance-none outline-none ring-0 focus:outline-none focus:shadow-none ${
-                errors[field] ? "border-red-500" : "border-slate-100 focus:border-primary-600"
-              }`}
-              style={{ boxShadow: 'none' }}
-            />
+            placeholder={
+    field === "name" ? "Ej: Juan Pérez" :
+    field === "phone" ? "Ej: +1 555 123 4567" :
+    field === "address" ? "Ej: 123 Main St, Orlando" : ""
+  }
+  className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-[12px] lg:text-[15px] placeholder:text-slate-400 transition-all duration-500 ease-in-out outline-none ring-0 focus:outline-none focus:shadow-none ${
+    errors[field] ? "border-red-500" : "border-slate-100 focus:border-primary-600"
+  } ${
+    field === "date" 
+      ? "min-h-[42px] md:min-h-0 cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full" 
+      : "appearance-none"
+  }`}
+  style={{ 
+    boxShadow: 'none',
+    WebkitAppearance: field === "date" ? "none" : "none" // Forzamos limpieza en iOS
+  }}
+/>
             {errors[field] && (
               <p className="text-[10px] text-red-500 font-black uppercase tracking-wider pt-1 pl-1 animate-in fade-in slide-in-from-top-1 duration-300">
                 {errors[field]}
@@ -402,18 +409,22 @@ return (
 )}
 
 {step === 3 && (
-  <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700 overflow-hidden">
-    <div className="w-full max-w-[580px] flex flex-col items-center">
-  
-      <div className="text-center mb-3 hidden lg:block">
-        <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+  <div className="w-full h-full flex flex-col items-center bg-transparent animate-in fade-in slide-in-from-bottom-6 duration-700">
+    
+    {/* Contenedor con Scroll: pt-32 para respetar las bolitas en top-24 */}
+    <div className="w-full max-w-[580px] px-6 pt-64 pb-10 overflow-y-auto scrollbar-hide flex flex-col items-center">
+      
+      {/* Título: Solo visible en PC */}
+      <div className="text-center mb-10 hidden lg:block">
+        <h2 className="font-display font-black text-3xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
           {t("contact.steps.step_2.title")}
         </h2>
         <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
       </div>
 
-      <div className="grid grid-cols-1 gap-y-4 w-full">
+      <div className="grid grid-cols-1 gap-y-6 w-full">
         
+        {/* Campo: Colores */}
         <div className="w-full space-y-1.5 relative">
           <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
             {t("contact.steps.step_2.fields.colors")}
@@ -425,23 +436,14 @@ return (
               errors.colors ? "border-red-500" : "border-slate-100 hover:border-primary-600"
             }`}
           >
-            <span className={`font-sans font-medium text-sm transition-colors ${contactData.colors ? "text-slate-900" : "text-slate-400"}`}>
+            <span className={`font-sans font-medium text-[12px] transition-colors ${contactData.colors ? "text-slate-900" : "text-slate-400"}`}>
               {contactData.colors || "Seleccionar..."}
             </span>
-            <ChevronDown 
-              size={14} 
-              className={`text-slate-400 transition-transform duration-500 ease-out ${openSelect === "colors" ? "rotate-180 text-primary-600" : "rotate-0"}`} 
-            />
+            <ChevronDown size={14} className={`text-slate-400 transition-transform duration-500 ${openSelect === "colors" ? "rotate-180" : ""}`} />
           </div>
 
-          {errors.colors && (
-            <p className="text-[10px] text-red-500 font-black uppercase pt-1 pl-1 animate-in fade-in duration-300">
-              {errors.colors}
-            </p>
-          )}
-
           {openSelect === "colors" && (
-            <div className="absolute top-[110%] left-0 w-full bg-white border border-slate-100 rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] z-[100] py-2 animate-in fade-in zoom-in-95 duration-200">
+            <div className="absolute top-[110%] left-0 w-full bg-white border border-slate-100 rounded-xl shadow-xl z-[100] py-2">
               <div className="max-h-[200px] overflow-y-auto custom-scrollbar">
                 {(colorOptions || []).map((color) => (
                   <div 
@@ -449,14 +451,8 @@ return (
                     onClick={() => {
                       setContactData((prev: any) => ({ ...prev, colors: color }));
                       setOpenSelect(null);
-                    
-                      if (errors.colors) setErrors((prev: any) => {
-                        const newErrs = {...prev};
-                        delete newErrs.colors;
-                        return newErrs;
-                      });
                     }}
-                    className="px-4 py-2.5 font-sans text-[11px] font-bold uppercase tracking-tight text-slate-500 hover:text-primary-600 hover:bg-slate-50 transition-all cursor-pointer"
+                    className="px-4 py-2.5 font-sans text-[11px] font-bold uppercase text-slate-500 hover:text-primary-600 hover:bg-slate-50 transition-all cursor-pointer"
                   >
                     {color}
                   </div>
@@ -466,15 +462,16 @@ return (
           )}
         </div>
 
+        {/* Campo: Tipo de Servicio (Checkboxes con dimensiones móvil) */}
         <div className="w-full space-y-3">
           <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
             {t("contact.steps.step_2.fields.service_type")}
           </label>
-          <div className={`flex flex-wrap md:flex-nowrap items-center justify-between gap-4 p-4 rounded-2xl border transition-all duration-300 ${
+          <div className={`flex flex-wrap items-center justify-start gap-4 p-4 rounded-2xl border ${
             errors.main_services ? "border-red-500 bg-red-50/10" : "bg-slate-50/50 border-slate-100"
           }`}>
             {(t("contact.steps.step_2.options.services", { returnObjects: true }) as any[] || []).map((service) => (
-              <label key={service.id} className="flex items-center gap-2 cursor-pointer group">
+              <label key={service.id} className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={(contactData.main_services || []).includes(service.id)}
@@ -482,45 +479,30 @@ return (
                     const checked = e.target.checked;
                     setContactData((prev: any) => {
                       const current = prev.main_services || [];
-                      const updated = checked 
-                        ? [...current, service.id] 
-                        : current.filter((id: string) => id !== service.id);
- 
-                      if (updated.length > 0 && errors.main_services) {
-                        setErrors((prevErr: any) => {
-                          const newErrs = {...prevErr};
-                          delete newErrs.main_services;
-                          return newErrs;
-                        });
-                      }
+                      const updated = checked ? [...current, service.id] : current.filter((id: string) => id !== service.id);
                       return { ...prev, main_services: updated };
                     });
                   }}
-                  className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600 focus:ring-0 cursor-pointer"
+                  className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600 focus:ring-0"
                 />
-                <span className="font-sans font-black text-[9px] text-slate-400 group-hover:text-slate-950 transition-colors uppercase tracking-widest whitespace-nowrap">
+                <span className="font-sans font-black text-[9px] text-slate-400 uppercase tracking-widest whitespace-nowrap">
                   {service.label}
                 </span>
               </label>
             ))}
           </div>
-         
-          {errors.main_services && (
-            <p className="text-[10px] text-red-500 font-black uppercase pl-1 animate-in fade-in duration-300">
-              {errors.main_services}
-            </p>
-          )}
         </div>
 
+        {/* Campo: Específicos */}
         <div className="w-full space-y-3">
           <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
             {t("contact.steps.step_2.fields.specifics")}
           </label>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             {Object.values(t("contact.steps.step_2.options.specifics", { returnObjects: true }) || {})
               .flat()
               .map((service: any) => (
-                <label key={service} className="flex items-center gap-2 cursor-pointer group">
+                <label key={service} className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={(contactData.specifics || []).includes(service)}
@@ -528,17 +510,12 @@ return (
                       const checked = e.target.checked;
                       setContactData((prev: any) => {
                         const current = prev.specifics || [];
-                        return { 
-                          ...prev, 
-                          specifics: checked 
-                            ? [...current, service] 
-                            : current.filter((v: string) => v !== service) 
-                        };
+                        return { ...prev, specifics: checked ? [...current, service] : current.filter((v: string) => v !== service) };
                       });
                     }}
                     className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600 focus:ring-0"
                   />
-                  <span className="font-sans font-bold text-slate-400 text-[10px] group-hover:text-primary-600 transition-colors uppercase tracking-tight">
+                  <span className="font-sans font-bold text-slate-400 text-[10px] uppercase tracking-tight">
                     {service}
                   </span>
                 </label>
@@ -546,7 +523,8 @@ return (
           </div>
         </div>
 
-        <div className="w-full space-y-1">
+        {/* Campo: Tipo de Pintura */}
+        <div className="w-full space-y-1.5">
           <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
             {t("contact.steps.step_2.fields.paint_type")}
           </label>
@@ -555,79 +533,53 @@ return (
             name="paint_type"
             value={contactData.paint_type || ""}
             onChange={(e) => setContactData((prev: any) => ({ ...prev, paint_type: e.target.value }))}
-            placeholder="Ej: Mate, Satinado, Sherwin-Williams..."
-            className="w-full p-2 bg-transparent border-t-0 border-x-0 border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-sm placeholder:text-slate-400 transition-all duration-300 outline-none focus:outline-none focus:ring-0 focus:border-primary-600 shadow-none"
+            placeholder="Ej: Mate, Satinado..."
+            className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-[12px] placeholder:text-slate-400 outline-none focus:border-primary-600 appearance-none shadow-none"
           />
         </div>
       </div>
 
+      {/* Botones de Navegación: Dimensiones Móvil Grabadas */}
       <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
         <button
-  type="button"
-  onClick={() => {
-    if (validateStepThree()) setStep(4);
-  }}
-  className="
-    group relative overflow-hidden inline-flex items-center justify-center gap-3 
-    bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] 
-    shadow-xl shadow-slate-200 active:scale-95
-    
-    /* --- DIMENSIONES MÓVIL --- */
-    w-full h-[48px] px-6 text-[9px] rounded-2xl
-    
-    /* --- DIMENSIONES PC --- */
-    md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]
-  "
->
-  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
-  <span className="relative z-10">
-    {t("contact.buttons.next")}
-  </span>
-  <ChevronRight 
-    size={16} 
-    className="relative z-10 group-hover:translate-x-1 transition-transform" 
-  />
-</button>
+          type="button"
+          onClick={() => { if (validateStepThree()) setStep(4); }}
+          className="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-slate-950 text-white font-black uppercase tracking-[0.2em] w-full h-[48px] px-6 text-[9px] rounded-2xl active:scale-95 transition-all duration-500 shadow-xl shadow-slate-200"
+        >
+          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+          <span className="relative z-10">{t("contact.buttons.next")}</span>
+          <ChevronRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+        </button>
 
-       <button
-  type="button"
-  onClick={() => setStep(2)}
-  className="
-    inline-flex items-center justify-center
-    bg-white border-2 border-slate-100 text-slate-400
-    transition-all duration-300 font-black uppercase tracking-[0.2em] 
-    active:scale-95
-
-    /* --- DIMENSIONES MÓVIL --- */
-    w-full h-[48px] px-6 text-[9px] rounded-2xl
-
-    /* --- DIMENSIONES PC --- */
-    md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem]
-
-    /* Hover */
-    hover:text-slate-950 hover:border-slate-300
-  "
->
-  {t("contact.buttons.prev")}
-</button>
+        <button
+          type="button"
+          onClick={() => setStep(2)}
+          className="inline-flex items-center justify-center bg-white border-2 border-slate-100 text-slate-400 font-black uppercase tracking-[0.2em] w-full h-[48px] px-6 text-[9px] rounded-2xl active:scale-95 transition-all duration-300"
+        >
+          {t("contact.buttons.prev")}
+        </button>
       </div>
     </div>
   </div>
 )}
 
 {step === 4 && (
-  <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700 overflow-hidden">
-    <div className="w-full max-w-[580px] flex flex-col items-center">
+  <div className="w-full h-full flex flex-col items-center bg-transparent animate-in fade-in slide-in-from-bottom-6 duration-700">
+    
+    {/* Contenedor con Scroll: pt-32 para respetar las bolitas en top-24 */}
+    <div className="w-full max-w-[580px] px-6 pt-64 pb-10 overflow-y-auto scrollbar-hide flex flex-col items-center">
       
+      {/* Título: Solo visible en PC */}
       <div className="text-center mb-10 hidden lg:block">
-        <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+        <h2 className="font-display font-black text-3xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
           {t("contact.steps.step_3.title")}
         </h2>
         <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
       </div>
 
-      <div className="space-y-6 w-full">
+      <div className="space-y-8 w-full">
 
+        {/* Campo: Estado actual (Textarea) */}
         <div className="flex flex-col gap-1.5">
           <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
             {t("contact.steps.step_3.fields.status")}
@@ -640,14 +592,15 @@ return (
               if (errors.status) setErrors((prevErr: any) => ({ ...prevErr, status: null }));
             }}
             placeholder={t("contact.steps.step_3.placeholders.status")}
-            className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-sm transition-all duration-500 !outline-none !ring-0 resize-none h-[60px] placeholder:text-slate-400 ${
+            className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-[12px] transition-all duration-500 !outline-none !ring-0 resize-none h-[60px] placeholder:text-slate-400 ${
               errors.status ? "border-red-500" : "border-slate-100 focus:border-primary-600"
             }`}
           />
           {errors.status && <p className="text-[10px] text-red-500 font-black uppercase pt-1 pl-1">{errors.status}</p>}
         </div>
 
-          <div className="flex flex-col gap-1.5 h-[160px]">
+        {/* Campo: Subir Fotos (Zona de carga optimizada para móvil) */}
+        <div className="flex flex-col gap-1.5 h-[180px]">
           <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
             {t("contact.steps.step_3.fields.upload")}
           </label>
@@ -663,7 +616,6 @@ return (
                 accept="image/*" 
                 onChange={(e) => {
                   const files = Array.from(e.target.files || []);
-                  
                   const validImages = files.filter(file => file.type.startsWith('image/'));
                   
                   if (validImages.length !== files.length) {
@@ -688,6 +640,7 @@ return (
               </div>
             </div>
 
+            {/* Lista de archivos con scroll interno */}
             {contactData.upload && contactData.upload.length > 0 && (
               <div className="flex flex-col gap-2 overflow-y-auto pr-1 scrollbar-hide">
                 {Array.from(contactData.upload as File[]).map((file, index) => (
@@ -713,6 +666,7 @@ return (
           {errors.upload && <p className="text-[10px] text-red-500 font-black uppercase pt-1 pl-1">{errors.upload}</p>}
         </div>
 
+        {/* Campo: Notas especiales */}
         <div className="flex flex-col gap-1.5">
           <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
             {t("contact.steps.step_3.fields.special")}
@@ -723,300 +677,221 @@ return (
             value={contactData.special || ""}
             onChange={(e) => setContactData((prev: any) => ({ ...prev, special: e.target.value }))}
             placeholder={t("contact.steps.step_3.placeholders.special")}
-            className="w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-sm placeholder:text-slate-400 transition-all duration-500 !outline-none !ring-0 focus:border-primary-600 shadow-none"
+            className="w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-[12px] placeholder:text-slate-400 transition-all duration-500 !outline-none !ring-0 focus:border-primary-600 appearance-none shadow-none"
           />
         </div>
       </div>
 
+      {/* Botones de Navegación: Dimensiones Móvil Grabadas */}
       <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
-       <button
-  type="button"
-  onClick={() => {
-    if (validateStepFor()) setStep(5);
-  }}
-  className="
-    group relative overflow-hidden inline-flex items-center justify-center gap-3 
-    bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] 
-    shadow-xl shadow-slate-200 active:scale-95
-    
-    /* --- DIMENSIONES MÓVIL --- */
-    w-full h-[48px] px-6 text-[9px] rounded-2xl
-    
-    /* --- DIMENSIONES PC --- */
-    md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]
-  "
->
-  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
-  <span className="relative z-10">
-    {t("contact.buttons.next")}
-  </span>
-  <ChevronRight 
-    size={16} 
-    className="relative z-10 group-hover:translate-x-1 transition-transform" 
-  />
-</button>
         <button
-  type="button"
-  onClick={() => setStep(3)}
-  className="
-    inline-flex items-center justify-center
-    bg-white border-2 border-slate-100 text-slate-400
-    transition-all duration-300 font-black uppercase tracking-[0.2em] 
-    active:scale-95
+          type="button"
+          onClick={() => {
+            if (validateStepFor()) setStep(5);
+          }}
+          className="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl shadow-slate-200 active:scale-95 w-full h-[48px] px-6 text-[9px] rounded-2xl md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]"
+        >
+          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+          <span className="relative z-10">{t("contact.buttons.next")}</span>
+          <ChevronRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+        </button>
 
-    /* --- DIMENSIONES MÓVIL --- */
-    w-full h-[48px] px-6 text-[9px] rounded-2xl
-
-    /* --- DIMENSIONES PC --- */
-    md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem]
-
-    /* Hover */
-    hover:text-slate-950 hover:border-slate-300
-  "
->
-  {t("contact.buttons.prev")}
-</button>
+        <button
+          type="button"
+          onClick={() => setStep(3)}
+          className="inline-flex items-center justify-center bg-white border-2 border-slate-100 text-slate-400 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[48px] px-6 text-[9px] rounded-2xl md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem] hover:text-slate-950 hover:border-slate-300"
+        >
+          {t("contact.buttons.prev")}
+        </button>
       </div>
     </div>
   </div>
 )}
 
 {step === 5 && (
-  <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700 overflow-hidden">
-  <div className="w-full max-w-[580px] flex flex-col items-center">
+  <div className="w-full h-full flex flex-col items-center bg-transparent animate-in fade-in slide-in-from-bottom-6 duration-700">
+    
+    {/* Contenedor con Scroll: pt-32 para respetar las bolitas en top-24 */}
+    <div className="w-full max-w-[580px] px-6 pt-64 pb-10 overflow-y-auto scrollbar-hide flex flex-col items-center">
+      
+      {/* TÍTULO: Solo visible en PC */}
+      <div className="text-center mb-10 hidden lg:block">
+        <h2 className="font-display font-black text-3xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+          {t("contact.steps.step_4.title")}
+        </h2>
+        <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
+      </div>
 
-    {/* TÍTULO */}
-    <div className="text-center mb-10 hidden lg:block">
-      <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
-        {t("contact.steps.step_4.title")}
-      </h2>
-      <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
-    </div>
+      <div className="space-y-6 w-full">
 
-    <div className="space-y-6 w-full">
+        {/* CUSTOM SELECT: RANGO DE INVERSIÓN */}
+        <div className="flex flex-col gap-1.5 relative">
+          <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+            {t("contact.steps.step_4.fields.budget")}
+          </label>
 
-      {/* CUSTOM SELECT: RANGO DE INVERSIÓN */}
-      <div className="flex flex-col gap-1.5 relative">
-        <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
-          {t("contact.steps.step_4.fields.budget")}
-        </label>
+          <div
+            onClick={() => setOpenSelect(openSelect === "budget" ? null : "budget")}
+            className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 flex items-center justify-between cursor-pointer group transition-all duration-300 hover:border-primary-600"
+          >
+            <span className={`font-sans font-medium text-[12px] transition-colors ${contactData.budget ? "text-slate-900" : "text-slate-400"}`}>
+              {contactData.budget || "Seleccionar rango..."}
+            </span>
 
-        <div
-          onClick={() => setOpenSelect(openSelect === "budget" ? null : "budget")}
-          className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 flex items-center justify-between cursor-pointer group transition-all duration-300 hover:border-primary-600"
-        >
-          <span className={`font-sans font-medium text-sm transition-colors ${contactData.budget ? "text-slate-900" : "text-slate-400"}`}>
-            {contactData.budget || "Seleccionar rango..."}
-          </span>
+            <ChevronDown
+              size={14}
+              className={`text-slate-400 transition-transform duration-500 ease-out ${openSelect === "budget" ? "rotate-180 text-primary-600" : "rotate-0"}`}
+            />
+          </div>
 
-          <ChevronDown
-            size={14}
-            className={`text-slate-400 transition-transform duration-500 ease-out ${openSelect === "budget" ? "rotate-180 text-primary-600" : "rotate-0"}`}
+          {openSelect === "budget" && (
+            <div className="absolute top-[110%] left-0 w-full bg-white border border-slate-100 rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] z-[100] py-2 animate-in fade-in zoom-in-95 duration-200">
+              <div className="max-h-[200px] overflow-y-auto custom-scrollbar">
+                {(() => {
+                  const raw = t("contact.steps.step_4.ranges", { returnObjects: true });
+                  const ranges = typeof raw === "object" && raw !== null ? (raw as Record<string, { label: string }>) : {};
+
+                  return Object.entries(ranges).map(([key, value]) => (
+                    <div
+                      key={key}
+                      onClick={() => {
+                        setContactData((prev: any) => ({ ...prev, budget: value.label }));
+                        setOpenSelect(null);
+                      }}
+                      className="px-4 py-2.5 font-sans text-[11px] font-bold uppercase tracking-tight text-slate-500 hover:text-primary-600 hover:bg-slate-50 transition-all cursor-pointer"
+                    >
+                      {value.label}
+                    </div>
+                  ));
+                })()}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* COMMENTS */}
+        <div className="flex flex-col gap-1.5">
+          <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+            {t("contact.steps.step_4.fields.comments")}
+          </label>
+
+          <textarea
+            name="comments"
+            value={contactData.comments || ""}
+            onChange={(e) => setContactData((prev: any) => ({ ...prev, comments: e.target.value }))}
+            className="w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-[12px] transition-all duration-500 !outline-none !ring-0 focus:border-primary-600 resize-none h-[70px] placeholder:text-slate-400 shadow-none appearance-none"
+            placeholder="¿Algo más que debamos saber?"
           />
         </div>
 
-        {openSelect === "budget" && (
-          <div className="absolute top-[110%] left-0 w-full bg-white border border-slate-100 rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] z-[100] py-2 animate-in fade-in zoom-in-95 duration-200">
-            <div className="max-h-[200px] overflow-y-auto custom-scrollbar">
-
-              {/* 🔥 FIX REAL: validación runtime */}
-              {(() => {
-                const raw = t("contact.steps.step_4.ranges", { returnObjects: true });
-
-                const ranges =
-                  typeof raw === "object" && raw !== null
-                    ? (raw as Record<string, { label: string }>)
-                    : {};
-
-                return Object.entries(ranges).map(([key, value]) => (
-                  <div
-                    key={key}
-                    onClick={() => {
-                      setContactData((prev: any) => ({
-                        ...prev,
-                        budget: value.label
-                      }));
-                      setOpenSelect(null);
-                    }}
-                    className="px-4 py-2.5 font-sans text-[11px] font-bold uppercase tracking-tight text-slate-500 hover:text-primary-600 hover:bg-slate-50 transition-all cursor-pointer"
-                  >
-                    {value.label}
-                  </div>
-                ));
-              })()}
-
+        {/* VIP CHECKBOX */}
+        <div className="pt-2">
+          <label className="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50 cursor-pointer group hover:border-primary-600 transition-all">
+            <div className="relative flex items-center justify-center mt-1">
+              <input
+                type="checkbox"
+                checked={contactData.vip || false}
+                onChange={(e) => setContactData((prev: any) => ({ ...prev, vip: e.target.checked }))}
+                className="peer h-5 w-5 cursor-pointer appearance-none rounded border-2 border-slate-300 checked:border-primary-600 checked:bg-primary-600 transition-all"
+              />
+              <Star size={10} className="absolute text-white opacity-0 peer-checked:opacity-100" />
             </div>
-          </div>
-        )}
+
+            <div className="flex flex-col gap-1">
+              <span className="font-sans font-black text-[10px] uppercase tracking-widest text-slate-950 group-hover:text-primary-600 transition-colors">
+                {t("contact.steps.step_4.fields.vip_label")}
+              </span>
+              <p className="font-sans font-medium text-slate-500 text-[10px] leading-relaxed uppercase tracking-tight">
+                {t("contact.steps.step_4.fields.vip_text")}
+              </p>
+            </div>
+          </label>
+        </div>
       </div>
 
-      {/* COMMENTS */}
-      <div className="flex flex-col gap-1.5">
-        <label className="font-sans text-[9px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
-          {t("contact.steps.step_4.fields.comments")}
-        </label>
+      {/* NAV: Dimensiones Móvil Grabadas */}
+      <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
+        <button
+          type="button"
+          onClick={() => setStep(6)}
+          className="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl shadow-slate-200 active:scale-95 w-full h-[48px] px-6 text-[9px] rounded-2xl md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]"
+        >
+          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+          <span className="relative z-10">Finalizar estimado</span>
+        </button>
 
-        <textarea
-          name="comments"
-          value={contactData.comments || ""}
-          onChange={(e) =>
-            setContactData((prev: any) => ({ ...prev, comments: e.target.value }))
-          }
-          className="w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-sm transition-all duration-500 !outline-none !ring-0 focus:border-primary-600 resize-none h-[70px] placeholder:text-slate-400 shadow-none"
-          placeholder="¿Algo más que debamos saber?"
-        />
+        <button
+          type="button"
+          onClick={() => setStep(4)}
+          className="inline-flex items-center justify-center bg-white border-2 border-slate-100 text-slate-400 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[48px] px-6 text-[9px] rounded-2xl md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem] hover:text-slate-950 hover:border-slate-300"
+        >
+          {t("contact.buttons.prev")}
+        </button>
       </div>
-
-      {/* VIP */}
-      <div className="pt-2">
-        <label className="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50 cursor-pointer group hover:border-primary-600 transition-all">
-          <div className="relative flex items-center justify-center mt-1">
-            <input
-              type="checkbox"
-              checked={contactData.vip || false}
-              onChange={(e) =>
-                setContactData((prev: any) => ({
-                  ...prev,
-                  vip: e.target.checked
-                }))
-              }
-              className="peer h-5 w-5 cursor-pointer appearance-none rounded border-2 border-slate-300 checked:border-primary-600 checked:bg-primary-600 transition-all"
-            />
-            <Star size={10} className="absolute text-white opacity-0 peer-checked:opacity-100" />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <span className="font-sans font-black text-[10px] uppercase tracking-widest text-slate-950 group-hover:text-primary-600 transition-colors">
-              {t("contact.steps.step_4.fields.vip_label")}
-            </span>
-            <p className="font-sans font-medium text-slate-500 text-[10px] leading-relaxed uppercase tracking-tight">
-              {t("contact.steps.step_4.fields.vip_text")}
-            </p>
-          </div>
-        </label>
-      </div>
-
     </div>
-
-    {/* NAV */}
-    <div className="flex flex-col md:flex-row gap-4 w-full pt-10 justify-center items-center">
-     <button
-  type="button"
-  onClick={() => setStep(6)}
-  className="
-    group relative overflow-hidden inline-flex items-center justify-center gap-3 
-    bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] 
-    shadow-xl shadow-slate-200 active:scale-95
-    
-    /* --- DIMENSIONES MÓVIL --- */
-    w-full h-[48px] px-6 text-[9px] rounded-2xl
-    
-    /* --- DIMENSIONES PC --- */
-    md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]
-  "
->
-  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
-  <span className="relative z-10">
-    Finalizar estimado
-  </span>
-</button>
-
-      <button
-  type="button"
-  onClick={() => setStep(4)}
-  className="
-    inline-flex items-center justify-center
-    bg-white border-2 border-slate-100 text-slate-400
-    transition-all duration-300 font-black uppercase tracking-[0.2em] 
-    active:scale-95
-
-    /* --- DIMENSIONES MÓVIL --- */
-    w-full h-[48px] px-6 text-[9px] rounded-2xl
-
-    /* --- DIMENSIONES PC --- */
-    md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem]
-
-    /* Hover */
-    hover:text-slate-950 hover:border-slate-300
-  "
->
-  {t("contact.buttons.prev")}
-</button>
-    </div>
-
   </div>
-</div>
 )}
 
 {step === 6 && (
-  <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in zoom-in-95 duration-700 overflow-hidden text-center">
-    <div className="w-full max-w-[550px] flex flex-col items-center">
+  /* Bloqueamos scroll con fixed y h-screen como en el Step 1 */
+  <div className="fixed inset-0 w-full h-screen flex flex-col items-center justify-center bg-white px-8 animate-in fade-in zoom-in-95 duration-700 overflow-hidden text-center">
+    
+    {/* Contenedor con pt-44 para alineación exacta con el inicio */}
+    <div className="w-full max-w-[550px] flex flex-col items-center pt-44 lg:pt-0">
 
-
-      {/* BLOQUE DE TEXTO */}
-      <div className="space-y-6 mb-14">
-        <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+      {/* BLOQUE DE TEXTO: Usando escalas del Step 1 */}
+      <div className="space-y-6 mb-12">
+        <h2 className="font-display font-black text-4xl lg:text-5xl leading-[0.95] uppercase tracking-tighter text-slate-950">
           {t("contact.success.title")}
         </h2>
         
-        <div className="h-[2px] w-10 bg-primary-600 mx-auto rounded-full" />
+        <div className="h-[3px] w-12 bg-primary-600 mx-auto rounded-full" />
         
-        {/* DESCRIPCIÓN ESTIRADA */}
-        <p className="font-sans text-[13px] sm:text-sm font-medium text-slate-500 leading-[1.8] max-w-[460px] mx-auto uppercase tracking-wide pt-2">
+        <p className="font-sans text-sm lg:text-lg font-medium text-slate-600 leading-relaxed max-w-[460px] mx-auto">
           {t("contact.success.message")}
         </p>
       </div>
 
-      {/* ACCIONES FINALIZAR */}
+      {/* ACCIONES: Dimensiones de móvil grabadas (h-48px, text-9px) */}
       <div className="flex flex-col sm:flex-row gap-4 w-full max-w-[460px]">
-        {/* VOLVER AL INICIO */}
-       <button 
-  type="button" 
-  onClick={onClose} 
-  className="
-    group relative overflow-hidden inline-flex items-center justify-center gap-3 
-    bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] 
-    shadow-xl shadow-slate-200 active:scale-95
-    
-    /* --- DIMENSIONES MÓVIL --- */
-    w-full h-[48px] px-6 text-[9px] rounded-2xl
-    
-    /* --- DIMENSIONES PC --- */
-    md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]
-  "
->
-  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
-  <span className="relative z-10">
-    {t("contact.success.close")}
-  </span>
-</button>
+        
+        <button 
+          type="button" 
+          onClick={onClose} 
+          className="
+            group relative overflow-hidden inline-flex items-center justify-center gap-3 
+            bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] 
+            shadow-xl shadow-slate-200 active:scale-95
+            w-full h-[48px] px-6 text-[9px] rounded-2xl
+            md:flex-[1.2] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem]
+          "
+        >
+          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+          <span className="relative z-10">
+            {t("contact.success.close")}
+          </span>
+          <ChevronRight className="relative z-10 transition-transform group-hover:translate-x-1" size={16} />
+        </button>
 
-{/* LLAMAR DIRECTAMENTE */}
-<a 
-  href="tel:+14070000000" 
-  className="
-    inline-flex items-center justify-center
-    bg-white border-2 border-slate-100 text-slate-400
-    transition-all duration-300 font-black uppercase tracking-[0.2em] 
-    active:scale-95 text-center
-
-    /* --- DIMENSIONES MÓVIL --- */
-    w-full h-[48px] px-6 text-[9px] rounded-2xl
-
-    /* --- DIMENSIONES PC --- */
-    md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem]
-
-    /* Hover */
-    hover:text-slate-950 hover:border-slate-300
-  "
->
-  {t("contact.success.call_btn")}
-</a>
+        <a 
+          href="tel:+14070000000" 
+          className="
+            inline-flex items-center justify-center
+            bg-white border-2 border-slate-100 text-slate-400
+            transition-all duration-300 font-black uppercase tracking-[0.2em] 
+            active:scale-95 text-center
+            w-full h-[48px] px-6 text-[9px] rounded-2xl
+            md:flex-1 md:min-h-15 md:px-5 md:py-5 md:text-[10px] md:rounded-[2rem]
+            hover:text-slate-950 hover:border-slate-300
+          "
+        >
+          {t("contact.success.call_btn")}
+        </a>
       </div>
       
     </div>
   </div>
-)} 
+)}
           </div>
         </div>
       </div>
