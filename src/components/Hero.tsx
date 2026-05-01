@@ -39,7 +39,7 @@ const HeroContent = memo(({ t, onOpenContact, current, isAnimate, heroContent }:
       <div className="flex flex-col sm:flex-row gap-4">
         <button
           onClick={onOpenContact}
-          className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-blue-600 text-white font-black rounded-xl uppercase text-[10px] tracking-[0.3em] flex items-center justify-center gap-3 transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
+          className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-blue-600 text-white font-black rounded-xl uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
         >
           <span>{t("hero.ctaFree")}</span>
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -47,7 +47,7 @@ const HeroContent = memo(({ t, onOpenContact, current, isAnimate, heroContent }:
 
         <a
           href="tel:+17863506367"
-          className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white/5 border border-white/10 text-white font-black rounded-xl flex items-center justify-center gap-3 text-[10px] tracking-[0.3em] transition-all duration-300 hover:bg-white hover:text-slate-950 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 group"
+          className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white/5 border border-white/10 text-white font-black rounded-xl flex items-center justify-center gap-3 text-[10px] tracking-[0.2em] transition-all duration-300 hover:bg-white hover:text-slate-950 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 group"
         >
           <Phone className="w-4 h-4 text-primary-500 transition-all duration-300 group-hover:text-blue-600 group-hover:scale-110" />
           <span>(786) 350-6367</span>

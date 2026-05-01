@@ -90,7 +90,7 @@ export default function WhyChooseClean() {
         <div className="mt-20 flex flex-col gap-6 sm:flex-row justify-center items-center">
           <button
             onClick={() => setIsContactOpen(true)}
-            className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl shadow-slate-200 active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:rounded-[2rem] md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px]"
+            className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl shadow-slate-200 active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:rounded-xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px]"
           >
             <span className="absolute inset-0 w-0 bg-primary-600 transition-all duration-500 ease-out group-hover:w-full" />
             <span className="relative z-10 flex items-center gap-3">
@@ -101,7 +101,7 @@ export default function WhyChooseClean() {
 
           <a
             href={`tel:${t("combined_conversion_section.cta_box.phone")}`}
-            className="inline-flex items-center justify-center gap-4 bg-white border-2 border-slate-100 text-slate-950 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-[2rem] hover:bg-primary-600 hover:border-primary-600 hover:text-white"
+            className="inline-flex items-center justify-center gap-4 bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-xl  hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
           >
             <Phone className="w-4 h-4" />
             {t("combined_conversion_section.cta_box.phone")}

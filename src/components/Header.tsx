@@ -43,7 +43,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsMenuOpen(false);
-
     window.dispatchEvent(new CustomEvent("app:close-overlays"));
 
     if (href === "#") {
@@ -59,7 +58,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
         behavior: "smooth",
         block: "start",
       });
-
       window.history.pushState(null, "", href);
     }
   };
@@ -151,7 +149,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
             <a
               href="tel:+17863506367"
-              className="font-sans group flex items-center gap-3 rounded-3xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-primary-600 hover:text-white active:scale-95 uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4"
+              className="font-sans group flex items-center gap-3 rounded-xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-blue-500 hover:text-slate-100 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4"
             >
               <Phone className="w-3 h-3" />
               <span>(786) 350-6367</span>
@@ -166,25 +164,49 @@ export default function Header({ forceSolid = false }: HeaderProps) {
           </button>
         </div>
 
+        {/* DESPLEGABLE MÓVIL ESTILO TIZA (COMPACTO) */}
         <div
-          className={`lg:hidden absolute left-4 right-4 top-[calc(100%+16px)] rounded-[2rem] border border-white/10 bg-slate-950/95 backdrop-blur-2xl text-white shadow-2xl transition-all duration-500 overflow-hidden ${
+          className={`lg:hidden absolute left-6 right-6 top-[calc(100%+12px)] rounded-[1.5rem] border border-white/10 bg-slate-950/98 backdrop-blur-3xl text-white shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
             isMenuOpen
-              ? "max-h-[80vh] opacity-100 translate-y-0"
-              : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
+              ? "opacity-100 translate-y-0 scale-100 visible"
+              : "opacity-0 -translate-y-4 scale-[0.98] invisible pointer-events-none"
           }`}
         >
-          <div className="flex flex-col gap-4 px-6 py-8">
-            {navigation.map((item) => (
+          <div className="flex flex-col gap-2 px-4 py-6">
+            {navigation.map((item, index) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleSmoothScroll(e, item.href)}
-                className="flex items-center justify-between px-6 py-5 text-[11px] font-black uppercase tracking-[0.3em] bg-white/5 rounded-2xl hover:bg-primary-600/20"
+                style={{ transitionDelay: `${index * 40}ms` }}
+                className={`flex items-center justify-between px-5 py-3.5 text-[9px] font-black uppercase tracking-[0.25em] bg-white/[0.03] border border-white/[0.05] rounded-xl active:scale-[0.98] transition-all duration-300 ${
+                  isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
+                }`}
               >
-                <span>{item.name}</span>
-                <span className="text-primary-500">→</span>
+                <span className="text-white/70">{item.name}</span>
+                <span className="text-primary-500 text-xs">→</span>
               </a>
             ))}
+
+            <div className="h-px w-full bg-white/5 my-1" />
+
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                onClick={() => setLanguage(language === "es" ? "en" : "es")}
+                className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/[0.03] border border-white/[0.05] text-[8px] font-bold uppercase tracking-[0.2em] text-primary-400 active:bg-primary-500/10 transition-all"
+              >
+                <Globe className="w-3.5 h-3.5" />
+                <span>{language === "es" ? "EN" : "ES"}</span>
+              </button>
+
+              <a
+                href="tel:+17863506367"
+                className="flex items-center justify-center gap-2 py-3 rounded-xl bg-primary-600 text-white text-[9px] font-black uppercase tracking-[0.15em] active:scale-[0.98] transition-all shadow-lg shadow-primary-900/20"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>CALL</span>
+              </a>
+            </div>
           </div>
         </div>
       </nav>

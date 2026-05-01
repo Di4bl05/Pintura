@@ -67,6 +67,41 @@
     ]
   }
 },
+"serviceAreas": {
+    "primaryRegion": "Áreas de Servicios",
+    "mainHub": "Orlando, FL",
+    "locations": [
+      {
+        "city": "Orlando",
+        "strategic_zones": ["Lake Nona", "Baldwin Park", "Downtown Orlando", "Dr. Phillips"]
+      },
+      {
+        "city": "Winter Park",
+        "strategic_zones": ["Park Ave Area", "Via Streets", "Maitland Border"]
+      },
+      {
+        "city": "Windermere",
+        "strategic_zones": ["Isleworth", "Keene's Pointe", "Lake Butler"]
+      },
+      {
+        "city": "Kissimmee",
+        "strategic_zones": ["Celebration", "Reunion", "West Kissimmee"]
+      },
+      {
+        "city": "Winter Garden",
+        "strategic_zones": ["Horizon West", "Stoneybrook West", "Historic District"]
+      },
+      {
+        "city": "Clermont",
+        "strategic_zones": ["Minneola", "Legends", "Kings Ridge"]
+      },
+      {
+        "city": "Lake Mary",
+        "strategic_zones": ["Heathrow", "Alaqua Lakes"]
+      }
+    ],
+    "counties": ["Orange County", "Seminole County", "Osceola County", "Lake County"]
+  },
 "servicesdetails": {
   "premium": "Experiencia de servicio premium",
   "execution": "Proceso de ejecución",
@@ -405,7 +440,7 @@
     },
     "steps": {
       "step_1": {
-        "title": "Datos de Contacto y Ubicación",
+        "title": "Contacto y Ubicación",
         "fields": {
           "name": "Nombre Completo",
           "phone": "Teléfono de Contacto",
@@ -470,7 +505,7 @@
       }
     },
     "success": {
-      "title": "¡Solicitud Recibida con Éxito!",
+      "title": "¡Solicitud Recibida!",
       "message": "Gracias por confiar en nuestra compañía. Tu solicitud está siendo evaluada por nuestro equipo técnico. En breve recibirás un correo electrónico confirmando si tu proyecto ha sido aprobado o si requerimos más detalles.",
       "call_btn": "Llamar Directamente",
       "close": "Volver al inicio"

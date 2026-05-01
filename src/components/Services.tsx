@@ -6,6 +6,7 @@ import {
   ChevronRight,
   ChevronLeft,
   MapPin,
+  ArrowUpRight,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRef, useState } from "react";
@@ -51,7 +52,9 @@ export default function Services() {
     { key: "repair", img: getStaticGalleryImageUrl("exterior2After") },
   ];
 
-  const serviceAreas = ["Orlando", "Kissimmee", "Windermere", "Winter Park", "Lake Nona"];
+  // Extraemos datos del JSON de traducción
+  const locations = t("serviceAreas.locations", { returnObjects: true }) || [];
+  const counties = t("serviceAreas.counties", { returnObjects: true }) || [];
 
   return (
     <section id="services" className="relative py-24 sm:py-32 md:py-48 lg:py-64 overflow-hidden bg-white">
@@ -92,7 +95,6 @@ export default function Services() {
           <div
             ref={scrollRef}
             className="flex gap-4 md:gap-6 lg:gap-8 pb-6 md:pb-12 overflow-x-auto overflow-y-hidden snap-x snap-mandatory touch-action-pan-y scroll-smooth scrollbar-hide"
-            style={{ WebkitOverflowScrolling: 'touch' }}
           >
             {services.map((service, index) => (
               <div key={index} className="flex-none snap-center md:snap-start">
@@ -124,20 +126,39 @@ export default function Services() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 md:gap-x-12 border-t border-slate-100 pt-12">
-          <div className="flex items-center gap-2 text-primary-600">
-            <MapPin size={16} className="animate-pulse" />
-            <span className="font-sans text-[10px] font-black uppercase tracking-[0.3em]">
-              {t("services.areasTitle") || "Service Areas"}
-            </span>
+        {/* SECCIÓN DE ÁREAS SIMPLIFICADA */}
+        <div className="mt-20 border-t border-slate-100 pt-16">
+          <div className="flex flex-col items-center mb-10 text-center">
+           
+            <h3 className="font-display lg:text-[50px] font-bold text-slate-900">
+              {t("serviceAreas.primaryRegion") || "Central Florida"}
+            </h3>
           </div>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-            {serviceAreas.map((area, i) => (
-              <span 
-                key={i} 
-                className="font-sans text-[11px] md:text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-primary-600 transition-colors cursor-default"
-              >
-                {area}
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-10 max-w-5xl mx-auto">
+            {Array.isArray(locations) && locations.map((loc: any, i: number) => (
+              <div key={i} className="flex flex-col items-center md:items-start text-center md:text-left">
+                <h4 className="font-body lg:text-[13px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2">
+                  {loc.city}
+                </h4>
+                <div className="flex flex-col items-start justify-start gap-y-2">
+                  {loc.strategic_zones?.map((zone: string, zIdx: number) => (
+                    <span 
+                    key={zIdx} 
+                    className="font-sans lg:text-[15px] text-slate-500 font-medium leading-tight"
+                    >
+                      {zone}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-slate-50 pt-8">
+            {Array.isArray(counties) && counties.map((county: string, i: number) => (
+              <span key={i} className="font-sans text-[13px] font-bold text-slate-400 uppercase tracking-[0.3em]">
+                {county}
               </span>
             ))}
           </div>

@@ -113,7 +113,7 @@ export default function Reviews() {
                 <div className="absolute inset-0 bg-primary-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
                 <div className="relative z-10 flex items-center gap-3 md:gap-4">
                   <GoogleIcon className="w-3 h-3 md:w-4 md:h-4" />
-                  <span className="font-sans font-black text-[8px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em]">
+                  <span className="font-sans font-black text-[8px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.2em]">
                     {t("reviews.googleBadge.viewAll")}
                   </span>
                   <ExternalLink size={14} className="opacity-70 group-hover:translate-x-1 transition-transform md:size-4" />
