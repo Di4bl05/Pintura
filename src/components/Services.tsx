@@ -5,8 +5,6 @@ import {
   ArrowRight,
   ChevronRight,
   ChevronLeft,
-  MapPin,
-  ArrowUpRight,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRef, useState } from "react";
@@ -126,38 +124,35 @@ export default function Services() {
           </div>
         </div>
 
-        {/* SECCIÓN DE ÁREAS SIMPLIFICADA */}
         <div className="mt-20 border-t border-slate-100 pt-16">
-          <div className="flex flex-col items-center mb-10 text-center">
+          <div className="flex flex-col items-center mb-16 lg:mb-24 text-center">
            
-            <h3 className="font-display lg:text-[50px] font-bold text-slate-900">
+            <h3 className="font-display text-3xl lg:text-[50px] font-bold text-slate-900">
               {t("serviceAreas.primaryRegion") || "Central Florida"}
             </h3>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-10 max-w-5xl mx-auto">
-            {Array.isArray(locations) && locations.map((loc: any, i: number) => (
-              <div key={i} className="flex flex-col items-center md:items-start text-center md:text-left">
-                <h4 className="font-body lg:text-[13px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2">
-                  {loc.city}
-                </h4>
-                <div className="flex flex-col items-start justify-start gap-y-2">
-                  {loc.strategic_zones?.map((zone: string, zIdx: number) => (
-                    <span 
-                    key={zIdx} 
-                    className="font-sans lg:text-[15px] text-slate-500 font-medium leading-tight"
-                    >
-                      {zone}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 md:gap-x-32 gap-y-10 max-w-5xl mx-auto px-4">
+             {Array.isArray(locations) && locations.map((loc: any, i: number) => (
+          <div key={i} className="flex flex-col items-start text-left">
+              <h4 className="font-body text-[12px] lg:text-[13px] font-black uppercase tracking-[0.2em] text-slate-900 mb-3 border-b border-slate-100 pb-1 w-full">
+                {loc.city}
+              </h4>
+      <div className="flex flex-col items-start justify-start gap-y-2">
+        {loc.strategic_zones?.map((zone: string, zIdx: number) => (
+          <span 
+            key={zIdx} 
+            className="font-sans text-sm lg:text-[15px] text-slate-500 font-medium leading-tight hover:text-primary-600 transition-colors cursor-default"
+          >
+            {zone}
+          </span>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
           <div className="mt-16 flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-slate-50 pt-8">
             {Array.isArray(counties) && counties.map((county: string, i: number) => (
-              <span key={i} className="font-sans text-[13px] font-bold text-slate-400 uppercase tracking-[0.3em]">
+              <span key={i} className="font-sans text-[10px] lg:text-[12px] font-bold text-slate-500 uppercase">
                 {county}
               </span>
             ))}

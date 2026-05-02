@@ -4,6 +4,7 @@ import { Resend } from "resend";
 export async function POST(req: Request) {
   try {
     const apiKey = process.env.RESEND_API_KEY;
+    
     if (!apiKey) {
       return NextResponse.json(
         { ok: false, error: "RESEND_API_KEY is not configured" },
@@ -12,59 +13,102 @@ export async function POST(req: Request) {
     }
 
     const resend = new Resend(apiKey);
-    const data = await req.json();
+    const formData = await req.formData();
+    
+    // 1. Campos de texto
+    const name = formData.get("name") as string || "N/A";
+    const email = formData.get("email") as string || "";
+    const phone = formData.get("phone") as string || "N/A";
+    const address = formData.get("address") as string || "N/A";
+    const date = formData.get("date") as string || "N/A";
+    const colors = formData.get("colors") as string || "N/A";
+    const paint_type = formData.get("paint_type") as string || "N/A";
+    const status = formData.get("status") as string || "N/A";
+    const special = formData.get("special") as string || "N/A";
+    const budget = formData.get("budget") as string || "N/A";
+    const comments = formData.get("comments") as string || "N/A";
+    const vip = formData.get("vip") === "true";
 
-    const safeArray = (v: any) => (Array.isArray(v) ? v : []);
+    // 2. Manejo de Arrays
+    const service_type = JSON.parse(formData.get("service_type") as string || "[]");
+    const specifics = JSON.parse(formData.get("specifics") as string || "[]");
+
+    // 3. CORRECCIÓN CLAVE: Usar getAll("files") para capturar todas las fotos
+    const files = formData.getAll("files") as File[]; 
+    let attachments = [];
+
+    if (files.length > 0) {
+      for (const file of files) {
+        if (file.size > 0) {
+          const arrayBuffer = await file.arrayBuffer();
+          const buffer = Buffer.from(arrayBuffer);
+          
+          attachments.push({
+            filename: file.name,
+            content: buffer,
+          });
+        }
+      }
+    }
+
+    // 4. Enlaces inteligentes para Luis
+    const phoneUrl = `tel:${phone.replace(/\s/g, "")}`;
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 
     const emailContent = `
-========================
-NEW PAINTING PROJECT
-========================
+=========================================
+      NUEVA SOLICITUD DE PROYECTO
+=========================================
 
-CLIENT INFO
-------------------------
-Name: ${data.name || ""}
-Phone: ${data.phone || ""}
-Address: ${data.address || ""}
-Date: ${data.date || ""}
+DATOS DEL CLIENTE
+-----------------------------------------
+Nombre:    ${name}
+Email:     ${email}
+Teléfono:  ${phone} (Llamar: ${phoneUrl})
+Dirección: ${address} (Mapa: ${mapsUrl})
+Fecha deseada: ${date}
 
-PROJECT INFO
-------------------------
-Colors: ${data.colors || ""}
-Main Services: ${safeArray(data.main_services).join(", ")}
-Specifics: ${safeArray(data.specifics).join(", ")}
-Paint Type: ${data.paint_type || ""}
+DETALLES DEL TRABAJO
+-----------------------------------------
+Tipo de Servicio: ${service_type.join(", ")}
+Áreas Específicas: ${specifics.join(", ") || "N/A"}
+Colores: ${colors}
+Tipo de Pintura: ${paint_type || "N/A"}
 
-SURFACE ANALYSIS
-------------------------
-Surface Status: ${data.status || ""}
-Visual Load (Carga visual): ${data.visual_load || "N/A"}
-Special Notes: ${data.special || ""}
+ANÁLISIS DE SUPERFICIE
+-----------------------------------------
+Estado actual: ${status}
+Notas especiales: ${special || "N/A"}
 
-BUDGET
-------------------------
-Range: ${data.budget || ""}
+PRESUPUESTO Y EXTRAS
+-----------------------------------------
+Rango estimado: ${budget}
+Cliente VIP: ${vip ? "SÍ" : "NO"}
+Comentarios adicionales: ${comments}
 
-ADDITIONAL INFO
-------------------------
-Comments: ${data.comments || ""}
-VIP: ${data.vip ? "YES" : "NO"}
-
-UPLOAD:
-${data.upload ? "File received (check storage/handling needed)" : "No upload"}
+-----------------------------------------
+FOTOS: ${attachments.length > 0 ? `${attachments.length} fotos adjuntas en este correo.` : "No se subieron fotos."}
 `;
 
     const result = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>",
-      to: "perezcorralesismael@gmail.com",
-      subject: "New Painting Request",
+      from: "LuisBety Website <onboarding@resend.dev>",
+      to: "perezcorralesismael@gmail.com", 
+      ...(email && { replyTo: email }), 
+      subject: `Solicitud: ${name} - ${service_type[0] || "Pintura"}`,
       text: emailContent,
+      attachments: attachments, // <--- Aquí llegan todas las fotos
     });
 
+    if (result.error) {
+      return NextResponse.json({ ok: false, error: result.error }, { status: 400 });
+    }
+
     return NextResponse.json({ ok: true, result });
+
   } catch (error) {
+    console.error("Error en API Route:", error);
     return NextResponse.json(
-      { ok: false, error: String(error) },
+      { ok: false, error: "Internal Server Error" },
       { status: 500 }
     );
   }

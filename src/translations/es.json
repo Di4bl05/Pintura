@@ -7,6 +7,7 @@
     "contact": "Contacto",
     "why": "Nosotoros"
   },
+
   "hero": {
     "title1": "PINTURA DE",
     "title2": "INTERIOR & EXTERIOR",
@@ -21,6 +22,7 @@
       "Limpieza Detallada Post-Trabajo"
     ]
   },
+
  "services": {
   "title": "Pintura profesional",
   "titleHighlight": "con acabados de alta gama",
@@ -66,9 +68,10 @@
       "Acabados invisibles"
     ]
   }
-},
+  },
+
 "serviceAreas": {
-    "primaryRegion": "Áreas de Servicios",
+    "primaryRegion": "ÁREAS DE SERVICIOS",
     "mainHub": "Orlando, FL",
     "locations": [
       {
@@ -102,6 +105,7 @@
     ],
     "counties": ["Orange County", "Seminole County", "Osceola County", "Lake County"]
   },
+
 "servicesdetails": {
   "premium": "Experiencia de servicio premium",
   "execution": "Proceso de ejecución",
@@ -185,7 +189,7 @@
       }
     ]
   }
-},
+  },
 
   "gallery": {
     "after": "Antes",
@@ -404,19 +408,13 @@
       ]
     }
   },
-  "combined_conversion_section": {
-  "arguments": "Nuestros 3 pilares de valor...",
-  "cta_box": {
-    "title": "¿Listo para ahorrar un 40% en su próximo proyecto?",
-    "action": "Solicitar Estimado",
-    "phone": "(786) 350-6367"
-  }
-},
+
   "contact": {
     "errors": {
       "name": "El nombre es muy corto",
       "phone": "Número de teléfono no válido",
       "address": "Por favor, escribe la dirección completa",
+      "gmail": "Por favor escriba la dirección de correo completa",
       "date": "La fecha no puede ser en el pasado",
       "required": "Este campo es obligatorio",
       "name_special": "El nombre no puede contener caracteres especiales",
@@ -445,7 +443,8 @@
           "name": "Nombre Completo",
           "phone": "Teléfono de Contacto",
           "address": "Dirección de la Propiedad",
-          "date": "Fecha Deseada para Visita"
+          "date": "Fecha Deseada para Visita",
+          "gmail": "Dirección de Correo"
         }
       },
       "step_2": {
@@ -519,7 +518,6 @@
     }
   },
 
-  
   "footer": {
     "description": "Pintores profesionales en Florida Central. Especialistas en acabados residenciales y comerciales de alta gama. Licenciados y asegurados para su total tranquilidad.",
     "services": {

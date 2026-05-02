@@ -1,19 +1,15 @@
 "use client";
 
-
 import React, { useEffect, useState } from "react";
-import { ChevronRight, Star, Plus, Check, ChevronDown, X } from 'lucide-react';
+import { ChevronRight, Star, Plus, Check, ChevronDown, X, Loader2 } from 'lucide-react';
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
 import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
-
-
 interface ContactFormProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
 
 const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
   const pathname = usePathname();
@@ -23,6 +19,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
 
   const [contactData, setContactData] = useState<any>({
     name: "",
+    email: "",
     phone: "",
     address: "",
     date: "",
@@ -46,40 +43,52 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
   const [errors, setErrors] = useState<Errors>({});
 
   const validateStepTwo = () => {
-    let newErrors: any = {};
-    const today = new Date().toISOString().split('T')[0];
-       
-    const nameRegex = /^[a-zA-ZÀ-ÿ\s]+$/;
- 
-    const phoneRegex = /^[0-9\s\+\-\(\)]+$/;
+  let newErrors: any = {};
+  const today = new Date().toISOString().split('T')[0];
+  
+  const nameRegex = /^[a-zA-ZÀ-ÿ\s]+$/;
+  const phoneRegex = /^[0-9\s\+\-\(\)]+$/;
+  // Regex para validar email estándar
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!contactData.name?.trim()) {
-      newErrors.name = t("contact.errors.required");
-    } else if (!nameRegex.test(contactData.name)) {
-      newErrors.name = t("contact.errors.name_special");
-    } else if (contactData.name.trim().length < 3) {
-      newErrors.name = t("contact.errors.name");
-    }
+  // Validación Nombre
+  if (!contactData.name?.trim()) {
+    newErrors.name = t("contact.errors.required");
+  } else if (!nameRegex.test(contactData.name)) {
+    newErrors.name = t("contact.errors.name_special");
+  } else if (contactData.name.trim().length < 3) {
+    newErrors.name = t("contact.errors.name");
+  }
 
-    if (!contactData.phone?.trim()) {
-      newErrors.phone = t("contact.errors.required");
-    } else if (!phoneRegex.test(contactData.phone)) {
-      newErrors.phone = t("contact.errors.phone_numbers");
-    }
+  // Validación Email (Gmail)
+  if (!contactData.email?.trim()) {
+    newErrors.email = t("contact.errors.required");
+  } else if (!emailRegex.test(contactData.email)) {
+    newErrors.email = t("contact.errors.gmail");
+  }
 
-    if (!contactData.address?.trim() || contactData.address.length < 10) {
-      newErrors.address = t("contact.errors.address");
-    }
+  // Validación Teléfono
+  if (!contactData.phone?.trim()) {
+    newErrors.phone = t("contact.errors.required");
+  } else if (!phoneRegex.test(contactData.phone)) {
+    newErrors.phone = t("contact.errors.phone_numbers");
+  }
 
-    if (!contactData.date) {
-      newErrors.date = t("contact.errors.required");
-    } else if (contactData.date < today) {
-      newErrors.date = t("contact.errors.date");
-    }
+  // Validación Dirección
+  if (!contactData.address?.trim() || contactData.address.length < 10) {
+    newErrors.address = t("contact.errors.address");
+  }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  // Validación Fecha
+  if (!contactData.date) {
+    newErrors.date = t("contact.errors.required");
+  } else if (contactData.date < today) {
+    newErrors.date = t("contact.errors.date");
+  }
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
 
   const validateStepThree = () => {
   let newErrors: any = {};
@@ -88,15 +97,15 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
     newErrors.colors = t("contact.errors.colors_required");
   }
 
-  if (!contactData.main_services || contactData.main_services.length === 0) {
-    newErrors.main_services = t("contact.errors.services_required");
+  if (!contactData.service_type || contactData.service_type.length === 0) {
+    newErrors.service_type = t("contact.errors.services_required");
   }
 
   setErrors(newErrors);
   return Object.keys(newErrors).length === 0;
 };
 
-const validateStepFor = () => {
+ const validateStepFor = () => {
   let newErrors: any = {};
 
   if (!contactData.status?.trim()) {
@@ -109,49 +118,76 @@ const validateStepFor = () => {
   return Object.keys(newErrors).length === 0;
 };
 
- const submitForm = async () => {
+const submitForm = async (data: any) => {
   try {
     setLoading(true);
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(contactData),
+    const formData = new FormData();
+    
+    // 1. Agregamos los campos de texto simples
+    // Filtramos 'upload', 'service_type' y 'specifics' porque se manejan diferente
+    Object.keys(data).forEach(key => {
+      if (key !== 'upload' && key !== 'service_type' && key !== 'specifics') {
+        // Aseguramos que si es null o undefined mande un string vacío
+        formData.append(key, data[key] ?? "");
+      }
     });
 
-    const data = await res.json();
+    // 2. Metemos los arrays de servicios y áreas específicas como JSON strings
+    // Esto es para que el Router pueda hacer el JSON.parse correctamente
+    formData.append('service_type', JSON.stringify(data.service_type || []));
+    formData.append('specifics', JSON.stringify(data.specifics || []));
 
-    if (!res.ok || !data.ok) {
-      throw new Error(data.error || "Error sending form");
+    // 3. ¡AQUÍ ESTÁ EL CAMBIO CLAVE PARA LAS FOTOS!
+    // Como data.upload es un Array de Files, los recorremos uno por uno
+    if (Array.isArray(data.upload)) {
+      data.upload.forEach((file: File) => {
+        // IMPORTANTE: La llave debe ser 'files' (en plural) para que el Router 
+        // use formData.getAll("files") y pesque todas las fotos
+        formData.append('files', file);
+      });
     }
 
-    return true; 
+    // 4. Enviamos la petición
+    const res = await fetch("/api/send", {
+      method: "POST",
+      body: formData, // El navegador configura el Content-Type: multipart/form-data automáticamente
+    });
+
+    const result = await res.json();
+    
+    if (!res.ok || !result.ok) {
+      throw new Error(result.error || "Error al enviar el formulario");
+    }
+
+    return true;
   } catch (error) {
-    console.error(error);
-
-    setErrors((prev) => ({
-      ...prev,
-      submit: "Error enviando el formulario",
-    }));
-
-    return false; 
+    console.error("Error en submitForm:", error);
+    return false;
   } finally {
     setLoading(false);
   }
 };
 
 const handleSubmit = async () => {
-  const success = await submitForm();
+  // Ejecutamos el envío
+  const success = await submitForm(contactData);
 
   if (success) {
-    setStep(6); 
+    // Solo si el servidor respondió ok, pasamos al mensaje de éxito
+    setStep(6);
+    
+    // Opcional: Podrías hacer un scroll hacia arriba para que el mensaje de éxito se vea bien
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    // Si falló, el error ya se guarda en setErrors dentro de submitForm
+    // podrías mostrar un toast o alert aquí
+    alert("Hubo un problema al enviar. Por favor revisa los campos.");
   }
 };
 
   const currentImage = getStaticGalleryImageUrl("exteriorAfter");
-    const [openSelect, setOpenSelect] = useState<string | null>(null);
+  const [openSelect, setOpenSelect] = useState<string | null>(null);
 
   const colorOptions = React.useMemo(() => {
     const value = t("contact.steps.step_2.options.colors");
@@ -190,8 +226,6 @@ const handleSubmit = async () => {
   useEffect(() => { if (isOpen) onClose(); }, [pathname, onClose]);
 
   if (!isOpen) return null;
-
-  
 
 return (
   <div className="fixed inset-0 z-[40] bg-white overflow-hidden antialiased flex flex-col">
@@ -249,10 +283,9 @@ return (
      <div className="w-full animate-in slide-in-from-left-6 duration-700 flex flex-col justify-center items-center">
 
 {step === 1 && (
-  /* Bloqueamos el scroll del contenedor principal con fixed y h-screen */
+  
   <div className="fixed inset-0 w-full h-screen lg:relative lg:h-full flex items-center justify-between px-8 lg:px-20 animate-in fade-in duration-700 overflow-hidden bg-white">
     
-    {/* Mantenemos tus medidas exactas: pt-32, pb-12, px-1 */}
     <div className="w-full lg:w-1/2 flex flex-col h-full pt-44 lg:pt-28 pb-12 px-1 lg:px-6 transition-all">
   
       <div className="max-w-[550px] mx-auto lg:mx-0 w-full">   
@@ -338,14 +371,21 @@ return (
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 w-full">
-        {["name", "phone", "address", "date"].map((field) => (
-          <div key={field} className={`w-full space-y-1.5 ${field === "address" || field === "date" ? "md:col-span-2" : ""}`}>
+        {/* Array actualizado para incluir email */}
+        {["name", "email", "phone", "address", "date"].map((field) => (
+          <div 
+            key={field} 
+            className={`w-full space-y-1.5 ${
+              field === "address" || field === "date" ? "md:col-span-2" : "md:col-span-1"
+            }`}
+          >
             <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
-              {t(`contact.steps.step_1.fields.${field}`)}
+              {/* Buscamos 'gmail' en el i18n si el campo es 'email' */}
+              {t(`contact.steps.step_1.fields.${field === "email" ? "gmail" : field}`)}
             </label>
             
             <input
-              type={field === "date" ? "date" : "text"}
+              type={field === "date" ? "date" : field === "email" ? "email" : "text"}
               name={field}
               value={contactData[field]}
               onChange={(e) => {
@@ -360,7 +400,8 @@ return (
               }}
               placeholder={
                 field === "name" ? "Ej: Juan Pérez" :
-                field === "phone" ? "Ej: +1 555 123 4567" :
+                field === "email" ? "Ej: cliente@correo.com" :
+                field === "phone" ? "Ej: +1 407 123 4567" :
                 field === "address" ? "Ej: 123 Main St, Orlando" : ""
               }
               className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-[12px] lg:text-[15px] placeholder:text-slate-400 transition-all duration-500 ease-in-out outline-none ring-0 focus:ring-0 focus:outline-none ${
@@ -385,7 +426,7 @@ return (
         ))}
       </div>
 
-      {/* Botones con las dimensiones grabadas y pt reducido para móvil */}
+      {/* Botones */}
       <div className="flex flex-col md:flex-row gap-4 w-full pt-6 md:pt-10 justify-center items-center">
         <button
           type="button"
@@ -469,38 +510,44 @@ return (
           )}
         </div>
 
-        {/* Campo: Tipo de Servicio (Ya corregido) */}
-        <div className="w-full space-y-3">
-          <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
-            {t("contact.steps.step_2.fields.service_type")}
-          </label>
-          <div className={`flex flex-wrap items-center justify-start gap-4 p-4 rounded-2xl border transition-all duration-300 ${
-            errors.main_services ? "border-red-500 bg-red-50/10" : "bg-slate-50/50 border-slate-100"
-          }`}>
-            {(t("contact.steps.step_2.options.services", { returnObjects: true }) as any[] || []).map((service) => (
-              <label key={service.id} className="flex items-center gap-2 cursor-pointer group">
-                <input
-                  type="checkbox"
-                  checked={(contactData.main_services || []).includes(service.id)}
-                  onChange={(e) => {
-                    const checked = e.target.checked;
-                    setContactData((prev: any) => {
-                      const current = prev.main_services || [];
-                      const updated = checked ? [...current, service.id] : current.filter((id: string) => id !== service.id);
-                      return { ...prev, main_services: updated };
-                    });
-                    if (errors.main_services) setErrors((prev: any) => ({ ...prev, main_services: null }));
-                  }}
-                  className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600 focus:ring-0"
-                />
-                <span className="font-sans font-bold text-[10px] lg:text-[11px] text-slate-400 uppercase tracking-tight group-hover:text-slate-600 transition-colors">
-                  {service.label}
-                </span>
-              </label>
-            ))}
-          </div>
-          {errors.main_services && <p className="text-[10px] text-red-500 font-black uppercase pt-1 pl-1">{errors.main_services}</p>}
-        </div>
+       {/* Campo: Tipo de Servicio (Corregido a service_type) */}
+<div className="w-full space-y-3">
+  <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+    {t("contact.steps.step_2.fields.service_type")}
+  </label>
+  <div className={`flex flex-wrap items-center justify-start gap-4 p-4 rounded-2xl border transition-all duration-300 ${
+    errors.service_type ? "border-red-500 bg-red-50/10" : "bg-slate-50/50 border-slate-100"
+  }`}>
+    {(t("contact.steps.step_2.options.services", { returnObjects: true }) as any[] || []).map((service) => (
+      <label key={service.id} className="flex items-center gap-2 cursor-pointer group">
+        <input
+          type="checkbox"
+          checked={(contactData.service_type || []).includes(service.id)} // <--- Corregido
+          onChange={(e) => {
+            const checked = e.target.checked;
+            setContactData((prev: any) => {
+              const current = prev.service_type || []; // <--- Corregido
+              const updated = checked 
+                ? [...current, service.id] 
+                : current.filter((id: string) => id !== service.id);
+              return { ...prev, service_type: updated }; // <--- Corregido
+            });
+            if (errors.service_type) setErrors((prev: any) => ({ ...prev, service_type: null }));
+          }}
+          className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600 focus:ring-0"
+        />
+        <span className="font-sans font-bold text-[10px] lg:text-[11px] text-slate-400 uppercase tracking-tight group-hover:text-slate-600 transition-colors">
+          {service.label}
+        </span>
+      </label>
+    ))}
+  </div>
+  {errors.service_type && (
+    <p className="text-[10px] text-red-500 font-black uppercase pt-1 pl-1">
+      {errors.service_type}
+    </p>
+  )}
+</div>
 
         {/* Campo: Específicos (Validación añadida) */}
         <div className="w-full space-y-3">
@@ -622,72 +669,102 @@ return (
           {errors.status && <p className="text-[10px] text-red-500 font-black uppercase pt-1 pl-1">{errors.status}</p>}
         </div>
 
-        {/* Campo: Subir Fotos (Ajustado para no forzar scroll) */}
-        <div className="flex flex-col gap-1.5 h-auto min-h-[140px]">
-          <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
-            {t("contact.steps.step_3.fields.upload")}
-          </label>
-          
-          <div className={`relative flex flex-col gap-3 border-2 border-dashed rounded-2xl p-4 transition-all bg-slate-50/30 ${
-            errors.upload ? "border-red-500" : "border-slate-100 hover:border-primary-600"
-          }`}>
-            
-            <div className="relative shrink-0">
-              <input 
-                type="file" 
-                multiple 
-                accept="image/*" 
-                onChange={(e) => {
-                  const files = Array.from(e.target.files || []);
-                  const validImages = files.filter(file => file.type.startsWith('image/'));
-                  if (validImages.length !== files.length) {
-                    setErrors((prev: any) => ({ ...prev, upload: t("contact.errors.only_images") }));
-                  } else {
-                    setErrors((prev: any) => ({ ...prev, upload: null }));
-                    setContactData((prev: any) => ({ 
-                      ...prev, 
-                      upload: prev.upload ? [...prev.upload, ...validImages] : validImages 
-                    }));
-                  }
-                }} 
-                className="absolute inset-0 opacity-0 cursor-pointer z-10" 
-              />
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm border border-slate-50 shrink-0">
-                  <Plus size={16} className="text-primary-600" />
-                </div>
-                <p className="font-sans font-medium text-slate-400 text-[9px] uppercase tracking-widest text-left leading-tight">
-                  {contactData.upload?.length > 0 ? "Añadir más fotos" : "Arrastra o haz clic aquí"}
-                </p>
-              </div>
-            </div>
+     {/* Campo: Subir Fotos - Adaptado para envío múltiple por FormData */}
+<div className="flex flex-col gap-1.5 h-auto min-h-[140px]">
+  <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+    {t("contact.steps.step_3.fields.upload")}
+  </label>
+  
+  <div className={`relative flex flex-col gap-3 border-2 border-dashed rounded-2xl p-4 transition-all bg-slate-50/30 ${
+    errors.upload ? "border-red-500" : "border-slate-100 hover:border-primary-600"
+  }`}>
+    
+    <div className="relative shrink-0">
+      <input 
+        type="file" 
+        multiple 
+        accept="image/*" 
+        onChange={(e) => {
+          const files = Array.from(e.target.files || []);
+          const validImages = files.filter(file => file.type.startsWith('image/'));
 
-            {/* Mini lista de archivos (scroll solo si hay muchos, para no romper el centro) */}
-            {contactData.upload && contactData.upload.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-2 max-h-[100px] overflow-y-auto scrollbar-hide">
-                {Array.from(contactData.upload as File[]).map((file, index) => (
-                  <div key={`${file.name}-${index}`} className="flex items-center gap-2 bg-white px-2 py-1 rounded-lg border border-slate-100">
-                    <span className="font-sans text-[8px] font-bold text-slate-600 uppercase truncate max-w-[80px]">
-                      {file.name}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const newFiles = Array.from(contactData.upload as File[]).filter((_, i) => i !== index);
-                        setContactData((prev: any) => ({ ...prev, upload: newFiles }));
-                      }}
-                      className="text-red-400"
-                    >
-                      <X size={10} />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          {errors.upload && <p className="text-[10px] text-red-500 font-black uppercase pt-1 pl-1">{errors.upload}</p>}
+          if (validImages.length !== files.length) {
+            setErrors((prev: any) => ({ ...prev, upload: t("contact.errors.only_images") }));
+          } else {
+            setErrors((prev: any) => ({ ...prev, upload: null }));
+            setContactData((prev: any) => {
+              // IMPORTANTE: Aseguramos que 'upload' siempre sea un array
+              const currentFiles = Array.isArray(prev.upload) ? prev.upload : [];
+              return { 
+                ...prev, 
+                upload: [...currentFiles, ...validImages] 
+              };
+            });
+          }
+          // Limpiar el valor del input para permitir subir la misma foto si se borró
+          e.target.value = "";
+        }} 
+        className="absolute inset-0 opacity-0 cursor-pointer z-10" 
+      />
+      <div className="flex items-center gap-3">
+        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm border border-slate-50 shrink-0">
+          <Plus size={16} className="text-primary-600" />
         </div>
+        <p className="font-sans font-medium text-slate-400 text-[9px] uppercase tracking-widest text-left leading-tight">
+          {contactData.upload?.length > 0 
+            ? `${contactData.upload.length} fotos seleccionadas` 
+            : "Arrastra o haz clic aquí"}
+        </p>
+      </div>
+    </div>
 
+    {/* Lista de archivos con Miniatura Real */}
+    {contactData.upload && contactData.upload.length > 0 && (
+      <div className="flex flex-wrap gap-2 mt-2 max-h-[120px] overflow-y-auto scrollbar-hide pt-2 border-t border-slate-100/50">
+        {contactData.upload.map((file: File, index: number) => {
+          // Crear URL temporal para la miniatura
+          const previewUrl = URL.createObjectURL(file);
+          
+          return (
+            <div key={`${file.name}-${index}`} className="group relative flex items-center gap-2 bg-white p-1 rounded-lg border border-slate-100 shadow-sm transition-all hover:border-primary-200">
+              {/* Miniatura */}
+              <div className="w-6 h-6 rounded bg-slate-100 overflow-hidden shrink-0">
+                <img 
+                  src={previewUrl} 
+                  alt="preview" 
+                  className="w-full h-full object-cover"
+                  onLoad={() => URL.revokeObjectURL(previewUrl)} // Liberar memoria
+                />
+              </div>
+              
+              <span className="font-sans text-[8px] font-bold text-slate-600 uppercase truncate max-w-[70px]">
+                {file.name}
+              </span>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setContactData((prev: any) => ({
+                    ...prev,
+                    upload: prev.upload.filter((_: any, i: number) => i !== index)
+                  }));
+                }}
+                className="flex items-center justify-center w-4 h-4 rounded-full bg-red-50 text-red-400 hover:bg-red-500 hover:text-white transition-colors"
+              >
+                <X size={8} />
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    )}
+  </div>
+  {errors.upload && (
+    <p className="text-[10px] text-red-500 font-black uppercase pt-1 pl-1">
+      {errors.upload}
+    </p>
+  )}
+</div>
         {/* Campo: Notas especiales */}
         <div className="flex flex-col gap-1.5 pb-4">
           <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
@@ -831,14 +908,26 @@ return (
 
       {/* NAV: Con pt-6 para que quepa bien sin scroll en pantallas pequeñas */}
       <div className="flex flex-col md:flex-row gap-4 w-full pt-6 md:pt-10 justify-center items-center">
-        <button
-          type="button"
-          onClick={() => setStep(6)}
-          className="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl shadow-slate-200 active:scale-95 w-full h-[40px] lg:h-[48px] px-6 text-[9px] rounded-2xl md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-xl"
-        >
-          <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
-          <span className="relative z-10">Finalizar estimado</span>
-        </button>
+       <button
+  type="button"
+  disabled={loading} // Evita múltiples clics mientras envía
+  onClick={handleSubmit} // <--- Llamamos a la lógica de envío
+  className="group relative overflow-hidden inline-flex items-center justify-center gap-3 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl shadow-slate-200 active:scale-95 w-full h-[40px] lg:h-[48px] px-6 text-[9px] rounded-2xl md:flex-[1.5] md:min-h-15 md:px-12 md:py-5 md:text-[10px] md:rounded-xl disabled:opacity-70 disabled:cursor-not-allowed"
+>
+  <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 group-hover:translate-y-0" />
+  
+  {loading ? (
+    <span className="relative z-10 flex items-center gap-2">
+      <Loader2 size={14} className="animate-spin" /> {/* Necesitas importar Loader2 de lucide-react */}
+      Enviando...
+    </span>
+  ) : (
+    <>
+      <span className="relative z-10">Finalizar estimado</span>
+      <ChevronRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+    </>
+  )}
+</button>
 
         <button
           type="button"
