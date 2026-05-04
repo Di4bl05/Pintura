@@ -9,10 +9,13 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
 import ContactForm from "@/components/ContactForm";
 import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
+import { useSmartLink } from "@/hooks/useSmartLink";
 
 export default function WhyChooseClean() {
   const { t } = useLanguage();
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const { handlePhoneClick } = useSmartLink();
+  const luisPhone = "+1 (786) 350-6367";
 
   const iconConfigs: Record<string, { grad: string; sym: string }> = {
     price_disruption: { grad: "from-green-400 to-emerald-600", sym: "$" },
@@ -51,7 +54,7 @@ export default function WhyChooseClean() {
                   Painting Experts
                 </p>
                 <p className="font-sans font-black text-[10px] tracking-[0.1em] text-slate-950 uppercase">
-                  Luis & Bety • Orlando, FL
+                  Luis & Bety • Orlando FL
                 </p>
               </div>
             </div>
@@ -94,17 +97,18 @@ export default function WhyChooseClean() {
           >
             <span className="absolute inset-0 w-0 bg-primary-600 transition-all duration-500 ease-out group-hover:w-full" />
             <span className="relative z-10 flex items-center gap-3">
-              {t("combined_conversion_section.cta_box.action")}
+              {t("hero.ctaFree")}
               <ArrowRight className="md:text-lg transition-transform group-hover:translate-x-2" />
             </span>
           </button>
 
           <a
-            href={`tel:${t("combined_conversion_section.cta_box.phone")}`}
+            href={`tel:${luisPhone.replace(/\D/g, "")}`}
+            onClick={handlePhoneClick(luisPhone)}
             className="inline-flex items-center justify-center gap-4 bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-xl  hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
           >
             <Phone className="w-4 h-4" />
-            {t("combined_conversion_section.cta_box.phone")}
+            <span>{luisPhone}</span>
           </a>
         </div>
       </div>

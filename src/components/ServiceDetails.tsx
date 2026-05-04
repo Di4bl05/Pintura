@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { X, Phone, Send, CheckCircle2 } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { X, Phone, Send, CheckCircle2, ArrowRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
+import { useSmartLink } from "@/hooks/useSmartLink";
 
 interface ServiceDetailProps {
   isOpen: boolean;
@@ -20,8 +21,11 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
   const pathname = usePathname();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
+  const { handlePhoneClick } = useSmartLink();
+  const luisPhone = "+1 (786) 350-6367";
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
-  // Reset scroll al abrir y bloquear scroll del body
+
   useEffect(() => {
     if (isOpen && scrollRef.current) {
       scrollRef.current.scrollTo(0, 0);
@@ -32,7 +36,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
     };
   }, [isOpen]);
 
-  // Cerrar si se hace click en algún enlace interno
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -53,14 +56,14 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
       {/* Header forzado a sólido para que el contenido pase por debajo */}
       <Header forceSolid />
 
-      <div className="px-6 pb-28 pt-28 md:pt-36 lg:px-16">
+      <div className="px-6 pb-28 pt-28 md:pt-36 lg:px-24">
         <div className="mx-auto max-w-[1440px] relative">
           
           {/* --- BOTÓN CERRAR (STICKY: SE QUEDA AL DESLIZAR) --- */}
-          <div className="sticky top-[85px] md:top-[110px] z-[120] flex justify-end mb-4 pointer-events-none">
+          <div className="sticky top-[70px] md:top-[90px] z-[120] flex justify-end md:mb-1 pointer-events-none">
             <button
               onClick={onClose}
-              className="group pointer-events-auto flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-slate-950/90 text-white shadow-2xl backdrop-blur-md transition-all duration-300 hover:bg-primary-600 active:scale-90 mr-2 md:mr-0"
+              className="group pointer-events-auto flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-slate-950/90 text-white shadow-2xl backdrop-blur-md transition-all duration-300 hover:bg-primary-600 active:scale-90 -mr-2 md:-mr-16"
             >
               <X 
                 size={18} 
@@ -70,29 +73,26 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
           </div>
 
           {/* --- BLOQUE SUPERIOR: TÍTULO E IMAGEN --- */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 items-start max-w-6xl -mt-16 md:mt-14">
             <div>
-              <div className="text-[10px] font-black uppercase tracking-[0.5em] text-primary-600 mb-6">
-                {t("servicesdetails.premium")}
-              </div>
 
-              <h1 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tight text-slate-950 leading-[0.9]">
+              <h1 className="font-display text-3xl md:text-5xl font-bold uppercase tracking-tight text-slate-950 leading-[0.9]">
                 {serviceData.title}
               </h1>
 
-              <h2 className="font-serif text-2xl md:text-4xl italic text-primary-600 font-normal mt-2">
+              <h2 className="font-serif text-xl md:text-4xl italic text-primary-600 font-normal mt-2">
                 {serviceData.titleHighlight}
               </h2>
 
-              <div className="h-[3px] w-24 bg-primary-600 mt-8 mb-8" />
+              <div className="h-[3px] w-24 bg-primary-600 mt-5 md:mt-8 mb-8" />
 
-              <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+              <p className="text-sm md:text-lg text-slate-600 leading-relaxed font-medium">
                 {serviceData.description}
               </p>
             </div>
 
             {/* Imagen decorativa en PC */}
-            <div className="hidden md:flex justify-end md:translate-x-20 md:mt-12">
+            <div className="hidden md:flex justify-end md:translate-x-32 md:-mt-8">
               <div className="relative group flex justify-end">
                 <div className="absolute -inset-6 bg-primary-600/10 blur-3xl rounded-[2.5rem]" />
                 <div className="relative w-full max-w-2xl rounded-[2.5rem] p-3 bg-white border border-slate-200 shadow-2xl overflow-hidden scale-105 md:scale-110">
@@ -113,7 +113,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
           <div className="mt-20 md:mt-32 max-w-6xl mx-auto">
             <div className="mb-10 md:mb-20 flex items-center gap-6">
               <div className="shrink-0">
-                <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-900">
+                <h3 className=" text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-slate-900">
                   {t("servicesdetails.execution")}
                 </h3>
                 <div className="h-[3px] w-12 bg-primary-600 mt-3" />
@@ -138,8 +138,8 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
                   </div>
 
                   <div className="flex-1 pt-1 md:pt-2">
-                    <div className="flex items-center gap-4 mb-4">
-                      <h4 className="text-xl md:text-2xl font-display font-black uppercase text-slate-950 tracking-tighter">
+                    <div className="flex items center gap-4 mb-4">
+                      <h4 className="text-xl md:text-2xl font-serif font-black text-slate-950">
                         {step.title}
                       </h4>
                       <div className="h-px flex-1 bg-slate-50 group-hover:bg-primary-100 transition-colors" />
@@ -148,7 +148,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
                         className="text-primary-600 opacity-0 group-hover:opacity-100 transition-all duration-500"
                       />
                     </div>
-                    <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium max-w-3xl">
+                    <p className="text-sm md:text-lg text-slate-600 leading-relaxed font-medium max-w-3xl">
                       {step.desc}
                     </p>
                   </div>
@@ -160,28 +160,26 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
           {/* --- BOTONES INFERIORES DE ACCIÓN --- */}
           <div className="mt-16 md:mt-28 border-t pt-10 md:pt-14 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
             
-            {/* Botón Cerrar (Efecto Llenado Galería) */}
             <button
-              onClick={onClose}
-              className="group relative overflow-hidden flex items-center justify-center gap-3 w-full md:w-auto px-12 py-5 bg-slate-950 text-white font-black uppercase text-[11px] tracking-[0.3em] rounded-xl shadow-xl transition-all duration-300 active:scale-95"
-            >
-              <div className="absolute inset-0 bg-primary-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-              <div className="relative z-10 flex items-center gap-3">
-                <Send size={15} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                <span>{t("servicesdetails.buttons1")}</span>
-              </div>
-            </button>
+                       onClick={() => setIsContactOpen(true)}
+                       className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl shadow-slate-200 active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:rounded-xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px]"
+                     >
+                       <span className="absolute inset-0 w-0 bg-primary-600 transition-all duration-500 ease-out group-hover:w-full" />
+                       <span className="relative z-10 flex items-center gap-3">
+                         {t("hero.ctaFree")}
+                         <ArrowRight className="md:text-lg transition-transform group-hover:translate-x-2" />
+                       </span>
+                     </button>
 
             {/* Botón Teléfono */}
-            <a
-              href="tel:+17863506367"
-              className="group h-[60px] w-full md:w-auto px-10 flex items-center justify-center gap-4 text-slate-950 border border-slate-200 hover:border-primary-600 hover:text-primary-600 rounded-xl transition-all duration-300 font-black uppercase text-[11px] tracking-[0.2em] active:scale-95"
-            >
-              <div className="p-2.5 bg-slate-100 group-hover:bg-primary-50 group-hover:text-primary-600 rounded-lg transition-all">
-                <Phone size={15} />
-              </div>
-              <span>(786) 350-6367</span>
-            </a>
+           <a
+                      href={`tel:${luisPhone.replace(/\D/g, "")}`}
+                      onClick={handlePhoneClick(luisPhone)}
+                      className="inline-flex items-center justify-center gap-4 bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-xl  hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
+                    >
+                      <Phone className="w-4 h-4" />
+                      <span>{luisPhone}</span>
+                    </a>
           </div>
 
         </div>

@@ -128,7 +128,7 @@ export default function Services() {
           <div className="flex flex-col items-center mb-16 lg:mb-24 text-center">
            
             <h3 className="font-display text-3xl lg:text-[50px] font-bold text-slate-900">
-              {t("serviceAreas.primaryRegion") || "Central Florida"}
+              {t("serviceAreas.primaryRegion")}
             </h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 md:gap-x-32 gap-y-10 max-w-5xl mx-auto px-4">

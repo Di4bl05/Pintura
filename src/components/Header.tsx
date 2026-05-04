@@ -5,6 +5,7 @@ import { Phone, Menu, X, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getSiteImageUrl } from "@/lib/siteImageSources";
+import { useSmartLink } from "@/hooks/useSmartLink";
 
 interface HeaderProps {
   forceSolid?: boolean;
@@ -15,6 +16,8 @@ export default function Header({ forceSolid = false }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [hasOverlayOpen, setHasOverlayOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const { handlePhoneClick } = useSmartLink();
+  const luisPhone = "+1 (786) 350-6367";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -148,11 +151,12 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             </button>
 
             <a
-              href="tel:+17863506367"
-              className="font-sans group flex items-center gap-3 rounded-xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-blue-500 hover:text-slate-100 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4"
+              href={`tel:${luisPhone.replace(/\D/g, "")}`}
+              onClick={handlePhoneClick(luisPhone)}
+              className="font-sans group flex items-center -gap-1 rounded-xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-blue-500 hover:text-slate-100 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4"
             >
               <Phone className="w-3 h-3" />
-              <span>(786) 350-6367</span>
+              <span>{luisPhone}</span>
             </a>
           </div>
 
@@ -164,7 +168,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
           </button>
         </div>
 
-        {/* DESPLEGABLE MÓVIL ESTILO TIZA (COMPACTO) */}
         <div
           className={`lg:hidden absolute left-6 right-6 top-[calc(100%+12px)] rounded-[1.5rem] border border-white/10 bg-slate-950/98 backdrop-blur-3xl text-white shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
             isMenuOpen
@@ -200,7 +203,8 @@ export default function Header({ forceSolid = false }: HeaderProps) {
               </button>
 
               <a
-                href="tel:+17863506367"
+                href={`tel:${luisPhone.replace(/\D/g, "")}`}
+                onClick={handlePhoneClick(luisPhone)}
                 className="flex items-center justify-center gap-2 py-3 rounded-xl bg-primary-600 text-white text-[9px] font-black uppercase tracking-[0.15em] active:scale-[0.98] transition-all shadow-lg shadow-primary-900/20"
               >
                 <Phone className="w-3.5 h-3.5" />

@@ -51,7 +51,6 @@ export async function POST(req: Request) {
       }
     }
 
-    // 4. Enlaces inteligentes para Luis
     const phoneUrl = `tel:${phone.replace(/\s/g, "")}`;
     const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 
@@ -62,11 +61,11 @@ export async function POST(req: Request) {
 
 DATOS DEL CLIENTE
 -----------------------------------------
-Nombre:    ${name}
-Email:     ${email}
-Teléfono:  ${phone} (Llamar: ${phoneUrl})
+Nombre: ${name}
+Email: ${email}
 Dirección: ${address} (Mapa: ${mapsUrl})
 Fecha deseada: ${date}
+Teléfono: ${phone} (Llamar: ${phoneUrl})
 
 DETALLES DEL TRABAJO
 -----------------------------------------
@@ -96,7 +95,7 @@ FOTOS: ${attachments.length > 0 ? `${attachments.length} fotos adjuntas en este 
       ...(email && { replyTo: email }), 
       subject: `Solicitud: ${name} - ${service_type[0] || "Pintura"}`,
       text: emailContent,
-      attachments: attachments, // <--- Aquí llegan todas las fotos
+      attachments: attachments,
     });
 
     if (result.error) {

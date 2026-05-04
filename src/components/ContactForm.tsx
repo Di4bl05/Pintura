@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
 import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
+import { useSmartLink } from "@/hooks/useSmartLink";
 interface ContactFormProps {
   isOpen: boolean;
   onClose: () => void;
@@ -16,6 +17,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose }) => {
   const { t } = useLanguage();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const { handlePhoneClick } = useSmartLink();
+  const luisPhone = "+1 (786) 350-6367";
 
   const [contactData, setContactData] = useState<any>({
     name: "",
@@ -986,18 +989,18 @@ return (
         </button>
 
         <a 
-          href="tel:+14070000000" 
+          href={`tel:${luisPhone.replace(/\D/g, "")}`}
+          onClick={handlePhoneClick(luisPhone)}
           className="
             inline-flex items-center justify-center
-            bg-white border-2 border-slate-100 text-slate-400
-            transition-all duration-300 font-black uppercase tracking-[0.2em] 
+            bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 font-black uppercase tracking-[0.2em] 
             active:scale-95 text-center
             w-full h-[48px] px-6 text-[9px] rounded-2xl
             md:flex-1 md:h-[54px] md:px-5 md:text-[10px] md:rounded-xl
-            hover:text-slate-950 hover:border-slate-300
+          hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group 
           "
         >
-          {t("contact.success.call_btn")}
+          <span>{luisPhone}</span>
         </a>
       </div>
       

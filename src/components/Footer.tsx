@@ -81,9 +81,6 @@ export default function Footer() {
                   <span>{area}</span>
                 </li>
               ))}
-              <li className="mt-4 pt-4 border-t border-white/5 text-[10px] font-black text-primary-600 uppercase tracking-widest">
-                {t("footer.areas.all")}
-              </li>
             </ul>
           </div>
 
@@ -110,13 +107,10 @@ export default function Footer() {
                   {t("footer.contact.address")}
                 </span>
               </li>
-              <li className="flex gap-4 border-t border-white/5 pt-4">
+              <li className="flex gap-4 border-t border-white/5 pt-3">
                 <Clock size={18} className="text-primary-600 shrink-0" />
                 <div>
-                  <p className="text-[10px] uppercase font-black text-slate-500">
-                    {t("footer.contact.hours_label")}
-                  </p>
-                  <p className="text-[11px] text-slate-300 mt-1">
+                  <p className="text-[13px] leading-relaxed">
                     {t("footer.contact.hours")}
                   </p>
                 </div>

@@ -1,5 +1,5 @@
 {
-  "nav": {
+ "nav": {
     "home": "Inicio",
     "services": "Servicios",
     "gallery": "Galería",
@@ -8,18 +8,16 @@
     "why": "Nosotoros"
   },
 
-  "hero": {
+ "hero": {
     "title1": "PINTURA DE",
     "title2": "INTERIOR & EXTERIOR",
-    "description": "Pintura residencial profesional en Orlando, FL. Especialistas en reparación de drywall, enlacado de gabinetes y lavado a presión.",
+    "description": "Pintura residencial profesional en Orlando FL. Especialistas en reparación de drywall, enlacado de gabinetes y lavado a presión.",
     "descriptionBold": "Licenciados, Asegurados y Limpieza Detallada Incluida.",
     "ctaFree": "PRESUPUESTO GRATIS",
-    "ctaCall": "Llamar Ahora",
     "carousel": [
       "Pintura de Gabinetes de Cocina",
       "Reparación Profesional de Paredes",
-      "Limpieza de Techos y Lavado a Presión",
-      "Limpieza Detallada Post-Trabajo"
+      "Limpieza de Techos y Lavado a Presión"
     ]
   },
 
@@ -70,12 +68,12 @@
   }
   },
 
-"serviceAreas": {
-    "primaryRegion": "ÁREAS DE SERVICIOS",
+ "serviceAreas": {
+    "primaryRegion": "Áreas de Servicio",
     "mainHub": "Orlando, FL",
     "locations": [
       {
-        "city": "Orlando",
+        "city": "Orlando FL",
         "strategic_zones": ["Lake Nona", "Baldwin Park", "Downtown Orlando", "Dr. Phillips"]
       },
       {
@@ -106,25 +104,29 @@
     "counties": ["Orange County", "Seminole County", "Osceola County", "Lake County"]
   },
 
-"servicesdetails": {
+ "servicesdetails": {
   "premium": "Experiencia de servicio premium",
-  "execution": "Proceso de ejecución",
+  "execution": "¿Que incluye el servicio?",
   "buttons1": "Solicitar estimado gratis",
   "exterior": {
     "title": "Pintura Exterior Profesional",
-    "titleHighlight": "La Armadura de tu Hogar",
+    "titleHighlight": "La armadura de tu hogar",
     "description": "No solo cambiamos el color de tu fachada; renovamos la protección de tu patrimonio. En una zona donde el sol intenso y la humedad de la tarde no perdonan, nuestra pintura exterior actúa como un escudo de alta tecnología. Devolvemos el valor de mercado a tu propiedad y el orgullo de llegar a casa, con acabados que resisten el paso del tiempo y realzan cada detalle arquitectónico bajo el sol de Orlando.",
     "steps": [
       {
-        "title": "Preparación con Pressure Washing Profesional",
+        "title": "Preparación con pressure washing profesional",
         "desc": "No pintamos sobre suciedad. Usamos hidrolavadoras de alta potencia para arrancar el moho, la polución y la pintura vieja. Es la única forma de garantizar que la nueva capa se fusione con la pared para siempre."
       },
       {
-        "title": "Sellado Antihumedad y Protección UV",
+        "title": "Soffits y rejillas",
         "desc": "Identificamos cada grieta por donde el agua pueda filtrarse. Sellamos puntos críticos, cuidamos los Soffits (rejillas de ventilación) y aplicamos bases que bloquean los rayos ultravioleta, evitando que el color pierda vida con los años."
       },
       {
-        "title": "Detalle y Estética Multi-color",
+        "title": "Sellado anti-humedad",
+        "desc": "Aplicamos la pintura con precisión quirúrgica. Desde las paredes principales hasta los marcos de ventanas y puertas, gestionamos combinaciones de colores que resaltan la personalidad de tu hogar con una limpieza visual absoluta."
+      },
+       {
+        "title": "Protección ultra violeta(UV)",
         "desc": "Aplicamos la pintura con precisión quirúrgica. Desde las paredes principales hasta los marcos de ventanas y puertas, gestionamos combinaciones de colores que resaltan la personalidad de tu hogar con una limpieza visual absoluta."
       }
     ]
@@ -132,39 +134,43 @@
 
   "interior": {
     "title": "Transformación de Interiores",
-    "titleHighlight": "El Arte de Vivir Bien",
+    "titleHighlight": "El arte de vivir bien",
     "description": "El interior de tu casa es donde ocurre la vida. Por eso, nuestro servicio de pintura interior es una experiencia de cuidado y detalle extremo. Entendemos que estamos trabajando en tu espacio privado; nos movemos con respeto, trabajamos con limpieza y entregamos paredes tan perfectas que parecen seda. No se trata de cubrir paredes, se trata de crear la atmósfera perfecta para tu familia.",
     "steps": [
       {
-        "title": "Restauración Invisible (Drywall & Plaster)",
+        "title": "Paredes y techos",
         "desc": "Antes de la pintura, viene la perfección. Reparamos huellas de TV Mounts, grietas de asentamiento o daños en molduras. Aplicamos plaster y un lijado profesional que deja la superficie totalmente plana y lista para el color."
       },
       {
-        "title": "Protección y Ética de Trabajo",
-        "desc": "Tus suelos, muebles y arte son sagrados. Cubrimos cada centímetro con plástico y cinta de precisión. Pintamos con rapidez pero sin prisas, asegurando que el único rastro sea un color impecable."
+        "title": "Restauración invisible (Drywall & Plaster)",
+        "desc": "Antes de la pintura, viene la perfección. Reparamos huellas de TV Mounts, grietas de asentamiento o daños en molduras. Aplicamos plaster y un lijado profesional que deja la superficie totalmente plana y lista para el color."
       },
       {
-        "title": "Acabados de Lujo en Paredes, Techos y Baseboards",
+        "title": "Baseboards y molduras",
         "desc": "Somos expertos en cortes limpios. Pintamos techos con blanco puro y rodapiés con esmaltes de alta resistencia. Si buscas un diseño multi-color personalizado, ejecutamos la transición con precisión profesional."
+      },
+      {
+        "title": "Protección y limpieza final",
+        "desc": "Tus suelos, muebles y arte son sagrados. Cubrimos cada centímetro con plástico y cinta de precisión. Pintamos con rapidez pero sin prisas, asegurando que el único rastro sea un color impecable."
       }
     ]
   },
 
   "pressure": {
-    "title": "Lavado a Presión Pro",
-    "titleHighlight": "El Renacer de tus Superficies",
+    "title": "Lavado a Presión Profesional",
+    "titleHighlight": "El renacer de tus superficies",
     "description": "El moho y la suciedad acumulada no solo se ven mal, también dañan tus materiales. Nuestro servicio de Pressure Washing es un tratamiento revitalizante para las áreas exteriores. Desde el concreto hasta los techos modernos, devolvemos el brillo original a tu inversión y mejoramos instantáneamente el curb appeal de tu propiedad en Florida Central.",
     "steps": [
       {
-        "title": "Driveways y Concreto de Alto Tráfico",
+        "title": "Driveways y concreto de alto tráfico",
         "desc": "Eliminamos manchas de aceite, marcas de neumáticos y moho del concreto, dejando tu entrada completamente limpia y lista para recibir visitas."
       },
       {
-        "title": "Soft Wash para Techos Modernos",
+        "title": "Soft wash para techos modernos",
         "desc": "Usamos químicos biodegradables y baja presión para eliminar el hongo de raíz sin dañar techos metálicos o delicados."
       },
       {
-        "title": "Áreas de Piscina y Recreación",
+        "title": "Áreas de piscina y recreación",
         "desc": "Limpiamos profundamente los alrededores de piscinas y aceras, creando un entorno higiénico y seguro para disfrutar del exterior."
       }
     ]
@@ -172,32 +178,34 @@
 
   "repair": {
     "title": "Reparación de Superficies",
-    "titleHighlight": "La Base de la Excelencia",
+    "titleHighlight": "La base de la execelencia",
     "description": "Nada arruina más un trabajo de pintura que una base mal preparada. Somos especialistas en restauración de superficies dañadas. Ya sea madera podrida, yeso deteriorado o paredes castigadas por el tiempo, devolvemos la solidez estructural antes de aplicar cualquier acabado.",
     "steps": [
       {
-        "title": "Diagnóstico y Sustitución",
+        "title": "Restauración de madera",
         "desc": "Detectamos madera dañada o drywall comprometido. Si está podrido, lo reemplazamos; si está suelto, lo fijamos con solidez estructural."
       },
       {
-        "title": "Lijado y Pulido Profesional",
+        "title": "Lijado y pulido profesional",
         "desc": "Usamos herramientas avanzadas para lograr superficies totalmente lisas. El objetivo es un acabado invisible que no deje rastro de reparación."
       },
       {
-        "title": "Sellado de Preparación",
+        "title": "Sellado de preparación",
+        "desc": "Sellamos cada reparación para asegurar absorción uniforme de pintura, evitando manchas o diferencias de brillo en el resultado final."
+      },
+       {
+        "title": "Acabados invisibles",
         "desc": "Sellamos cada reparación para asegurar absorción uniforme de pintura, evitando manchas o diferencias de brillo en el resultado final."
       }
     ]
   }
   },
 
-  "gallery": {
-    "after": "Antes",
-    "before": "Después",  
+ "gallery": {
     "title": "Proyectos reales:",
     "titleHighlight": "la excelencia en cada detalle",
     "subtitle": "Explore nuestra selección de transformaciones recientes. Cada proyecto es un testimonio de nuestra atención al detalle, mostrando cómo una aplicación técnica correcta puede revitalizar por completo la arquitectura de una residencia o local comercial en Orlando y sus alrededores.",
-    "filters": {
+    "filters": {  
       "all": "Todos",
       "interior": "Interiores",
       "exterior": "Exteriores",
@@ -206,63 +214,10 @@
       "deck": "Decks",
       "pressure": "Lavado Pro"
     },
-  
-    "viewAll": "Ver Todas",
-
-    "projects": {
-      "1": {
-        "title": "Repintado Exterior de Estuco",
-        "location": "Orlando",
-        "service": "exterior",
-        "description": "Reparación de grietas y aplicación de pintura acrílica resistente a los rayos UV y humedad."
-      },
-      "2": {
-        "title": "Renovación de Interiores y Rodapiés",
-        "location": "Winter Park",
-        "service": "interior",
-        "description": "Pintura de paredes, techos y molduras con acabado mate lavable ideal para familias."
-      },
-      "3": {
-        "title": "Restauración y Sellado de Deck",
-        "location": "Lake Nona",
-        "service": "deck",
-        "description": "Lavado profundo, lijado de madera exterior y aplicación de tinte protector semi-transparente."
-      },
-      "4": {
-        "title": "Repintado de Fachada Comercial",
-        "location": "Kissimmee",
-        "service": "commercial",
-        "description": "Aplicación de pintura elastomérica de alto tráfico. Trabajo realizado fuera de horario para no afectar al negocio."
-      },
-      "5": {
-        "title": "Transformación de Gabinetes de Cocina",
-        "location": "Windermere",
-        "service": "cabinet",
-        "description": "Preparación intensiva y pintura de gabinetes con esmalte de poliuretano para un acabado liso de fábrica."
-      },
-      "6": {
-        "title": "Pintura Exterior Aprobada por HOA",
-        "location": "Dr. Phillips",
-        "service": "exterior",
-        "description": "Cambio de paleta de colores cumpliendo con los estándares de la asociación de propietarios, incluyendo puertas y garaje."
-      },
-      "7": {
-        "title": "Remoción de Popcorn y Pintura",
-        "location": "Altamonte Springs",
-        "service": "interior",
-        "description": "Eliminación de textura antigua en techos (popcorn ceiling), alisado completo y aplicación de pintura fresca."
-      },
-      "8": {
-        "title": "Lavado a Presión de Entradas (Driveways)",
-        "location": "Hunters Creek",
-        "service": "pressure",
-        "description": "Eliminación profunda de moho, aceite y suciedad incrustada en aceras y calzadas de concreto."
-      }
-
-    }
+    "viewAll": "Ver Todas"
   },
 
-  "reviews": {
+ "reviews": {
     "title": "Nuestra reputación",
     "titleHighlight": "construida por clientes satisfechos",
     "subtitle": "La satisfacción de quienes ya confiaron en nosotros es nuestro mayor activo. Descubra las experiencias reales de propietarios que han transformado sus hogares con nuestra ayuda y comprenda por qué somos la opción preferida por calidad de servicio y atención personalizada.",
@@ -270,8 +225,8 @@
       "status": "Estado Verificado",
       "label": "VERIFICADO",
       "basedOn": "Basado en",
-      "count": "150+ reseñas",
-      "location": "Florida Central",
+      "count": "40+ reseñas",
+      "location": "Orlando FL",
       "viewAll": "Ver todas las reseñas en Google"
     },
     "sectionLabel": "Section Reviews",
@@ -324,7 +279,7 @@
     ]
   },
 
-"whyChoose": {
+ "whyChoose": {
   "core_value_proposition": {
     "hook": "La Calidad que su Hogar Merece, a un precio que hace sentido.",
     "description": "Con más de 3 años transformando propiedades en Florida no solo aplicamos color; garantizamos durabilidad a través de una metodología rigurosa y el uso exclusivo de materiales premium. Nuestra trayectoria en el mercado local se basa en la puntualidad, la limpieza absoluta y un estándar de calidad que supera las expectativas de los propietarios más exigentes.",
@@ -372,44 +327,10 @@
         "benefit": "Un canal abierto y directo. Sin operadoras automáticas ni esperas de días; soporte humano real cuando usted lo necesite."
       }
     ]
-      
-    },
-    "service_portfolio": [
-      "Exterior Painting",
-      "Interior Painting",
-      "Commercial Painting",
-      "Pressure Washing",
-      "Deck Staining"
-    ],
-    "conversion_triggers": {
-      "pricing_range": {
-        "min": 2000,
-        "max": 10000,
-        "average": 6000,
-        "currency": "USD"
-      },
-      "social_proof": {
-        "platform": "TikTok",
-        "user": "luisenriquecardenas86",
-        "content_type": "Reels de procesos reales y resultados"
-      },
-      "primary_cta": "Solicitar Estimado Gratis",
-      "contact_primary": "(786) 350-6367",
-      "contact_secondary": "(786) 956-3550"
-    },
-    "marketing_narrative": {
-      "problem": "El mercado de pintura en Florida está inflado por burocracia y sobrecostos innecesarios.",
-      "solution": "LuisBety Inc ofrece un modelo directo, ágil y de alta gama para el propietario que busca valor real sobre el marketing inflado.",
-      "seo_keywords": [
-        "pintores económicos orlando",
-        "best price painting florida",
-        "luisbety inc painting reviews",
-        "pintura residencial longwood fl"
-      ]
     }
   },
 
-  "contact": {
+ "contact": {
     "errors": {
       "name": "El nombre es muy corto",
       "phone": "Número de teléfono no válido",
@@ -506,7 +427,6 @@
     "success": {
       "title": "¡Solicitud Recibida!",
       "message": "Gracias por confiar en nuestra compañía. Tu solicitud está siendo evaluada por nuestro equipo técnico. En breve recibirás un correo electrónico confirmando si tu proyecto ha sido aprobado o si requerimos más detalles.",
-      "call_btn": "Llamar Directamente",
       "close": "Volver al inicio"
     },
     "buttons": {
@@ -518,7 +438,7 @@
     }
   },
 
-  "footer": {
+ "footer": {
     "description": "Pintores profesionales en Florida Central. Especialistas en acabados residenciales y comerciales de alta gama. Licenciados y asegurados para su total tranquilidad.",
     "services": {
       "title": "Servicios Principales",
@@ -532,14 +452,14 @@
     "areas": {
       "title": "Áreas de Servicio",
       "items": [
-        "Pintores en Longwood",
-        "Pintura en Orlando",
+        "Orlando FL",
+        "Winter Garden",
         "Winter Park",
         "Windermere",
         "Kissimmee",
-        "Lake Nona"
-      ],
-      "all": "Sirviendo a toda Florida Central"
+        "Clermont",
+        "Lake Mary"
+      ]
     },
     "contact": {
       "title": "Contáctanos",
@@ -547,7 +467,6 @@
       "phone_href": "tel:+17863506367",
       "email": "contact@luisbety.com",
       "address": "2381 Westwood Dr, Longwood, FL 32779",
-      "hours_label": "Horarios de atención",
       "hours": "Lun-Vie: 9AM - 5PM | Sáb: 9AM - 2PM"
     },
     "socials": {
