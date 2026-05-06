@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { X, Phone, Send, CheckCircle2, ArrowRight } from "lucide-react";
+import React, { useEffect, useRef } from "react";
+import { X, Phone, CheckCircle2, ArrowRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
@@ -11,20 +11,31 @@ interface ServiceDetailProps {
   isOpen: boolean;
   onClose: () => void;
   serviceData: any;
+  onOpenContact: () => void;
 }
 
 const ServiceDetail: React.FC<ServiceDetailProps> = ({
   isOpen,
   onClose,
   serviceData,
+  onOpenContact,
 }) => {
   const pathname = usePathname();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
   const { handlePhoneClick } = useSmartLink();
   const luisPhone = "+1 (786) 350-6367";
-  const [isContactOpen, setIsContactOpen] = useState(false);
 
+  const handleEstimateClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    onClose();
+
+    requestAnimationFrame(() => {
+      onOpenContact();
+    });
+  };
 
   useEffect(() => {
     if (isOpen && scrollRef.current) {
@@ -53,13 +64,11 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
       ref={scrollRef}
       className="fixed inset-0 z-[100] bg-white overflow-y-auto antialiased animate-in fade-in duration-500"
     >
-      {/* Header forzado a sólido para que el contenido pase por debajo */}
       <Header forceSolid />
 
       <div className="px-6 pb-28 pt-28 md:pt-36 lg:px-24">
         <div className="mx-auto max-w-[1440px] relative">
           
-          {/* --- BOTÓN CERRAR (STICKY: SE QUEDA AL DESLIZAR) --- */}
           <div className="sticky top-[70px] md:top-[90px] z-[120] flex justify-end md:mb-1 pointer-events-none">
             <button
               onClick={onClose}
@@ -72,10 +81,8 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
             </button>
           </div>
 
-          {/* --- BLOQUE SUPERIOR: TÍTULO E IMAGEN --- */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 items-start max-w-6xl -mt-16 md:mt-14">
             <div>
-
               <h1 className="font-display text-3xl md:text-5xl font-bold uppercase tracking-tight text-slate-950 leading-[0.9]">
                 {serviceData.title}
               </h1>
@@ -91,7 +98,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
               </p>
             </div>
 
-            {/* Imagen decorativa en PC */}
             <div className="hidden md:flex justify-end md:translate-x-32 md:-mt-8">
               <div className="relative group flex justify-end">
                 <div className="absolute -inset-6 bg-primary-600/10 blur-3xl rounded-[2.5rem]" />
@@ -109,7 +115,6 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
             </div>
           </div>
 
-          {/* --- SECCIÓN DE EJECUCIÓN (STEPS) --- */}
           <div className="mt-20 md:mt-32 max-w-6xl mx-auto">
             <div className="mb-10 md:mb-20 flex items-center gap-6">
               <div className="shrink-0">
@@ -157,31 +162,27 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
             </div>
           </div>
           
-          {/* --- BOTONES INFERIORES DE ACCIÓN --- */}
           <div className="mt-16 md:mt-28 border-t pt-10 md:pt-14 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
-            
             <button
-                       onClick={() => setIsContactOpen(true)}
-                       className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl shadow-slate-200 active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:rounded-xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px]"
-                     >
-                       <span className="absolute inset-0 w-0 bg-primary-600 transition-all duration-500 ease-out group-hover:w-full" />
-                       <span className="relative z-10 flex items-center gap-3">
-                         {t("hero.ctaFree")}
-                         <ArrowRight className="md:text-lg transition-transform group-hover:translate-x-2" />
-                       </span>
-                     </button>
+              onClick={handleEstimateClick}
+              className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:rounded-xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px]"
+            >
+              <span className="absolute inset-0 w-0 bg-primary-600 transition-all duration-500 ease-out group-hover:w-full" />
+              <span className="relative z-10 flex items-center gap-3">
+                {t("hero.ctaFree")}
+                <ArrowRight className="md:text-lg transition-transform group-hover:translate-x-2" />
+              </span>
+            </button>
 
-            {/* Botón Teléfono */}
-           <a
-                      href={`tel:${luisPhone.replace(/\D/g, "")}`}
-                      onClick={handlePhoneClick(luisPhone)}
-                      className="inline-flex items-center justify-center gap-4 bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-xl  hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
-                    >
-                      <Phone className="w-4 h-4" />
-                      <span>{luisPhone}</span>
-                    </a>
+            <a
+              href={`tel:${luisPhone.replace(/\D/g, "")}`}
+              onClick={handlePhoneClick(luisPhone)}
+              className="inline-flex items-center justify-center gap-4 bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-xl hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
+            >
+              <Phone className="w-4 h-4" />
+              <span>{luisPhone}</span>
+            </a>
           </div>
-
         </div>
       </div>
     </div>

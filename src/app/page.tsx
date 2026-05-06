@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -7,6 +8,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import Services from "@/components/Services";
 import Reviews from "@/components/Reviews";
 import Footer from "@/components/Footer";
+import ContactForm from "@/components/ContactForm";
 
 const BeforeAfterGallery = dynamic(() => import("@/components/BeforeAfterGallery"), {
   ssr: false,
@@ -22,15 +24,31 @@ const BeforeAfterGallery = dynamic(() => import("@/components/BeforeAfterGallery
 });
 
 export default function Home() {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
+  const handleOpenContact = useCallback(() => {
+    setIsContactOpen(true);
+  }, []);
+
+  const handleCloseContact = useCallback(() => {
+    setIsContactOpen(false);
+  }, []);
+
   return (
+    <>
     <main className="min-h-screen">
       <Header />
-      <Hero />
-      <Services />
+      <Hero onOpenContact={handleOpenContact} />
+      <Services onOpenContact={handleOpenContact} />
       <BeforeAfterGallery />
       <Reviews />
-      <WhyChooseUs />
+      <WhyChooseUs onOpenContact={handleOpenContact} />
       <Footer />
     </main>
+       <ContactForm 
+        isOpen={isContactOpen} 
+        onClose={handleCloseContact} 
+      />
+      </>
   );
 }

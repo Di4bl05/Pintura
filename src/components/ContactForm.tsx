@@ -231,6 +231,7 @@ const handleSubmit = async () => {
   if (!isOpen) return null;
 
 return (
+ 
   <div className="fixed inset-0 z-[40] bg-white overflow-hidden antialiased flex flex-col">
     
     <div className="absolute top-24 left-0 w-full flex justify-center z-50 pointer-events-none px-8">
@@ -284,6 +285,7 @@ return (
   <div className="flex h-full w-full pt-32 bg-white justify-center items-center overflow-y-auto">
    <div className="w-full flex flex-col items-center">
      <div className="w-full animate-in slide-in-from-left-6 duration-700 flex flex-col justify-center items-center">
+      
 
 {step === 1 && (
   

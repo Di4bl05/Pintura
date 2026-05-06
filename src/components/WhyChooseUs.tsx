@@ -6,14 +6,16 @@ import {
   ArrowRight 
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
-import ContactForm from "@/components/ContactForm";
+import { useMemo } from "react";
 import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 import { useSmartLink } from "@/hooks/useSmartLink";
 
-export default function WhyChooseClean() {
+interface WhyChooseProps {
+  onOpenContact: () => void;
+}
+
+export default function WhyChooseClean({ onOpenContact }: WhyChooseProps) {
   const { t } = useLanguage();
-  const [isContactOpen, setIsContactOpen] = useState(false);
   const { handlePhoneClick } = useSmartLink();
   const luisPhone = "+1 (786) 350-6367";
 
@@ -28,8 +30,11 @@ export default function WhyChooseClean() {
   };
 
   const differences = ((t as any)("whyChoose.core_value_proposition.the_difference", { returnObjects: true }) as any[]) || [];
-  const leftCol = differences.slice(0, 4);
-  const rightCol = differences.slice(4);
+  
+  const { leftCol, rightCol } = useMemo(() => ({
+    leftCol: differences.slice(0, 4),
+    rightCol: differences.slice(4)
+  }), [differences]);
 
   const hookText = t("whyChoose.core_value_proposition.hook") || "Resultados de Élite, Precios de Realidad";
   const [hookMain, hookItalic] = hookText.includes(',') ? hookText.split(',') : [hookText, ""];
@@ -91,29 +96,33 @@ export default function WhyChooseClean() {
         </div>
 
         <div className="mt-20 flex flex-col gap-6 sm:flex-row justify-center items-center">
-          <button
-            onClick={() => setIsContactOpen(true)}
-            className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl shadow-slate-200 active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:rounded-xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px]"
-          >
-            <span className="absolute inset-0 w-0 bg-primary-600 transition-all duration-500 ease-out group-hover:w-full" />
-            <span className="relative z-10 flex items-center gap-3">
-              {t("hero.ctaFree")}
-              <ArrowRight className="md:text-lg transition-transform group-hover:translate-x-2" />
-            </span>
+        <button
+        type="button"
+        onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        requestAnimationFrame(() => {
+          onOpenContact();
+        });
+      }}
+      className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white transition-all duration-700 ease-in-out font-black uppercase tracking-[0.2em] shadow-xl hover:shadow-primary-600/20 active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:rounded-xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px]"
+      >
+        <span className="absolute inset-0 w-0 bg-primary-600 transition-all duration-500 ease-out group-hover:w-full" />
+        <span className="relative z-10 flex items-center gap-3">
+          {t("hero.ctaFree")}
+          <ArrowRight className="md:text-lg transition-transform duration-500 group-hover:translate-x-2" />
+          </span>
           </button>
-
           <a
             href={`tel:${luisPhone.replace(/\D/g, "")}`}
             onClick={handlePhoneClick(luisPhone)}
-            className="inline-flex items-center justify-center gap-4 bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-xl  hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
+            className="inline-flex items-center justify-center gap-4 bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-xl hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
           >
             <Phone className="w-4 h-4" />
             <span>{luisPhone}</span>
           </a>
         </div>
       </div>
-
-      <ContactForm isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </section>
   );
 }

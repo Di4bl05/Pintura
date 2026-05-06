@@ -87,7 +87,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                 src={logoUrl}
                 alt="LUISBETY INC"
                 className={`transition-all duration-500 object-contain ${
-                  isSolid ? "h-8 sm:h-10" : "h-10 sm:h-12 md:h-16"
+                  isSolid ? "h-8 sm:h-10" : "h-10 sm:h-12 md:h-14"
                 } w-auto`}
                 style={{ filter: "brightness(0) invert(1)" }}
               />
@@ -153,10 +153,10 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             <a
               href={`tel:${luisPhone.replace(/\D/g, "")}`}
               onClick={handlePhoneClick(luisPhone)}
-              className="font-sans group flex items-center -gap-1 rounded-xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-blue-500 hover:text-slate-100 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4"
+              className="font-sans group flex items-center gap-3 rounded-xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-blue-500 hover:text-slate-100 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4"
             >
               <Phone className="w-3 h-3" />
-              <span>{luisPhone}</span>
+              <span>(786) 350-6367</span>
             </a>
           </div>
 

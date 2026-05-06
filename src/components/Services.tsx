@@ -11,11 +11,16 @@ import { useRef, useState } from "react";
 import ServiceDetail from "./ServiceDetails";
 import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 
-export default function Services() {
+interface ServicesProps {
+  onOpenContact: () => void;
+}
+
+export default function Services({ onOpenContact }: ServicesProps) {
   const { t } = useLanguage();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedServiceData, setSelectedServiceData] = useState<any>(null);
+  
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -164,6 +169,7 @@ export default function Services() {
         isOpen={isDetailsOpen}
         onClose={() => setIsDetailsOpen(false)}
         serviceData={selectedServiceData}
+        onOpenContact={onOpenContact}
       />
 
       <style jsx global>{`
