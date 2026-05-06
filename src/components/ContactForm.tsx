@@ -298,7 +298,7 @@ return (
         <h1 className="font-display font-black text-4xl sm:text-4xl lg:text-5xl text-slate-950 leading-[0.95] uppercase tracking-tighter mb-9">
           {t("contact.header.title").split("preciso")[0]}
           <span className="text-primary-600 block">
-            preciso.
+            {t("cta.5")}
           </span>
         </h1>
         
@@ -486,8 +486,8 @@ return (
               errors.colors ? "border-red-500 bg-red-50/10" : "border-slate-100 hover:border-primary-600"
             }`}
           >
-            <span className={`font-sans font-medium text-[12px] transition-colors ${contactData.colors ? "text-slate-900" : "text-slate-400"}`}>
-              {contactData.colors || "Seleccionar..."}
+            <span className={`font-sans font-medium text-[12px] md:text-[14px] transition-colors ${contactData.colors ? "text-slate-900" : "text-slate-400"}`}>
+               {contactData.colors || t("cta.1")}
             </span>
             <ChevronDown size={14} className={`text-slate-400 transition-transform duration-500 ${openSelect === "colors" ? "rotate-180" : ""}`} />
           </div>
@@ -718,7 +718,7 @@ return (
         <p className="font-sans font-medium text-slate-400 text-[9px] uppercase tracking-widest text-left leading-tight">
           {contactData.upload?.length > 0 
             ? `${contactData.upload.length} fotos seleccionadas` 
-            : "Arrastra o haz clic aquí"}
+            : t("cta.2")}
         </p>
       </div>
     </div>
@@ -837,7 +837,7 @@ return (
             className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 flex items-center justify-between cursor-pointer group transition-all duration-300 hover:border-primary-600"
           >
             <span className={`font-sans font-medium text-[13px] transition-colors ${contactData.budget ? "text-slate-900" : "text-slate-400"}`}>
-              {contactData.budget || "Seleccionar rango..."}
+              {contactData.budget || t("cta.3")}
             </span>
 
             <ChevronDown
@@ -882,7 +882,7 @@ return (
             value={contactData.comments || ""}
             onChange={(e) => setContactData((prev: any) => ({ ...prev, comments: e.target.value }))}
             className="w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-[12px] lg:text-[13px] transition-all duration-500 !outline-none !ring-0 focus:border-primary-600 resize-none h-[70px] placeholder:text-slate-400 shadow-none appearance-none"
-            placeholder="¿Algo más que debamos saber?"
+            placeholder={t("cta.4")}
           />
         </div>
 
@@ -903,7 +903,7 @@ return (
               <span className="font-sans font-black text-[9px] lg:text-[10px]  uppercase tracking-widest text-slate-950 group-hover:text-yellow-400 transition-colors">
                 {t("contact.steps.step_4.fields.vip_label")}
               </span>
-              <p className="font-sans font-medium text-slate-500 text-[9px] lg:text-[10px] leading-relaxed uppercase tracking-tight">
+              <p className="font-sans font-medium text-slate-500 text-[12px] lg:text-[14px] leading-relaxed tracking-tight">
                 {t("contact.steps.step_4.fields.vip_text")}
               </p>
             </div>

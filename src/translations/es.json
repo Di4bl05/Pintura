@@ -476,5 +476,12 @@
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
     "licenseInfo": "Licensed & Insured"
+  },
+  "cta": {
+    "1":"Selecionar...",
+    "2":"Arrastra o has click aquí",
+    "3":"Selecionar rango...",
+    "4":"¿Algo más que debemos saber?",
+    "5":"Preciso"
   }
 }
