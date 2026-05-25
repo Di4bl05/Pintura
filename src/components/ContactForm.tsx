@@ -189,7 +189,7 @@ const handleSubmit = async () => {
   }
 };
 
-  const currentImage = getStaticGalleryImageUrl("exteriorAfter");
+  const currentImage = getStaticGalleryImageUrl("exteriorCTA");
   const [openSelect, setOpenSelect] = useState<string | null>(null);
 
   const colorOptions = React.useMemo(() => {

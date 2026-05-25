@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Phone, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState, useEffect, useCallback, useMemo, memo } from "react";
+import { useState, useEffect, useMemo, memo } from "react";
 import { getStaticGalleryImageUrl } from "@/lib/galleryImageSources";
 import { useSmartLink } from "@/hooks/useSmartLink";
 
@@ -72,30 +72,24 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
   const { handlePhoneClick } = useSmartLink();
   const [current, setCurrent] = useState(0);
   const [isAnimate, setIsAnimate] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
+  // Eliminamos el estado de JS para el resize, ahora el HTML se encarga nativamente de la responsividad
 
   const heroContent = useMemo(() => [
     {
       title: t("hero.carousel.0"),
-      imgDesktop: getStaticGalleryImageUrl("exteriorBefore"),
-      imgMobile: getStaticGalleryImageUrl("exteriorBefore"),
+      imgDesktop: getStaticGalleryImageUrl("cabinet"),
+      imgMobile: getStaticGalleryImageUrl("cabinet"), 
     },
     {
       title: t("hero.carousel.1"),
-      imgDesktop: getStaticGalleryImageUrl("exteriorAfter"),
-      imgMobile: getStaticGalleryImageUrl("exteriorAfter"),
+      imgDesktop: getStaticGalleryImageUrl("repair"),
+      imgMobile: getStaticGalleryImageUrl("repair"), 
     },
     {
       title: t("hero.carousel.2"),
-      imgDesktop: getStaticGalleryImageUrl("luisBety"),
-      imgMobile: getStaticGalleryImageUrl("luisBety"),
+      imgDesktop: getStaticGalleryImageUrl("pressure1"),
+      imgMobile: getStaticGalleryImageUrl("pressure1"),
     }
   ], [t]);
 
@@ -112,16 +106,21 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
 
   return (
     <section className="relative h-[100svh] min-h-[700px] flex items-center pt-0 md:pt-5 bg-slate-950 overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={isMobile ? heroContent[current].imgMobile : heroContent[current].imgDesktop}
-          alt="Hero background"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover brightness-[0.3] scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent" />
+      
+      {/* SECCIÓN DE FOTOS ADAPTADA AL ANCHO TOTAL Y SIN ZOOM CORRECTO */}
+      <div className="absolute inset-0 z-0 w-full h-full">
+        <picture className="w-full h-full">
+
+          {/* Si el cliente entra desde celular (pantalla menor a 768px), usa imgMobile instantáneamente */}
+          <source media="(max-width: 767px)" srcSet={heroContent[current].imgMobile} />
+          <img
+            src={heroContent[current].imgDesktop}
+            alt="Hero background"
+            loading="eager"
+            className="absolute inset-0 w-full h-full object-cover object-center brightness-[0.35] transition-opacity duration-700 ease-in-out"
+          />
+        </picture>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/30 to-transparent" />
       </div>
 
       <div className="relative z-20 w-full mt-12 md:mt-24">

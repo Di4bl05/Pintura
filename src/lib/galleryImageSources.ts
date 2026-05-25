@@ -5,11 +5,13 @@ const SUPABASE_GALLERY_BASE = process.env.NEXT_PUBLIC_SUPABASE_URL
   : "";
 
 const STATIC_GALLERY_FILENAMES = {
-  exteriorBefore: "exterior-antes.webp",
-  exteriorAfter: "exterior-despues.webp",
-  exterior2After: "exterior2-despues.webp",
-  pressureWash: "lavado-presion-pro.webp",
-  luisBety: "luis-y-bety.webp",
+  cabinet: "Gabinetes.png",
+  interior: "Interior.webp",
+  repair: "Superfice1.png",
+  pressure1: "Pressure.png",
+  exterior: "Exterior.png",
+  luisBety: "L.png",
+  exteriorCTA: "exteriorCTA.png"
 } as const;
 
 export type StaticGalleryImageKey = keyof typeof STATIC_GALLERY_FILENAMES;

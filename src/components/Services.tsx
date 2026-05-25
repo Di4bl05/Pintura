@@ -49,10 +49,10 @@ export default function Services({ onOpenContact }: ServicesProps) {
   };
 
   const services = [
-    { key: "exterior", img: getStaticGalleryImageUrl("exteriorAfter") },
-    { key: "interior", img: getStaticGalleryImageUrl("exteriorBefore") },
-    { key: "pressure", img: getStaticGalleryImageUrl("pressureWash") },
-    { key: "repair", img: getStaticGalleryImageUrl("exterior2After") },
+    { key: "exterior", img: getStaticGalleryImageUrl("exterior") },
+    { key: "interior", img: getStaticGalleryImageUrl("cabinet") },
+    { key: "pressure", img: getStaticGalleryImageUrl("pressure1") },
+    { key: "repair", img: getStaticGalleryImageUrl("repair") },
   ];
 
   // Extraemos datos del JSON de traducción
