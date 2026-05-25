@@ -324,7 +324,7 @@ export default function BeforeAfterGallery() {
                         <span className="font-sans text-[9px] font-bold uppercase tracking-widest text-white">{activeItem.location}</span>
                       </div>
                       <h3 className="font-display mb-3 text-4xl font-bold uppercase leading-none tracking-tighter text-white">{activeItem.title}</h3>
-                      <p className="max-w-lg font-sans text-[17px] text-slate-100 opacity-90 line-clamp-2">
+                      <p className="max-w-lg font-sans text-sm md:text-lg text-slate-100 opacity-90 line-clamp-2">
                         {activeItem.description}
                       </p>
                     </div>
@@ -376,7 +376,7 @@ export default function BeforeAfterGallery() {
         )}
 
         <div className="flex flex-col gap-6 border-t border-slate-100 pt-10 md:flex-row md:items-stretch">
-          <div ref={carouselRef} className="no-scrollbar scrollbar-hide snap-x flex flex-1 gap-4 overflow-x-auto pb-4">
+          <div ref={carouselRef} className="no-scrollbar scrollbar-hide snap-x flex flex-1 gap-4 overflow-x-auto pb-4 touch-action-pan-x">
             {filteredGallery.map((item) => (
               <button
                 key={item.id}
@@ -386,8 +386,8 @@ export default function BeforeAfterGallery() {
                   scrollToViewer();
                 }}
                 className={`relative snap-start overflow-hidden rounded-xl transition-all duration-500 flex-shrink-0 w-[140px] h-[100px] md:w-[260px] md:h-[200px] ${
-                  activeId === item.id ? "scale-95 border-primary-600 shadow-xl" : "border-transparent"
-                }`}
+                    activeId === item.id ? "scale-95 border-primary-600" : "border-transparent"
+                  }`}>
               >
                 <ResponsiveGalleryImage
                   desktopSrc={item.afterImageDesktop}
@@ -496,7 +496,7 @@ export default function BeforeAfterGallery() {
                       <h3 className="font-display text-[20px] font-bold uppercase tracking-tight text-slate-950 mb-2">
                         {item.title}
                       </h3>
-                      <p className="line-clamp-2 font-sans leading-relaxed text-slate-500 text-[14px] md:text-[16px]">
+                      <p className="line-clamp-2 font-sans leading-relaxed text-slate-500 text-sm md:text-lg">
                         {item.description}
                       </p>
                     </div>

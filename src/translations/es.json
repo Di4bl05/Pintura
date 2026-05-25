@@ -377,6 +377,9 @@
           "colors": "Cantidad de Colores",
           "paint_type": "Tipo de Pintura Específico (Opcional)"
         },
+        "placeholders": {
+          "paint_type": "Ej: Mate, Satinado..."
+        },
       "options": {
         "services": [
           { "id": "interior", "label": "Interior" },

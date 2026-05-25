@@ -83,14 +83,14 @@ export default function Services({ onOpenContact }: ServicesProps) {
         <div className="relative group/carousel mb-16 md:mb-24">
           <button
             onClick={() => scroll("left")}
-            className="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-40 w-14 h-14 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all shadow-xl active:scale-90"
+            className="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-40 w-14 h-14 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all active:scale-90"
           >
             <ChevronLeft className="w-8 h-8" />
           </button>
 
           <button
             onClick={() => scroll("right")}
-            className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-40 w-14 h-14 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all shadow-xl active:scale-90"
+            className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-40 w-14 h-14 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all active:scale-90"
           >
             <ChevronRight className="w-8 h-8" />
           </button>
@@ -103,7 +103,7 @@ export default function Services({ onOpenContact }: ServicesProps) {
               <div key={index} className="flex-none snap-center md:snap-start">
                 <div 
                   onClick={() => handleOpenDetails(service)}
-                  className="group/card relative flex-shrink-0 w-[80vw] aspect-[3/4] md:w-[450px] md:h-[600px] overflow-hidden rounded-[2rem] md:rounded-[3rem] cursor-pointer shadow-2xl transition-all duration-700 select-none"
+                  className="group/card relative flex-shrink-0 w-[80vw] aspect-[3/4] md:w-[450px] md:h-[600px] overflow-hidden rounded-[2rem] md:rounded-[3rem] cursor-pointer transition-all duration-700 select-none"
                 >
                   <Image
                     src={service.img}
@@ -144,9 +144,9 @@ export default function Services({ onOpenContact }: ServicesProps) {
               </h4>
       <div className="flex flex-col items-start justify-start gap-y-2">
         {loc.strategic_zones?.map((zone: string, zIdx: number) => (
-          <span 
+            <span 
             key={zIdx} 
-            className="font-sans text-sm lg:text-[15px] text-slate-500 font-medium leading-tight hover:text-primary-600 transition-colors cursor-default"
+            className="font-sans text-sm md:text-lg text-slate-500 font-medium leading-tight hover:text-primary-600 transition-colors cursor-default"
           >
             {zone}
           </span>
