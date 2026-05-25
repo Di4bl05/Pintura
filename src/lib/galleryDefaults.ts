@@ -47,18 +47,18 @@ const serviceCopy = {
 
 const getImageSrc = (id: number, side: "antes" | "despues", size: "600" | "1600") => {
   if (side === "antes") {
-    return getStaticGalleryImageUrl("exteriorBefore");
+    return getStaticGalleryImageUrl("exterior");
   }
 
   if (size === "600") {
-    return getStaticGalleryImageUrl("pressureWash");
+    return getStaticGalleryImageUrl("pressure1");
   }
 
   if (id % 3 === 0) {
     return getStaticGalleryImageUrl("luisBety");
   }
 
-  return id % 2 === 0 ? getStaticGalleryImageUrl("exterior2After") : getStaticGalleryImageUrl("exteriorAfter");
+  return id % 2 === 0 ? getStaticGalleryImageUrl("exterior") : getStaticGalleryImageUrl("exterior");
 };
 
 export function getFallbackGalleryProjects(): GalleryProject[] {

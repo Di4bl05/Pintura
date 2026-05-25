@@ -388,7 +388,6 @@ export default function BeforeAfterGallery() {
                 className={`relative snap-start overflow-hidden rounded-xl transition-all duration-500 flex-shrink-0 w-[140px] h-[100px] md:w-[260px] md:h-[200px] ${
                     activeId === item.id ? "scale-95 border-primary-600" : "border-transparent"
                   }`}>
-              >
                 <ResponsiveGalleryImage
                   desktopSrc={item.afterImageDesktop}
                   mobileSrc={item.afterImageMobile}

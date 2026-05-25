@@ -8,10 +8,10 @@ export type ServiceSlug = (typeof SERVICE_SLUGS)[number];
 export type ServiceLocale = "es" | "en";
 
 const SERVICE_IMAGES: Record<ServiceSlug, string> = {
-  exterior: getStaticGalleryImageUrl("exteriorAfter"),
-  interior: getStaticGalleryImageUrl("exteriorBefore"),
-  pressure: getStaticGalleryImageUrl("pressureWash"),
-  repair: getStaticGalleryImageUrl("exterior2After"),
+  exterior: getStaticGalleryImageUrl("exterior"),
+  interior: getStaticGalleryImageUrl("interior"),
+  pressure: getStaticGalleryImageUrl("pressure1"),
+  repair: getStaticGalleryImageUrl("repair"),
 };
 
 const SERVICE_FAQS_ES: Record<ServiceSlug, { question: string; answer: string }[]> = {
