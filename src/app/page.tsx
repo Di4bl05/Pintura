@@ -41,8 +41,8 @@ export default function Home() {
       <Hero onOpenContact={handleOpenContact} />
       <Services onOpenContact={handleOpenContact} />
       <BeforeAfterGallery />
-      <WhyChooseUs onOpenContact={handleOpenContact} />
       <Reviews />
+      <WhyChooseUs onOpenContact={handleOpenContact} />
       <Footer />
     </main>
        <ContactForm 

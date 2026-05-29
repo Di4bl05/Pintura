@@ -242,14 +242,11 @@ export default function BeforeAfterGallery() {
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 text-left lg:px-16">
         <div className="mb-16 max-w-5xl md:mb-24">
           <h2 className="flex flex-col gap-1 mb-6 md:mb-8">
-            <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase leading-[0.95] tracking-tight">
+            <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 leading-[0.95] tracking-tight">
               {t("gallery.title") || (language === "es" ? "Resultados" : "Results")}
             </span>
-            <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-5xl italic text-primary-600 leading-none">
-              {t("gallery.titleHighlight") || (language === "es" ? "impecables" : "impeccable")}
-            </span>
           </h2>
-          <p className="font-sans text-sm lg:text-lg text-slate-600 font-medium leading-relaxed max-w-full opacity-90">
+          <p className="font-sans text-sm lg:text-lg text-slate-600 max-w-full">
             {t("gallery.subtitle") ||
               (language === "es"
                 ? "Explora nuestras transformaciones recientes con imagenes optimizadas para movil y escritorio."
@@ -365,10 +362,10 @@ export default function BeforeAfterGallery() {
                   <span className="font-sans text-[9px] uppercase tracking-widest">{activeItem.location}</span>
                 </div>
               </div>
-              <h3 className="font-display text-[25px] font-bold uppercase tracking-tighter text-slate-950">
+              <h3 className="font-display text-[25px] font-bold tracking-tighter text-slate-950">
                 {activeItem.title}
               </h3>
-              <p className="font-sans text-sm leading-relaxed text-slate-500">
+              <p className="font-sans text-sm lg:text-lg text-slate-600 max-w-full">
                 {activeItem.description}
               </p>
             </div>
@@ -424,7 +421,7 @@ export default function BeforeAfterGallery() {
                 setFilter(f);
                 setComparePosition(50);
               }}
-              className={`group relative overflow-hidden rounded-xl border px-4 py-3 md:px-8 md:py-4 text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all duration-500 ${
+              className={`group relative overflow-hidden rounded-xl border px-4 py-3 md:px-8 md:py-4 text-[9px] md:text-[10px] font-sans uppercas e tracking-widest transition-all duration-500 ${
                 filter === f
                   ? "border-primary-600 bg-primary-600 text-white shadow-xl"
                   : "border-slate-100 bg-white text-slate-500 hover:text-white"
