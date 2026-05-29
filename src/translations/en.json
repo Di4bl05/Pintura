@@ -376,6 +376,9 @@
           "colors": "Number of Colors",
           "paint_type": "Specific Paint Type (Optional)"
         },
+          "placeholders": {
+            "paint_type": "Eg: Matte, Satin..."
+          },
       "options": {
         "services": [
           { "id": "interior", "label": "Interior" },

@@ -402,7 +402,7 @@ return (
                 field === "phone" ? "Ej: +1 407 123 4567" :
                 field === "address" ? "Ej: 123 Main St, Orlando" : ""
               }
-              className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-[12px] lg:text-[15px] placeholder:text-slate-400 transition-all duration-500 ease-in-out outline-none ring-0 focus:ring-0 focus:outline-none ${
+              className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-base lg:text-[15px] placeholder:text-slate-400 transition-all duration-500 ease-in-out outline-none ring-0 focus:ring-0 focus:outline-none ${
                 errors[field] ? "border-red-500" : "border-slate-100 focus:border-primary-600"
               } ${
                 field === "date" 
@@ -598,10 +598,11 @@ return (
               setContactData((prev: any) => ({ ...prev, paint_type: e.target.value }));
               if (errors.paint_type) setErrors((prev: any) => ({ ...prev, paint_type: null }));
             }}
-            placeholder="Ej: Mate, Satinado..."
-            className={`w-full p-2.5 bg-transparent border-b-2 font-sans font-medium text-slate-900 text-[12px] lg:text-[15px] outline-none focus:border-primary-600 appearance-none shadow-none transition-all ${
+            placeholder={t("contact.steps.step_2.placeholders.paint_type") || "Ej: Mate, Satinado..."}
+            className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-base lg:text-[15px] placeholder:text-slate-400 transition-all duration-500 ease-in-out outline-none ring-0 focus:ring-0 focus:outline-none focus:border-primary-600 no-underline ${
               errors.paint_type ? "border-red-500" : "border-slate-100"
             }`}
+            style={{ WebkitTapHighlightColor: 'transparent' }}
           />
           {errors.paint_type && <p className="text-[10px] text-red-500 font-black uppercase pt-1 pl-1">{errors.paint_type}</p>}
         </div>
@@ -660,7 +661,7 @@ return (
               if (errors.status) setErrors((prevErr: any) => ({ ...prevErr, status: null }));
             }}
             placeholder={t("contact.steps.step_3.placeholders.status")}
-            className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-[12px] lg:text-[15px] transition-all duration-500 !outline-none !ring-0 resize-none h-[60px] placeholder:text-slate-400 ${
+            className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-base lg:text-[15px] transition-all duration-500 !outline-none !ring-0 resize-none h-[60px] placeholder:text-slate-400 ${
               errors.status ? "border-red-500" : "border-slate-100 focus:border-primary-600"
             }`}
           />
@@ -774,7 +775,7 @@ return (
             value={contactData.special || ""}
             onChange={(e) => setContactData((prev: any) => ({ ...prev, special: e.target.value }))}
             placeholder={t("contact.steps.step_3.placeholders.special")}
-            className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-[12px] lg:text-[15px] outline-none focus:outline-none focus:ring-0 focus:border-primary-600"
+            className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-base lg:text-[15px] outline-none focus:outline-none focus:ring-0 focus:border-primary-600"
           />
         </div>
       </div>

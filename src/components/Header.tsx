@@ -20,10 +20,14 @@ export default function Header({ forceSolid = false }: HeaderProps) {
   const luisPhone = "+1 (786) 350-6367";
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 20);
+      if (isMenuOpen && y > 20) setIsMenuOpen(false);
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMenuOpen]);
 
   useEffect(() => {
     const handleOverlayState = (event: Event) => {
