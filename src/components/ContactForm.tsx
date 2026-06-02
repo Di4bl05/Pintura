@@ -145,16 +145,13 @@ const submitForm = async (data: any) => {
     // Como data.upload es un Array de Files, los recorremos uno por uno
     if (Array.isArray(data.upload)) {
       data.upload.forEach((file: File) => {
-        // IMPORTANTE: La llave debe ser 'files' (en plural) para que el Router 
-        // use formData.getAll("files") y pesque todas las fotos
         formData.append('files', file);
       });
     }
 
-    // 4. Enviamos la petición
     const res = await fetch("/api/send", {
       method: "POST",
-      body: formData, // El navegador configura el Content-Type: multipart/form-data automáticamente
+      body: formData, 
     });
 
     const result = await res.json();
@@ -173,18 +170,11 @@ const submitForm = async (data: any) => {
 };
 
 const handleSubmit = async () => {
-  // Ejecutamos el envío
   const success = await submitForm(contactData);
-
   if (success) {
-    // Solo si el servidor respondió ok, pasamos al mensaje de éxito
     setStep(6);
-    
-    // Opcional: Podrías hacer un scroll hacia arriba para que el mensaje de éxito se vea bien
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
-    // Si falló, el error ya se guarda en setErrors dentro de submitForm
-    // podrías mostrar un toast o alert aquí
     alert("Hubo un problema al enviar. Por favor revisa los campos.");
   }
 };
@@ -302,7 +292,7 @@ return (
           </span>
         </h1>
         
-        <p className="font-sans text-sm lg:text-lg font-medium text-slate-600 leading-relaxed mb-8 md:mb-10">
+        <p className="font-sans text-sm lg:text-lg text-slate-600  mb-8 md:mb-10">
           {t("contact.header.description")}
         </p>
 
@@ -365,9 +355,12 @@ return (
 
 {step === 2 && (
   <div className="w-full h-full flex flex-col items-center justify-center bg-transparent px-6 animate-in slide-in-from-bottom-6 duration-700">
+
+{/* Niebla Superior Adaptativa */}
+    <div className="fixed top-[65px] left-0 w-full h-24 lg:h-28 bg-gradient-to-b from-white via-white to-transparent z-[40] pointer-events-none" />
+
     <div className="w-full max-w-[800px] flex flex-col items-center">
       
-      {/* Título: oculto en móvil y visible en PC */}
       <div className="text-center mb-10 hidden lg:block">
         <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
           {t("contact.steps.step_1.title")}
@@ -541,7 +534,7 @@ return (
           }}
           className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600 focus:ring-0"
         />
-        <span className="font-sans font-bold text-[10px] lg:text-[11px] text-slate-400 uppercase tracking-tight group-hover:text-slate-600 transition-colors">
+        <span className="font-sans text-[10px] lg:text-[11px] text-slate-600 uppercase tracking-tight group-hover:text-slate-600 transition-colors">
           {service.label}
         </span>
       </label>
@@ -582,7 +575,7 @@ return (
                       }}
                       className="w-4 h-4 rounded border-slate-300 text-primary-600 accent-primary-600 focus:ring-0 transition-all group-hover:scale-110"
                     />
-                    <span className="font-sans font-bold text-slate-400 text-[10px] lg:text-[11px] uppercase tracking-tight transition-colors group-hover:text-slate-600">
+                    <span className="font-sans text-slate-600 text-[10px] lg:text-[11px] uppercase tracking-tight transition-colors group-hover:text-slate-600">
                       {service}
                     </span>
                   </label>
@@ -837,7 +830,7 @@ return (
             onClick={() => setOpenSelect(openSelect === "budget" ? null : "budget")}
             className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 flex items-center justify-between cursor-pointer group transition-all duration-300 hover:border-primary-600"
           >
-            <span className={`font-sans font-medium text-[13px] transition-colors ${contactData.budget ? "text-slate-900" : "text-slate-400"}`}>
+            <span className={`font-sans font-medium text-[12px] lg:text-[13px] transition-colors ${contactData.budget ? "text-slate-900" : "text-slate-400"}`}>
               {contactData.budget || t("cta.3")}
             </span>
 
@@ -904,7 +897,7 @@ return (
               <span className="font-sans font-black text-[9px] lg:text-[10px]  uppercase tracking-widest text-slate-950 group-hover:text-yellow-400 transition-colors">
                 {t("contact.steps.step_4.fields.vip_label")}
               </span>
-              <p className="font-sans font-medium text-slate-500 text-[12px] lg:text-[14px] leading-relaxed tracking-tight">
+              <p className="font-sans text-slate-500 text-[12px] lg:text-[14px]">
                 {t("contact.steps.step_4.fields.vip_text")}
               </p>
             </div>

@@ -59,14 +59,11 @@ export default function Reviews() {
           <div className="space-y-16 lg:space-y-24">
             <div className="max-w-4xl">
               <h2 className="flex flex-col gap-1 mb-6 md:mb-8">
-                <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase leading-[0.95] tracking-tight">
+                <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950  leading-[0.95] tracking-tight">
                   {t("reviews.title")}
                 </span>
-                <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-5xl italic text-primary-600 leading-none">
-                  {t("reviews.titleHighlight")}
-                </span>
               </h2>
-              <p className="font-sans text-sm lg:text-lg text-slate-600 font-medium leading-relaxed max-w-full opacity-90">
+              <p className="font-sans text-sm lg:text-lg text-slate-600 max-w-full">
                 {t("reviews.subtitle")}
               </p>
             </div>
@@ -81,7 +78,7 @@ export default function Reviews() {
                       </div>
                       <div className="flex-1">
                         <div className="flex flex-wrap items-center gap-3 mb-2">
-                          <h4 className="font-display font-bold text-[17px] md:text-xl text-slate-950 tracking-tight leading-none uppercase">
+                          <h4 className="font-display font-bold text-[16px] md:text-xl text-slate-950 tracking-tight leading-none ">
                             {review.author}
                           </h4>
                           <span className="font-sans flex items-center gap-2 text-[8px] font-black text-primary-600 bg-white px-3 py-1 rounded-full uppercase tracking-widest border border-primary-50 shadow-sm">
@@ -98,7 +95,7 @@ export default function Reviews() {
                         </div>
                       </div>
                     </div>
-                    <p className="font-sans text-sm md:text-lg text-slate-600 font-medium leading-relaxed">
+                    <p className="font-sans text-sm md:text-lg text-slate-600">
                       &ldquo;{review.text}&rdquo;
                     </p>
                   </div>

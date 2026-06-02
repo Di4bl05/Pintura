@@ -68,7 +68,7 @@ export default function WhyChooseClean({ onOpenContact }: WhyChooseProps) {
 
         <div className="flex flex-col items-start text-left mb-14 space-y-6">
           <h2 className="flex flex-col max-w-2xl text-left">
-            <span className="font-display text-3xl md:text-6xl font-bold text-slate-950 uppercase tracking-tighter leading-[0.9]">
+            <span className="font-display text-3xl md:text-6xl font-bold text-slate-950  tracking-tighter leading-[0.9]">
               {hookMain}
             </span>
             {hookItalic && (
@@ -77,7 +77,7 @@ export default function WhyChooseClean({ onOpenContact }: WhyChooseProps) {
               </span>
             )}
           </h2>
-          <p className="font-sans text-sm md:text-lg text-slate-600 font-medium leading-relaxed max-w-xl">
+          <p className="font-sans text-sm md:text-lg text-slate-600 max-w-xl">
             {t("whyChoose.core_value_proposition.description")}
           </p>
         </div>
@@ -129,7 +129,7 @@ export default function WhyChooseClean({ onOpenContact }: WhyChooseProps) {
 
 function Card({ item, config }: { item: any; config: any }) {
   return (
-    <div className="flex flex-col md:flex-row gap-4 md:gap-8 p-6 md:p-8 rounded-[2.5rem] bg-slate-50/50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300">
+    <div className="flex flex-col px-1 md:flex-row gap-4 md:gap-8 p-6 md:p-8 rounded-[2.5rem] bg-slate-50/50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300">
       <div className="hidden md:block relative flex-shrink-0 w-16 h-16">
         <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${config?.grad} shadow-md`} />
         <div className="relative w-full h-full flex items-center justify-center text-white text-2xl font-bold">
@@ -138,14 +138,14 @@ function Card({ item, config }: { item: any; config: any }) {
       </div>
 
       <div className="space-y-3 flex-1 text-left">
-        <h3 className="font-display font-black tracking-tight uppercase text-slate-950 leading-tight text-[17px] md:text-xl">
+        <h3 className="font-display font-black text-slate-950 text-[16px] md:text-xl leading-[0.95]">
           {item.label}
         </h3>
-        <p className="font-sans text-sm md:text-lg leading-snug text-slate-600">
+        <p className="font-sans text-sm md:text-[17px] leading-snug text-slate-600">
           {item.argument} 
         </p>
         <div className="pt-3 border-t border-slate-200 w-full mt-1">
-          <span className="font-sans text-primary-600 text-sm md:text-lg md:font-normal">
+          <span className="font-sans text-primary-600 text-sm md:text-[16px] md:font-normal">
             • {item.benefit}
           </span>
         </div>

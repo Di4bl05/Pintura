@@ -67,14 +67,11 @@ export default function Services({ onOpenContact }: ServicesProps) {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-12 md:mb-20">
           <div className="max-w-4xl">
             <h2 className="flex flex-col gap-1 mb-6 md:mb-8">
-              <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950 uppercase leading-[0.95]">
+              <span className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-950  leading-[0.95]">
                 {t("services.title")}
               </span>
-              <span className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-5xl italic text-primary-600 leading-none">
-                {t("services.titleHighlight")}
-              </span>
             </h2>
-            <p className="font-sans text-sm lg:text-lg text-slate-600 font-medium leading-relaxed max-w-full">
+            <p className="font-sans text-sm lg:text-lg text-slate-600 max-w-full">
               {t("services.subtitle")}
             </p>
           </div>
