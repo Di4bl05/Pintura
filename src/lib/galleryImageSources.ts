@@ -10,7 +10,7 @@ const STATIC_GALLERY_FILENAMES = {
   repair: "Superfice1.png",
   pressure1: "Pressure.png",
   exterior: "Exterior.png",
-  luisBety: "L.png",
+  luisBety: "luis-y-bety.webp",
   exteriorCTA: "exteriorCTA.png"
 } as const;
 
