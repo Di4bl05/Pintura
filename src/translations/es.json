@@ -9,7 +9,7 @@
   },
 
  "hero": {
-    "title1": "PINTURA DE",
+    "title1": "Pintura de",
     "title2": "Interior & Exterior",
     "description": "Pintura residencial profesional en Orlando FL. Especialistas en reparación de drywall, enlacado de gabinetes, lavado a presión y mucho más.",
     "descriptionBold": "Licenciados, Asegurados y Limpieza Detallada Incluida.",
@@ -24,7 +24,7 @@
  "services": {
   "title": "Servicios Principales",
   "titleHighlight": "",
-  "subtitle": "Desde la protección profunda de fachadas contra el clima de Florida hasta la renovación estética de sus espacios internos. Ofrecemos soluciones integrales de pintura y mantenimiento diseñadas para elevar el valor de su propiedad con acabados de alta resistencia y precisión técnica.",
+  "subtitle": "Ofrecemos soluciones integrales de pintura y mantenimiento diseñadas para elevar el valor de su propiedad con acabados de alta resistencia y precisión técnica.",
   "moreInfo": "Leer más", 
 
   "exterior": {
@@ -205,7 +205,7 @@
  "gallery": {
     "title": "Galería de Proyectos",
     "titleHighlight": "",
-    "subtitle": "Explore nuestra selección de transformaciones recientes. Cada proyecto es un testimonio de nuestra atención al detalle, mostrando cómo una aplicación técnica correcta puede revitalizar por completo la arquitectura de una residencia o local comercial en Orlando y sus alrededores.",
+    "subtitle": "Explore nuestra selección de transformaciones reciente donde cada proyecto es un testimonio de nuestra atención al detalle.",
     "filters": {  
       "all": "Todos",
       "interior": "Interiores",
@@ -220,12 +220,10 @@
 
  "reviews": {
     "title": "Nuestra Reputación",
-    "subtitle": "La satisfacción de quienes ya confiaron en nosotros es nuestro mayor activo. Descubra las experiencias reales de propietarios que han transformado sus hogares con nuestra ayuda y comprenda por qué somos la opción preferida por calidad de servicio y atención personalizada.",
+    "subtitle": "Descubra las experiencias reales de propietarios que han transformado sus hogares con nuestra ayuda.",
     "googleBadge": {
       "status": "Estado Verificado",
       "label": "VERIFICADO",
-      "basedOn": "Basado en",
-      "count": "40+ reseñas",
       "location": "Orlando FL",
       "viewAll": "Ver todas las reseñas en Google"
     },
@@ -282,7 +280,7 @@
  "whyChoose": {
   "core_value_proposition": {
     "hook": "Tu Mejor Opción",
-    "description": "Con más de 3 años transformando propiedades en Florida no solo aplicamos color; garantizamos durabilidad a través de una metodología rigurosa y el uso exclusivo de materiales premium. Nuestra trayectoria en el mercado local se basa en la puntualidad, la limpieza absoluta y un estándar de calidad que supera las expectativas de los propietarios más exigentes.",
+    "description": "Una trayectoria con más de 3 años de experiencia en el mercado local basada en la puntualidad, la limpieza absoluta y un estándar de calidad.",
     "the_difference": [
       {
         "id": "price_disruption",
@@ -347,7 +345,7 @@
       "only_images": "Solo se permiten imágenes (JPG, PNG, WEBP)"
     },
     "header": {
-      "title": "Adelanta tu proyecto y recibe un estimado preciso.",
+      "title": "Adelanta tu Proyecto y Recibe un Estimado preciso.",
       "description": "Recopilamos estos detalles para llegar a tu propiedad con una solución lista, reduciendo el tiempo de negociación y acelerando el inicio de tu obra."
     },
     "stepper": {

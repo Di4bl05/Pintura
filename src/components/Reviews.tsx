@@ -53,7 +53,7 @@ export default function Reviews() {
   }, []);
 
   return (
-    <section id="reviews" ref={sectionRef} className="relative py-24 sm:py-32 md:py-48 lg:py-64 bg-white overflow-visible antialiased selection:bg-primary-100">
+    <section id="reviews" ref={sectionRef} className="relative py-24 sm:py-44 md:py-48 lg:py-64 bg-white overflow-visible antialiased selection:bg-primary-100">
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 lg:px-16 text-left">
         <div className="grid lg:grid-cols-[1fr_320px] gap-12 lg:gap-20 items-start">
           <div className="space-y-16 lg:space-y-24">
@@ -70,18 +70,18 @@ export default function Reviews() {
             <div className="space-y-10">
               <div className="grid grid-cols-1 gap-10">
                 {reviewsData.map((review) => (
-                  <div key={review.id} className="relative bg-slate-50/50 p-8 md:p-12 rounded-[2.5rem] border border-slate-100 select-none transition-all hover:bg-slate-50">
+                  <div key={review.id} className="relative bg-slate-50/50 p-8 md:p-10 rounded-[2.5rem] border border-slate-100 select-none transition-all hover:bg-slate-50">
                     <Quote className="absolute top-8 right-10 w-12 h-12 text-primary-600/5" />
                     <div className="flex flex-col md:flex-row gap-6 mb-6 md:mb-8">
-                      <div className={`hidden md:flex w-14 h-14 rounded-2xl ${review.color} flex-shrink-0 items-center justify-center font-display font-bold text-xl shadow-sm`}>
+                      <div className={`hidden md:flex w-12 h-12 rounded-2xl ${review.color} flex-shrink-0 items-center justify-center font-display font-bold text-[17px] shadow-sm`}>
                         {review.avatar}
                       </div>
                       <div className="flex-1">
                         <div className="flex flex-wrap items-center gap-3 mb-2">
-                          <h4 className="font-display font-bold text-[16px] md:text-xl text-slate-950 tracking-tight leading-none ">
+                          <h4 className="font-display text-[16px] md:text-xl text-slate-950 tracking-tight leading-none ">
                             {review.author}
                           </h4>
-                          <span className="font-sans flex items-center gap-2 text-[8px] font-black text-primary-600 bg-white px-3 py-1 rounded-full uppercase tracking-widest border border-primary-50 shadow-sm">
+                          <span className="font-sans flex items-center gap-2 text-[9px] text-primary-600 bg-white px-3 py-1 rounded-full uppercase tracking-widest border border-primary-50 shadow-sm">
                             <GoogleIcon className="w-3.5 h-3.5" /> {t("reviews.googleBadge.label")}
                           </span>
                         </div>
@@ -110,7 +110,7 @@ export default function Reviews() {
                 <div className="absolute inset-0 bg-primary-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
                 <div className="relative z-10 flex items-center gap-3 md:gap-4">
                   <GoogleIcon className="w-3 h-3 md:w-4 md:h-4" />
-                  <span className="font-sans font-black text-[8px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.2em]">
+                  <span className="font-sans text-[8px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.2em]">
                     {t("reviews.googleBadge.viewAll")}
                   </span>
                   <ExternalLink size={14} className="opacity-70 group-hover:translate-x-1 transition-transform md:size-4" />
@@ -125,12 +125,12 @@ export default function Reviews() {
                   <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center border border-slate-200 shadow-sm">
                     <GoogleIcon className="w-6 h-6" />
                   </div>
-                  <span className="font-sans text-[8px] font-black text-primary-600 uppercase tracking-[0.4em] block">
+                  <span className="font-sans text-[9px] text-primary-600 uppercase tracking-[0.4em] block">
                     {t("reviews.googleBadge.status")}
                   </span>
                 </div>
                 <div className="relative py-2">
-                  <div className="font-display text-6xl md:text-7xl font-black text-slate-950 tracking-tighter leading-none">
+                  <div className="font-display text-6xl md:text-7xl text-slate-950 tracking-tighter leading-none">
                     {rating.toFixed(1)}
                   </div>
                   <div className="flex justify-center gap-1 text-yellow-400 mt-3">
@@ -140,12 +140,10 @@ export default function Reviews() {
                   </div>
                 </div>
                 <div className="pt-6 border-t border-slate-200/60">
-                  <p className="font-sans text-[9px] font-bold text-slate-400 uppercase tracking-[0.15em] leading-tight mb-5">
-                    {t("reviews.googleBadge.basedOn")} <span className="text-slate-950 font-black">{t("reviews.googleBadge.count")}</span>
-                  </p>
+                 
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-100 rounded-full shadow-sm">
                     <MapPin size={9} className="text-primary-600" />
-                    <span className="font-sans text-[7px] font-black text-slate-950 uppercase tracking-widest">
+                    <span className="font-sans text-[9px] text-slate-950 uppercase tracking-widest">
                       {t("reviews.googleBadge.location")}
                     </span>
                   </div>

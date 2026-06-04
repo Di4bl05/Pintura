@@ -110,10 +110,10 @@ export default function Services({ onOpenContact }: ServicesProps) {
                     draggable={false}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 md:p-14 flex flex-col justify-end">
-                    <h3 className="font-display text-2xl md:text-3xl font-bold text-white uppercase tracking-tighter leading-[0.85] mb-3 md:mb-7 transform transition-transform duration-700 group-hover/card:-translate-y-2">
+                    <h3 className="font-display text-2xl md:text-3xl font-bold text-white leading-[0.85] mb-3 md:mb-7 transform transition-transform duration-700 group-hover/card:-translate-y-2">
                       {t(`services.${service.key}.title`)}
                     </h3>
-                    <div className="flex items-center gap-4 text-white font-sans text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] group/btn w-fit transform transition-transform duration-700 group-hover/card:-translate-y-1">
+                    <div className="flex items-center gap-4 text-white font-sans text-[9px] md:text-[10px] uppercase tracking-[0.2em] group/btn w-fit transform transition-transform duration-700 group-hover/card:-translate-y-1">
                       <span className="border-b-2 border-white/20 group-hover/btn:border-white pb-1 transition-colors">
                         {t("services.moreInfo")}
                       </span>
@@ -129,21 +129,21 @@ export default function Services({ onOpenContact }: ServicesProps) {
         <div className="mt-20 border-t border-slate-100 pt-16">
           <div className="flex flex-col items-center mb-16 lg:mb-24 text-center">
            
-            <h3 className="font-display text-3xl lg:text-[50px] font-bold text-slate-900">
+            <h3 className="font-display text-2xl lg:text-[50px] font-bold text-slate-900">
               {t("serviceAreas.primaryRegion")}
             </h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 md:gap-x-32 gap-y-10 max-w-5xl mx-auto px-4">
              {Array.isArray(locations) && locations.map((loc: any, i: number) => (
           <div key={i} className="flex flex-col items-start text-left">
-              <h4 className="font-body text-[12px] lg:text-[13px] font-black uppercase tracking-[0.2em] text-slate-900 mb-3 border-b border-slate-100 pb-1 w-full">
+              <h4 className="font-display text-[13px] lg:text-[17px]   text-slate-900 mb-3 border-b border-slate-100 pb-1 w-full">
                 {loc.city}
               </h4>
       <div className="flex flex-col items-start justify-start gap-y-2">
         {loc.strategic_zones?.map((zone: string, zIdx: number) => (
             <span 
             key={zIdx} 
-            className="font-sans text-sm md:text-lg text-slate-500 font-medium leading-tight hover:text-primary-600 transition-colors cursor-default"
+            className="font-sans text-[12px] md:text-[14px] text-slate-500"
           >
             {zone}
           </span>
@@ -154,7 +154,7 @@ export default function Services({ onOpenContact }: ServicesProps) {
 </div>
           <div className="mt-16 flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-slate-50 pt-8">
             {Array.isArray(counties) && counties.map((county: string, i: number) => (
-              <span key={i} className="font-sans text-[10px] lg:text-[12px] font-bold text-slate-500 uppercase">
+              <span key={i} className="font-sans text-[9px] lg:text-[12px]  text-slate-50 0 uppercase">
                 {county}
               </span>
             ))}

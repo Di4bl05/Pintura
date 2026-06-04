@@ -55,10 +55,10 @@ export default function WhyChooseClean({ onOpenContact }: WhyChooseProps) {
             </div>
             <div className="absolute bottom-10 -right-4 bg-white py-3 px-6 rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.12)] border border-slate-50 transition-all duration-500 group-hover:-translate-y-2">
               <div className="flex flex-col gap-0.5">
-                <p className="font-sans font-black text-[8px] tracking-[0.3em] text-primary-600 uppercase">
+                <p className="font-sans text-[9px] tracking-[0.3em] text-primary-600 uppercase">
                   Painting Experts
                 </p>
-                <p className="font-sans font-black text-[10px] tracking-[0.1em] text-slate-950 uppercase">
+                <p className="font-sans text-[10px] tracking-[0.1em] text-slate-950 uppercase">
                   Luis & Bety • Orlando FL
                 </p>
               </div>
@@ -105,7 +105,7 @@ export default function WhyChooseClean({ onOpenContact }: WhyChooseProps) {
           onOpenContact();
         });
       }}
-      className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white transition-all duration-700 ease-in-out font-black uppercase tracking-[0.2em] shadow-xl hover:shadow-primary-600/20 active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:rounded-xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px]"
+      className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white transition-all duration-700 ease-in-out uppercase tracking-[0.2em] shadow-xl hover:shadow-primary-600/20 active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:rounded-xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px]"
       >
         <span className="absolute inset-0 w-0 bg-primary-600 transition-all duration-500 ease-out group-hover:w-full" />
         <span className="relative z-10 flex items-center gap-3">
@@ -113,10 +113,11 @@ export default function WhyChooseClean({ onOpenContact }: WhyChooseProps) {
           <ArrowRight className="md:text-lg transition-transform duration-500 group-hover:translate-x-2" />
           </span>
           </button>
+
           <a
             href={`tel:${luisPhone.replace(/\D/g, "")}`}
             onClick={handlePhoneClick(luisPhone)}
-            className="inline-flex items-center justify-center gap-4 bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-xl hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
+            className="inline-flex items-center justify-center gap-4 bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-xl hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
           >
             <Phone className="w-4 h-4" />
             <span>{luisPhone}</span>
@@ -138,7 +139,7 @@ function Card({ item, config }: { item: any; config: any }) {
       </div>
 
       <div className="space-y-3 flex-1 text-left">
-        <h3 className="font-display font-black text-slate-950 text-[16px] md:text-xl leading-[0.95]">
+        <h3 className="font-display text-slate-950 text-[16px] md:text-xl leading-[0.95]">
           {item.label}
         </h3>
         <p className="font-sans text-sm md:text-[17px] leading-snug text-slate-600">

@@ -246,7 +246,7 @@ export default function BeforeAfterGallery() {
               {t("gallery.title") || (language === "es" ? "Resultados" : "Results")}
             </span>
           </h2>
-          <p className="font-sans text-sm lg:text-lg text-slate-600 max-w-full">
+          <p className="font-sans text-sm lg:text-lg text-slate-600 max-full">
             {t("gallery.subtitle") ||
               (language === "es"
                 ? "Explora nuestras transformaciones recientes con imagenes optimizadas para movil y escritorio."
@@ -320,8 +320,8 @@ export default function BeforeAfterGallery() {
                         <MapPin className="h-3 w-3 text-primary-400" />
                         <span className="font-sans text-[9px] font-bold uppercase tracking-widest text-white">{activeItem.location}</span>
                       </div>
-                      <h3 className="font-display mb-3 text-4xl font-bold uppercase leading-none tracking-tighter text-white">{activeItem.title}</h3>
-                      <p className="max-w-lg font-sans text-sm md:text-lg text-slate-100 opacity-90 line-clamp-2">
+                      <h3 className="font-display mb-3 text-4xl font-bold leading-none tracking-tighter text-white">{activeItem.title}</h3>
+                      <p className="font-sans max-w-lg text-sm md:text-lg text-slate-100 opacity-90 line-clamp-2">
                         {activeItem.description}
                       </p>
                     </div>
@@ -372,7 +372,7 @@ export default function BeforeAfterGallery() {
           </div>
         )}
 
-        <div className="flex flex-col gap-6 border-t border-slate-100 pt-10 md:flex-row md:items-stretch">
+        <div className="flex flex-col gap-6 border-t border-slate-100 md:flex-row md:items-stretch">
           <div ref={carouselRef} className="no-scrollbar scrollbar-hide snap-x flex flex-1 gap-4 overflow-x-auto pb-4 touch-action-pan-x">
             {filteredGallery.map((item) => (
               <button
@@ -393,14 +393,14 @@ export default function BeforeAfterGallery() {
                   sizes="260px"
                 />
                 <div className="absolute inset-0 flex items-end bg-gradient-to-t from-slate-950/80 to-transparent p-5">
-                  <span className="truncate font-sans text-[9px] font-black uppercase tracking-widest text-white">{item.title}</span>
+                  <span className="truncate font-sans text-[9px] uppercase tracking-widest text-white">{item.title}</span>
                 </div>
               </button>
             ))}
           </div>
           <button
             onClick={() => setShowAllPhotos(true)}
-            className="w-full sm:w-auto px-6 sm:px-10 py-4 md:h-[200px] rounded-xl group relative overflow-hidden flex items-center justify-center gap-3 bg-slate-950 text-white transition-all duration-300 active:scale-95 font-black uppercase text-[8px] md:text-[10px] tracking-[0.3em]"
+            className="w-full sm:w-auto px-6 sm:px-10 py-4 md:h-[200px] rounded-xl group relative overflow-hidden flex items-center justify-center gap-3 bg-slate-950 text-white transition-all duration-300 active:scale-95 uppercase text-[8px] md:text-[10px] tracking-[0.3em]"
           >
             <div className="absolute inset-0 translate-y-full bg-primary-600 transition-transform duration-500 ease-out group-hover:translate-y-0" />
             <div className="relative z-10 flex items-center gap-3">
@@ -420,7 +420,7 @@ export default function BeforeAfterGallery() {
                 setFilter(f);
                 setComparePosition(50);
               }}
-              className={`group relative overflow-hidden rounded-xl border px-4 py-3 md:px-8 md:py-4 text-[9px] md:text-[10px] font-sans uppercas e tracking-widest transition-all duration-500 ${
+              className={`group relative overflow-hidden rounded-xl border px-4 py-3 md:px-8 md:py-4 text-[8px] md:text-[9px] font-sans uppercase tracking-widest text-slate-950 transition-all duration-500 ${
                 filter === f
                   ? "border-primary-600 bg-primary-600 text-white shadow-xl"
                   : "border-slate-100 bg-white text-slate-500 hover:text-white"
@@ -489,10 +489,10 @@ export default function BeforeAfterGallery() {
                           {item.location}
                         </span>
                       </div>
-                      <h3 className="font-display text-[20px] font-bold uppercase tracking-tight text-slate-950 mb-2">
+                      <h3 className="font-display text-[20px] font-bold tracking-tight text-slate-950 mb-2">
                         {item.title}
                       </h3>
-                      <p className="line-clamp-2 font-sans leading-relaxed text-slate-500 text-sm md:text-lg">
+                      <p className="line-clamp-2 font-sans leading-relaxed text-slate-500 text-sm md:text-[15px]">
                         {item.description}
                       </p>
                     </div>

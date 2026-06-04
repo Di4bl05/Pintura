@@ -285,7 +285,7 @@ return (
   
       <div className="max-w-[550px] mx-auto lg:mx-0 w-full">   
         
-        <h1 className="font-display font-black text-4xl sm:text-4xl lg:text-5xl text-slate-950 leading-[0.95] uppercase tracking-tighter mb-9">
+        <h1 className="font-display font-black text-4xl sm:text-4xl lg:text-5xl text-slate-950 leading-[0.95]  tracking-tighter mb-9">
           {t("contact.header.title").split("preciso")[0]}
           <span className="text-primary-600 block">
             {t("cta.5")}
@@ -362,10 +362,10 @@ return (
     <div className="w-full max-w-[800px] flex flex-col items-center">
       
       <div className="text-center mb-10 hidden lg:block">
-        <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+        <h2 className="font-display  text-3xl sm:text-4xl lg:text-4xl text-slate-950">
           {t("contact.steps.step_1.title")}
         </h2>
-        <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
+        <div className="h-0.5 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 w-full">
@@ -377,8 +377,8 @@ return (
               field === "address" || field === "date" ? "md:col-span-2" : "md:col-span-1"
             }`}
           >
-            <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
-              {/* Buscamos 'gmail' en el i18n si el campo es 'email' */}
+            <label className="font-sans font-medium text-primary-600 text-[13px] lg:text-[15px]  pl-2">
+
               {t(`contact.steps.step_1.fields.${field === "email" ? "gmail" : field}`)}
             </label>
             
@@ -402,7 +402,7 @@ return (
                 field === "phone" ? "Ej: +1 407 123 4567" :
                 field === "address" ? "Ej: 123 Main St, Orlando" : ""
               }
-              className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-base lg:text-[15px] placeholder:text-slate-400 transition-all duration-500 ease-in-out outline-none ring-0 focus:ring-0 focus:outline-none ${
+              className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-600 text-[12px] lg:text-[15px] placeholder:text-slate-400 transition-all duration-500 ease-in-out outline-none ring-0 focus:ring-0 focus:outline-none ${
                 errors[field] ? "border-red-500" : "border-slate-100 focus:border-primary-600"
               } ${
                 field === "date" 
@@ -459,17 +459,17 @@ return (
     <div className="w-full max-w-[800px] px-6 pt-96 pb-10 lg:pt-44 overflow-y-auto scrollbar-hide flex flex-col items-center">
       
       <div className="text-center mb-10 hidden lg:block">
-        <h2 className="font-display font-black text-3xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+        <h2 className="font-display text-3xl lg:text-4xl text-slate-950">
           {t("contact.steps.step_2.title")}
         </h2>
-        <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
+        <div className="h-0.5 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
       </div>
 
       <div className="grid grid-cols-1 gap-y-10 w-full">
         
         {/* Campo: Colores (Validación añadida) */}
         <div className="w-full space-y-1.5 relative">
-          <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+          <label className="font-sans font-medium text-primary-600 text-[13px] lg:text-[15px]  pl-2">
             {t("contact.steps.step_2.fields.colors")}
           </label>
           
@@ -479,7 +479,7 @@ return (
               errors.colors ? "border-red-500 bg-red-50/10" : "border-slate-100 hover:border-primary-600"
             }`}
           >
-            <span className={`font-sans font-medium text-[12px] md:text-[14px] transition-colors ${contactData.colors ? "text-slate-900" : "text-slate-400"}`}>
+            <span className={`font-sans font-medium text-[12px] md:text-[14px] transition-colors ${contactData.colors ? "text-slate-600" : "text-slate-400"}`}>
                {contactData.colors || t("cta.1")}
             </span>
             <ChevronDown size={14} className={`text-slate-400 transition-transform duration-500 ${openSelect === "colors" ? "rotate-180" : ""}`} />
@@ -510,7 +510,7 @@ return (
 
        {/* Campo: Tipo de Servicio (Corregido a service_type) */}
 <div className="w-full space-y-3">
-  <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+  <label className="font-sans font-medium text-primary-600 text-[13px] lg:text-[15px]  pl-2">
     {t("contact.steps.step_2.fields.service_type")}
   </label>
   <div className={`flex flex-wrap items-center justify-start gap-4 p-4 rounded-2xl border transition-all duration-300 ${
@@ -549,7 +549,7 @@ return (
 
         {/* Campo: Específicos (Validación añadida) */}
         <div className="w-full space-y-3">
-          <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+          <label className="font-sans font-medium text-primary-600 text-[13px] lg:text-[15px]  pl-2">
             {t("contact.steps.step_2.fields.specifics")}
           </label>
           
@@ -587,7 +587,7 @@ return (
 
         {/* Campo: Tipo de Pintura */}
         <div className="w-full space-y-1.5">
-          <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+          <label className="font-sans font-medium text-primary-600 text-[13px] lg:text-[15px]  pl-2">
             {t("contact.steps.step_2.fields.paint_type")}
           </label>
           <input
@@ -599,7 +599,7 @@ return (
               if (errors.paint_type) setErrors((prev: any) => ({ ...prev, paint_type: null }));
             }}
             placeholder={t("contact.steps.step_2.placeholders.paint_type") || "Ej: Mate, Satinado..."}
-            className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-base lg:text-[15px] placeholder:text-slate-400 transition-all duration-500 ease-in-out outline-none ring-0 focus:ring-0 focus:outline-none focus:border-primary-600 no-underline ${
+            className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-600 text-[12px] md:text-[15px] placeholder:text-slate-400 transition-all duration-500 ease-in-out outline-none ring-0 focus:ring-0 focus:outline-none focus:border-primary-600 no-underline ${
               errors.paint_type ? "border-red-500" : "border-slate-100"
             }`}
             style={{ WebkitTapHighlightColor: 'transparent' }}
@@ -640,17 +640,17 @@ return (
       
       {/* Título: PC */}
       <div className="text-center mb-10 hidden lg:block">
-        <h2 className="font-display font-black text-3xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+        <h2 className="font-display text-3xl lg:text-4xl  text-slate-950">
           {t("contact.steps.step_3.title")}
         </h2>
-        <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
+        <div className="h-0.5 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
       </div>
 
       <div className="space-y-8 w-full">
 
         {/* Campo: Estado actual */}
         <div className="flex flex-col gap-1.5">
-          <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+          <label className="font-sans font-medium text-primary-600 text-[13px] lg:text-[15px]  pl-2">
             {t("contact.steps.step_3.fields.status")}
           </label>
           <textarea
@@ -661,7 +661,7 @@ return (
               if (errors.status) setErrors((prevErr: any) => ({ ...prevErr, status: null }));
             }}
             placeholder={t("contact.steps.step_3.placeholders.status")}
-            className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-900 text-base lg:text-[15px] transition-all duration-500 !outline-none !ring-0 resize-none h-[60px] placeholder:text-slate-400 ${
+            className={`w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 font-sans font-medium text-slate-600 text-[12px] lg:text-[15px] transition-all duration-500 !outline-none !ring-0 resize-none h-[60px] placeholder:text-slate-400 ${
               errors.status ? "border-red-500" : "border-slate-100 focus:border-primary-600"
             }`}
           />
@@ -670,7 +670,7 @@ return (
 
      {/* Campo: Subir Fotos - Adaptado para envío múltiple por FormData */}
 <div className="flex flex-col gap-1.5 h-auto min-h-[140px]">
-  <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+  <label className="font-sans font-medium text-primary-600 text-[13px] lg:text-[14px]  pl-2">
     {t("contact.steps.step_3.fields.upload")}
   </label>
   
@@ -766,7 +766,7 @@ return (
 </div>
         {/* Campo: Notas especiales */}
         <div className="flex flex-col gap-1.5 pb-4">
-          <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+          <label className="font-sans font-medium text-primary-600 text-[13px] lg:text-[15px]  pl-2">
             {t("contact.steps.step_3.fields.special")}
           </label>
           <input
@@ -775,7 +775,7 @@ return (
             value={contactData.special || ""}
             onChange={(e) => setContactData((prev: any) => ({ ...prev, special: e.target.value }))}
             placeholder={t("contact.steps.step_3.placeholders.special")}
-            className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-base lg:text-[15px] outline-none focus:outline-none focus:ring-0 focus:border-primary-600"
+            className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 font-sans font-medium text-slate-600 text-[12px] lg:text-[15px] outline-none focus:outline-none focus:ring-0 focus:border-primary-600"
           />
         </div>
       </div>
@@ -812,17 +812,17 @@ return (
       
       {/* TÍTULO: Solo visible en PC */}
       <div className="text-center mb-10 hidden lg:block">
-        <h2 className="font-display font-black text-3xl lg:text-4xl leading-[1.1] uppercase tracking-tighter text-slate-950">
+        <h2 className="font-display text-3xl lg:text-4xl text-slate-950">
           {t("contact.steps.step_4.title")}
         </h2>
-        <div className="h-1 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
+        <div className="h-0.5 w-12 bg-primary-600 mx-auto mt-4 rounded-full" />
       </div>
 
       <div className="space-y-6 w-full">
 
         {/* CUSTOM SELECT: RANGO DE INVERSIÓN */}
         <div className="flex flex-col gap-1.5 relative">
-          <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+          <label className="font-sans font-medium text-primary-600 text-[13px] lg:text-[15px]  pl-2">
             {t("contact.steps.step_4.fields.budget")}
           </label>
 
@@ -830,7 +830,7 @@ return (
             onClick={() => setOpenSelect(openSelect === "budget" ? null : "budget")}
             className="w-full p-2.5 bg-transparent border-b-2 border-slate-100 flex items-center justify-between cursor-pointer group transition-all duration-300 hover:border-primary-600"
           >
-            <span className={`font-sans font-medium text-[12px] lg:text-[13px] transition-colors ${contactData.budget ? "text-slate-900" : "text-slate-400"}`}>
+            <span className={`font-sans font-medium text-[12px] lg:text-[15px] transition-colors ${contactData.budget ? "text-slate-600" : "text-slate-400"}`}>
               {contactData.budget || t("cta.3")}
             </span>
 
@@ -867,7 +867,7 @@ return (
 
         {/* COMMENTS */}
         <div className="flex flex-col gap-1.5">
-          <label className="font-sans text-[9px] lg:text-[10px] font-black tracking-[0.15em] uppercase text-slate-950 pl-1">
+          <label className="font-sans font-medium text-primary-600 text-[13px] lg:text-[15px]  pl-2">
             {t("contact.steps.step_4.fields.comments")}
           </label>
 
@@ -875,7 +875,7 @@ return (
             name="comments"
             value={contactData.comments || ""}
             onChange={(e) => setContactData((prev: any) => ({ ...prev, comments: e.target.value }))}
-            className="w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 border-slate-100 font-sans font-medium text-slate-900 text-[12px] lg:text-[13px] transition-all duration-500 !outline-none !ring-0 focus:border-primary-600 resize-none h-[70px] placeholder:text-slate-400 shadow-none appearance-none"
+            className="w-full p-2.5 bg-transparent border-t-0 border-x-0 border-b-2 border-slate-100 font-sans font-medium text-slate-600 text-[12px] lg:text-[15px] transition-all duration-500 !outline-none !ring-0 focus:border-primary-600 resize-none h-[70px] placeholder:text-slate-400 shadow-none appearance-none"
             placeholder={t("cta.4")}
           />
         </div>
@@ -894,7 +894,7 @@ return (
             </div>
 
             <div className="flex flex-col gap-1">
-              <span className="font-sans font-black text-[9px] lg:text-[10px]  uppercase tracking-widest text-slate-950 group-hover:text-yellow-400 transition-colors">
+              <span className="font-sans font-medium text-primary-600 text-[13px] lg:text-[15px] group-hover:text-yellow-400 transition-colors">
                 {t("contact.steps.step_4.fields.vip_label")}
               </span>
               <p className="font-sans text-slate-500 text-[12px] lg:text-[14px]">

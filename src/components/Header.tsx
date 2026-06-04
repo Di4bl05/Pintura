@@ -100,21 +100,21 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
             <div className="flex flex-col pl-2 sm:pl-3 md:pl-4 leading-none text-left border-l border-white/10">
               <span
-                className={`font-display font-black tracking-tightest text-white transition-all duration-500 ${
+                className={`font-display  text-white transition-all duration-500 ${
                   isSolid ? "text-sm sm:text-lg md:text-xl" : "text-base sm:text-xl md:text-3xl"
                 }`}
               >
-                LUISBETY{" "}
-                <span className="font-serif italic font-normal text-primary-500">
+                LuisBety{" "}
+                <span className="font-display italic text-primary-500">
                   Inc.
                 </span>
               </span>
               <span
-                className={`font-sans font-bold uppercase text-primary-200/50 transition-all duration-500 ${
+                className={`font-sans uppercase text-primary-200/50 transition-all duration-500 ${
                   isSolid
-                    ? "text-[7px] mt-1"
-                    : "text-[8px] sm:text-[9px] md:text-[10px] mt-1 md:mt-2"
-                } tracking-[0.25em] sm:tracking-[0.35em]`}
+                    ? "text-[8px] mt-1"
+                    : "text-[8px] sm:text-[9px] md:text-[11px] mt-1 md:mt-2"
+                } tracking-[0.2em]  `}
               >
                 Painting and Remodeling
               </span>
@@ -131,7 +131,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleSmoothScroll(e, item.href)}
-                className="font-sans text-[10px] font-black uppercase tracking-[0.25em] text-white/60 transition-all hover:text-white relative group"
+                className="font-sans  text-[10px] uppercase tracking-[0.25em] text-white/60 transition-all hover:text-white relative group"
               >
                 {item.name}
                 <span className="absolute left-0 w-0 h-px transition-all duration-500 -bottom-2 bg-primary-500 group-hover:w-full" />
@@ -157,7 +157,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             <a
               href={`tel:${luisPhone.replace(/\D/g, "")}`}
               onClick={handlePhoneClick(luisPhone)}
-              className="font-sans group flex items-center gap-3 rounded-xl font-bold text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-blue-500 hover:text-slate-100 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4"
+              className="font-sans group flex items-center gap-3 rounded-xl text-[10px] tracking-[0.2em] transition-all bg-white text-slate-950 hover:bg-blue-500 hover:text-slate-100 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group uppercase whitespace-nowrap px-6 md:px-8 py-3 md:py-4"
             >
               <Phone className="w-3 h-3" />
               <span>(786) 350-6367</span>

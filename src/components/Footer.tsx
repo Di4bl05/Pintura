@@ -31,7 +31,9 @@ export default function Footer() {
               </div>
               <div className="flex flex-col border-l border-white/20 leading-none py-1 ml-4 pl-4">
                 <span className="font-display font-black text-xl text-white tracking-tighter">
-                  LUISBETY <span className="font-serif italic font-normal text-primary-500">Inc.</span>
+                  LUISBETY 
+                  <span className="font-serif italic font-normal text-primary-500">
+                    Inc.</span>
                 </span>
                 <span className="font-sans font-bold uppercase text-primary-200/50 text-[8px] md:text-[9px] mt-1 md:mt-2 tracking-[0.3em] md:tracking-[3px] whitespace-nowrap">
                   Painting and Remodeling

@@ -13,17 +13,17 @@ const HeroContent = memo(({ t, onOpenContact, current, isAnimate, heroContent, h
   return (
     <div className="relative z-20 max-w-[1440px] mx-auto px-6 lg:px-16 w-full">
       <div className="max-w-4xl mt-6 sm:mt-0">
-        <span className="font-serif block text-primary-400 text-base sm:text-lg md:text-xl lg:text-2xl mb-4 italic">
+        <span className="font-serif text-primary-400  sm:text-lg md:text-xl lg:text-xl mb-5 italic">
           {t("hero.title1")}
         </span>
 
-        <h1 className="font-display text-5xl md:text-4xl lg:text-7xl xl:text-[7rem] font-black text-white leading-[0.92] uppercase mb-7 drop-shadow-2xl">
+        <h1 className="font-serif text-5xl md:text-4xl lg:text-7xl xl:text-[7rem]  text-white leading-[0.92]  mb-7 drop-shadow-2xl">
           {t("hero.title2")}
         </h1>
 
         <div className="h-10 overflow-hidden mb-10 border-l-2 border-primary-600/30 pl-4">
           <p
-            className={`font-sans text-sm md:text-lg font-bold text-primary-100/60 uppercase tracking-[0.35em] transition-all duration-700
+            className={`font-sans text-[12px] md:text-lg text-primary-100/60 uppercase tracking-[0.35em] transition-all duration-700
             ${isAnimate ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
           >
             {heroContent[current].title}
@@ -45,7 +45,7 @@ const HeroContent = memo(({ t, onOpenContact, current, isAnimate, heroContent, h
               e.preventDefault();
               onOpenContact();
             }}
-            className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-blue-600 text-white font-black rounded-xl uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
+            className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-blue-600 text-white font-sans rounded-xl uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
           >
             <span>{t("hero.ctaFree")}</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -54,7 +54,7 @@ const HeroContent = memo(({ t, onOpenContact, current, isAnimate, heroContent, h
           <a
             href={`tel:${luisPhone.replace(/\D/g, "")}`}
             onClick={handlePhoneClick(luisPhone)}
-            className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white/5 border border-white/10 text-white font-black rounded-xl flex items-center justify-center gap-3 text-[10px] tracking-[0.2em] transition-all duration-300 hover:bg-white hover:text-slate-950 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 group"
+            className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white/5 border border-white/10 text-white  rounded-xl flex items-center justify-center gap-3 text-[10px] tracking-[0.2em] transition-all duration-300 hover:bg-white hover:text-slate-950 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 group"
           >
             <Phone className="w-4 h-4 text-primary-500 transition-all duration-300 group-hover:text-blue-600 group-hover:scale-110" />
             <span>(786) 350-6367</span>
@@ -72,8 +72,6 @@ export default function Hero({ onOpenContact }: { onOpenContact: () => void }) {
   const { handlePhoneClick } = useSmartLink();
   const [current, setCurrent] = useState(0);
   const [isAnimate, setIsAnimate] = useState(true);
-
-  // Eliminamos el estado de JS para el resize, ahora el HTML se encarga nativamente de la responsividad
 
   const heroContent = useMemo(() => [
     {

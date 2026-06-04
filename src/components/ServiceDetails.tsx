@@ -81,47 +81,13 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 items-start max-w-6xl -mt-16 md:mt-14">
-            <div>
-              <h1 className="font-display text-3xl md:text-5xl font-bold uppercase tracking-tight text-slate-950 leading-[0.9]">
-                {serviceData.title}
-              </h1>
-
-              <h2 className="font-serif text-xl md:text-4xl italic text-primary-600 font-normal mt-2">
-                {serviceData.titleHighlight}
-              </h2>
-
-              <div className="h-[3px] w-24 bg-primary-600 mt-5 md:mt-8 mb-8" />
-
-              <p className="text-sm md:text-lg text-slate-600 leading-relaxed font-medium">
-                {serviceData.description}
-              </p>
-            </div>
-
-            <div className="hidden md:flex justify-end md:translate-x-32 md:-mt-8">
-              <div className="relative group flex justify-end">
-                <div className="absolute -inset-6 bg-primary-600/10 blur-3xl rounded-[2.5rem]" />
-                <div className="relative w-full max-w-2xl rounded-[2.5rem] p-3 bg-white border border-slate-200 shadow-2xl overflow-hidden scale-105 md:scale-110">
-                  <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3]">
-                    <img
-                      src={serviceData.img}
-                      alt={serviceData.title}
-                      className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div className="mt-20 md:mt-32 max-w-6xl mx-auto">
             <div className="mb-10 md:mb-20 flex items-center gap-6">
               <div className="shrink-0">
-                <h3 className=" text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-slate-900">
+                <h3 className="font-semibold text-[9px] md:text-[12px] uppercase tracking-[0.2em] text-slate-900">
                   {t("servicesdetails.execution")}
                 </h3>
-                <div className="h-[3px] w-12 bg-primary-600 mt-3" />
+                <div className="h-[1px] w-12 bg-primary-600 mt-3" />
               </div>
               <div className="h-px w-full bg-slate-100" />
             </div>
@@ -136,7 +102,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
                 >
                   <div className="relative z-10 shrink-0 hidden md:block">
                     <div className="w-[70px] h-[70px] rounded-full bg-white border-2 border-slate-100 flex items-center justify-center group-hover:border-primary-600 group-hover:bg-primary-600 transition-all duration-500 shadow-sm">
-                      <span className="font-display text-xl font-black text-slate-950 group-hover:text-white">
+                      <span className="font-display text-xl text-slate-950 group-hover:text-white">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </div>
@@ -144,7 +110,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
 
                   <div className="flex-1 pt-1 md:pt-2">
                     <div className="flex items center gap-4 mb-4">
-                      <h4 className="text-xl md:text-2xl font-serif font-black text-slate-950">
+                      <h4 className="text-xl md:text-2xl font-serif text-slate-950">
                         {step.title}
                       </h4>
                       <div className="h-px flex-1 bg-slate-50 group-hover:bg-primary-100 transition-colors" />
@@ -153,7 +119,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
                         className="text-primary-600 opacity-0 group-hover:opacity-100 transition-all duration-500"
                       />
                     </div>
-                    <p className="text-sm md:text-lg text-slate-600 leading-relaxed font-medium max-w-3xl">
+                    <p className="font-sans text-sm md:text-lg text-slate-600 max-w-3xl">
                       {step.desc}
                     </p>
                   </div>
@@ -165,21 +131,21 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({
           <div className="mt-16 md:mt-28 border-t pt-10 md:pt-14 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
             <button
               onClick={handleEstimateClick}
-              className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white transition-all duration-500 font-black uppercase tracking-[0.2em] shadow-xl active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:rounded-xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px]"
+              className="group relative overflow-hidden inline-flex items-center justify-center gap-4 bg-slate-950 text-white transition-all duration-500 uppercase tracking-[0.2em] shadow-xl active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:rounded-xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px]"
             >
               <span className="absolute inset-0 w-0 bg-primary-600 transition-all duration-500 ease-out group-hover:w-full" />
               <span className="relative z-10 flex items-center gap-3">
                 {t("hero.ctaFree")}
-                <ArrowRight className="md:text-lg transition-transform group-hover:translate-x-2" />
+                <ArrowRight className=" w-4 h-6 transition-transform group-hover:translate-x-2" />
               </span>
             </button>
 
             <a
               href={`tel:${luisPhone.replace(/\D/g, "")}`}
               onClick={handlePhoneClick(luisPhone)}
-              className="inline-flex items-center justify-center gap-4 bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 font-black uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-xl hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
+              className="inline-flex items-center justify-center gap-4 bg-primary-600 border-primary-600 text-slate-100 transition-all duration-300 uppercase tracking-[0.2em] active:scale-95 w-full h-[50px] px-6 text-[9px] rounded-2xl md:w-auto md:min-h-16 md:px-12 md:py-5 md:text-[10px] md:rounded-xl hover:bg-blue-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.8)] active:scale-95 focus:outline-none group"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-3 h-3" />
               <span>{luisPhone}</span>
             </a>
           </div>
